@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import FibleRoute from './route';
+import FibleRoute from './selectorItem';
 import {Droppable} from 'react-beautiful-dnd';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import { faTimes, faPlus } from '@fortawesome/free-solid-svg-icons'
 import Router from 'next/router'
-import {initializeInputScreenUi} from '../../redux/actions/uiActions';
+import {initializeInputScreenUi,stopAndPoiManagerController, setTitle} from '../../redux/actions/uiActions';
 import {initializeHtype} from '../../redux/actions/dataActions';
 import {connect} from 'react-redux';
 
@@ -29,15 +29,24 @@ const RouteList = styled.div`
 `
 
 
-class Column extends React.Component<{column: any, key:any,dataState:any, listItems:any, type:any,initializeInputScreenUi:Function, initializeHtype:Function}> {
+class Column extends React.Component<{column: any, key:any,dataState:any, listItems:any, type:any,initializeInputScreenUi:Function, initializeHtype:Function,stopAndPoiManagerController:Function, setTitle:Function}> {
+
 
     handleInputScreenButton= () =>{
+        if(this.props.type == "ROUTES"){
         Router.push({
             pathname: '/inputScreen',
           })
         this.props.initializeHtype({htype:this.props.type})
         this.props.initializeInputScreenUi({dispatch:this.props.type})
-
+        } else {
+        this.props.stopAndPoiManagerController({htype:this.props.type})
+        let firstLetter = this.props.type.substring(0,1)
+        let rest = this.props.type.substring(1,)
+        let title = firstLetter + rest.toLowerCase() + " manager"
+        this.props.setTitle({title:title})
+        
+        }
     }
 
     render() {
@@ -59,18 +68,16 @@ class Column extends React.Component<{column: any, key:any,dataState:any, listIt
             <FontAwesomeIcon icon={faPlus}/>
         </InputScreenButton>
         </Container>
-        
        )}
-
 }
 
 const mapStateToProps = state => {
-    return {dataState:state.data ,initializeInputScreenState:state.initializeInputScreenState};
+    return {dataState:state.data ,initializeInputScreenState:state.initializeInputScreenState, stopAndPoiManagerController:state.stopAndPoiManagerController, setTitle:state.setTitle};
   };
 
 
 
-export default connect(mapStateToProps,{initializeInputScreenUi, initializeHtype  })(Column);
+export default connect(mapStateToProps,{initializeInputScreenUi, initializeHtype,stopAndPoiManagerController,setTitle  })(Column);
 
 
 

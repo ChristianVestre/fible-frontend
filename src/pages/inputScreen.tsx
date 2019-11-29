@@ -1,9 +1,8 @@
 import Link from 'next/link';
 import styled from 'styled-components';
 import {connect} from 'react-redux'
-import { Provider } from 'react-redux';
-//import {store, persistor} from '../redux/store';
-import store from '../redux/store';
+
+//import store from '../redux/store';
 import { faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import MenuManager from '../components/inputscreen-components/menu/menuManager'
 import Simulator from '../components/inputscreen-components/simulator/simulator';
@@ -13,12 +12,10 @@ import  dynamic  from 'next/dynamic';
 
 
 const InputScreen = props => (
-    <Provider store={store}>
         <Container>
             <MenuManager/>
-            <DynamicSimulator/>
+            <Simulator/>
         </Container>
-        </Provider>
 );
 /*
  const InputScreen = props => (
@@ -34,12 +31,12 @@ const InputScreen = props => (
 
 */
 export default InputScreen
-
+/*
 const DynamicSimulator = dynamic(
     () => import('../components/inputscreen-components/simulator/simulator'),
     { ssr: false }
 )
-
+*/
 const Container = styled.div`
     width: 100vw;
     height: 100vh;

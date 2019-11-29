@@ -4,8 +4,9 @@ import { HEADLINE,
   EMPTY_SELECTED_COMPONENT_ID,
   SET_SELECTED_COMPONENT,
   UPDATE_COMPONENTS_ORDER,
-
-
+  CLEAN_NONSAVED_HTYPES,
+  LOAD_USER,
+  CLEAN_USER,
 
 } from "./types";
 
@@ -16,6 +17,9 @@ let deleteHtypeId = 0;
 let emptySelectedComponentId = 0;
 let setSelectedComponentId = 0;
 let updateComponentsOrderId = 0;
+let cleanNonsavedHtypesId = 0;
+let loadUserId = 0;
+let cleanUserId = 0;
 
 
 
@@ -63,5 +67,27 @@ export const updateComponentsOrder = content => ({
   payload:{
     id:++updateComponentsOrderId,
     content
+  }
+})
+
+export const cleanNonsavedHtypes = () => ({
+  type: CLEAN_NONSAVED_HTYPES,
+  payload:{
+    id:++cleanNonsavedHtypesId,
+  }
+})
+
+export const loadUser = content => ({
+  type: LOAD_USER,
+  payload:{
+    id:++loadUserId,
+    content,
+  }
+})
+
+export const cleanUser = () => ({
+  type: CLEAN_USER,
+  payload:{
+    id:++cleanUserId
   }
 })

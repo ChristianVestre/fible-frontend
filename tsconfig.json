@@ -24,6 +24,6 @@
   "include": [
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx", "src/redux/store.js"
+    "**/*.tsx", "src/redux/store.js", "src/redux/redux.jsx", "src/components/inputscreen-components/simulator/simulatorComponent.jsx", "src/components/inputscreen-components/simulator/simulator.jsx", "src/lib/apollo.tsx", "src/lib/auth2.jsx"
   ]
 }

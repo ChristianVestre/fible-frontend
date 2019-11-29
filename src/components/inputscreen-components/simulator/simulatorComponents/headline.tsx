@@ -54,7 +54,7 @@ class Headline extends React.Component<{component:any, index:any,uiState:any,dat
             datatype={this.props.component.id == this.props.uiState.simulator.selected ? "-0.2vh":"0" }
             property={this.props.component.id == this.props.uiState.simulator.selected ? "dashed":"none" }
             >
-            <HeadlineText value={this.props.component.headline} onChange={ (e) => this.handleHeadline(e)} ></HeadlineText>
+            <HeadlineText>{this.props.component.headline}</HeadlineText>
         </Container>
         )
         }
@@ -80,7 +80,7 @@ const Container = styled.div`
     align-content:center;
 `
 
-const  HeadlineText = styled(TextareaAutosize)`
+const  HeadlineText = styled.h1`
     font-weight: lighter;
     position:relative;
     user-select: none;
@@ -91,17 +91,6 @@ const  HeadlineText = styled(TextareaAutosize)`
     margin:0.1vh;
     padding:0.5vh;
     text-align:center;
-    resize:none;
-    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
-    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
-    box-sizing: border-box;
-    align-self:center;
-    border:0;
-    display:flex;
-    :focus {
-        outline:none;
-        caret-color:salmon;
-    }
 `
 
 const HeadlineText2 = styled.textarea`

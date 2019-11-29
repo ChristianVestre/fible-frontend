@@ -1,13 +1,22 @@
 import Link from 'next/link';
 import styled from 'styled-components';
 import dynamic from 'next/dynamic';
-import { Provider } from 'react-redux';
-//import {store, persistor} from '../redux/store';
-import store from '../redux/store';
-import { PersistGate } from 'redux-persist/integration/react'
+import Title from '../components/route-management/title'
+import SelectorManager from '../components/route-management/stateManager';
+import { connect } from 'react-redux';
+import LogoutButton from './../components/shared-components/logoutButton'
+import { withApollo } from '../lib/apollo';
+import React from 'react';
+import { withRedux } from '../redux/redux';
+import { compose } from 'redux';
+import  {withAuth} from '../lib/auth';
+import gql from 'graphql-tag';
 
-const RouteManagement = props => (
-    <Provider store={store}>
+
+
+
+const RouteManagement = (props) => {
+    return(
         <Container>
             <Images>
                 <HeaderImage src="/logo_fible.png" alt="my image"></HeaderImage>
@@ -15,57 +24,43 @@ const RouteManagement = props => (
                     <BackImage src="/back.svg"></BackImage>
                 </Link>
             </Images>
-            <Title>Welcome Christian, here are your routes!</Title>
-
-            <DynamicRouteSelector></DynamicRouteSelector>
+            <Title name={props.me.name}/>
+            <LogoutButton/>
+            <SelectorManager routes={props.routes} stops={null} pois={null}></SelectorManager>
         </Container>
-    </Provider>
-);
+    )
+};
 
+RouteManagement.getInitialProps = async (context) => {
+
+    const routesQuery = gql`query routes {getRoutes
+        {id owner name}
+    }`
+  //  console.log(context.reduxStore.getState())
+
+   return {routes:await context.apolloClient.query({query:routesQuery})}
+
+  }
+  
+
+
+const mapStateToProps = state => {
+    return { selectorState: state.selector, uiState:state.ui,dataState:state.data };
+};
+const enhance = compose(
+    withRedux,
+    withApollo,
+    withAuth,
+    connect(mapStateToProps, null),
+  )
+export default enhance(RouteManagement);
 
 /*
-const RouteManagement = props => (
-    <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
-        <Container>
-            <Images>
-                <HeaderImage src="/logo_fible.png" alt="my image"></HeaderImage>
-                <Link href="/">
-                    <BackImage src="/back.svg"></BackImage>
-                </Link>
-            </Images>
-            <Title>Welcome Christian, here are your routes!</Title>
-
-            <DynamicRouteSelector></DynamicRouteSelector>
-        </Container>
-        </PersistGate>
-    </Provider>
-);
-
-*/
-
-export default RouteManagement
-
-
 const DynamicRouteSelector = dynamic(
     () => import('../components/route-management/selectorManager'),
     { ssr: false }
 )
-
-const Title = styled.h2`
-    position:absolute;
-    top:3%;
-    font-size: 2.5em;
-    color:black;
-    border:none;
-    background:none;
-    text-decoration: none;
-    padding-left:1em;  
-    font-weight:lighter;
-    text-align:center;
-    margin:0;
-    padding:0;
-`
+*/
 
 
 const Images = styled.div`

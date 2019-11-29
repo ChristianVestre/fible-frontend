@@ -1,6 +1,8 @@
 import { REMOVE_ROUTE, UPDATE_ROUTE_STATE, UPDATE_SELECTOR_MANAGER_STATE, 
     UPDATE_INPUT_SCREEN_UI, INITIALIZE_INPUT_SCREEN_UI, 
-    UPDATE_SIMULATOR_SELECTION
+    UPDATE_SIMULATOR_SELECTION,
+    STOP_AND_POI_MANAGER_CONTROLLER,
+    SET_TITLE,
   } from "./types";
   //includes route management actions
 
@@ -11,6 +13,8 @@ import { REMOVE_ROUTE, UPDATE_ROUTE_STATE, UPDATE_SELECTOR_MANAGER_STATE,
   let updateInputScreenUiId = 0;
   let initializeInputScreenUiId = 0;
   let updateSimulatorSelectionId = 0;
+  let stopAndPoiManagerControllerId = 0;
+  let setTitleId = 0;
 
 
   export const removeRoute = content => ({
@@ -61,4 +65,20 @@ import { REMOVE_ROUTE, UPDATE_ROUTE_STATE, UPDATE_SELECTOR_MANAGER_STATE,
       content,
     }
     
+  })
+
+  export const stopAndPoiManagerController = content => ({
+    type: STOP_AND_POI_MANAGER_CONTROLLER,
+    payload: {
+      id:++stopAndPoiManagerControllerId,
+      content,
+    }
+  })
+
+  export const setTitle = content => ({
+    type: SET_TITLE,
+    payload: {
+      id:++setTitleId,
+      content,
+    }
   })

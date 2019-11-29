@@ -8,7 +8,8 @@ import SubheadlineInput from './subheadlineInput';
 class MenuManager extends React.Component<{state:any}> {
     
     menuChoice = () => {
-           switch(this.props.state.menu.show){
+        console.log(this.props.state.inputMenu.show)
+           switch(this.props.state.inputMenu.show){
                case("MENU"): {
                    return<Menu/>
                }

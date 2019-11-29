@@ -1,6 +1,5 @@
 import styled from 'styled-components'
 import Link from 'next/link'
-require('@material/ripple')
 
 
 const MenuItem = props => (

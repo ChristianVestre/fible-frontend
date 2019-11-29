@@ -1,4 +1,11 @@
-import { REMOVE_ROUTE, UPDATE_ROUTE_STATE, INITIALIZE_INPUT_SCREEN_UI, UPDATE_INPUT_SCREEN_UI, UPDATE_SIMULATOR_SELECTION } from "../actions/types";
+import { REMOVE_ROUTE, UPDATE_ROUTE_STATE, 
+    INITIALIZE_INPUT_SCREEN_UI, 
+    UPDATE_INPUT_SCREEN_UI, 
+    UPDATE_SIMULATOR_SELECTION,
+    UPDATE_SELECTOR_MANAGER_STATE,
+    STOP_AND_POI_MANAGER_CONTROLLER,
+    SET_TITLE,
+ } from "../actions/types";
 
 
 
@@ -80,18 +87,18 @@ const initialState = {
         },
         "column-2": {
             id: "column-2",
-            title: "Stop",
+            title: "Stops",
             ids: ["s213141", "s54321"],
         },
         "column-3": {
             id: "column-3",
-            title: "Poi",
+            title: "Pois",
             ids: ["p1314134"]
         }
     },
     columnOrder: ["column-1", "column-2", "column-3"],
-    menu: {
-
+    title:"",
+    inputMenu: {
         htype: "ROUTES",
         //which component is shown in the menu
         show: "MENU",
@@ -111,8 +118,15 @@ const initialState = {
     simulator: {
         show: "ROUTES",
         selected: "empty"
-
     },
+    selector:{
+        lastManagerUiCode:"",
+        selectedROUTES:"",
+        selectedSTOPS:"",
+        selectedPOIS:"",
+        managerUiCode:"RO",
+        htype:"",
+    }
 }
 
 /*simulator states
@@ -121,12 +135,95 @@ const initialState = {
 export default function (state = initialState, action) {
 
     switch (action.type) {
+        case UPDATE_SELECTOR_MANAGER_STATE: {
+            const selectedId = action.payload.content.selectedId
+            const htype = action.payload.content.htype
+            let managerUiCode = "RO"
+            let selectedROUTES = ""
+            let selectedSTOPS = ""
+            let selectedPOIS = ""
+            if(htype == "ROUTES" && state.selector.selectedROUTES != selectedId){
+                managerUiCode = "ROST"
+                selectedROUTES = selectedId
+                selectedSTOPS = ""
+                selectedPOIS = ""
+            } else if (htype == "ROUTES" && state.selector.selectedROUTES == selectedId){
+                managerUiCode = "RO"
+                selectedROUTES = ""
+                selectedSTOPS = ""
+                selectedPOIS = ""
+            }else if (htype == "STOPS" && state.selector.selectedSTOPS != selectedId){
+                managerUiCode = "ROSTPO"
+                selectedROUTES = state.selector.selectedROUTES
+                selectedSTOPS = selectedId
+                selectedPOIS = ""
+            }else if (htype == "STOPS" && state.selector.selectedSTOPS == selectedId){
+                managerUiCode = "ROST"
+                selectedROUTES = state.selector.selectedROUTES
+                selectedSTOPS = ""
+                selectedPOIS = ""
+            }else if (htype == "POIS" && state.selector.selectedPOIS != selectedId){
+                managerUiCode = "ROSTPO"
+                selectedROUTES = state.selector.selectedROUTES
+                selectedSTOPS = state.selector.selectedSTOPS
+                selectedPOIS = selectedId
+            }else if (htype == "POIS" && state.selector.selectedPOIS == selectedId){
+                managerUiCode = "ROSTPO"
+                selectedROUTES = state.selector.selectedROUTES
+                selectedSTOPS = state.selector.selectedSTOPS
+                selectedPOIS = ""
+            }
+
+            return {
+                ...state,
+                selector:{
+                    ...state.selector,
+                    selectedROUTES:selectedROUTES,
+                    selectedSTOPS:selectedSTOPS,
+                    selectedPOIS:selectedPOIS,
+                    managerUiCode:managerUiCode
+                }
+            }
+        }
+
+        case STOP_AND_POI_MANAGER_CONTROLLER:{
+            if(state.selector.managerUiCode != "MA"){
+            const htype = action.payload.content.htype
+            return {
+                ...state,
+                selector:{
+                    ...state.selector,
+                    lastManagerUiCode:state.selector.managerUiCode,
+                    htype:htype,
+                    managerUiCode:"MA",
+                }
+            }
+            }   else {
+                return {
+                    ...state,
+                    selector:{
+                        ...state.selector,
+                        managerUiCode:state.selector.lastManagerUiCode,
+                    }
+                }    
+            }
+        }
+
+        case SET_TITLE: {
+            const title = action.payload.content.title
+            return {
+                ...state,
+                title:title
+            }
+        }
+
+
         case INITIALIZE_INPUT_SCREEN_UI: {
             const selectedDispatch = action.payload.content.dispatch
             return {
                 ...state,
                 menu: {
-                    ...state.menu,
+                    ...state.inputMenu,
                     //menu for what kind of hierarchy type
                     htype: selectedDispatch,
                     //which component is shown in the menu //menu, headline input, image gallery etc.
@@ -139,10 +236,12 @@ export default function (state = initialState, action) {
             const selectedDispatch = action.payload.content
             return {
                 ...state,
-                menu: {
-                    ...state.menu,
+                inputMenu: {
+                    ...state.inputMenu,
                     //which component is shown in the menu //menu, headline input, image gallery etc.
+                  
                     show: selectedDispatch
+                    
                 }
             }
         }

@@ -1,10144 +1,4448 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[1],{
 
-/***/ "./node_modules/@babel/runtime-corejs2/helpers/esm/extends.js":
-/*!********************************************************************!*\
-  !*** ./node_modules/@babel/runtime-corejs2/helpers/esm/extends.js ***!
-  \********************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _extends; });
-/* harmony import */ var _core_js_object_assign__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core-js/object/assign */ "./node_modules/@babel/runtime-corejs2/core-js/object/assign.js");
-/* harmony import */ var _core_js_object_assign__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_core_js_object_assign__WEBPACK_IMPORTED_MODULE_0__);
-
-function _extends() {
-  _extends = _core_js_object_assign__WEBPACK_IMPORTED_MODULE_0___default.a || function (target) {
-    for (var i = 1; i < arguments.length; i++) {
-      var source = arguments[i];
-
-      for (var key in source) {
-        if (Object.prototype.hasOwnProperty.call(source, key)) {
-          target[key] = source[key];
-        }
-      }
-    }
-
-    return target;
-  };
-
-  return _extends.apply(this, arguments);
-}
-
-/***/ }),
-
-/***/ "./node_modules/autosize/dist/autosize.js":
-/*!************************************************!*\
-  !*** ./node_modules/autosize/dist/autosize.js ***!
-  \************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
-	autosize 4.0.2
-	license: MIT
-	http://www.jacklmoore.com/autosize
-*/
-(function (global, factory) {
-	if (true) {
-		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [module, exports], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
-				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
-				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
-				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-	} else { var mod; }
-})(this, function (module, exports) {
-	'use strict';
-
-	var map = typeof Map === "function" ? new Map() : function () {
-		var keys = [];
-		var values = [];
-
-		return {
-			has: function has(key) {
-				return keys.indexOf(key) > -1;
-			},
-			get: function get(key) {
-				return values[keys.indexOf(key)];
-			},
-			set: function set(key, value) {
-				if (keys.indexOf(key) === -1) {
-					keys.push(key);
-					values.push(value);
-				}
-			},
-			delete: function _delete(key) {
-				var index = keys.indexOf(key);
-				if (index > -1) {
-					keys.splice(index, 1);
-					values.splice(index, 1);
-				}
-			}
-		};
-	}();
-
-	var createEvent = function createEvent(name) {
-		return new Event(name, { bubbles: true });
-	};
-	try {
-		new Event('test');
-	} catch (e) {
-		// IE does not support `new Event()`
-		createEvent = function createEvent(name) {
-			var evt = document.createEvent('Event');
-			evt.initEvent(name, true, false);
-			return evt;
-		};
-	}
-
-	function assign(ta) {
-		if (!ta || !ta.nodeName || ta.nodeName !== 'TEXTAREA' || map.has(ta)) return;
-
-		var heightOffset = null;
-		var clientWidth = null;
-		var cachedHeight = null;
-
-		function init() {
-			var style = window.getComputedStyle(ta, null);
-
-			if (style.resize === 'vertical') {
-				ta.style.resize = 'none';
-			} else if (style.resize === 'both') {
-				ta.style.resize = 'horizontal';
-			}
-
-			if (style.boxSizing === 'content-box') {
-				heightOffset = -(parseFloat(style.paddingTop) + parseFloat(style.paddingBottom));
-			} else {
-				heightOffset = parseFloat(style.borderTopWidth) + parseFloat(style.borderBottomWidth);
-			}
-			// Fix when a textarea is not on document body and heightOffset is Not a Number
-			if (isNaN(heightOffset)) {
-				heightOffset = 0;
-			}
-
-			update();
-		}
-
-		function changeOverflow(value) {
-			{
-				// Chrome/Safari-specific fix:
-				// When the textarea y-overflow is hidden, Chrome/Safari do not reflow the text to account for the space
-				// made available by removing the scrollbar. The following forces the necessary text reflow.
-				var width = ta.style.width;
-				ta.style.width = '0px';
-				// Force reflow:
-				/* jshint ignore:start */
-				ta.offsetWidth;
-				/* jshint ignore:end */
-				ta.style.width = width;
-			}
-
-			ta.style.overflowY = value;
-		}
-
-		function getParentOverflows(el) {
-			var arr = [];
-
-			while (el && el.parentNode && el.parentNode instanceof Element) {
-				if (el.parentNode.scrollTop) {
-					arr.push({
-						node: el.parentNode,
-						scrollTop: el.parentNode.scrollTop
-					});
-				}
-				el = el.parentNode;
-			}
-
-			return arr;
-		}
-
-		function resize() {
-			if (ta.scrollHeight === 0) {
-				// If the scrollHeight is 0, then the element probably has display:none or is detached from the DOM.
-				return;
-			}
-
-			var overflows = getParentOverflows(ta);
-			var docTop = document.documentElement && document.documentElement.scrollTop; // Needed for Mobile IE (ticket #240)
-
-			ta.style.height = '';
-			ta.style.height = ta.scrollHeight + heightOffset + 'px';
-
-			// used to check if an update is actually necessary on window.resize
-			clientWidth = ta.clientWidth;
-
-			// prevents scroll-position jumping
-			overflows.forEach(function (el) {
-				el.node.scrollTop = el.scrollTop;
-			});
-
-			if (docTop) {
-				document.documentElement.scrollTop = docTop;
-			}
-		}
-
-		function update() {
-			resize();
-
-			var styleHeight = Math.round(parseFloat(ta.style.height));
-			var computed = window.getComputedStyle(ta, null);
-
-			// Using offsetHeight as a replacement for computed.height in IE, because IE does not account use of border-box
-			var actualHeight = computed.boxSizing === 'content-box' ? Math.round(parseFloat(computed.height)) : ta.offsetHeight;
-
-			// The actual height not matching the style height (set via the resize method) indicates that 
-			// the max-height has been exceeded, in which case the overflow should be allowed.
-			if (actualHeight < styleHeight) {
-				if (computed.overflowY === 'hidden') {
-					changeOverflow('scroll');
-					resize();
-					actualHeight = computed.boxSizing === 'content-box' ? Math.round(parseFloat(window.getComputedStyle(ta, null).height)) : ta.offsetHeight;
-				}
-			} else {
-				// Normally keep overflow set to hidden, to avoid flash of scrollbar as the textarea expands.
-				if (computed.overflowY !== 'hidden') {
-					changeOverflow('hidden');
-					resize();
-					actualHeight = computed.boxSizing === 'content-box' ? Math.round(parseFloat(window.getComputedStyle(ta, null).height)) : ta.offsetHeight;
-				}
-			}
-
-			if (cachedHeight !== actualHeight) {
-				cachedHeight = actualHeight;
-				var evt = createEvent('autosize:resized');
-				try {
-					ta.dispatchEvent(evt);
-				} catch (err) {
-					// Firefox will throw an error on dispatchEvent for a detached element
-					// https://bugzilla.mozilla.org/show_bug.cgi?id=889376
-				}
-			}
-		}
-
-		var pageResize = function pageResize() {
-			if (ta.clientWidth !== clientWidth) {
-				update();
-			}
-		};
-
-		var destroy = function (style) {
-			window.removeEventListener('resize', pageResize, false);
-			ta.removeEventListener('input', update, false);
-			ta.removeEventListener('keyup', update, false);
-			ta.removeEventListener('autosize:destroy', destroy, false);
-			ta.removeEventListener('autosize:update', update, false);
-
-			Object.keys(style).forEach(function (key) {
-				ta.style[key] = style[key];
-			});
-
-			map.delete(ta);
-		}.bind(ta, {
-			height: ta.style.height,
-			resize: ta.style.resize,
-			overflowY: ta.style.overflowY,
-			overflowX: ta.style.overflowX,
-			wordWrap: ta.style.wordWrap
-		});
-
-		ta.addEventListener('autosize:destroy', destroy, false);
-
-		// IE9 does not fire onpropertychange or oninput for deletions,
-		// so binding to onkeyup to catch most of those events.
-		// There is no way that I know of to detect something like 'cut' in IE9.
-		if ('onpropertychange' in ta && 'oninput' in ta) {
-			ta.addEventListener('keyup', update, false);
-		}
-
-		window.addEventListener('resize', pageResize, false);
-		ta.addEventListener('input', update, false);
-		ta.addEventListener('autosize:update', update, false);
-		ta.style.overflowX = 'hidden';
-		ta.style.wordWrap = 'break-word';
-
-		map.set(ta, {
-			destroy: destroy,
-			update: update
-		});
-
-		init();
-	}
-
-	function destroy(ta) {
-		var methods = map.get(ta);
-		if (methods) {
-			methods.destroy();
-		}
-	}
-
-	function update(ta) {
-		var methods = map.get(ta);
-		if (methods) {
-			methods.update();
-		}
-	}
-
-	var autosize = null;
-
-	// Do nothing in Node.js environment and IE8 (or lower)
-	if (typeof window === 'undefined' || typeof window.getComputedStyle !== 'function') {
-		autosize = function autosize(el) {
-			return el;
-		};
-		autosize.destroy = function (el) {
-			return el;
-		};
-		autosize.update = function (el) {
-			return el;
-		};
-	} else {
-		autosize = function autosize(el, options) {
-			if (el) {
-				Array.prototype.forEach.call(el.length ? el : [el], function (x) {
-					return assign(x, options);
-				});
-			}
-			return el;
-		};
-		autosize.destroy = function (el) {
-			if (el) {
-				Array.prototype.forEach.call(el.length ? el : [el], destroy);
-			}
-			return el;
-		};
-		autosize.update = function (el) {
-			if (el) {
-				Array.prototype.forEach.call(el.length ? el : [el], update);
-			}
-			return el;
-		};
-	}
-
-	exports.default = autosize;
-	module.exports = exports['default'];
-});
-
-/***/ }),
-
-/***/ "./node_modules/computed-style/dist/computedStyle.commonjs.js":
-/*!********************************************************************!*\
-  !*** ./node_modules/computed-style/dist/computedStyle.commonjs.js ***!
-  \********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-// This code has been refactored for 140 bytes
-// You can see the original here: https://github.com/twolfson/computedStyle/blob/04cd1da2e30fa45844f95f5cb1ac898e9b9ef050/lib/computedStyle.js
-var computedStyle = function (el, prop, getComputedStyle) {
-  getComputedStyle = window.getComputedStyle;
-
-  // In one fell swoop
-  return (
-    // If we have getComputedStyle
-    getComputedStyle ?
-      // Query it
-      // TODO: From CSS-Query notes, we might need (node, null) for FF
-      getComputedStyle(el) :
-
-    // Otherwise, we are in IE and use currentStyle
-      el.currentStyle
-  )[
-    // Switch to camelCase for CSSOM
-    // DEV: Grabbed from jQuery
-    // https://github.com/jquery/jquery/blob/1.9-stable/src/css.js#L191-L194
-    // https://github.com/jquery/jquery/blob/1.9-stable/src/core.js#L593-L597
-    prop.replace(/-(\w)/gi, function (word, letter) {
-      return letter.toUpperCase();
-    })
-  ];
-};
-
-module.exports = computedStyle;
-
-
-/***/ }),
-
-/***/ "./node_modules/core-js/library/fn/date/now.js":
-/*!*****************************************************!*\
-  !*** ./node_modules/core-js/library/fn/date/now.js ***!
-  \*****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-__webpack_require__(/*! ../../modules/es6.date.now */ "./node_modules/core-js/library/modules/es6.date.now.js");
-module.exports = __webpack_require__(/*! ../../modules/_core */ "./node_modules/core-js/library/modules/_core.js").Date.now;
-
-
-/***/ }),
-
-/***/ "./node_modules/core-js/library/fn/number/is-integer.js":
-/*!**************************************************************!*\
-  !*** ./node_modules/core-js/library/fn/number/is-integer.js ***!
-  \**************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-__webpack_require__(/*! ../../modules/es6.number.is-integer */ "./node_modules/core-js/library/modules/es6.number.is-integer.js");
-module.exports = __webpack_require__(/*! ../../modules/_core */ "./node_modules/core-js/library/modules/_core.js").Number.isInteger;
-
-
-/***/ }),
-
-/***/ "./node_modules/core-js/library/fn/object/values.js":
-/*!**********************************************************!*\
-  !*** ./node_modules/core-js/library/fn/object/values.js ***!
-  \**********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-__webpack_require__(/*! ../../modules/es7.object.values */ "./node_modules/core-js/library/modules/es7.object.values.js");
-module.exports = __webpack_require__(/*! ../../modules/_core */ "./node_modules/core-js/library/modules/_core.js").Object.values;
-
-
-/***/ }),
-
-/***/ "./node_modules/core-js/library/modules/_is-integer.js":
+/***/ "./node_modules/@apollo/react-ssr/lib/react-ssr.esm.js":
 /*!*************************************************************!*\
-  !*** ./node_modules/core-js/library/modules/_is-integer.js ***!
+  !*** ./node_modules/@apollo/react-ssr/lib/react-ssr.esm.js ***!
   \*************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/*! exports provided: getDataFromTree, getMarkupFromTree, renderToStringWithData */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-// 20.1.2.3 Number.isInteger(number)
-var isObject = __webpack_require__(/*! ./_is-object */ "./node_modules/core-js/library/modules/_is-object.js");
-var floor = Math.floor;
-module.exports = function isInteger(it) {
-  return !isObject(it) && isFinite(it) && floor(it) === it;
-};
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getDataFromTree", function() { return getDataFromTree; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getMarkupFromTree", function() { return getMarkupFromTree; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "renderToStringWithData", function() { return renderToStringWithData; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _apollo_react_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @apollo/react-common */ "./node_modules/@apollo/react-common/lib/react-common.esm.js");
+/* harmony import */ var _apollo_react_hooks__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @apollo/react-hooks */ "./node_modules/@apollo/react-hooks/lib/react-hooks.esm.js");
+
+
+
+
+
+function getDataFromTree(tree, context) {
+    if (context === void 0) { context = {}; }
+    return getMarkupFromTree({
+        tree: tree,
+        context: context,
+        renderFunction: __webpack_require__(/*! react-dom/server */ "./node_modules/react-dom/server.browser.js").renderToStaticMarkup
+    });
+}
+function getMarkupFromTree(_a) {
+    var tree = _a.tree, _b = _a.context, context = _b === void 0 ? {} : _b, _c = _a.renderFunction, renderFunction = _c === void 0 ? __webpack_require__(/*! react-dom/server */ "./node_modules/react-dom/server.browser.js").renderToStaticMarkup : _c;
+    var renderPromises = new _apollo_react_hooks__WEBPACK_IMPORTED_MODULE_3__["RenderPromises"]();
+    function process() {
+        var ApolloContext = Object(_apollo_react_common__WEBPACK_IMPORTED_MODULE_2__["getApolloContext"])();
+        var html = renderFunction(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(ApolloContext.Provider, { value: Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, context), { renderPromises: renderPromises }) }, tree));
+        return renderPromises.hasPromises()
+            ? renderPromises.consumeAndAwaitPromises().then(process)
+            : html;
+    }
+    return Promise.resolve().then(process);
+}
+
+function renderToStringWithData(component) {
+    return getMarkupFromTree({
+        tree: component,
+        renderFunction: __webpack_require__(/*! react-dom/server */ "./node_modules/react-dom/server.browser.js").renderToString
+    });
+}
+
+
+//# sourceMappingURL=react-ssr.esm.js.map
 
 
 /***/ }),
 
-/***/ "./node_modules/core-js/library/modules/_object-to-array.js":
-/*!******************************************************************!*\
-  !*** ./node_modules/core-js/library/modules/_object-to-array.js ***!
-  \******************************************************************/
+/***/ "./node_modules/react-dom/cjs/react-dom-server.browser.development.js":
+/*!****************************************************************************!*\
+  !*** ./node_modules/react-dom/cjs/react-dom-server.browser.development.js ***!
+  \****************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var DESCRIPTORS = __webpack_require__(/*! ./_descriptors */ "./node_modules/core-js/library/modules/_descriptors.js");
-var getKeys = __webpack_require__(/*! ./_object-keys */ "./node_modules/core-js/library/modules/_object-keys.js");
-var toIObject = __webpack_require__(/*! ./_to-iobject */ "./node_modules/core-js/library/modules/_to-iobject.js");
-var isEnum = __webpack_require__(/*! ./_object-pie */ "./node_modules/core-js/library/modules/_object-pie.js").f;
-module.exports = function (isEntries) {
-  return function (it) {
-    var O = toIObject(it);
-    var keys = getKeys(O);
-    var length = keys.length;
-    var i = 0;
-    var result = [];
-    var key;
-    while (length > i) {
-      key = keys[i++];
-      if (!DESCRIPTORS || isEnum.call(O, key)) {
-        result.push(isEntries ? [key, O[key]] : O[key]);
+"use strict";
+/** @license React v16.10.2
+ * react-dom-server.browser.development.js
+ *
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+
+
+
+
+if (true) {
+  (function() {
+'use strict';
+
+var _assign = __webpack_require__(/*! object-assign */ "./node_modules/object-assign/index.js");
+var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+var checkPropTypes = __webpack_require__(/*! prop-types/checkPropTypes */ "./node_modules/prop-types/checkPropTypes.js");
+
+// Do not require this module directly! Use normal `invariant` calls with
+// template literal strings. The messages will be converted to ReactError during
+// build, and in production they will be minified.
+
+// Do not require this module directly! Use normal `invariant` calls with
+// template literal strings. The messages will be converted to ReactError during
+// build, and in production they will be minified.
+function ReactError(error) {
+  error.name = 'Invariant Violation';
+  return error;
+}
+
+// TODO: this is special because it gets imported during build.
+
+var ReactVersion = '16.10.2';
+
+/**
+ * Use invariant() to assert state which your program assumes to be true.
+ *
+ * Provide sprintf-style format (only %s is supported) and arguments
+ * to provide information about what broke and what you were
+ * expecting.
+ *
+ * The invariant message will be stripped in production, but the invariant
+ * will remain to ensure logic does not differ in production.
+ */
+
+/**
+ * Similar to invariant but only logs a warning if the condition is not met.
+ * This can be used to log issues in development environments in critical
+ * paths. Removing the logging code for production environments will keep the
+ * same logic and follow the same code paths.
+ */
+var warningWithoutStack = function () {};
+
+{
+  warningWithoutStack = function (condition, format) {
+    for (var _len = arguments.length, args = new Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
+      args[_key - 2] = arguments[_key];
+    }
+
+    if (format === undefined) {
+      throw new Error('`warningWithoutStack(condition, format, ...args)` requires a warning ' + 'message argument');
+    }
+
+    if (args.length > 8) {
+      // Check before the condition to catch violations early.
+      throw new Error('warningWithoutStack() currently supports at most 8 arguments.');
+    }
+
+    if (condition) {
+      return;
+    }
+
+    if (typeof console !== 'undefined') {
+      var argsWithFormat = args.map(function (item) {
+        return '' + item;
+      });
+      argsWithFormat.unshift('Warning: ' + format); // We intentionally don't use spread (or .apply) directly because it
+      // breaks IE9: https://github.com/facebook/react/issues/13610
+
+      Function.prototype.apply.call(console.error, console, argsWithFormat);
+    }
+
+    try {
+      // --- Welcome to debugging React ---
+      // This error was thrown as a convenience so that you can use this stack
+      // to find the callsite that caused this warning to fire.
+      var argIndex = 0;
+      var message = 'Warning: ' + format.replace(/%s/g, function () {
+        return args[argIndex++];
+      });
+      throw new Error(message);
+    } catch (x) {}
+  };
+}
+
+var warningWithoutStack$1 = warningWithoutStack;
+
+// The Symbol used to tag the ReactElement-like types. If there is no native Symbol
+// nor polyfill, then a plain number is used for performance.
+var hasSymbol = typeof Symbol === 'function' && Symbol.for;
+
+var REACT_PORTAL_TYPE = hasSymbol ? Symbol.for('react.portal') : 0xeaca;
+var REACT_FRAGMENT_TYPE = hasSymbol ? Symbol.for('react.fragment') : 0xeacb;
+var REACT_STRICT_MODE_TYPE = hasSymbol ? Symbol.for('react.strict_mode') : 0xeacc;
+var REACT_PROFILER_TYPE = hasSymbol ? Symbol.for('react.profiler') : 0xead2;
+var REACT_PROVIDER_TYPE = hasSymbol ? Symbol.for('react.provider') : 0xeacd;
+var REACT_CONTEXT_TYPE = hasSymbol ? Symbol.for('react.context') : 0xeace; // TODO: We don't use AsyncMode or ConcurrentMode anymore. They were temporary
+// (unstable) APIs that have been removed. Can we remove the symbols?
+
+
+var REACT_CONCURRENT_MODE_TYPE = hasSymbol ? Symbol.for('react.concurrent_mode') : 0xeacf;
+var REACT_FORWARD_REF_TYPE = hasSymbol ? Symbol.for('react.forward_ref') : 0xead0;
+var REACT_SUSPENSE_TYPE = hasSymbol ? Symbol.for('react.suspense') : 0xead1;
+var REACT_SUSPENSE_LIST_TYPE = hasSymbol ? Symbol.for('react.suspense_list') : 0xead8;
+var REACT_MEMO_TYPE = hasSymbol ? Symbol.for('react.memo') : 0xead3;
+var REACT_LAZY_TYPE = hasSymbol ? Symbol.for('react.lazy') : 0xead4;
+var REACT_FUNDAMENTAL_TYPE = hasSymbol ? Symbol.for('react.fundamental') : 0xead5;
+
+var REACT_SCOPE_TYPE = hasSymbol ? Symbol.for('react.scope') : 0xead7;
+
+var ReactSharedInternals = React.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED; // Prevent newer renderers from RTE when used with older react package versions.
+// Current owner and dispatcher used to share the same ref,
+// but PR #14548 split them out to better support the react-debug-tools package.
+
+if (!ReactSharedInternals.hasOwnProperty('ReactCurrentDispatcher')) {
+  ReactSharedInternals.ReactCurrentDispatcher = {
+    current: null
+  };
+}
+
+if (!ReactSharedInternals.hasOwnProperty('ReactCurrentBatchConfig')) {
+  ReactSharedInternals.ReactCurrentBatchConfig = {
+    suspense: null
+  };
+}
+
+/**
+ * Similar to invariant but only logs a warning if the condition is not met.
+ * This can be used to log issues in development environments in critical
+ * paths. Removing the logging code for production environments will keep the
+ * same logic and follow the same code paths.
+ */
+
+var warning = warningWithoutStack$1;
+
+{
+  warning = function (condition, format) {
+    if (condition) {
+      return;
+    }
+
+    var ReactDebugCurrentFrame = ReactSharedInternals.ReactDebugCurrentFrame;
+    var stack = ReactDebugCurrentFrame.getStackAddendum(); // eslint-disable-next-line react-internal/warning-and-invariant-args
+
+    for (var _len = arguments.length, args = new Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
+      args[_key - 2] = arguments[_key];
+    }
+
+    warningWithoutStack$1.apply(void 0, [false, format + '%s'].concat(args, [stack]));
+  };
+}
+
+var warning$1 = warning;
+
+var Uninitialized = -1;
+var Pending = 0;
+var Resolved = 1;
+var Rejected = 2;
+function refineResolvedLazyComponent(lazyComponent) {
+  return lazyComponent._status === Resolved ? lazyComponent._result : null;
+}
+function initializeLazyComponentType(lazyComponent) {
+  if (lazyComponent._status === Uninitialized) {
+    lazyComponent._status = Pending;
+    var ctor = lazyComponent._ctor;
+    var thenable = ctor();
+    lazyComponent._result = thenable;
+    thenable.then(function (moduleObject) {
+      if (lazyComponent._status === Pending) {
+        var defaultExport = moduleObject.default;
+
+        {
+          if (defaultExport === undefined) {
+            warning$1(false, 'lazy: Expected the result of a dynamic import() call. ' + 'Instead received: %s\n\nYour code should look like: \n  ' + "const MyComponent = lazy(() => import('./MyComponent'))", moduleObject);
+          }
+        }
+
+        lazyComponent._status = Resolved;
+        lazyComponent._result = defaultExport;
+      }
+    }, function (error) {
+      if (lazyComponent._status === Pending) {
+        lazyComponent._status = Rejected;
+        lazyComponent._result = error;
+      }
+    });
+  }
+}
+
+function getWrappedName(outerType, innerType, wrapperName) {
+  var functionName = innerType.displayName || innerType.name || '';
+  return outerType.displayName || (functionName !== '' ? wrapperName + "(" + functionName + ")" : wrapperName);
+}
+
+function getComponentName(type) {
+  if (type == null) {
+    // Host root, text node or just invalid type.
+    return null;
+  }
+
+  {
+    if (typeof type.tag === 'number') {
+      warningWithoutStack$1(false, 'Received an unexpected object in getComponentName(). ' + 'This is likely a bug in React. Please file an issue.');
+    }
+  }
+
+  if (typeof type === 'function') {
+    return type.displayName || type.name || null;
+  }
+
+  if (typeof type === 'string') {
+    return type;
+  }
+
+  switch (type) {
+    case REACT_FRAGMENT_TYPE:
+      return 'Fragment';
+
+    case REACT_PORTAL_TYPE:
+      return 'Portal';
+
+    case REACT_PROFILER_TYPE:
+      return "Profiler";
+
+    case REACT_STRICT_MODE_TYPE:
+      return 'StrictMode';
+
+    case REACT_SUSPENSE_TYPE:
+      return 'Suspense';
+
+    case REACT_SUSPENSE_LIST_TYPE:
+      return 'SuspenseList';
+  }
+
+  if (typeof type === 'object') {
+    switch (type.$$typeof) {
+      case REACT_CONTEXT_TYPE:
+        return 'Context.Consumer';
+
+      case REACT_PROVIDER_TYPE:
+        return 'Context.Provider';
+
+      case REACT_FORWARD_REF_TYPE:
+        return getWrappedName(type, type.render, 'ForwardRef');
+
+      case REACT_MEMO_TYPE:
+        return getComponentName(type.type);
+
+      case REACT_LAZY_TYPE:
+        {
+          var thenable = type;
+          var resolvedThenable = refineResolvedLazyComponent(thenable);
+
+          if (resolvedThenable) {
+            return getComponentName(resolvedThenable);
+          }
+
+          break;
+        }
+    }
+  }
+
+  return null;
+}
+
+/**
+ * Forked from fbjs/warning:
+ * https://github.com/facebook/fbjs/blob/e66ba20ad5be433eb54423f2b097d829324d9de6/packages/fbjs/src/__forks__/warning.js
+ *
+ * Only change is we use console.warn instead of console.error,
+ * and do nothing when 'console' is not supported.
+ * This really simplifies the code.
+ * ---
+ * Similar to invariant but only logs a warning if the condition is not met.
+ * This can be used to log issues in development environments in critical
+ * paths. Removing the logging code for production environments will keep the
+ * same logic and follow the same code paths.
+ */
+var lowPriorityWarningWithoutStack = function () {};
+
+{
+  var printWarning = function (format) {
+    for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+      args[_key - 1] = arguments[_key];
+    }
+
+    var argIndex = 0;
+    var message = 'Warning: ' + format.replace(/%s/g, function () {
+      return args[argIndex++];
+    });
+
+    if (typeof console !== 'undefined') {
+      console.warn(message);
+    }
+
+    try {
+      // --- Welcome to debugging React ---
+      // This error was thrown as a convenience so that you can use this stack
+      // to find the callsite that caused this warning to fire.
+      throw new Error(message);
+    } catch (x) {}
+  };
+
+  lowPriorityWarningWithoutStack = function (condition, format) {
+    if (format === undefined) {
+      throw new Error('`lowPriorityWarningWithoutStack(condition, format, ...args)` requires a warning ' + 'message argument');
+    }
+
+    if (!condition) {
+      for (var _len2 = arguments.length, args = new Array(_len2 > 2 ? _len2 - 2 : 0), _key2 = 2; _key2 < _len2; _key2++) {
+        args[_key2 - 2] = arguments[_key2];
+      }
+
+      printWarning.apply(void 0, [format].concat(args));
+    }
+  };
+}
+
+var lowPriorityWarningWithoutStack$1 = lowPriorityWarningWithoutStack;
+
+var BEFORE_SLASH_RE = /^(.*)[\\\/]/;
+var describeComponentFrame = function (name, source, ownerName) {
+  var sourceInfo = '';
+
+  if (source) {
+    var path = source.fileName;
+    var fileName = path.replace(BEFORE_SLASH_RE, '');
+
+    {
+      // In DEV, include code for a common special case:
+      // prefer "folder/index.js" instead of just "index.js".
+      if (/^index\./.test(fileName)) {
+        var match = path.match(BEFORE_SLASH_RE);
+
+        if (match) {
+          var pathBeforeSlash = match[1];
+
+          if (pathBeforeSlash) {
+            var folderName = pathBeforeSlash.replace(BEFORE_SLASH_RE, '');
+            fileName = folderName + '/' + fileName;
+          }
+        }
       }
     }
-    return result;
-  };
+
+    sourceInfo = ' (at ' + fileName + ':' + source.lineNumber + ')';
+  } else if (ownerName) {
+    sourceInfo = ' (created by ' + ownerName + ')';
+  }
+
+  return '\n    in ' + (name || 'Unknown') + sourceInfo;
 };
 
+// Helps identify side effects in begin-phase lifecycle hooks and setState reducers:
 
-/***/ }),
+ // In some cases, StrictMode should also double-render lifecycles.
+// This can be confusing for tests though,
+// And it can be bad for performance in production.
+// This feature flag can be used to control the behavior:
 
-/***/ "./node_modules/core-js/library/modules/es6.date.now.js":
-/*!**************************************************************!*\
-  !*** ./node_modules/core-js/library/modules/es6.date.now.js ***!
-  \**************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+ // To preserve the "Pause on caught exceptions" behavior of the debugger, we
+// replay the begin phase of a failed component inside invokeGuardedCallback.
 
-// 20.3.3.1 / 15.9.4.4 Date.now()
-var $export = __webpack_require__(/*! ./_export */ "./node_modules/core-js/library/modules/_export.js");
+ // Warn about deprecated, async-unsafe lifecycles; relates to RFC #6:
 
-$export($export.S, 'Date', { now: function () { return new Date().getTime(); } });
+var warnAboutDeprecatedLifecycles = true; // Gather advanced timing metrics for Profiler subtrees.
 
+ // Trace which interactions trigger each commit.
 
-/***/ }),
+ // Only used in www builds.
 
-/***/ "./node_modules/core-js/library/modules/es6.number.is-integer.js":
-/*!***********************************************************************!*\
-  !*** ./node_modules/core-js/library/modules/es6.number.is-integer.js ***!
-  \***********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+var enableSuspenseServerRenderer = false; // TODO: true? Here it might just be false.
 
-// 20.1.2.3 Number.isInteger(number)
-var $export = __webpack_require__(/*! ./_export */ "./node_modules/core-js/library/modules/_export.js");
+ // Only used in www builds.
 
-$export($export.S, 'Number', { isInteger: __webpack_require__(/*! ./_is-integer */ "./node_modules/core-js/library/modules/_is-integer.js") });
+ // Only used in www builds.
+
+ // Disable javascript: URL strings in href for XSS protection.
+
+var disableJavaScriptURLs = false; // React Fire: prevent the value and checked attributes from syncing
+// with their related DOM properties
+
+ // These APIs will no longer be "unstable" in the upcoming 16.7 release,
+// Control this behavior with a flag to support 16.6 minor releases in the meanwhile.
 
 
-/***/ }),
+ // See https://github.com/react-native-community/discussions-and-proposals/issues/72 for more information
+// This is a flag so we can fix warnings in RN core before turning it on
 
-/***/ "./node_modules/core-js/library/modules/es7.object.values.js":
-/*!*******************************************************************!*\
-  !*** ./node_modules/core-js/library/modules/es7.object.values.js ***!
-  \*******************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+ // Experimental React Flare event system and event components support.
 
-// https://github.com/tc39/proposal-object-values-entries
-var $export = __webpack_require__(/*! ./_export */ "./node_modules/core-js/library/modules/_export.js");
-var $values = __webpack_require__(/*! ./_object-to-array */ "./node_modules/core-js/library/modules/_object-to-array.js")(false);
+var enableFlareAPI = false; // Experimental Host Component support.
 
-$export($export.S, 'Object', {
-  values: function values(it) {
-    return $values(it);
+var enableFundamentalAPI = false; // Experimental Scope support.
+
+var enableScopeAPI = false; // New API for JSX transforms to target - https://github.com/reactjs/rfcs/pull/107
+
+ // We will enforce mocking scheduler with scheduler/unstable_mock at some point. (v17?)
+// Till then, we warn about the missing mock, but still fallback to a sync mode compatible version
+
+ // For tests, we flush suspense fallbacks in an act scope;
+// *except* in some of our own tests, where we test incremental loading states.
+
+ // Changes priority of some events like mousemove to user-blocking priority,
+// but without making them discrete. The flag exists in case it causes
+// starvation problems.
+
+ // Add a callback property to suspense to notify which promises are currently
+// in the update queue. This allows reporting and tracing of what is causing
+// the user to see a loading state.
+// Also allows hydration callbacks to fire when a dehydrated boundary gets
+// hydrated or deleted.
+
+ // Part of the simplification of React.createElement so we can eventually move
+// from React.createElement to React.jsx
+// https://github.com/reactjs/rfcs/blob/createlement-rfc/text/0000-create-element-changes.md
+
+
+
+var disableLegacyContext = false;
+
+var ReactDebugCurrentFrame$1;
+var didWarnAboutInvalidateContextType;
+
+{
+  ReactDebugCurrentFrame$1 = ReactSharedInternals.ReactDebugCurrentFrame;
+  didWarnAboutInvalidateContextType = new Set();
+}
+
+var emptyObject = {};
+
+{
+  Object.freeze(emptyObject);
+}
+
+function maskContext(type, context) {
+  var contextTypes = type.contextTypes;
+
+  if (!contextTypes) {
+    return emptyObject;
   }
-});
 
+  var maskedContext = {};
 
-/***/ }),
+  for (var contextName in contextTypes) {
+    maskedContext[contextName] = context[contextName];
+  }
 
-/***/ "./node_modules/css-box-model/dist/css-box-model.esm.js":
-/*!**************************************************************!*\
-  !*** ./node_modules/css-box-model/dist/css-box-model.esm.js ***!
-  \**************************************************************/
-/*! exports provided: calculateBox, createBox, expand, getBox, getRect, offset, shrink, withScroll */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+  return maskedContext;
+}
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "calculateBox", function() { return calculateBox; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createBox", function() { return createBox; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "expand", function() { return expand; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getBox", function() { return getBox; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getRect", function() { return getRect; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "offset", function() { return offset; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "shrink", function() { return shrink; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "withScroll", function() { return withScroll; });
-/* harmony import */ var tiny_invariant__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tiny-invariant */ "./node_modules/tiny-invariant/dist/tiny-invariant.esm.js");
+function checkContextTypes(typeSpecs, values, location) {
+  {
+    checkPropTypes(typeSpecs, values, location, 'Component', ReactDebugCurrentFrame$1.getCurrentStack);
+  }
+}
 
+function validateContextBounds(context, threadID) {
+  // If we don't have enough slots in this context to store this threadID,
+  // fill it in without leaving any holes to ensure that the VM optimizes
+  // this as non-holey index properties.
+  // (Note: If `react` package is < 16.6, _threadCount is undefined.)
+  for (var i = context._threadCount | 0; i <= threadID; i++) {
+    // We assume that this is the same as the defaultValue which might not be
+    // true if we're rendering inside a secondary renderer but they are
+    // secondary because these use cases are very rare.
+    context[i] = context._currentValue2;
+    context._threadCount = i + 1;
+  }
+}
+function processContext(type, context, threadID, isClass) {
+  if (isClass) {
+    var contextType = type.contextType;
 
-var getRect = function getRect(_ref) {
-  var top = _ref.top,
-      right = _ref.right,
-      bottom = _ref.bottom,
-      left = _ref.left;
-  var width = right - left;
-  var height = bottom - top;
-  var rect = {
-    top: top,
-    right: right,
-    bottom: bottom,
-    left: left,
-    width: width,
-    height: height,
-    x: left,
-    y: top,
-    center: {
-      x: (right + left) / 2,
-      y: (bottom + top) / 2
+    {
+      if ('contextType' in type) {
+        var isValid = // Allow null for conditional declaration
+        contextType === null || contextType !== undefined && contextType.$$typeof === REACT_CONTEXT_TYPE && contextType._context === undefined; // Not a <Context.Consumer>
+
+        if (!isValid && !didWarnAboutInvalidateContextType.has(type)) {
+          didWarnAboutInvalidateContextType.add(type);
+          var addendum = '';
+
+          if (contextType === undefined) {
+            addendum = ' However, it is set to undefined. ' + 'This can be caused by a typo or by mixing up named and default imports. ' + 'This can also happen due to a circular dependency, so ' + 'try moving the createContext() call to a separate file.';
+          } else if (typeof contextType !== 'object') {
+            addendum = ' However, it is set to a ' + typeof contextType + '.';
+          } else if (contextType.$$typeof === REACT_PROVIDER_TYPE) {
+            addendum = ' Did you accidentally pass the Context.Provider instead?';
+          } else if (contextType._context !== undefined) {
+            // <Context.Consumer>
+            addendum = ' Did you accidentally pass the Context.Consumer instead?';
+          } else {
+            addendum = ' However, it is set to an object with keys {' + Object.keys(contextType).join(', ') + '}.';
+          }
+
+          warningWithoutStack$1(false, '%s defines an invalid contextType. ' + 'contextType should point to the Context object returned by React.createContext().%s', getComponentName(type) || 'Component', addendum);
+        }
+      }
     }
-  };
-  return rect;
-};
-var expand = function expand(target, expandBy) {
-  return {
-    top: target.top - expandBy.top,
-    left: target.left - expandBy.left,
-    bottom: target.bottom + expandBy.bottom,
-    right: target.right + expandBy.right
-  };
-};
-var shrink = function shrink(target, shrinkBy) {
-  return {
-    top: target.top + shrinkBy.top,
-    left: target.left + shrinkBy.left,
-    bottom: target.bottom - shrinkBy.bottom,
-    right: target.right - shrinkBy.right
-  };
-};
 
-var shift = function shift(target, shiftBy) {
-  return {
-    top: target.top + shiftBy.y,
-    left: target.left + shiftBy.x,
-    bottom: target.bottom + shiftBy.y,
-    right: target.right + shiftBy.x
-  };
-};
+    if (typeof contextType === 'object' && contextType !== null) {
+      validateContextBounds(contextType, threadID);
+      return contextType[threadID];
+    }
 
-var noSpacing = {
-  top: 0,
-  right: 0,
-  bottom: 0,
-  left: 0
-};
-var createBox = function createBox(_ref2) {
-  var borderBox = _ref2.borderBox,
-      _ref2$margin = _ref2.margin,
-      margin = _ref2$margin === void 0 ? noSpacing : _ref2$margin,
-      _ref2$border = _ref2.border,
-      border = _ref2$border === void 0 ? noSpacing : _ref2$border,
-      _ref2$padding = _ref2.padding,
-      padding = _ref2$padding === void 0 ? noSpacing : _ref2$padding;
-  var marginBox = getRect(expand(borderBox, margin));
-  var paddingBox = getRect(shrink(borderBox, border));
-  var contentBox = getRect(shrink(paddingBox, padding));
-  return {
-    marginBox: marginBox,
-    borderBox: getRect(borderBox),
-    paddingBox: paddingBox,
-    contentBox: contentBox,
-    margin: margin,
-    border: border,
-    padding: padding
-  };
-};
+    if (disableLegacyContext) {
+      {
+        if (type.contextTypes) {
+          warningWithoutStack$1(false, '%s uses the legacy contextTypes API which is no longer supported. ' + 'Use React.createContext() with static contextType instead.', getComponentName(type) || 'Unknown');
+        }
+      }
 
-var parse = function parse(raw) {
-  var value = raw.slice(0, -2);
-  var suffix = raw.slice(-2);
-
-  if (suffix !== 'px') {
-    return 0;
-  }
-
-  var result = Number(value);
-  !!isNaN(result) ?  true ? Object(tiny_invariant__WEBPACK_IMPORTED_MODULE_0__["default"])(false, "Could not parse value [raw: " + raw + ", without suffix: " + value + "]") : undefined : void 0;
-  return result;
-};
-
-var getWindowScroll = function getWindowScroll() {
-  return {
-    x: window.pageXOffset,
-    y: window.pageYOffset
-  };
-};
-
-var offset = function offset(original, change) {
-  var borderBox = original.borderBox,
-      border = original.border,
-      margin = original.margin,
-      padding = original.padding;
-  var shifted = shift(borderBox, change);
-  return createBox({
-    borderBox: shifted,
-    border: border,
-    margin: margin,
-    padding: padding
-  });
-};
-var withScroll = function withScroll(original, scroll) {
-  if (scroll === void 0) {
-    scroll = getWindowScroll();
-  }
-
-  return offset(original, scroll);
-};
-var calculateBox = function calculateBox(borderBox, styles) {
-  var margin = {
-    top: parse(styles.marginTop),
-    right: parse(styles.marginRight),
-    bottom: parse(styles.marginBottom),
-    left: parse(styles.marginLeft)
-  };
-  var padding = {
-    top: parse(styles.paddingTop),
-    right: parse(styles.paddingRight),
-    bottom: parse(styles.paddingBottom),
-    left: parse(styles.paddingLeft)
-  };
-  var border = {
-    top: parse(styles.borderTopWidth),
-    right: parse(styles.borderRightWidth),
-    bottom: parse(styles.borderBottomWidth),
-    left: parse(styles.borderLeftWidth)
-  };
-  return createBox({
-    borderBox: borderBox,
-    margin: margin,
-    padding: padding,
-    border: border
-  });
-};
-var getBox = function getBox(el) {
-  var borderBox = el.getBoundingClientRect();
-  var styles = window.getComputedStyle(el);
-  return calculateBox(borderBox, styles);
-};
-
-
-
-
-/***/ }),
-
-/***/ "./node_modules/line-height/lib/line-height.js":
-/*!*****************************************************!*\
-  !*** ./node_modules/line-height/lib/line-height.js ***!
-  \*****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-// Load in dependencies
-var computedStyle = __webpack_require__(/*! computed-style */ "./node_modules/computed-style/dist/computedStyle.commonjs.js");
-
-/**
- * Calculate the `line-height` of a given node
- * @param {HTMLElement} node Element to calculate line height of. Must be in the DOM.
- * @returns {Number} `line-height` of the element in pixels
- */
-function lineHeight(node) {
-  // Grab the line-height via style
-  var lnHeightStr = computedStyle(node, 'line-height');
-  var lnHeight = parseFloat(lnHeightStr, 10);
-
-  // If the lineHeight did not contain a unit (i.e. it was numeric), convert it to ems (e.g. '2.3' === '2.3em')
-  if (lnHeightStr === lnHeight + '') {
-    // Save the old lineHeight style and update the em unit to the element
-    var _lnHeightStyle = node.style.lineHeight;
-    node.style.lineHeight = lnHeightStr + 'em';
-
-    // Calculate the em based height
-    lnHeightStr = computedStyle(node, 'line-height');
-    lnHeight = parseFloat(lnHeightStr, 10);
-
-    // Revert the lineHeight style
-    if (_lnHeightStyle) {
-      node.style.lineHeight = _lnHeightStyle;
+      return emptyObject;
     } else {
-      delete node.style.lineHeight;
+      var maskedContext = maskContext(type, context);
+
+      {
+        if (type.contextTypes) {
+          checkContextTypes(type.contextTypes, maskedContext, 'context');
+        }
+      }
+
+      return maskedContext;
+    }
+  } else {
+    if (disableLegacyContext) {
+      {
+        if (type.contextTypes) {
+          warningWithoutStack$1(false, '%s uses the legacy contextTypes API which is no longer supported. ' + 'Use React.createContext() with React.useContext() instead.', getComponentName(type) || 'Unknown');
+        }
+      }
+
+      return undefined;
+    } else {
+      var _maskedContext = maskContext(type, context);
+
+      {
+        if (type.contextTypes) {
+          checkContextTypes(type.contextTypes, _maskedContext, 'context');
+        }
+      }
+
+      return _maskedContext;
     }
   }
-
-  // If the lineHeight is in `pt`, convert it to pixels (4px for 3pt)
-  // DEV: `em` units are converted to `pt` in IE6
-  // Conversion ratio from https://developer.mozilla.org/en-US/docs/Web/CSS/length
-  if (lnHeightStr.indexOf('pt') !== -1) {
-    lnHeight *= 4;
-    lnHeight /= 3;
-  // Otherwise, if the lineHeight is in `mm`, convert it to pixels (96px for 25.4mm)
-  } else if (lnHeightStr.indexOf('mm') !== -1) {
-    lnHeight *= 96;
-    lnHeight /= 25.4;
-  // Otherwise, if the lineHeight is in `cm`, convert it to pixels (96px for 2.54cm)
-  } else if (lnHeightStr.indexOf('cm') !== -1) {
-    lnHeight *= 96;
-    lnHeight /= 2.54;
-  // Otherwise, if the lineHeight is in `in`, convert it to pixels (96px for 1in)
-  } else if (lnHeightStr.indexOf('in') !== -1) {
-    lnHeight *= 96;
-  // Otherwise, if the lineHeight is in `pc`, convert it to pixels (12pt for 1pc)
-  } else if (lnHeightStr.indexOf('pc') !== -1) {
-    lnHeight *= 16;
-  }
-
-  // Continue our computation
-  lnHeight = Math.round(lnHeight);
-
-  // If the line-height is "normal", calculate by font-size
-  if (lnHeightStr === 'normal') {
-    // Create a temporary node
-    var nodeName = node.nodeName;
-    var _node = document.createElement(nodeName);
-    _node.innerHTML = '&nbsp;';
-
-    // If we have a text area, reset it to only 1 row
-    // https://github.com/twolfson/line-height/issues/4
-    if (nodeName.toUpperCase() === 'TEXTAREA') {
-      _node.setAttribute('rows', '1');
-    }
-
-    // Set the font-size of the element
-    var fontSizeStr = computedStyle(node, 'font-size');
-    _node.style.fontSize = fontSizeStr;
-
-    // Remove default padding/border which can affect offset height
-    // https://github.com/twolfson/line-height/issues/4
-    // https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/offsetHeight
-    _node.style.padding = '0px';
-    _node.style.border = '0px';
-
-    // Append it to the body
-    var body = document.body;
-    body.appendChild(_node);
-
-    // Assume the line height of the element is the height
-    var height = _node.offsetHeight;
-    lnHeight = height;
-
-    // Remove our child from the DOM
-    body.removeChild(_node);
-  }
-
-  // Return the calculated height
-  return lnHeight;
 }
 
-// Export lineHeight
-module.exports = lineHeight;
+// Allocates a new index for each request. Tries to stay as compact as possible so that these
+// indices can be used to reference a tightly packed array. As opposed to being used in a Map.
+// The first allocated index is 1.
+var nextAvailableThreadIDs = new Uint16Array(16);
 
+for (var i = 0; i < 15; i++) {
+  nextAvailableThreadIDs[i] = i + 1;
+}
 
-/***/ }),
+nextAvailableThreadIDs[15] = 0;
 
-/***/ "./node_modules/raf-schd/dist/raf-schd.esm.js":
-/*!****************************************************!*\
-  !*** ./node_modules/raf-schd/dist/raf-schd.esm.js ***!
-  \****************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+function growThreadCountAndReturnNextAvailable() {
+  var oldArray = nextAvailableThreadIDs;
+  var oldSize = oldArray.length;
+  var newSize = oldSize * 2;
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-var rafSchd = function rafSchd(fn) {
-  var lastArgs = [];
-  var frameId = null;
-
-  var wrapperFn = function wrapperFn() {
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
+  (function () {
+    if (!(newSize <= 0x10000)) {
+      {
+        throw ReactError(Error("Maximum number of concurrent React renderers exceeded. This can happen if you are not properly destroying the Readable provided by React. Ensure that you call .destroy() on it if you no longer want to read from it, and did not read to the end. If you use .pipe() this should be automatic."));
+      }
     }
+  })();
 
-    lastArgs = args;
+  var newArray = new Uint16Array(newSize);
+  newArray.set(oldArray);
+  nextAvailableThreadIDs = newArray;
+  nextAvailableThreadIDs[0] = oldSize + 1;
 
-    if (frameId) {
-      return;
+  for (var _i = oldSize; _i < newSize - 1; _i++) {
+    nextAvailableThreadIDs[_i] = _i + 1;
+  }
+
+  nextAvailableThreadIDs[newSize - 1] = 0;
+  return oldSize;
+}
+
+function allocThreadID() {
+  var nextID = nextAvailableThreadIDs[0];
+
+  if (nextID === 0) {
+    return growThreadCountAndReturnNextAvailable();
+  }
+
+  nextAvailableThreadIDs[0] = nextAvailableThreadIDs[nextID];
+  return nextID;
+}
+function freeThreadID(id) {
+  nextAvailableThreadIDs[id] = nextAvailableThreadIDs[0];
+  nextAvailableThreadIDs[0] = id;
+}
+
+// A reserved attribute.
+// It is handled by React separately and shouldn't be written to the DOM.
+var RESERVED = 0; // A simple string attribute.
+// Attributes that aren't in the whitelist are presumed to have this type.
+
+var STRING = 1; // A string attribute that accepts booleans in React. In HTML, these are called
+// "enumerated" attributes with "true" and "false" as possible values.
+// When true, it should be set to a "true" string.
+// When false, it should be set to a "false" string.
+
+var BOOLEANISH_STRING = 2; // A real boolean attribute.
+// When true, it should be present (set either to an empty string or its name).
+// When false, it should be omitted.
+
+var BOOLEAN = 3; // An attribute that can be used as a flag as well as with a value.
+// When true, it should be present (set either to an empty string or its name).
+// When false, it should be omitted.
+// For any other value, should be present with that value.
+
+var OVERLOADED_BOOLEAN = 4; // An attribute that must be numeric or parse as a numeric.
+// When falsy, it should be removed.
+
+var NUMERIC = 5; // An attribute that must be positive numeric or parse as a positive numeric.
+// When falsy, it should be removed.
+
+var POSITIVE_NUMERIC = 6;
+
+/* eslint-disable max-len */
+var ATTRIBUTE_NAME_START_CHAR = ":A-Z_a-z\\u00C0-\\u00D6\\u00D8-\\u00F6\\u00F8-\\u02FF\\u0370-\\u037D\\u037F-\\u1FFF\\u200C-\\u200D\\u2070-\\u218F\\u2C00-\\u2FEF\\u3001-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFFD";
+/* eslint-enable max-len */
+
+var ATTRIBUTE_NAME_CHAR = ATTRIBUTE_NAME_START_CHAR + "\\-.0-9\\u00B7\\u0300-\\u036F\\u203F-\\u2040";
+
+var ROOT_ATTRIBUTE_NAME = 'data-reactroot';
+var VALID_ATTRIBUTE_NAME_REGEX = new RegExp('^[' + ATTRIBUTE_NAME_START_CHAR + '][' + ATTRIBUTE_NAME_CHAR + ']*$');
+var hasOwnProperty$1 = Object.prototype.hasOwnProperty;
+var illegalAttributeNameCache = {};
+var validatedAttributeNameCache = {};
+function isAttributeNameSafe(attributeName) {
+  if (hasOwnProperty$1.call(validatedAttributeNameCache, attributeName)) {
+    return true;
+  }
+
+  if (hasOwnProperty$1.call(illegalAttributeNameCache, attributeName)) {
+    return false;
+  }
+
+  if (VALID_ATTRIBUTE_NAME_REGEX.test(attributeName)) {
+    validatedAttributeNameCache[attributeName] = true;
+    return true;
+  }
+
+  illegalAttributeNameCache[attributeName] = true;
+
+  {
+    warning$1(false, 'Invalid attribute name: `%s`', attributeName);
+  }
+
+  return false;
+}
+function shouldIgnoreAttribute(name, propertyInfo, isCustomComponentTag) {
+  if (propertyInfo !== null) {
+    return propertyInfo.type === RESERVED;
+  }
+
+  if (isCustomComponentTag) {
+    return false;
+  }
+
+  if (name.length > 2 && (name[0] === 'o' || name[0] === 'O') && (name[1] === 'n' || name[1] === 'N')) {
+    return true;
+  }
+
+  return false;
+}
+function shouldRemoveAttributeWithWarning(name, value, propertyInfo, isCustomComponentTag) {
+  if (propertyInfo !== null && propertyInfo.type === RESERVED) {
+    return false;
+  }
+
+  switch (typeof value) {
+    case 'function': // $FlowIssue symbol is perfectly valid here
+
+    case 'symbol':
+      // eslint-disable-line
+      return true;
+
+    case 'boolean':
+      {
+        if (isCustomComponentTag) {
+          return false;
+        }
+
+        if (propertyInfo !== null) {
+          return !propertyInfo.acceptsBooleans;
+        } else {
+          var prefix = name.toLowerCase().slice(0, 5);
+          return prefix !== 'data-' && prefix !== 'aria-';
+        }
+      }
+
+    default:
+      return false;
+  }
+}
+function shouldRemoveAttribute(name, value, propertyInfo, isCustomComponentTag) {
+  if (value === null || typeof value === 'undefined') {
+    return true;
+  }
+
+  if (shouldRemoveAttributeWithWarning(name, value, propertyInfo, isCustomComponentTag)) {
+    return true;
+  }
+
+  if (isCustomComponentTag) {
+    return false;
+  }
+
+  if (propertyInfo !== null) {
+    switch (propertyInfo.type) {
+      case BOOLEAN:
+        return !value;
+
+      case OVERLOADED_BOOLEAN:
+        return value === false;
+
+      case NUMERIC:
+        return isNaN(value);
+
+      case POSITIVE_NUMERIC:
+        return isNaN(value) || value < 1;
     }
+  }
 
-    frameId = requestAnimationFrame(function () {
-      frameId = null;
-      fn.apply(void 0, lastArgs);
-    });
-  };
+  return false;
+}
+function getPropertyInfo(name) {
+  return properties.hasOwnProperty(name) ? properties[name] : null;
+}
 
-  wrapperFn.cancel = function () {
-    if (!frameId) {
-      return;
-    }
-
-    cancelAnimationFrame(frameId);
-    frameId = null;
-  };
-
-  return wrapperFn;
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (rafSchd);
+function PropertyInfoRecord(name, type, mustUseProperty, attributeName, attributeNamespace, sanitizeURL) {
+  this.acceptsBooleans = type === BOOLEANISH_STRING || type === BOOLEAN || type === OVERLOADED_BOOLEAN;
+  this.attributeName = attributeName;
+  this.attributeNamespace = attributeNamespace;
+  this.mustUseProperty = mustUseProperty;
+  this.propertyName = name;
+  this.type = type;
+  this.sanitizeURL = sanitizeURL;
+} // When adding attributes to this list, be sure to also add them to
+// the `possibleStandardNames` module to ensure casing and incorrect
+// name warnings.
 
 
-/***/ }),
+var properties = {}; // These props are reserved by React. They shouldn't be written to the DOM.
 
-/***/ "./node_modules/react-autosize-textarea/lib/TextareaAutosize.js":
-/*!**********************************************************************!*\
-  !*** ./node_modules/react-autosize-textarea/lib/TextareaAutosize.js ***!
-  \**********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+['children', 'dangerouslySetInnerHTML', // TODO: This prevents the assignment of defaultValue to regular
+// elements (not just inputs). Now that ReactDOMInput assigns to the
+// defaultValue property -- do we need this?
+'defaultValue', 'defaultChecked', 'innerHTML', 'suppressContentEditableWarning', 'suppressHydrationWarning', 'style'].forEach(function (name) {
+  properties[name] = new PropertyInfoRecord(name, RESERVED, false, // mustUseProperty
+  name, // attributeName
+  null, // attributeNamespace
+  false);
+}); // A few React string attributes have a different name.
+// This is a mapping from React prop names to the attribute names.
 
-"use strict";
+[['acceptCharset', 'accept-charset'], ['className', 'class'], ['htmlFor', 'for'], ['httpEquiv', 'http-equiv']].forEach(function (_ref) {
+  var name = _ref[0],
+      attributeName = _ref[1];
+  properties[name] = new PropertyInfoRecord(name, STRING, false, // mustUseProperty
+  attributeName, // attributeName
+  null, // attributeNamespace
+  false);
+}); // These are "enumerated" HTML attributes that accept "true" and "false".
+// In React, we let users pass `true` and `false` even though technically
+// these aren't boolean attributes (they are coerced to strings).
 
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-var __assign = (this && this.__assign) || Object.assign || function(t) {
-    for (var s, i = 1, n = arguments.length; i < n; i++) {
-        s = arguments[i];
-        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-            t[p] = s[p];
-    }
-    return t;
-};
-var __rest = (this && this.__rest) || function (s, e) {
-    var t = {};
-    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
-        t[p] = s[p];
-    if (s != null && typeof Object.getOwnPropertySymbols === "function")
-        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) if (e.indexOf(p[i]) < 0)
-            t[p[i]] = s[p[i]];
-    return t;
-};
-exports.__esModule = true;
-var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-var PropTypes = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-var autosize = __webpack_require__(/*! autosize */ "./node_modules/autosize/dist/autosize.js");
-var _getLineHeight = __webpack_require__(/*! line-height */ "./node_modules/line-height/lib/line-height.js");
-var getLineHeight = _getLineHeight;
-var RESIZED = "autosize:resized";
-/**
- * A light replacement for built-in textarea component
- * which automaticaly adjusts its height to match the content
- */
-var TextareaAutosizeClass = /** @class */ (function (_super) {
-    __extends(TextareaAutosizeClass, _super);
-    function TextareaAutosizeClass() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.state = {
-            lineHeight: null
-        };
-        _this.textarea = _this.props.innerRef || React.createRef();
-        _this.onResize = function (e) {
-            if (_this.props.onResize) {
-                _this.props.onResize(e);
-            }
-        };
-        _this.updateLineHeight = function () {
-            if (_this.textarea.current) {
-                _this.setState({
-                    lineHeight: getLineHeight(_this.textarea.current)
-                });
-            }
-        };
-        _this.onChange = function (e) {
-            var onChange = _this.props.onChange;
-            _this.currentValue = e.currentTarget.value;
-            onChange && onChange(e);
-        };
-        return _this;
-    }
-    TextareaAutosizeClass.prototype.componentDidMount = function () {
-        var _this = this;
-        var _a = this.props, maxRows = _a.maxRows, async = _a.async;
-        if (typeof maxRows === "number") {
-            this.updateLineHeight();
-        }
-        if (typeof maxRows === "number" || async) {
-            /*
-              the defer is needed to:
-                - force "autosize" to activate the scrollbar when this.props.maxRows is passed
-                - support StyledComponents (see #71)
-            */
-            setTimeout(function () { return _this.textarea.current && autosize(_this.textarea.current); });
-        }
-        else {
-            this.textarea.current && autosize(this.textarea.current);
-        }
-        if (this.textarea.current) {
-            this.textarea.current.addEventListener(RESIZED, this.onResize);
-        }
-    };
-    TextareaAutosizeClass.prototype.componentWillUnmount = function () {
-        if (this.textarea.current) {
-            this.textarea.current.removeEventListener(RESIZED, this.onResize);
-            autosize.destroy(this.textarea.current);
-        }
-    };
-    TextareaAutosizeClass.prototype.render = function () {
-        var _a = this, _b = _a.props, onResize = _b.onResize, maxRows = _b.maxRows, onChange = _b.onChange, style = _b.style, innerRef = _b.innerRef, children = _b.children, props = __rest(_b, ["onResize", "maxRows", "onChange", "style", "innerRef", "children"]), lineHeight = _a.state.lineHeight;
-        var maxHeight = maxRows && lineHeight ? lineHeight * maxRows : null;
-        return (React.createElement("textarea", __assign({}, props, { onChange: this.onChange, style: maxHeight ? __assign({}, style, { maxHeight: maxHeight }) : style, ref: this.textarea }), children));
-    };
-    TextareaAutosizeClass.prototype.componentDidUpdate = function () {
-        this.textarea.current && autosize.update(this.textarea.current);
-    };
-    TextareaAutosizeClass.defaultProps = {
-        rows: 1,
-        async: false
-    };
-    TextareaAutosizeClass.propTypes = {
-        rows: PropTypes.number,
-        maxRows: PropTypes.number,
-        onResize: PropTypes.func,
-        innerRef: PropTypes.object,
-        async: PropTypes.bool
-    };
-    return TextareaAutosizeClass;
-}(React.Component));
-exports.TextareaAutosize = React.forwardRef(function (props, ref) {
-    return React.createElement(TextareaAutosizeClass, __assign({}, props, { innerRef: ref }));
+['contentEditable', 'draggable', 'spellCheck', 'value'].forEach(function (name) {
+  properties[name] = new PropertyInfoRecord(name, BOOLEANISH_STRING, false, // mustUseProperty
+  name.toLowerCase(), // attributeName
+  null, // attributeNamespace
+  false);
+}); // These are "enumerated" SVG attributes that accept "true" and "false".
+// In React, we let users pass `true` and `false` even though technically
+// these aren't boolean attributes (they are coerced to strings).
+// Since these are SVG attributes, their attribute names are case-sensitive.
+
+['autoReverse', 'externalResourcesRequired', 'focusable', 'preserveAlpha'].forEach(function (name) {
+  properties[name] = new PropertyInfoRecord(name, BOOLEANISH_STRING, false, // mustUseProperty
+  name, // attributeName
+  null, // attributeNamespace
+  false);
+}); // These are HTML boolean attributes.
+
+['allowFullScreen', 'async', // Note: there is a special case that prevents it from being written to the DOM
+// on the client side because the browsers are inconsistent. Instead we call focus().
+'autoFocus', 'autoPlay', 'controls', 'default', 'defer', 'disabled', 'disablePictureInPicture', 'formNoValidate', 'hidden', 'loop', 'noModule', 'noValidate', 'open', 'playsInline', 'readOnly', 'required', 'reversed', 'scoped', 'seamless', // Microdata
+'itemScope'].forEach(function (name) {
+  properties[name] = new PropertyInfoRecord(name, BOOLEAN, false, // mustUseProperty
+  name.toLowerCase(), // attributeName
+  null, // attributeNamespace
+  false);
+}); // These are the few React props that we set as DOM properties
+// rather than attributes. These are all booleans.
+
+['checked', // Note: `option.selected` is not updated if `select.multiple` is
+// disabled with `removeAttribute`. We have special logic for handling this.
+'multiple', 'muted', 'selected'].forEach(function (name) {
+  properties[name] = new PropertyInfoRecord(name, BOOLEAN, true, // mustUseProperty
+  name, // attributeName
+  null, // attributeNamespace
+  false);
+}); // These are HTML attributes that are "overloaded booleans": they behave like
+// booleans, but can also accept a string value.
+
+['capture', 'download'].forEach(function (name) {
+  properties[name] = new PropertyInfoRecord(name, OVERLOADED_BOOLEAN, false, // mustUseProperty
+  name, // attributeName
+  null, // attributeNamespace
+  false);
+}); // These are HTML attributes that must be positive numbers.
+
+['cols', 'rows', 'size', 'span'].forEach(function (name) {
+  properties[name] = new PropertyInfoRecord(name, POSITIVE_NUMERIC, false, // mustUseProperty
+  name, // attributeName
+  null, // attributeNamespace
+  false);
+}); // These are HTML attributes that must be numbers.
+
+['rowSpan', 'start'].forEach(function (name) {
+  properties[name] = new PropertyInfoRecord(name, NUMERIC, false, // mustUseProperty
+  name.toLowerCase(), // attributeName
+  null, // attributeNamespace
+  false);
+});
+var CAMELIZE = /[\-\:]([a-z])/g;
+
+var capitalize = function (token) {
+  return token[1].toUpperCase();
+}; // This is a list of all SVG attributes that need special casing, namespacing,
+// or boolean value assignment. Regular attributes that just accept strings
+// and have the same names are omitted, just like in the HTML whitelist.
+// Some of these attributes can be hard to find. This list was created by
+// scrapping the MDN documentation.
+
+
+['accent-height', 'alignment-baseline', 'arabic-form', 'baseline-shift', 'cap-height', 'clip-path', 'clip-rule', 'color-interpolation', 'color-interpolation-filters', 'color-profile', 'color-rendering', 'dominant-baseline', 'enable-background', 'fill-opacity', 'fill-rule', 'flood-color', 'flood-opacity', 'font-family', 'font-size', 'font-size-adjust', 'font-stretch', 'font-style', 'font-variant', 'font-weight', 'glyph-name', 'glyph-orientation-horizontal', 'glyph-orientation-vertical', 'horiz-adv-x', 'horiz-origin-x', 'image-rendering', 'letter-spacing', 'lighting-color', 'marker-end', 'marker-mid', 'marker-start', 'overline-position', 'overline-thickness', 'paint-order', 'panose-1', 'pointer-events', 'rendering-intent', 'shape-rendering', 'stop-color', 'stop-opacity', 'strikethrough-position', 'strikethrough-thickness', 'stroke-dasharray', 'stroke-dashoffset', 'stroke-linecap', 'stroke-linejoin', 'stroke-miterlimit', 'stroke-opacity', 'stroke-width', 'text-anchor', 'text-decoration', 'text-rendering', 'underline-position', 'underline-thickness', 'unicode-bidi', 'unicode-range', 'units-per-em', 'v-alphabetic', 'v-hanging', 'v-ideographic', 'v-mathematical', 'vector-effect', 'vert-adv-y', 'vert-origin-x', 'vert-origin-y', 'word-spacing', 'writing-mode', 'xmlns:xlink', 'x-height'].forEach(function (attributeName) {
+  var name = attributeName.replace(CAMELIZE, capitalize);
+  properties[name] = new PropertyInfoRecord(name, STRING, false, // mustUseProperty
+  attributeName, null, // attributeNamespace
+  false);
+}); // String SVG attributes with the xlink namespace.
+
+['xlink:actuate', 'xlink:arcrole', 'xlink:role', 'xlink:show', 'xlink:title', 'xlink:type'].forEach(function (attributeName) {
+  var name = attributeName.replace(CAMELIZE, capitalize);
+  properties[name] = new PropertyInfoRecord(name, STRING, false, // mustUseProperty
+  attributeName, 'http://www.w3.org/1999/xlink', false);
+}); // String SVG attributes with the xml namespace.
+
+['xml:base', 'xml:lang', 'xml:space'].forEach(function (attributeName) {
+  var name = attributeName.replace(CAMELIZE, capitalize);
+  properties[name] = new PropertyInfoRecord(name, STRING, false, // mustUseProperty
+  attributeName, 'http://www.w3.org/XML/1998/namespace', false);
+}); // These attribute exists both in HTML and SVG.
+// The attribute name is case-sensitive in SVG so we can't just use
+// the React name like we do for attributes that exist only in HTML.
+
+['tabIndex', 'crossOrigin'].forEach(function (attributeName) {
+  properties[attributeName] = new PropertyInfoRecord(attributeName, STRING, false, // mustUseProperty
+  attributeName.toLowerCase(), // attributeName
+  null, // attributeNamespace
+  false);
+}); // These attributes accept URLs. These must not allow javascript: URLS.
+// These will also need to accept Trusted Types object in the future.
+
+var xlinkHref = 'xlinkHref';
+properties[xlinkHref] = new PropertyInfoRecord('xlinkHref', STRING, false, // mustUseProperty
+'xlink:href', 'http://www.w3.org/1999/xlink', true);
+['src', 'href', 'action', 'formAction'].forEach(function (attributeName) {
+  properties[attributeName] = new PropertyInfoRecord(attributeName, STRING, false, // mustUseProperty
+  attributeName.toLowerCase(), // attributeName
+  null, // attributeNamespace
+  true);
 });
 
+var ReactDebugCurrentFrame$2 = null;
 
-/***/ }),
+{
+  ReactDebugCurrentFrame$2 = ReactSharedInternals.ReactDebugCurrentFrame;
+} // A javascript: URL can contain leading C0 control or \u0020 SPACE,
+// and any newline or tab are filtered out as if they're not part of the URL.
+// https://url.spec.whatwg.org/#url-parsing
+// Tab or newline are defined as \r\n\t:
+// https://infra.spec.whatwg.org/#ascii-tab-or-newline
+// A C0 control is a code point in the range \u0000 NULL to \u001F
+// INFORMATION SEPARATOR ONE, inclusive:
+// https://infra.spec.whatwg.org/#c0-control-or-space
 
-/***/ "./node_modules/react-autosize-textarea/lib/index.js":
-/*!***********************************************************!*\
-  !*** ./node_modules/react-autosize-textarea/lib/index.js ***!
-  \***********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-exports.__esModule = true;
-var TextareaAutosize_1 = __webpack_require__(/*! ./TextareaAutosize */ "./node_modules/react-autosize-textarea/lib/TextareaAutosize.js");
-exports["default"] = TextareaAutosize_1.TextareaAutosize;
-
-
-/***/ }),
-
-/***/ "./node_modules/react-beautiful-dnd/dist/react-beautiful-dnd.esm.js":
-/*!**************************************************************************!*\
-  !*** ./node_modules/react-beautiful-dnd/dist/react-beautiful-dnd.esm.js ***!
-  \**************************************************************************/
-/*! exports provided: DragDropContext, Draggable, Droppable, resetServerContext */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DragDropContext", function() { return DragDropContext; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Draggable", function() { return PublicDraggable; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Droppable", function() { return ConnectedDroppable; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "resetServerContext", function() { return resetServerContext; });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var use_memo_one__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! use-memo-one */ "./node_modules/use-memo-one/dist/use-memo-one.esm.js");
-/* harmony import */ var _babel_runtime_corejs2_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/inheritsLoose */ "./node_modules/react-beautiful-dnd/node_modules/@babel/runtime-corejs2/helpers/esm/inheritsLoose.js");
-/* harmony import */ var _babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/extends */ "./node_modules/react-beautiful-dnd/node_modules/@babel/runtime-corejs2/helpers/esm/extends.js");
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var css_box_model__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! css-box-model */ "./node_modules/css-box-model/dist/css-box-model.esm.js");
-/* harmony import */ var memoize_one__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! memoize-one */ "./node_modules/memoize-one/dist/memoize-one.esm.js");
-/* harmony import */ var _babel_runtime_corejs2_core_js_object_values__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/object/values */ "./node_modules/react-beautiful-dnd/node_modules/@babel/runtime-corejs2/core-js/object/values.js");
-/* harmony import */ var _babel_runtime_corejs2_core_js_object_values__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_object_values__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var _babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/object/keys */ "./node_modules/react-beautiful-dnd/node_modules/@babel/runtime-corejs2/core-js/object/keys.js");
-/* harmony import */ var _babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var raf_schd__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! raf-schd */ "./node_modules/raf-schd/dist/raf-schd.esm.js");
-/* harmony import */ var _babel_runtime_corejs2_core_js_date_now__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/date/now */ "./node_modules/react-beautiful-dnd/node_modules/@babel/runtime-corejs2/core-js/date/now.js");
-/* harmony import */ var _babel_runtime_corejs2_core_js_date_now__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_date_now__WEBPACK_IMPORTED_MODULE_11__);
-/* harmony import */ var _babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/object/assign */ "./node_modules/react-beautiful-dnd/node_modules/@babel/runtime-corejs2/core-js/object/assign.js");
-/* harmony import */ var _babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_12__);
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_13__);
-/* harmony import */ var _babel_runtime_corejs2_core_js_number_is_integer__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/number/is-integer */ "./node_modules/react-beautiful-dnd/node_modules/@babel/runtime-corejs2/core-js/number/is-integer.js");
-/* harmony import */ var _babel_runtime_corejs2_core_js_number_is_integer__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_number_is_integer__WEBPACK_IMPORTED_MODULE_14__);
+/* eslint-disable max-len */
 
 
+var isJavaScriptProtocol = /^[\u0000-\u001F ]*j[\r\n\t]*a[\r\n\t]*v[\r\n\t]*a[\r\n\t]*s[\r\n\t]*c[\r\n\t]*r[\r\n\t]*i[\r\n\t]*p[\r\n\t]*t[\r\n\t]*\:/i;
+var didWarn = false;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-var isProduction = "development" === 'production';
-var spacesAndTabs = /[ \t]{2,}/g;
-var lineStartWithSpaces = /^[ \t]*/gm;
-
-var clean = function clean(value) {
-  return value.replace(spacesAndTabs, ' ').replace(lineStartWithSpaces, '').trim();
-};
-
-var getDevMessage = function getDevMessage(message) {
-  return clean("\n  %creact-beautiful-dnd\n\n  %c" + clean(message) + "\n\n  %c\uD83D\uDC77\u200D This is a development only message. It will be removed in production builds.\n");
-};
-
-var getFormattedMessage = function getFormattedMessage(message) {
-  return [getDevMessage(message), 'color: #00C584; font-size: 1.2em; font-weight: bold;', 'line-height: 1.5', 'color: #723874;'];
-};
-var isDisabledFlag = '__react-beautiful-dnd-disable-dev-warnings';
-function log(type, message) {
-  var _console;
-
-  if (isProduction) {
-    return;
+function sanitizeURL(url) {
+  if (disableJavaScriptURLs) {
+    (function () {
+      if (!!isJavaScriptProtocol.test(url)) {
+        {
+          throw ReactError(Error("React has blocked a javascript: URL as a security precaution." + (ReactDebugCurrentFrame$2.getStackAddendum())));
+        }
+      }
+    })();
+  } else if ( true && !didWarn && isJavaScriptProtocol.test(url)) {
+    didWarn = true;
+    warning$1(false, 'A future version of React will block javascript: URLs as a security precaution. ' + 'Use event handlers instead if you can. If you need to generate unsafe HTML try ' + 'using dangerouslySetInnerHTML instead. React was passed %s.', JSON.stringify(url));
   }
-
-  if (typeof window !== 'undefined' && window[isDisabledFlag]) {
-    return;
-  }
-
-  (_console = console)[type].apply(_console, getFormattedMessage(message));
 }
-var warning = log.bind(null, 'warn');
-var error = log.bind(null, 'error');
+
+// code copied and modified from escape-html
+
+/**
+ * Module variables.
+ * @private
+ */
+var matchHtmlRegExp = /["'&<>]/;
+/**
+ * Escapes special characters and HTML entities in a given html string.
+ *
+ * @param  {string} string HTML string to escape for later insertion
+ * @return {string}
+ * @public
+ */
+
+function escapeHtml(string) {
+  var str = '' + string;
+  var match = matchHtmlRegExp.exec(str);
+
+  if (!match) {
+    return str;
+  }
+
+  var escape;
+  var html = '';
+  var index;
+  var lastIndex = 0;
+
+  for (index = match.index; index < str.length; index++) {
+    switch (str.charCodeAt(index)) {
+      case 34:
+        // "
+        escape = '&quot;';
+        break;
+
+      case 38:
+        // &
+        escape = '&amp;';
+        break;
+
+      case 39:
+        // '
+        escape = '&#x27;'; // modified from escape-html; used to be '&#39'
+
+        break;
+
+      case 60:
+        // <
+        escape = '&lt;';
+        break;
+
+      case 62:
+        // >
+        escape = '&gt;';
+        break;
+
+      default:
+        continue;
+    }
+
+    if (lastIndex !== index) {
+      html += str.substring(lastIndex, index);
+    }
+
+    lastIndex = index + 1;
+    html += escape;
+  }
+
+  return lastIndex !== index ? html + str.substring(lastIndex, index) : html;
+} // end code copied and modified from escape-html
+
+/**
+ * Escapes text to prevent scripting attacks.
+ *
+ * @param {*} text Text value to escape.
+ * @return {string} An escaped string.
+ */
+
+
+function escapeTextForBrowser(text) {
+  if (typeof text === 'boolean' || typeof text === 'number') {
+    // this shortcircuit helps perf for types that we know will never have
+    // special characters, especially given that this function is used often
+    // for numeric dom ids.
+    return '' + text;
+  }
+
+  return escapeHtml(text);
+}
+
+/**
+ * Escapes attribute value to prevent scripting attacks.
+ *
+ * @param {*} value Value to escape.
+ * @return {string} An escaped string.
+ */
+
+function quoteAttributeValueForBrowser(value) {
+  return '"' + escapeTextForBrowser(value) + '"';
+}
+
+/**
+ * Operations for dealing with DOM properties.
+ */
+
+/**
+ * Creates markup for the ID property.
+ *
+ * @param {string} id Unescaped ID.
+ * @return {string} Markup string.
+ */
+
+
+function createMarkupForRoot() {
+  return ROOT_ATTRIBUTE_NAME + '=""';
+}
+/**
+ * Creates markup for a property.
+ *
+ * @param {string} name
+ * @param {*} value
+ * @return {?string} Markup string, or null if the property was invalid.
+ */
+
+function createMarkupForProperty(name, value) {
+  var propertyInfo = getPropertyInfo(name);
+
+  if (name !== 'style' && shouldIgnoreAttribute(name, propertyInfo, false)) {
+    return '';
+  }
+
+  if (shouldRemoveAttribute(name, value, propertyInfo, false)) {
+    return '';
+  }
+
+  if (propertyInfo !== null) {
+    var attributeName = propertyInfo.attributeName;
+    var type = propertyInfo.type;
+
+    if (type === BOOLEAN || type === OVERLOADED_BOOLEAN && value === true) {
+      return attributeName + '=""';
+    } else {
+      if (propertyInfo.sanitizeURL) {
+        value = '' + value;
+        sanitizeURL(value);
+      }
+
+      return attributeName + '=' + quoteAttributeValueForBrowser(value);
+    }
+  } else if (isAttributeNameSafe(name)) {
+    return name + '=' + quoteAttributeValueForBrowser(value);
+  }
+
+  return '';
+}
+/**
+ * Creates markup for a custom property.
+ *
+ * @param {string} name
+ * @param {*} value
+ * @return {string} Markup string, or empty string if the property was invalid.
+ */
+
+function createMarkupForCustomAttribute(name, value) {
+  if (!isAttributeNameSafe(name) || value == null) {
+    return '';
+  }
+
+  return name + '=' + quoteAttributeValueForBrowser(value);
+}
+
+/**
+ * inlined Object.is polyfill to avoid requiring consumers ship their own
+ * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is
+ */
+function is(x, y) {
+  return x === y && (x !== 0 || 1 / x === 1 / y) || x !== x && y !== y // eslint-disable-line no-self-compare
+  ;
+}
+
+var is$1 = typeof Object.is === 'function' ? Object.is : is;
+
+var currentlyRenderingComponent = null;
+var firstWorkInProgressHook = null;
+var workInProgressHook = null; // Whether the work-in-progress hook is a re-rendered hook
+
+var isReRender = false; // Whether an update was scheduled during the currently executing render pass.
+
+var didScheduleRenderPhaseUpdate = false; // Lazily created map of render-phase updates
+
+var renderPhaseUpdates = null; // Counter to prevent infinite loops.
+
+var numberOfReRenders = 0;
+var RE_RENDER_LIMIT = 25;
+var isInHookUserCodeInDev = false; // In DEV, this is the name of the currently executing primitive hook
+
+var currentHookNameInDev;
+
+function resolveCurrentlyRenderingComponent() {
+  (function () {
+    if (!(currentlyRenderingComponent !== null)) {
+      {
+        throw ReactError(Error("Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons:\n1. You might have mismatching versions of React and the renderer (such as React DOM)\n2. You might be breaking the Rules of Hooks\n3. You might have more than one copy of React in the same app\nSee https://fb.me/react-invalid-hook-call for tips about how to debug and fix this problem."));
+      }
+    }
+  })();
+
+  {
+    !!isInHookUserCodeInDev ? warning$1(false, 'Do not call Hooks inside useEffect(...), useMemo(...), or other built-in Hooks. ' + 'You can only call Hooks at the top level of your React function. ' + 'For more information, see ' + 'https://fb.me/rules-of-hooks') : void 0;
+  }
+
+  return currentlyRenderingComponent;
+}
+
+function areHookInputsEqual(nextDeps, prevDeps) {
+  if (prevDeps === null) {
+    {
+      warning$1(false, '%s received a final argument during this render, but not during ' + 'the previous render. Even though the final argument is optional, ' + 'its type cannot change between renders.', currentHookNameInDev);
+    }
+
+    return false;
+  }
+
+  {
+    // Don't bother comparing lengths in prod because these arrays should be
+    // passed inline.
+    if (nextDeps.length !== prevDeps.length) {
+      warning$1(false, 'The final argument passed to %s changed size between renders. The ' + 'order and size of this array must remain constant.\n\n' + 'Previous: %s\n' + 'Incoming: %s', currentHookNameInDev, "[" + nextDeps.join(', ') + "]", "[" + prevDeps.join(', ') + "]");
+    }
+  }
+
+  for (var i = 0; i < prevDeps.length && i < nextDeps.length; i++) {
+    if (is$1(nextDeps[i], prevDeps[i])) {
+      continue;
+    }
+
+    return false;
+  }
+
+  return true;
+}
+
+function createHook() {
+  if (numberOfReRenders > 0) {
+    (function () {
+      {
+        {
+          throw ReactError(Error("Rendered more hooks than during the previous render"));
+        }
+      }
+    })();
+  }
+
+  return {
+    memoizedState: null,
+    queue: null,
+    next: null
+  };
+}
+
+function createWorkInProgressHook() {
+  if (workInProgressHook === null) {
+    // This is the first hook in the list
+    if (firstWorkInProgressHook === null) {
+      isReRender = false;
+      firstWorkInProgressHook = workInProgressHook = createHook();
+    } else {
+      // There's already a work-in-progress. Reuse it.
+      isReRender = true;
+      workInProgressHook = firstWorkInProgressHook;
+    }
+  } else {
+    if (workInProgressHook.next === null) {
+      isReRender = false; // Append to the end of the list
+
+      workInProgressHook = workInProgressHook.next = createHook();
+    } else {
+      // There's already a work-in-progress. Reuse it.
+      isReRender = true;
+      workInProgressHook = workInProgressHook.next;
+    }
+  }
+
+  return workInProgressHook;
+}
+
+function prepareToUseHooks(componentIdentity) {
+  currentlyRenderingComponent = componentIdentity;
+
+  {
+    isInHookUserCodeInDev = false;
+  } // The following should have already been reset
+  // didScheduleRenderPhaseUpdate = false;
+  // firstWorkInProgressHook = null;
+  // numberOfReRenders = 0;
+  // renderPhaseUpdates = null;
+  // workInProgressHook = null;
+
+}
+function finishHooks(Component, props, children, refOrContext) {
+  // This must be called after every function component to prevent hooks from
+  // being used in classes.
+  while (didScheduleRenderPhaseUpdate) {
+    // Updates were scheduled during the render phase. They are stored in
+    // the `renderPhaseUpdates` map. Call the component again, reusing the
+    // work-in-progress hooks and applying the additional updates on top. Keep
+    // restarting until no more updates are scheduled.
+    didScheduleRenderPhaseUpdate = false;
+    numberOfReRenders += 1; // Start over from the beginning of the list
+
+    workInProgressHook = null;
+    children = Component(props, refOrContext);
+  }
+
+  currentlyRenderingComponent = null;
+  firstWorkInProgressHook = null;
+  numberOfReRenders = 0;
+  renderPhaseUpdates = null;
+  workInProgressHook = null;
+
+  {
+    isInHookUserCodeInDev = false;
+  } // These were reset above
+  // currentlyRenderingComponent = null;
+  // didScheduleRenderPhaseUpdate = false;
+  // firstWorkInProgressHook = null;
+  // numberOfReRenders = 0;
+  // renderPhaseUpdates = null;
+  // workInProgressHook = null;
+
+
+  return children;
+}
+
+function readContext(context, observedBits) {
+  var threadID = currentThreadID;
+  validateContextBounds(context, threadID);
+
+  {
+    !!isInHookUserCodeInDev ? warning$1(false, 'Context can only be read while React is rendering. ' + 'In classes, you can read it in the render method or getDerivedStateFromProps. ' + 'In function components, you can read it directly in the function body, but not ' + 'inside Hooks like useReducer() or useMemo().') : void 0;
+  }
+
+  return context[threadID];
+}
+
+function useContext(context, observedBits) {
+  {
+    currentHookNameInDev = 'useContext';
+  }
+
+  resolveCurrentlyRenderingComponent();
+  var threadID = currentThreadID;
+  validateContextBounds(context, threadID);
+  return context[threadID];
+}
+
+function basicStateReducer(state, action) {
+  return typeof action === 'function' ? action(state) : action;
+}
+
+function useState(initialState) {
+  {
+    currentHookNameInDev = 'useState';
+  }
+
+  return useReducer(basicStateReducer, // useReducer has a special case to support lazy useState initializers
+  initialState);
+}
+function useReducer(reducer, initialArg, init) {
+  {
+    if (reducer !== basicStateReducer) {
+      currentHookNameInDev = 'useReducer';
+    }
+  }
+
+  currentlyRenderingComponent = resolveCurrentlyRenderingComponent();
+  workInProgressHook = createWorkInProgressHook();
+
+  if (isReRender) {
+    // This is a re-render. Apply the new render phase updates to the previous
+    // current hook.
+    var queue = workInProgressHook.queue;
+    var dispatch = queue.dispatch;
+
+    if (renderPhaseUpdates !== null) {
+      // Render phase updates are stored in a map of queue -> linked list
+      var firstRenderPhaseUpdate = renderPhaseUpdates.get(queue);
+
+      if (firstRenderPhaseUpdate !== undefined) {
+        renderPhaseUpdates.delete(queue);
+        var newState = workInProgressHook.memoizedState;
+        var update = firstRenderPhaseUpdate;
+
+        do {
+          // Process this render phase update. We don't have to check the
+          // priority because it will always be the same as the current
+          // render's.
+          var action = update.action;
+
+          {
+            isInHookUserCodeInDev = true;
+          }
+
+          newState = reducer(newState, action);
+
+          {
+            isInHookUserCodeInDev = false;
+          }
+
+          update = update.next;
+        } while (update !== null);
+
+        workInProgressHook.memoizedState = newState;
+        return [newState, dispatch];
+      }
+    }
+
+    return [workInProgressHook.memoizedState, dispatch];
+  } else {
+    {
+      isInHookUserCodeInDev = true;
+    }
+
+    var initialState;
+
+    if (reducer === basicStateReducer) {
+      // Special case for `useState`.
+      initialState = typeof initialArg === 'function' ? initialArg() : initialArg;
+    } else {
+      initialState = init !== undefined ? init(initialArg) : initialArg;
+    }
+
+    {
+      isInHookUserCodeInDev = false;
+    }
+
+    workInProgressHook.memoizedState = initialState;
+
+    var _queue = workInProgressHook.queue = {
+      last: null,
+      dispatch: null
+    };
+
+    var _dispatch = _queue.dispatch = dispatchAction.bind(null, currentlyRenderingComponent, _queue);
+
+    return [workInProgressHook.memoizedState, _dispatch];
+  }
+}
+
+function useMemo(nextCreate, deps) {
+  currentlyRenderingComponent = resolveCurrentlyRenderingComponent();
+  workInProgressHook = createWorkInProgressHook();
+  var nextDeps = deps === undefined ? null : deps;
+
+  if (workInProgressHook !== null) {
+    var prevState = workInProgressHook.memoizedState;
+
+    if (prevState !== null) {
+      if (nextDeps !== null) {
+        var prevDeps = prevState[1];
+
+        if (areHookInputsEqual(nextDeps, prevDeps)) {
+          return prevState[0];
+        }
+      }
+    }
+  }
+
+  {
+    isInHookUserCodeInDev = true;
+  }
+
+  var nextValue = nextCreate();
+
+  {
+    isInHookUserCodeInDev = false;
+  }
+
+  workInProgressHook.memoizedState = [nextValue, nextDeps];
+  return nextValue;
+}
+
+function useRef(initialValue) {
+  currentlyRenderingComponent = resolveCurrentlyRenderingComponent();
+  workInProgressHook = createWorkInProgressHook();
+  var previousRef = workInProgressHook.memoizedState;
+
+  if (previousRef === null) {
+    var ref = {
+      current: initialValue
+    };
+
+    {
+      Object.seal(ref);
+    }
+
+    workInProgressHook.memoizedState = ref;
+    return ref;
+  } else {
+    return previousRef;
+  }
+}
+
+function useLayoutEffect(create, inputs) {
+  {
+    currentHookNameInDev = 'useLayoutEffect';
+  }
+
+  warning$1(false, 'useLayoutEffect does nothing on the server, because its effect cannot ' + "be encoded into the server renderer's output format. This will lead " + 'to a mismatch between the initial, non-hydrated UI and the intended ' + 'UI. To avoid this, useLayoutEffect should only be used in ' + 'components that render exclusively on the client. ' + 'See https://fb.me/react-uselayouteffect-ssr for common fixes.');
+}
+
+function dispatchAction(componentIdentity, queue, action) {
+  (function () {
+    if (!(numberOfReRenders < RE_RENDER_LIMIT)) {
+      {
+        throw ReactError(Error("Too many re-renders. React limits the number of renders to prevent an infinite loop."));
+      }
+    }
+  })();
+
+  if (componentIdentity === currentlyRenderingComponent) {
+    // This is a render phase update. Stash it in a lazily-created map of
+    // queue -> linked list of updates. After this render pass, we'll restart
+    // and apply the stashed updates on top of the work-in-progress hook.
+    didScheduleRenderPhaseUpdate = true;
+    var update = {
+      action: action,
+      next: null
+    };
+
+    if (renderPhaseUpdates === null) {
+      renderPhaseUpdates = new Map();
+    }
+
+    var firstRenderPhaseUpdate = renderPhaseUpdates.get(queue);
+
+    if (firstRenderPhaseUpdate === undefined) {
+      renderPhaseUpdates.set(queue, update);
+    } else {
+      // Append the update to the end of the list.
+      var lastRenderPhaseUpdate = firstRenderPhaseUpdate;
+
+      while (lastRenderPhaseUpdate.next !== null) {
+        lastRenderPhaseUpdate = lastRenderPhaseUpdate.next;
+      }
+
+      lastRenderPhaseUpdate.next = update;
+    }
+  } else {// This means an update has happened after the function component has
+    // returned. On the server this is a no-op. In React Fiber, the update
+    // would be scheduled for a future render.
+  }
+}
+
+function useCallback(callback, deps) {
+  // Callbacks are passed as they are in the server environment.
+  return callback;
+}
+
+function useResponder(responder, props) {
+  return {
+    props: props,
+    responder: responder
+  };
+}
 
 function noop() {}
 
-function getOptions(shared, fromBinding) {
-  return Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_3__["default"])({}, shared, {}, fromBinding);
+var currentThreadID = 0;
+function setCurrentThreadID(threadID) {
+  currentThreadID = threadID;
 }
-
-function bindEvents(el, bindings, sharedOptions) {
-  var unbindings = bindings.map(function (binding) {
-    var options = getOptions(sharedOptions, binding.options);
-    el.addEventListener(binding.eventName, binding.fn, options);
-    return function unbind() {
-      el.removeEventListener(binding.eventName, binding.fn, options);
-    };
-  });
-  return function unbindAll() {
-    unbindings.forEach(function (unbind) {
-      unbind();
-    });
-  };
-}
-
-var isProduction$1 = "development" === 'production';
-var prefix = 'Invariant failed';
-function RbdInvariant(message) {
-  this.message = message;
-}
-
-RbdInvariant.prototype.toString = function toString() {
-  return this.message;
+var Dispatcher = {
+  readContext: readContext,
+  useContext: useContext,
+  useMemo: useMemo,
+  useReducer: useReducer,
+  useRef: useRef,
+  useState: useState,
+  useLayoutEffect: useLayoutEffect,
+  useCallback: useCallback,
+  // useImperativeHandle is not run in the server environment
+  useImperativeHandle: noop,
+  // Effects are not run in the server environment.
+  useEffect: noop,
+  // Debugging effect
+  useDebugValue: noop,
+  useResponder: useResponder
 };
 
-function invariant(condition, message) {
-  if (condition) {
-    return;
-  }
+var HTML_NAMESPACE = 'http://www.w3.org/1999/xhtml';
+var MATH_NAMESPACE = 'http://www.w3.org/1998/Math/MathML';
+var SVG_NAMESPACE = 'http://www.w3.org/2000/svg';
+var Namespaces = {
+  html: HTML_NAMESPACE,
+  mathml: MATH_NAMESPACE,
+  svg: SVG_NAMESPACE
+}; // Assumes there is no parent namespace.
 
-  if (isProduction$1) {
-    throw new RbdInvariant(prefix);
-  } else {
-    throw new RbdInvariant(prefix + ": " + (message || ''));
+function getIntrinsicNamespace(type) {
+  switch (type) {
+    case 'svg':
+      return SVG_NAMESPACE;
+
+    case 'math':
+      return MATH_NAMESPACE;
+
+    default:
+      return HTML_NAMESPACE;
   }
 }
+function getChildNamespace(parentNamespace, type) {
+  if (parentNamespace == null || parentNamespace === HTML_NAMESPACE) {
+    // No (or default) parent namespace: potential entry point.
+    return getIntrinsicNamespace(type);
+  }
 
-var ErrorBoundary = function (_React$Component) {
-  Object(_babel_runtime_corejs2_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_2__["default"])(ErrorBoundary, _React$Component);
+  if (parentNamespace === SVG_NAMESPACE && type === 'foreignObject') {
+    // We're leaving SVG.
+    return HTML_NAMESPACE;
+  } // By default, pass namespace below.
 
-  function ErrorBoundary() {
-    var _this;
 
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
+  return parentNamespace;
+}
 
-    _this = _React$Component.call.apply(_React$Component, [this].concat(args)) || this;
-    _this.callbacks = null;
-    _this.unbind = noop;
+var ReactDebugCurrentFrame$3 = null;
+var ReactControlledValuePropTypes = {
+  checkPropTypes: null
+};
 
-    _this.onWindowError = function (event) {
-      var callbacks = _this.getCallbacks();
-
-      if (callbacks.isDragging()) {
-        callbacks.tryAbort();
-         true ? warning("\n        An error was caught by our window 'error' event listener while a drag was occurring.\n        The active drag has been aborted.\n      ") : undefined;
+{
+  ReactDebugCurrentFrame$3 = ReactSharedInternals.ReactDebugCurrentFrame;
+  var hasReadOnlyValue = {
+    button: true,
+    checkbox: true,
+    image: true,
+    hidden: true,
+    radio: true,
+    reset: true,
+    submit: true
+  };
+  var propTypes = {
+    value: function (props, propName, componentName) {
+      if (hasReadOnlyValue[props.type] || props.onChange || props.readOnly || props.disabled || props[propName] == null || enableFlareAPI && props.listeners) {
+        return null;
       }
 
-      var err = event.error;
-
-      if (err instanceof RbdInvariant) {
-        event.preventDefault();
-
-        if (true) {
-          error(err.message);
-        }
-      }
-    };
-
-    _this.getCallbacks = function () {
-      if (!_this.callbacks) {
-        throw new Error('Unable to find AppCallbacks in <ErrorBoundary/>');
-      }
-
-      return _this.callbacks;
-    };
-
-    _this.setCallbacks = function (callbacks) {
-      _this.callbacks = callbacks;
-    };
-
-    return _this;
-  }
-
-  var _proto = ErrorBoundary.prototype;
-
-  _proto.componentDidMount = function componentDidMount() {
-    this.unbind = bindEvents(window, [{
-      eventName: 'error',
-      fn: this.onWindowError
-    }]);
-  };
-
-  _proto.componentWillUnmount = function componentWillUnmount() {
-    this.unbind();
-  };
-
-  _proto.componentDidCatch = function componentDidCatch(err) {
-    if (err instanceof RbdInvariant) {
-      if (true) {
-        error(err.message);
-      }
-
-      this.setState({});
-      return;
-    }
-
-    throw err;
-  };
-
-  _proto.render = function render() {
-    return this.props.children(this.setCallbacks);
-  };
-
-  return ErrorBoundary;
-}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
-
-var liftInstruction = "Draggable item. Ensure your screen reader is not in browse mode and then press space bar to lift.";
-
-var position = function position(index) {
-  return index + 1;
-};
-
-var onDragStart = function onDragStart(start) {
-  return "\n  You have lifted an item in position " + position(start.source.index) + ".\n  Use the arrow keys to move, space bar to drop, and escape to cancel.\n";
-};
-
-var withLocation = function withLocation(source, destination) {
-  var isInHomeList = source.droppableId === destination.droppableId;
-  var startPosition = position(source.index);
-  var endPosition = position(destination.index);
-
-  if (isInHomeList) {
-    return "\n      You have moved the item from position " + startPosition + "\n      to position " + endPosition + "\n    ";
-  }
-
-  return "\n    You have moved the item from position " + startPosition + "\n    in list " + source.droppableId + "\n    to list " + destination.droppableId + "\n    in position " + endPosition + "\n  ";
-};
-
-var withCombine = function withCombine(id, source, combine) {
-  var inHomeList = source.droppableId === combine.droppableId;
-
-  if (inHomeList) {
-    return "\n      The item " + id + "\n      has been combined with " + combine.draggableId;
-  }
-
-  return "\n      The item " + id + "\n      in list " + source.droppableId + "\n      has been combined with " + combine.draggableId + "\n      in list " + combine.droppableId + "\n    ";
-};
-
-var onDragUpdate = function onDragUpdate(update) {
-  var location = update.destination;
-
-  if (location) {
-    return withLocation(update.source, location);
-  }
-
-  var combine = update.combine;
-
-  if (combine) {
-    return withCombine(update.draggableId, update.source, combine);
-  }
-
-  return 'You are over an area that cannot be dropped on';
-};
-
-var returnedToStart = function returnedToStart(source) {
-  return "\n  The item has returned to its starting position\n  of " + position(source.index) + "\n";
-};
-
-var onDragEnd = function onDragEnd(result) {
-  if (result.reason === 'CANCEL') {
-    return "\n      Movement cancelled.\n      " + returnedToStart(result.source) + "\n    ";
-  }
-
-  var location = result.destination;
-  var combine = result.combine;
-
-  if (location) {
-    return "\n      You have dropped the item.\n      " + withLocation(result.source, location) + "\n    ";
-  }
-
-  if (combine) {
-    return "\n      You have dropped the item.\n      " + withCombine(result.draggableId, result.source, combine) + "\n    ";
-  }
-
-  return "\n    The item has been dropped while not over a drop area.\n    " + returnedToStart(result.source) + "\n  ";
-};
-
-var preset = {
-  liftInstruction: liftInstruction,
-  onDragStart: onDragStart,
-  onDragUpdate: onDragUpdate,
-  onDragEnd: onDragEnd
-};
-
-var origin = {
-  x: 0,
-  y: 0
-};
-var add = function add(point1, point2) {
-  return {
-    x: point1.x + point2.x,
-    y: point1.y + point2.y
-  };
-};
-var subtract = function subtract(point1, point2) {
-  return {
-    x: point1.x - point2.x,
-    y: point1.y - point2.y
-  };
-};
-var isEqual = function isEqual(point1, point2) {
-  return point1.x === point2.x && point1.y === point2.y;
-};
-var negate = function negate(point) {
-  return {
-    x: point.x !== 0 ? -point.x : 0,
-    y: point.y !== 0 ? -point.y : 0
-  };
-};
-var patch = function patch(line, value, otherValue) {
-  var _ref;
-
-  if (otherValue === void 0) {
-    otherValue = 0;
-  }
-
-  return _ref = {}, _ref[line] = value, _ref[line === 'x' ? 'y' : 'x'] = otherValue, _ref;
-};
-var distance = function distance(point1, point2) {
-  return Math.sqrt(Math.pow(point2.x - point1.x, 2) + Math.pow(point2.y - point1.y, 2));
-};
-var closest = function closest(target, points) {
-  return Math.min.apply(Math, points.map(function (point) {
-    return distance(target, point);
-  }));
-};
-var apply = function apply(fn) {
-  return function (point) {
-    return {
-      x: fn(point.x),
-      y: fn(point.y)
-    };
-  };
-};
-
-var executeClip = (function (frame, subject) {
-  var result = Object(css_box_model__WEBPACK_IMPORTED_MODULE_6__["getRect"])({
-    top: Math.max(subject.top, frame.top),
-    right: Math.min(subject.right, frame.right),
-    bottom: Math.min(subject.bottom, frame.bottom),
-    left: Math.max(subject.left, frame.left)
-  });
-
-  if (result.width <= 0 || result.height <= 0) {
-    return null;
-  }
-
-  return result;
-});
-
-var offsetByPosition = function offsetByPosition(spacing, point) {
-  return {
-    top: spacing.top + point.y,
-    left: spacing.left + point.x,
-    bottom: spacing.bottom + point.y,
-    right: spacing.right + point.x
-  };
-};
-var getCorners = function getCorners(spacing) {
-  return [{
-    x: spacing.left,
-    y: spacing.top
-  }, {
-    x: spacing.right,
-    y: spacing.top
-  }, {
-    x: spacing.left,
-    y: spacing.bottom
-  }, {
-    x: spacing.right,
-    y: spacing.bottom
-  }];
-};
-var noSpacing = {
-  top: 0,
-  right: 0,
-  bottom: 0,
-  left: 0
-};
-
-var scroll = function scroll(target, frame) {
-  if (!frame) {
-    return target;
-  }
-
-  return offsetByPosition(target, frame.scroll.diff.displacement);
-};
-
-var increase = function increase(target, axis, withPlaceholder) {
-  if (withPlaceholder && withPlaceholder.increasedBy) {
-    var _extends2;
-
-    return Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_3__["default"])({}, target, (_extends2 = {}, _extends2[axis.end] = target[axis.end] + withPlaceholder.increasedBy[axis.line], _extends2));
-  }
-
-  return target;
-};
-
-var clip = function clip(target, frame) {
-  if (frame && frame.shouldClipSubject) {
-    return executeClip(frame.pageMarginBox, target);
-  }
-
-  return Object(css_box_model__WEBPACK_IMPORTED_MODULE_6__["getRect"])(target);
-};
-
-var getSubject = (function (_ref) {
-  var page = _ref.page,
-      withPlaceholder = _ref.withPlaceholder,
-      axis = _ref.axis,
-      frame = _ref.frame;
-  var scrolled = scroll(page.marginBox, frame);
-  var increased = increase(scrolled, axis, withPlaceholder);
-  var clipped = clip(increased, frame);
-  return {
-    page: page,
-    withPlaceholder: withPlaceholder,
-    active: clipped
-  };
-});
-
-var scrollDroppable = (function (droppable, newScroll) {
-  !droppable.frame ?  true ? invariant(false) : undefined : void 0;
-  var scrollable = droppable.frame;
-  var scrollDiff = subtract(newScroll, scrollable.scroll.initial);
-  var scrollDisplacement = negate(scrollDiff);
-
-  var frame = Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_3__["default"])({}, scrollable, {
-    scroll: {
-      initial: scrollable.scroll.initial,
-      current: newScroll,
-      diff: {
-        value: scrollDiff,
-        displacement: scrollDisplacement
-      },
-      max: scrollable.scroll.max
-    }
-  });
-
-  var subject = getSubject({
-    page: droppable.subject.page,
-    withPlaceholder: droppable.subject.withPlaceholder,
-    axis: droppable.axis,
-    frame: frame
-  });
-
-  var result = Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_3__["default"])({}, droppable, {
-    frame: frame,
-    subject: subject
-  });
-
-  return result;
-});
-
-function values(map) {
-  return _babel_runtime_corejs2_core_js_object_values__WEBPACK_IMPORTED_MODULE_8___default()(map);
-}
-function findIndex(list, predicate) {
-  if (list.findIndex) {
-    return list.findIndex(predicate);
-  }
-
-  for (var i = 0; i < list.length; i++) {
-    if (predicate(list[i])) {
-      return i;
-    }
-  }
-
-  return -1;
-}
-function find(list, predicate) {
-  if (list.find) {
-    return list.find(predicate);
-  }
-
-  var index = findIndex(list, predicate);
-
-  if (index !== -1) {
-    return list[index];
-  }
-
-  return undefined;
-}
-function toArray(list) {
-  return Array.prototype.slice.call(list);
-}
-
-var toDroppableMap = Object(memoize_one__WEBPACK_IMPORTED_MODULE_7__["default"])(function (droppables) {
-  return droppables.reduce(function (previous, current) {
-    previous[current.descriptor.id] = current;
-    return previous;
-  }, {});
-});
-var toDraggableMap = Object(memoize_one__WEBPACK_IMPORTED_MODULE_7__["default"])(function (draggables) {
-  return draggables.reduce(function (previous, current) {
-    previous[current.descriptor.id] = current;
-    return previous;
-  }, {});
-});
-var toDroppableList = Object(memoize_one__WEBPACK_IMPORTED_MODULE_7__["default"])(function (droppables) {
-  return values(droppables);
-});
-var toDraggableList = Object(memoize_one__WEBPACK_IMPORTED_MODULE_7__["default"])(function (draggables) {
-  return values(draggables);
-});
-
-var getDraggablesInsideDroppable = Object(memoize_one__WEBPACK_IMPORTED_MODULE_7__["default"])(function (droppableId, draggables) {
-  var result = toDraggableList(draggables).filter(function (draggable) {
-    return droppableId === draggable.descriptor.droppableId;
-  }).sort(function (a, b) {
-    return a.descriptor.index - b.descriptor.index;
-  });
-  return result;
-});
-
-var forward = {
-  vertical: 'down',
-  horizontal: 'right'
-};
-var backward = {
-  vertical: 'up',
-  horizontal: 'left'
-};
-
-function tryGetDestination(impact) {
-  if (impact.at && impact.at.type === 'REORDER') {
-    return impact.at.destination;
-  }
-
-  return null;
-}
-function tryGetCombine(impact) {
-  if (impact.at && impact.at.type === 'COMBINE') {
-    return impact.at.combine;
-  }
-
-  return null;
-}
-
-var removeDraggableFromList = Object(memoize_one__WEBPACK_IMPORTED_MODULE_7__["default"])(function (remove, list) {
-  return list.filter(function (item) {
-    return item.descriptor.id !== remove.descriptor.id;
-  });
-});
-
-var moveToNextCombine = (function (_ref) {
-  var isMovingForward = _ref.isMovingForward,
-      draggable = _ref.draggable,
-      destination = _ref.destination,
-      insideDestination = _ref.insideDestination,
-      previousImpact = _ref.previousImpact;
-
-  if (!destination.isCombineEnabled) {
-    return null;
-  }
-
-  var location = tryGetDestination(previousImpact);
-
-  if (!location) {
-    return null;
-  }
-
-  function getImpact(target) {
-    var at = {
-      type: 'COMBINE',
-      whenEntered: isMovingForward ? forward : backward,
-      combine: {
-        draggableId: target,
-        droppableId: destination.descriptor.id
-      }
-    };
-    return Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_3__["default"])({}, previousImpact, {
-      at: at
-    });
-  }
-
-  var all = previousImpact.displaced.all;
-  var closestId = all.length ? all[0] : null;
-
-  if (isMovingForward) {
-    return closestId ? getImpact(closestId) : null;
-  }
-
-  var withoutDraggable = removeDraggableFromList(draggable, insideDestination);
-
-  if (!closestId) {
-    if (!withoutDraggable.length) {
-      return null;
-    }
-
-    var last = withoutDraggable[withoutDraggable.length - 1];
-    return getImpact(last.descriptor.id);
-  }
-
-  var indexOfClosest = findIndex(withoutDraggable, function (d) {
-    return d.descriptor.id === closestId;
-  });
-  !(indexOfClosest !== -1) ?  true ? invariant(false, 'Could not find displaced item in set') : undefined : void 0;
-  var proposedIndex = indexOfClosest - 1;
-
-  if (proposedIndex < 0) {
-    return null;
-  }
-
-  var before = withoutDraggable[proposedIndex];
-  return getImpact(before.descriptor.id);
-});
-
-var isHomeOf = (function (draggable, destination) {
-  return draggable.descriptor.droppableId === destination.descriptor.id;
-});
-
-var noDisplacedBy = {
-  point: origin,
-  value: 0
-};
-var emptyGroups = {
-  invisible: {},
-  visible: {},
-  all: []
-};
-var noImpact = {
-  displaced: emptyGroups,
-  displacedBy: noDisplacedBy,
-  at: null
-};
-
-var isWithin = (function (lowerBound, upperBound) {
-  return function (value) {
-    return lowerBound <= value && value <= upperBound;
-  };
-});
-
-var isPartiallyVisibleThroughFrame = (function (frame) {
-  var isWithinVertical = isWithin(frame.top, frame.bottom);
-  var isWithinHorizontal = isWithin(frame.left, frame.right);
-  return function (subject) {
-    var isContained = isWithinVertical(subject.top) && isWithinVertical(subject.bottom) && isWithinHorizontal(subject.left) && isWithinHorizontal(subject.right);
-
-    if (isContained) {
-      return true;
-    }
-
-    var isPartiallyVisibleVertically = isWithinVertical(subject.top) || isWithinVertical(subject.bottom);
-    var isPartiallyVisibleHorizontally = isWithinHorizontal(subject.left) || isWithinHorizontal(subject.right);
-    var isPartiallyContained = isPartiallyVisibleVertically && isPartiallyVisibleHorizontally;
-
-    if (isPartiallyContained) {
-      return true;
-    }
-
-    var isBiggerVertically = subject.top < frame.top && subject.bottom > frame.bottom;
-    var isBiggerHorizontally = subject.left < frame.left && subject.right > frame.right;
-    var isTargetBiggerThanFrame = isBiggerVertically && isBiggerHorizontally;
-
-    if (isTargetBiggerThanFrame) {
-      return true;
-    }
-
-    var isTargetBiggerOnOneAxis = isBiggerVertically && isPartiallyVisibleHorizontally || isBiggerHorizontally && isPartiallyVisibleVertically;
-    return isTargetBiggerOnOneAxis;
-  };
-});
-
-var isTotallyVisibleThroughFrame = (function (frame) {
-  var isWithinVertical = isWithin(frame.top, frame.bottom);
-  var isWithinHorizontal = isWithin(frame.left, frame.right);
-  return function (subject) {
-    var isContained = isWithinVertical(subject.top) && isWithinVertical(subject.bottom) && isWithinHorizontal(subject.left) && isWithinHorizontal(subject.right);
-    return isContained;
-  };
-});
-
-var vertical = {
-  direction: 'vertical',
-  line: 'y',
-  crossAxisLine: 'x',
-  start: 'top',
-  end: 'bottom',
-  size: 'height',
-  crossAxisStart: 'left',
-  crossAxisEnd: 'right',
-  crossAxisSize: 'width'
-};
-var horizontal = {
-  direction: 'horizontal',
-  line: 'x',
-  crossAxisLine: 'y',
-  start: 'left',
-  end: 'right',
-  size: 'width',
-  crossAxisStart: 'top',
-  crossAxisEnd: 'bottom',
-  crossAxisSize: 'height'
-};
-
-var isTotallyVisibleThroughFrameOnAxis = (function (axis) {
-  return function (frame) {
-    var isWithinVertical = isWithin(frame.top, frame.bottom);
-    var isWithinHorizontal = isWithin(frame.left, frame.right);
-    return function (subject) {
-      if (axis === vertical) {
-        return isWithinVertical(subject.top) && isWithinVertical(subject.bottom);
-      }
-
-      return isWithinHorizontal(subject.left) && isWithinHorizontal(subject.right);
-    };
-  };
-});
-
-var getDroppableDisplaced = function getDroppableDisplaced(target, destination) {
-  var displacement = destination.frame ? destination.frame.scroll.diff.displacement : origin;
-  return offsetByPosition(target, displacement);
-};
-
-var isVisibleInDroppable = function isVisibleInDroppable(target, destination, isVisibleThroughFrameFn) {
-  if (!destination.subject.active) {
-    return false;
-  }
-
-  return isVisibleThroughFrameFn(destination.subject.active)(target);
-};
-
-var isVisibleInViewport = function isVisibleInViewport(target, viewport, isVisibleThroughFrameFn) {
-  return isVisibleThroughFrameFn(viewport)(target);
-};
-
-var isVisible = function isVisible(_ref) {
-  var toBeDisplaced = _ref.target,
-      destination = _ref.destination,
-      viewport = _ref.viewport,
-      withDroppableDisplacement = _ref.withDroppableDisplacement,
-      isVisibleThroughFrameFn = _ref.isVisibleThroughFrameFn;
-  var displacedTarget = withDroppableDisplacement ? getDroppableDisplaced(toBeDisplaced, destination) : toBeDisplaced;
-  return isVisibleInDroppable(displacedTarget, destination, isVisibleThroughFrameFn) && isVisibleInViewport(displacedTarget, viewport, isVisibleThroughFrameFn);
-};
-
-var isPartiallyVisible = function isPartiallyVisible(args) {
-  return isVisible(Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_3__["default"])({}, args, {
-    isVisibleThroughFrameFn: isPartiallyVisibleThroughFrame
-  }));
-};
-var isTotallyVisible = function isTotallyVisible(args) {
-  return isVisible(Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_3__["default"])({}, args, {
-    isVisibleThroughFrameFn: isTotallyVisibleThroughFrame
-  }));
-};
-var isTotallyVisibleOnAxis = function isTotallyVisibleOnAxis(args) {
-  return isVisible(Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_3__["default"])({}, args, {
-    isVisibleThroughFrameFn: isTotallyVisibleThroughFrameOnAxis(args.destination.axis)
-  }));
-};
-
-var getShouldAnimate = function getShouldAnimate(id, last, forceShouldAnimate) {
-  if (typeof forceShouldAnimate === 'boolean') {
-    return forceShouldAnimate;
-  }
-
-  if (!last) {
-    return true;
-  }
-
-  var invisible = last.invisible,
-      visible = last.visible;
-
-  if (invisible[id]) {
-    return false;
-  }
-
-  var previous = visible[id];
-  return previous ? previous.shouldAnimate : true;
-};
-
-function getTarget(draggable, displacedBy) {
-  var marginBox = draggable.page.marginBox;
-  var expandBy = {
-    top: displacedBy.point.y,
-    right: 0,
-    bottom: 0,
-    left: displacedBy.point.x
-  };
-  return Object(css_box_model__WEBPACK_IMPORTED_MODULE_6__["getRect"])(Object(css_box_model__WEBPACK_IMPORTED_MODULE_6__["expand"])(marginBox, expandBy));
-}
-
-function getDisplacementGroups(_ref) {
-  var afterDragging = _ref.afterDragging,
-      destination = _ref.destination,
-      displacedBy = _ref.displacedBy,
-      viewport = _ref.viewport,
-      forceShouldAnimate = _ref.forceShouldAnimate,
-      last = _ref.last;
-  return afterDragging.reduce(function process(groups, draggable) {
-    var target = getTarget(draggable, displacedBy);
-    var id = draggable.descriptor.id;
-    groups.all.push(id);
-    var isVisible = isPartiallyVisible({
-      target: target,
-      destination: destination,
-      viewport: viewport,
-      withDroppableDisplacement: true
-    });
-
-    if (!isVisible) {
-      groups.invisible[draggable.descriptor.id] = true;
-      return groups;
-    }
-
-    var shouldAnimate = getShouldAnimate(id, last, forceShouldAnimate);
-    var displacement = {
-      draggableId: id,
-      shouldAnimate: shouldAnimate
-    };
-    groups.visible[id] = displacement;
-    return groups;
-  }, {
-    all: [],
-    visible: {},
-    invisible: {}
-  });
-}
-
-function getIndexOfLastItem(draggables, options) {
-  if (!draggables.length) {
-    return 0;
-  }
-
-  var indexOfLastItem = draggables[draggables.length - 1].descriptor.index;
-  return options.inHomeList ? indexOfLastItem : indexOfLastItem + 1;
-}
-
-function goAtEnd(_ref) {
-  var insideDestination = _ref.insideDestination,
-      inHomeList = _ref.inHomeList,
-      displacedBy = _ref.displacedBy,
-      destination = _ref.destination;
-  var newIndex = getIndexOfLastItem(insideDestination, {
-    inHomeList: inHomeList
-  });
-  return {
-    displaced: emptyGroups,
-    displacedBy: displacedBy,
-    at: {
-      type: 'REORDER',
-      destination: {
-        droppableId: destination.descriptor.id,
-        index: newIndex
-      }
-    }
-  };
-}
-
-function calculateReorderImpact(_ref2) {
-  var draggable = _ref2.draggable,
-      insideDestination = _ref2.insideDestination,
-      destination = _ref2.destination,
-      viewport = _ref2.viewport,
-      displacedBy = _ref2.displacedBy,
-      last = _ref2.last,
-      index = _ref2.index,
-      forceShouldAnimate = _ref2.forceShouldAnimate;
-  var inHomeList = isHomeOf(draggable, destination);
-
-  if (index == null) {
-    return goAtEnd({
-      insideDestination: insideDestination,
-      inHomeList: inHomeList,
-      displacedBy: displacedBy,
-      destination: destination
-    });
-  }
-
-  var match = find(insideDestination, function (item) {
-    return item.descriptor.index === index;
-  });
-
-  if (!match) {
-    return goAtEnd({
-      insideDestination: insideDestination,
-      inHomeList: inHomeList,
-      displacedBy: displacedBy,
-      destination: destination
-    });
-  }
-
-  var withoutDragging = removeDraggableFromList(draggable, insideDestination);
-  var sliceFrom = insideDestination.indexOf(match);
-  var impacted = withoutDragging.slice(sliceFrom);
-  var displaced = getDisplacementGroups({
-    afterDragging: impacted,
-    destination: destination,
-    displacedBy: displacedBy,
-    last: last,
-    viewport: viewport.frame,
-    forceShouldAnimate: forceShouldAnimate
-  });
-  return {
-    displaced: displaced,
-    displacedBy: displacedBy,
-    at: {
-      type: 'REORDER',
-      destination: {
-        droppableId: destination.descriptor.id,
-        index: index
-      }
-    }
-  };
-}
-
-function didStartAfterCritical(draggableId, afterCritical) {
-  return Boolean(afterCritical.effected[draggableId]);
-}
-
-var fromCombine = (function (_ref) {
-  var isMovingForward = _ref.isMovingForward,
-      destination = _ref.destination,
-      draggables = _ref.draggables,
-      combine = _ref.combine,
-      afterCritical = _ref.afterCritical;
-
-  if (!destination.isCombineEnabled) {
-    return null;
-  }
-
-  var combineId = combine.draggableId;
-  var combineWith = draggables[combineId];
-  var combineWithIndex = combineWith.descriptor.index;
-  var didCombineWithStartAfterCritical = didStartAfterCritical(combineId, afterCritical);
-
-  if (didCombineWithStartAfterCritical) {
-    if (isMovingForward) {
-      return combineWithIndex;
-    }
-
-    return combineWithIndex - 1;
-  }
-
-  if (isMovingForward) {
-    return combineWithIndex + 1;
-  }
-
-  return combineWithIndex;
-});
-
-var fromReorder = (function (_ref) {
-  var isMovingForward = _ref.isMovingForward,
-      isInHomeList = _ref.isInHomeList,
-      insideDestination = _ref.insideDestination,
-      location = _ref.location;
-
-  if (!insideDestination.length) {
-    return null;
-  }
-
-  var currentIndex = location.index;
-  var proposedIndex = isMovingForward ? currentIndex + 1 : currentIndex - 1;
-  var firstIndex = insideDestination[0].descriptor.index;
-  var lastIndex = insideDestination[insideDestination.length - 1].descriptor.index;
-  var upperBound = isInHomeList ? lastIndex : lastIndex + 1;
-
-  if (proposedIndex < firstIndex) {
-    return null;
-  }
-
-  if (proposedIndex > upperBound) {
-    return null;
-  }
-
-  return proposedIndex;
-});
-
-var moveToNextIndex = (function (_ref) {
-  var isMovingForward = _ref.isMovingForward,
-      isInHomeList = _ref.isInHomeList,
-      draggable = _ref.draggable,
-      draggables = _ref.draggables,
-      destination = _ref.destination,
-      insideDestination = _ref.insideDestination,
-      previousImpact = _ref.previousImpact,
-      viewport = _ref.viewport,
-      afterCritical = _ref.afterCritical;
-  var wasAt = previousImpact.at;
-  !wasAt ?  true ? invariant(false, 'Cannot move in direction without previous impact location') : undefined : void 0;
-
-  if (wasAt.type === 'REORDER') {
-    var _newIndex = fromReorder({
-      isMovingForward: isMovingForward,
-      isInHomeList: isInHomeList,
-      location: wasAt.destination,
-      insideDestination: insideDestination
-    });
-
-    if (_newIndex == null) {
-      return null;
-    }
-
-    return calculateReorderImpact({
-      draggable: draggable,
-      insideDestination: insideDestination,
-      destination: destination,
-      viewport: viewport,
-      last: previousImpact.displaced,
-      displacedBy: previousImpact.displacedBy,
-      index: _newIndex
-    });
-  }
-
-  var newIndex = fromCombine({
-    isMovingForward: isMovingForward,
-    destination: destination,
-    displaced: previousImpact.displaced,
-    draggables: draggables,
-    combine: wasAt.combine,
-    afterCritical: afterCritical
-  });
-
-  if (newIndex == null) {
-    return null;
-  }
-
-  return calculateReorderImpact({
-    draggable: draggable,
-    insideDestination: insideDestination,
-    destination: destination,
-    viewport: viewport,
-    last: previousImpact.displaced,
-    displacedBy: previousImpact.displacedBy,
-    index: newIndex
-  });
-});
-
-var getCombinedItemDisplacement = (function (_ref) {
-  var displaced = _ref.displaced,
-      afterCritical = _ref.afterCritical,
-      combineWith = _ref.combineWith,
-      displacedBy = _ref.displacedBy;
-  var isDisplaced = Boolean(displaced.visible[combineWith] || displaced.invisible[combineWith]);
-
-  if (didStartAfterCritical(combineWith, afterCritical)) {
-    return isDisplaced ? origin : negate(displacedBy.point);
-  }
-
-  return isDisplaced ? displacedBy.point : origin;
-});
-
-var whenCombining = (function (_ref) {
-  var afterCritical = _ref.afterCritical,
-      impact = _ref.impact,
-      draggables = _ref.draggables;
-  var combine = tryGetCombine(impact);
-  !combine ?  true ? invariant(false) : undefined : void 0;
-  var combineWith = combine.draggableId;
-  var center = draggables[combineWith].page.borderBox.center;
-  var displaceBy = getCombinedItemDisplacement({
-    displaced: impact.displaced,
-    afterCritical: afterCritical,
-    combineWith: combineWith,
-    displacedBy: impact.displacedBy
-  });
-  return add(center, displaceBy);
-});
-
-var distanceFromStartToBorderBoxCenter = function distanceFromStartToBorderBoxCenter(axis, box) {
-  return box.margin[axis.start] + box.borderBox[axis.size] / 2;
-};
-
-var distanceFromEndToBorderBoxCenter = function distanceFromEndToBorderBoxCenter(axis, box) {
-  return box.margin[axis.end] + box.borderBox[axis.size] / 2;
-};
-
-var getCrossAxisBorderBoxCenter = function getCrossAxisBorderBoxCenter(axis, target, isMoving) {
-  return target[axis.crossAxisStart] + isMoving.margin[axis.crossAxisStart] + isMoving.borderBox[axis.crossAxisSize] / 2;
-};
-
-var goAfter = function goAfter(_ref) {
-  var axis = _ref.axis,
-      moveRelativeTo = _ref.moveRelativeTo,
-      isMoving = _ref.isMoving;
-  return patch(axis.line, moveRelativeTo.marginBox[axis.end] + distanceFromStartToBorderBoxCenter(axis, isMoving), getCrossAxisBorderBoxCenter(axis, moveRelativeTo.marginBox, isMoving));
-};
-var goBefore = function goBefore(_ref2) {
-  var axis = _ref2.axis,
-      moveRelativeTo = _ref2.moveRelativeTo,
-      isMoving = _ref2.isMoving;
-  return patch(axis.line, moveRelativeTo.marginBox[axis.start] - distanceFromEndToBorderBoxCenter(axis, isMoving), getCrossAxisBorderBoxCenter(axis, moveRelativeTo.marginBox, isMoving));
-};
-var goIntoStart = function goIntoStart(_ref3) {
-  var axis = _ref3.axis,
-      moveInto = _ref3.moveInto,
-      isMoving = _ref3.isMoving;
-  return patch(axis.line, moveInto.contentBox[axis.start] + distanceFromStartToBorderBoxCenter(axis, isMoving), getCrossAxisBorderBoxCenter(axis, moveInto.contentBox, isMoving));
-};
-
-var whenReordering = (function (_ref) {
-  var impact = _ref.impact,
-      draggable = _ref.draggable,
-      draggables = _ref.draggables,
-      droppable = _ref.droppable,
-      afterCritical = _ref.afterCritical;
-  var insideDestination = getDraggablesInsideDroppable(droppable.descriptor.id, draggables);
-  var draggablePage = draggable.page;
-  var axis = droppable.axis;
-
-  if (!insideDestination.length) {
-    return goIntoStart({
-      axis: axis,
-      moveInto: droppable.page,
-      isMoving: draggablePage
-    });
-  }
-
-  var displaced = impact.displaced,
-      displacedBy = impact.displacedBy;
-  var closestAfter = displaced.all[0];
-
-  if (closestAfter) {
-    var closest = draggables[closestAfter];
-
-    if (didStartAfterCritical(closestAfter, afterCritical)) {
-      return goBefore({
-        axis: axis,
-        moveRelativeTo: closest.page,
-        isMoving: draggablePage
-      });
-    }
-
-    var withDisplacement = Object(css_box_model__WEBPACK_IMPORTED_MODULE_6__["offset"])(closest.page, displacedBy.point);
-    return goBefore({
-      axis: axis,
-      moveRelativeTo: withDisplacement,
-      isMoving: draggablePage
-    });
-  }
-
-  var last = insideDestination[insideDestination.length - 1];
-
-  if (last.descriptor.id === draggable.descriptor.id) {
-    return draggablePage.borderBox.center;
-  }
-
-  if (didStartAfterCritical(last.descriptor.id, afterCritical)) {
-    var page = Object(css_box_model__WEBPACK_IMPORTED_MODULE_6__["offset"])(last.page, negate(afterCritical.displacedBy.point));
-    return goAfter({
-      axis: axis,
-      moveRelativeTo: page,
-      isMoving: draggablePage
-    });
-  }
-
-  return goAfter({
-    axis: axis,
-    moveRelativeTo: last.page,
-    isMoving: draggablePage
-  });
-});
-
-var withDroppableDisplacement = (function (droppable, point) {
-  var frame = droppable.frame;
-
-  if (!frame) {
-    return point;
-  }
-
-  return add(point, frame.scroll.diff.displacement);
-});
-
-var getResultWithoutDroppableDisplacement = function getResultWithoutDroppableDisplacement(_ref) {
-  var impact = _ref.impact,
-      draggable = _ref.draggable,
-      droppable = _ref.droppable,
-      draggables = _ref.draggables,
-      afterCritical = _ref.afterCritical;
-  var original = draggable.page.borderBox.center;
-  var at = impact.at;
-
-  if (!droppable) {
-    return original;
-  }
-
-  if (!at) {
-    return original;
-  }
-
-  if (at.type === 'REORDER') {
-    return whenReordering({
-      impact: impact,
-      draggable: draggable,
-      draggables: draggables,
-      droppable: droppable,
-      afterCritical: afterCritical
-    });
-  }
-
-  return whenCombining({
-    impact: impact,
-    draggables: draggables,
-    afterCritical: afterCritical
-  });
-};
-
-var getPageBorderBoxCenterFromImpact = (function (args) {
-  var withoutDisplacement = getResultWithoutDroppableDisplacement(args);
-  var droppable = args.droppable;
-  var withDisplacement = droppable ? withDroppableDisplacement(droppable, withoutDisplacement) : withoutDisplacement;
-  return withDisplacement;
-});
-
-var scrollViewport = (function (viewport, newScroll) {
-  var diff = subtract(newScroll, viewport.scroll.initial);
-  var displacement = negate(diff);
-  var frame = Object(css_box_model__WEBPACK_IMPORTED_MODULE_6__["getRect"])({
-    top: newScroll.y,
-    bottom: newScroll.y + viewport.frame.height,
-    left: newScroll.x,
-    right: newScroll.x + viewport.frame.width
-  });
-  var updated = {
-    frame: frame,
-    scroll: {
-      initial: viewport.scroll.initial,
-      max: viewport.scroll.max,
-      current: newScroll,
-      diff: {
-        value: diff,
-        displacement: displacement
-      }
-    }
-  };
-  return updated;
-});
-
-function getDraggables(ids, draggables) {
-  return ids.map(function (id) {
-    return draggables[id];
-  });
-}
-
-function tryGetVisible(id, groups) {
-  for (var i = 0; i < groups.length; i++) {
-    var displacement = groups[i].visible[id];
-
-    if (displacement) {
-      return displacement;
-    }
-  }
-
-  return null;
-}
-
-var speculativelyIncrease = (function (_ref) {
-  var impact = _ref.impact,
-      viewport = _ref.viewport,
-      destination = _ref.destination,
-      draggables = _ref.draggables,
-      maxScrollChange = _ref.maxScrollChange;
-  var scrolledViewport = scrollViewport(viewport, add(viewport.scroll.current, maxScrollChange));
-  var scrolledDroppable = destination.frame ? scrollDroppable(destination, add(destination.frame.scroll.current, maxScrollChange)) : destination;
-  var last = impact.displaced;
-  var withViewportScroll = getDisplacementGroups({
-    afterDragging: getDraggables(last.all, draggables),
-    destination: destination,
-    displacedBy: impact.displacedBy,
-    viewport: scrolledViewport.frame,
-    last: last,
-    forceShouldAnimate: false
-  });
-  var withDroppableScroll = getDisplacementGroups({
-    afterDragging: getDraggables(last.all, draggables),
-    destination: scrolledDroppable,
-    displacedBy: impact.displacedBy,
-    viewport: viewport.frame,
-    last: last,
-    forceShouldAnimate: false
-  });
-  var invisible = {};
-  var visible = {};
-  var groups = [last, withViewportScroll, withDroppableScroll];
-  last.all.forEach(function (id) {
-    var displacement = tryGetVisible(id, groups);
-
-    if (displacement) {
-      visible[id] = displacement;
-      return;
-    }
-
-    invisible[id] = true;
-  });
-
-  var newImpact = Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_3__["default"])({}, impact, {
-    displaced: {
-      all: last.all,
-      invisible: invisible,
-      visible: visible
-    }
-  });
-
-  return newImpact;
-});
-
-var withViewportDisplacement = (function (viewport, point) {
-  return add(viewport.scroll.diff.displacement, point);
-});
-
-var getClientFromPageBorderBoxCenter = (function (_ref) {
-  var pageBorderBoxCenter = _ref.pageBorderBoxCenter,
-      draggable = _ref.draggable,
-      viewport = _ref.viewport;
-  var withoutPageScrollChange = withViewportDisplacement(viewport, pageBorderBoxCenter);
-  var offset = subtract(withoutPageScrollChange, draggable.page.borderBox.center);
-  return add(draggable.client.borderBox.center, offset);
-});
-
-var isTotallyVisibleInNewLocation = (function (_ref) {
-  var draggable = _ref.draggable,
-      destination = _ref.destination,
-      newPageBorderBoxCenter = _ref.newPageBorderBoxCenter,
-      viewport = _ref.viewport,
-      withDroppableDisplacement = _ref.withDroppableDisplacement,
-      _ref$onlyOnMainAxis = _ref.onlyOnMainAxis,
-      onlyOnMainAxis = _ref$onlyOnMainAxis === void 0 ? false : _ref$onlyOnMainAxis;
-  var changeNeeded = subtract(newPageBorderBoxCenter, draggable.page.borderBox.center);
-  var shifted = offsetByPosition(draggable.page.borderBox, changeNeeded);
-  var args = {
-    target: shifted,
-    destination: destination,
-    withDroppableDisplacement: withDroppableDisplacement,
-    viewport: viewport
-  };
-  return onlyOnMainAxis ? isTotallyVisibleOnAxis(args) : isTotallyVisible(args);
-});
-
-var moveToNextPlace = (function (_ref) {
-  var isMovingForward = _ref.isMovingForward,
-      draggable = _ref.draggable,
-      destination = _ref.destination,
-      draggables = _ref.draggables,
-      previousImpact = _ref.previousImpact,
-      viewport = _ref.viewport,
-      previousPageBorderBoxCenter = _ref.previousPageBorderBoxCenter,
-      previousClientSelection = _ref.previousClientSelection,
-      afterCritical = _ref.afterCritical;
-
-  if (!destination.isEnabled) {
-    return null;
-  }
-
-  var insideDestination = getDraggablesInsideDroppable(destination.descriptor.id, draggables);
-  var isInHomeList = isHomeOf(draggable, destination);
-  var impact = moveToNextCombine({
-    isMovingForward: isMovingForward,
-    draggable: draggable,
-    destination: destination,
-    insideDestination: insideDestination,
-    previousImpact: previousImpact
-  }) || moveToNextIndex({
-    isMovingForward: isMovingForward,
-    isInHomeList: isInHomeList,
-    draggable: draggable,
-    draggables: draggables,
-    destination: destination,
-    insideDestination: insideDestination,
-    previousImpact: previousImpact,
-    viewport: viewport,
-    afterCritical: afterCritical
-  });
-
-  if (!impact) {
-    return null;
-  }
-
-  var pageBorderBoxCenter = getPageBorderBoxCenterFromImpact({
-    impact: impact,
-    draggable: draggable,
-    droppable: destination,
-    draggables: draggables,
-    afterCritical: afterCritical
-  });
-  var isVisibleInNewLocation = isTotallyVisibleInNewLocation({
-    draggable: draggable,
-    destination: destination,
-    newPageBorderBoxCenter: pageBorderBoxCenter,
-    viewport: viewport.frame,
-    withDroppableDisplacement: false,
-    onlyOnMainAxis: true
-  });
-
-  if (isVisibleInNewLocation) {
-    var clientSelection = getClientFromPageBorderBoxCenter({
-      pageBorderBoxCenter: pageBorderBoxCenter,
-      draggable: draggable,
-      viewport: viewport
-    });
-    return {
-      clientSelection: clientSelection,
-      impact: impact,
-      scrollJumpRequest: null
-    };
-  }
-
-  var distance = subtract(pageBorderBoxCenter, previousPageBorderBoxCenter);
-  var cautious = speculativelyIncrease({
-    impact: impact,
-    viewport: viewport,
-    destination: destination,
-    draggables: draggables,
-    maxScrollChange: distance
-  });
-  return {
-    clientSelection: previousClientSelection,
-    impact: cautious,
-    scrollJumpRequest: distance
-  };
-});
-
-var getKnownActive = function getKnownActive(droppable) {
-  var rect = droppable.subject.active;
-  !rect ?  true ? invariant(false, 'Cannot get clipped area from droppable') : undefined : void 0;
-  return rect;
-};
-
-var getBestCrossAxisDroppable = (function (_ref) {
-  var isMovingForward = _ref.isMovingForward,
-      pageBorderBoxCenter = _ref.pageBorderBoxCenter,
-      source = _ref.source,
-      droppables = _ref.droppables,
-      viewport = _ref.viewport;
-  var active = source.subject.active;
-
-  if (!active) {
-    return null;
-  }
-
-  var axis = source.axis;
-  var isBetweenSourceClipped = isWithin(active[axis.start], active[axis.end]);
-  var candidates = toDroppableList(droppables).filter(function (droppable) {
-    return droppable !== source;
-  }).filter(function (droppable) {
-    return droppable.isEnabled;
-  }).filter(function (droppable) {
-    return Boolean(droppable.subject.active);
-  }).filter(function (droppable) {
-    return isPartiallyVisibleThroughFrame(viewport.frame)(getKnownActive(droppable));
-  }).filter(function (droppable) {
-    var activeOfTarget = getKnownActive(droppable);
-
-    if (isMovingForward) {
-      return active[axis.crossAxisEnd] < activeOfTarget[axis.crossAxisEnd];
-    }
-
-    return activeOfTarget[axis.crossAxisStart] < active[axis.crossAxisStart];
-  }).filter(function (droppable) {
-    var activeOfTarget = getKnownActive(droppable);
-    var isBetweenDestinationClipped = isWithin(activeOfTarget[axis.start], activeOfTarget[axis.end]);
-    return isBetweenSourceClipped(activeOfTarget[axis.start]) || isBetweenSourceClipped(activeOfTarget[axis.end]) || isBetweenDestinationClipped(active[axis.start]) || isBetweenDestinationClipped(active[axis.end]);
-  }).sort(function (a, b) {
-    var first = getKnownActive(a)[axis.crossAxisStart];
-    var second = getKnownActive(b)[axis.crossAxisStart];
-
-    if (isMovingForward) {
-      return first - second;
-    }
-
-    return second - first;
-  }).filter(function (droppable, index, array) {
-    return getKnownActive(droppable)[axis.crossAxisStart] === getKnownActive(array[0])[axis.crossAxisStart];
-  });
-
-  if (!candidates.length) {
-    return null;
-  }
-
-  if (candidates.length === 1) {
-    return candidates[0];
-  }
-
-  var contains = candidates.filter(function (droppable) {
-    var isWithinDroppable = isWithin(getKnownActive(droppable)[axis.start], getKnownActive(droppable)[axis.end]);
-    return isWithinDroppable(pageBorderBoxCenter[axis.line]);
-  });
-
-  if (contains.length === 1) {
-    return contains[0];
-  }
-
-  if (contains.length > 1) {
-    return contains.sort(function (a, b) {
-      return getKnownActive(a)[axis.start] - getKnownActive(b)[axis.start];
-    })[0];
-  }
-
-  return candidates.sort(function (a, b) {
-    var first = closest(pageBorderBoxCenter, getCorners(getKnownActive(a)));
-    var second = closest(pageBorderBoxCenter, getCorners(getKnownActive(b)));
-
-    if (first !== second) {
-      return first - second;
-    }
-
-    return getKnownActive(a)[axis.start] - getKnownActive(b)[axis.start];
-  })[0];
-});
-
-var getCurrentPageBorderBoxCenter = function getCurrentPageBorderBoxCenter(draggable, afterCritical) {
-  var original = draggable.page.borderBox.center;
-  return didStartAfterCritical(draggable.descriptor.id, afterCritical) ? subtract(original, afterCritical.displacedBy.point) : original;
-};
-var getCurrentPageBorderBox = function getCurrentPageBorderBox(draggable, afterCritical) {
-  var original = draggable.page.borderBox;
-  return didStartAfterCritical(draggable.descriptor.id, afterCritical) ? offsetByPosition(original, negate(afterCritical.displacedBy.point)) : original;
-};
-
-var getClosestDraggable = (function (_ref) {
-  var pageBorderBoxCenter = _ref.pageBorderBoxCenter,
-      viewport = _ref.viewport,
-      destination = _ref.destination,
-      insideDestination = _ref.insideDestination,
-      afterCritical = _ref.afterCritical;
-  var sorted = insideDestination.filter(function (draggable) {
-    return isTotallyVisible({
-      target: getCurrentPageBorderBox(draggable, afterCritical),
-      destination: destination,
-      viewport: viewport.frame,
-      withDroppableDisplacement: true
-    });
-  }).sort(function (a, b) {
-    var distanceToA = distance(pageBorderBoxCenter, withDroppableDisplacement(destination, getCurrentPageBorderBoxCenter(a, afterCritical)));
-    var distanceToB = distance(pageBorderBoxCenter, withDroppableDisplacement(destination, getCurrentPageBorderBoxCenter(b, afterCritical)));
-
-    if (distanceToA < distanceToB) {
-      return -1;
-    }
-
-    if (distanceToB < distanceToA) {
-      return 1;
-    }
-
-    return a.descriptor.index - b.descriptor.index;
-  });
-  return sorted[0] || null;
-});
-
-var getDisplacedBy = Object(memoize_one__WEBPACK_IMPORTED_MODULE_7__["default"])(function getDisplacedBy(axis, displaceBy) {
-  var displacement = displaceBy[axis.line];
-  return {
-    value: displacement,
-    point: patch(axis.line, displacement)
-  };
-});
-
-var getRequiredGrowthForPlaceholder = function getRequiredGrowthForPlaceholder(droppable, placeholderSize, draggables) {
-  var axis = droppable.axis;
-
-  if (droppable.descriptor.mode === 'virtual') {
-    return patch(axis.line, placeholderSize[axis.line]);
-  }
-
-  var availableSpace = droppable.subject.page.contentBox[axis.size];
-  var insideDroppable = getDraggablesInsideDroppable(droppable.descriptor.id, draggables);
-  var spaceUsed = insideDroppable.reduce(function (sum, dimension) {
-    return sum + dimension.client.marginBox[axis.size];
-  }, 0);
-  var requiredSpace = spaceUsed + placeholderSize[axis.line];
-  var needsToGrowBy = requiredSpace - availableSpace;
-
-  if (needsToGrowBy <= 0) {
-    return null;
-  }
-
-  return patch(axis.line, needsToGrowBy);
-};
-
-var withMaxScroll = function withMaxScroll(frame, max) {
-  return Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_3__["default"])({}, frame, {
-    scroll: Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_3__["default"])({}, frame.scroll, {
-      max: max
-    })
-  });
-};
-
-var addPlaceholder = function addPlaceholder(droppable, draggable, draggables) {
-  var frame = droppable.frame;
-  !!isHomeOf(draggable, droppable) ?  true ? invariant(false, 'Should not add placeholder space to home list') : undefined : void 0;
-  !!droppable.subject.withPlaceholder ?  true ? invariant(false, 'Cannot add placeholder size to a subject when it already has one') : undefined : void 0;
-  var placeholderSize = getDisplacedBy(droppable.axis, draggable.displaceBy).point;
-  var requiredGrowth = getRequiredGrowthForPlaceholder(droppable, placeholderSize, draggables);
-  var added = {
-    placeholderSize: placeholderSize,
-    increasedBy: requiredGrowth,
-    oldFrameMaxScroll: droppable.frame ? droppable.frame.scroll.max : null
-  };
-
-  if (!frame) {
-    var _subject = getSubject({
-      page: droppable.subject.page,
-      withPlaceholder: added,
-      axis: droppable.axis,
-      frame: droppable.frame
-    });
-
-    return Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_3__["default"])({}, droppable, {
-      subject: _subject
-    });
-  }
-
-  var maxScroll = requiredGrowth ? add(frame.scroll.max, requiredGrowth) : frame.scroll.max;
-  var newFrame = withMaxScroll(frame, maxScroll);
-  var subject = getSubject({
-    page: droppable.subject.page,
-    withPlaceholder: added,
-    axis: droppable.axis,
-    frame: newFrame
-  });
-  return Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_3__["default"])({}, droppable, {
-    subject: subject,
-    frame: newFrame
-  });
-};
-var removePlaceholder = function removePlaceholder(droppable) {
-  var added = droppable.subject.withPlaceholder;
-  !added ?  true ? invariant(false, 'Cannot remove placeholder form subject when there was none') : undefined : void 0;
-  var frame = droppable.frame;
-
-  if (!frame) {
-    var _subject2 = getSubject({
-      page: droppable.subject.page,
-      axis: droppable.axis,
-      frame: null,
-      withPlaceholder: null
-    });
-
-    return Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_3__["default"])({}, droppable, {
-      subject: _subject2
-    });
-  }
-
-  var oldMaxScroll = added.oldFrameMaxScroll;
-  !oldMaxScroll ?  true ? invariant(false, 'Expected droppable with frame to have old max frame scroll when removing placeholder') : undefined : void 0;
-  var newFrame = withMaxScroll(frame, oldMaxScroll);
-  var subject = getSubject({
-    page: droppable.subject.page,
-    axis: droppable.axis,
-    frame: newFrame,
-    withPlaceholder: null
-  });
-  return Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_3__["default"])({}, droppable, {
-    subject: subject,
-    frame: newFrame
-  });
-};
-
-var moveToNewDroppable = (function (_ref) {
-  var previousPageBorderBoxCenter = _ref.previousPageBorderBoxCenter,
-      moveRelativeTo = _ref.moveRelativeTo,
-      insideDestination = _ref.insideDestination,
-      draggable = _ref.draggable,
-      draggables = _ref.draggables,
-      destination = _ref.destination,
-      viewport = _ref.viewport,
-      afterCritical = _ref.afterCritical;
-
-  if (!moveRelativeTo) {
-    if (insideDestination.length) {
-      return null;
-    }
-
-    var proposed = {
-      displaced: emptyGroups,
-      displacedBy: noDisplacedBy,
-      at: {
-        type: 'REORDER',
-        destination: {
-          droppableId: destination.descriptor.id,
-          index: 0
-        }
-      }
-    };
-    var proposedPageBorderBoxCenter = getPageBorderBoxCenterFromImpact({
-      impact: proposed,
-      draggable: draggable,
-      droppable: destination,
-      draggables: draggables,
-      afterCritical: afterCritical
-    });
-    var withPlaceholder = isHomeOf(draggable, destination) ? destination : addPlaceholder(destination, draggable, draggables);
-    var isVisibleInNewLocation = isTotallyVisibleInNewLocation({
-      draggable: draggable,
-      destination: withPlaceholder,
-      newPageBorderBoxCenter: proposedPageBorderBoxCenter,
-      viewport: viewport.frame,
-      withDroppableDisplacement: false,
-      onlyOnMainAxis: true
-    });
-    return isVisibleInNewLocation ? proposed : null;
-  }
-
-  var isGoingBeforeTarget = Boolean(previousPageBorderBoxCenter[destination.axis.line] <= moveRelativeTo.page.borderBox.center[destination.axis.line]);
-
-  var proposedIndex = function () {
-    var relativeTo = moveRelativeTo.descriptor.index;
-
-    if (moveRelativeTo.descriptor.id === draggable.descriptor.id) {
-      return relativeTo;
-    }
-
-    if (isGoingBeforeTarget) {
-      return relativeTo;
-    }
-
-    return relativeTo + 1;
-  }();
-
-  var displacedBy = getDisplacedBy(destination.axis, draggable.displaceBy);
-  return calculateReorderImpact({
-    draggable: draggable,
-    insideDestination: insideDestination,
-    destination: destination,
-    viewport: viewport,
-    displacedBy: displacedBy,
-    last: emptyGroups,
-    index: proposedIndex
-  });
-});
-
-var moveCrossAxis = (function (_ref) {
-  var isMovingForward = _ref.isMovingForward,
-      previousPageBorderBoxCenter = _ref.previousPageBorderBoxCenter,
-      draggable = _ref.draggable,
-      isOver = _ref.isOver,
-      draggables = _ref.draggables,
-      droppables = _ref.droppables,
-      viewport = _ref.viewport,
-      afterCritical = _ref.afterCritical;
-  var destination = getBestCrossAxisDroppable({
-    isMovingForward: isMovingForward,
-    pageBorderBoxCenter: previousPageBorderBoxCenter,
-    source: isOver,
-    droppables: droppables,
-    viewport: viewport
-  });
-
-  if (!destination) {
-    return null;
-  }
-
-  var insideDestination = getDraggablesInsideDroppable(destination.descriptor.id, draggables);
-  var moveRelativeTo = getClosestDraggable({
-    pageBorderBoxCenter: previousPageBorderBoxCenter,
-    viewport: viewport,
-    destination: destination,
-    insideDestination: insideDestination,
-    afterCritical: afterCritical
-  });
-  var impact = moveToNewDroppable({
-    previousPageBorderBoxCenter: previousPageBorderBoxCenter,
-    destination: destination,
-    draggable: draggable,
-    draggables: draggables,
-    moveRelativeTo: moveRelativeTo,
-    insideDestination: insideDestination,
-    viewport: viewport,
-    afterCritical: afterCritical
-  });
-
-  if (!impact) {
-    return null;
-  }
-
-  var pageBorderBoxCenter = getPageBorderBoxCenterFromImpact({
-    impact: impact,
-    draggable: draggable,
-    droppable: destination,
-    draggables: draggables,
-    afterCritical: afterCritical
-  });
-  var clientSelection = getClientFromPageBorderBoxCenter({
-    pageBorderBoxCenter: pageBorderBoxCenter,
-    draggable: draggable,
-    viewport: viewport
-  });
-  return {
-    clientSelection: clientSelection,
-    impact: impact,
-    scrollJumpRequest: null
-  };
-});
-
-var whatIsDraggedOver = (function (impact) {
-  var at = impact.at;
-
-  if (!at) {
-    return null;
-  }
-
-  if (at.type === 'REORDER') {
-    return at.destination.droppableId;
-  }
-
-  return at.combine.droppableId;
-});
-
-var getDroppableOver = function getDroppableOver(impact, droppables) {
-  var id = whatIsDraggedOver(impact);
-  return id ? droppables[id] : null;
-};
-
-var moveInDirection = (function (_ref) {
-  var state = _ref.state,
-      type = _ref.type;
-  var isActuallyOver = getDroppableOver(state.impact, state.dimensions.droppables);
-  var isMainAxisMovementAllowed = Boolean(isActuallyOver);
-  var home = state.dimensions.droppables[state.critical.droppable.id];
-  var isOver = isActuallyOver || home;
-  var direction = isOver.axis.direction;
-  var isMovingOnMainAxis = direction === 'vertical' && (type === 'MOVE_UP' || type === 'MOVE_DOWN') || direction === 'horizontal' && (type === 'MOVE_LEFT' || type === 'MOVE_RIGHT');
-
-  if (isMovingOnMainAxis && !isMainAxisMovementAllowed) {
-    return null;
-  }
-
-  var isMovingForward = type === 'MOVE_DOWN' || type === 'MOVE_RIGHT';
-  var draggable = state.dimensions.draggables[state.critical.draggable.id];
-  var previousPageBorderBoxCenter = state.current.page.borderBoxCenter;
-  var _state$dimensions = state.dimensions,
-      draggables = _state$dimensions.draggables,
-      droppables = _state$dimensions.droppables;
-  return isMovingOnMainAxis ? moveToNextPlace({
-    isMovingForward: isMovingForward,
-    previousPageBorderBoxCenter: previousPageBorderBoxCenter,
-    draggable: draggable,
-    destination: isOver,
-    draggables: draggables,
-    viewport: state.viewport,
-    previousClientSelection: state.current.client.selection,
-    previousImpact: state.impact,
-    afterCritical: state.afterCritical
-  }) : moveCrossAxis({
-    isMovingForward: isMovingForward,
-    previousPageBorderBoxCenter: previousPageBorderBoxCenter,
-    draggable: draggable,
-    isOver: isOver,
-    draggables: draggables,
-    droppables: droppables,
-    viewport: state.viewport,
-    afterCritical: state.afterCritical
-  });
-});
-
-function isMovementAllowed(state) {
-  return state.phase === 'DRAGGING' || state.phase === 'COLLECTING';
-}
-
-var isPositionInFrame = (function (frame) {
-  var isWithinVertical = isWithin(frame.top, frame.bottom);
-  var isWithinHorizontal = isWithin(frame.left, frame.right);
-  return function (point) {
-    return isWithinVertical(point.y) && isWithinVertical(point.y) && isWithinHorizontal(point.x) && isWithinHorizontal(point.x);
-  };
-});
-
-var getDroppableOver$1 = (function (_ref) {
-  var target = _ref.target,
-      droppables = _ref.droppables;
-  var maybe = find(toDroppableList(droppables), function (droppable) {
-    if (!droppable.isEnabled) {
-      return false;
-    }
-
-    var active = droppable.subject.active;
-
-    if (!active) {
-      return false;
-    }
-
-    return isPositionInFrame(active)(target);
-  });
-  return maybe ? maybe.descriptor.id : null;
-});
-
-var withDroppableScroll = (function (droppable, point) {
-  var frame = droppable.frame;
-
-  if (!frame) {
-    return point;
-  }
-
-  return add(point, frame.scroll.diff.value);
-});
-
-var isUserMovingForward = (function (axis, direction) {
-  return axis === vertical ? direction.vertical === 'down' : direction.horizontal === 'right';
-});
-
-function atIndex(_ref) {
-  var draggable = _ref.draggable,
-      closest = _ref.closest,
-      inHomeList = _ref.inHomeList;
-
-  if (!closest) {
-    return null;
-  }
-
-  if (!inHomeList) {
-    return closest.descriptor.index;
-  }
-
-  if (closest.descriptor.index > draggable.descriptor.index) {
-    return closest.descriptor.index - 1;
-  }
-
-  return closest.descriptor.index;
-}
-
-var getReorderImpact = (function (_ref2) {
-  var currentCenter = _ref2.pageBorderBoxCenterWithDroppableScrollChange,
-      draggable = _ref2.draggable,
-      destination = _ref2.destination,
-      insideDestination = _ref2.insideDestination,
-      last = _ref2.last,
-      viewport = _ref2.viewport,
-      userDirection = _ref2.userDirection,
-      afterCritical = _ref2.afterCritical;
-  var axis = destination.axis;
-  var isMovingForward = isUserMovingForward(destination.axis, userDirection);
-  var displacedBy = getDisplacedBy(destination.axis, draggable.displaceBy);
-  var targetCenter = currentCenter[axis.line];
-  var displacement = displacedBy.value;
-  var withoutDragging = removeDraggableFromList(draggable, insideDestination);
-  var closest = find(withoutDragging, function (child) {
-    var id = child.descriptor.id;
-    var borderBox = child.page.borderBox;
-    var start = borderBox[axis.start];
-    var end = borderBox[axis.end];
-    var didStartAfterCritical$1 = didStartAfterCritical(id, afterCritical);
-
-    if (isMovingForward) {
-      if (didStartAfterCritical$1) {
-        return targetCenter < start;
-      }
-
-      return targetCenter < start + displacement;
-    }
-
-    if (didStartAfterCritical$1) {
-      return targetCenter <= end - displacement;
-    }
-
-    return targetCenter <= end;
-  });
-  var newIndex = atIndex({
-    draggable: draggable,
-    closest: closest,
-    inHomeList: isHomeOf(draggable, destination)
-  });
-  return calculateReorderImpact({
-    draggable: draggable,
-    insideDestination: insideDestination,
-    destination: destination,
-    viewport: viewport,
-    last: last,
-    displacedBy: displacedBy,
-    index: newIndex
-  });
-});
-
-function getWhenEntered(id, current, lastCombineImpact) {
-  if (!lastCombineImpact) {
-    return current;
-  }
-
-  if (id !== lastCombineImpact.combine.draggableId) {
-    return current;
-  }
-
-  return lastCombineImpact.whenEntered;
-}
-
-function tryGetCombineImpact(impact) {
-  if (impact.at && impact.at.type === 'COMBINE') {
-    return impact.at;
-  }
-
-  return null;
-}
-
-function calculateCombineImpact(_ref) {
-  var combineWithId = _ref.combineWithId,
-      destinationId = _ref.destinationId,
-      userDirection = _ref.userDirection,
-      previousImpact = _ref.previousImpact;
-  var lastCombineImpact = tryGetCombineImpact(previousImpact);
-  var whenEntered = getWhenEntered(combineWithId, userDirection, lastCombineImpact);
-  var impact = {
-    displacedBy: previousImpact.displacedBy,
-    displaced: previousImpact.displaced,
-    at: {
-      type: 'COMBINE',
-      whenEntered: whenEntered,
-      combine: {
-        draggableId: combineWithId,
-        droppableId: destinationId
-      }
-    }
-  };
-  return impact;
-}
-
-function getWhenEntered$1(id, current, lastCombineImpact) {
-  if (!lastCombineImpact) {
-    return current;
-  }
-
-  if (id !== lastCombineImpact.combine.draggableId) {
-    return current;
-  }
-
-  return lastCombineImpact.whenEntered;
-}
-
-var isCombiningWith = function isCombiningWith(_ref) {
-  var id = _ref.id,
-      currentCenter = _ref.currentCenter,
-      axis = _ref.axis,
-      borderBox = _ref.borderBox,
-      displaceBy = _ref.displaceBy,
-      currentUserDirection = _ref.currentUserDirection,
-      lastCombineImpact = _ref.lastCombineImpact;
-  var start = borderBox[axis.start] + displaceBy[axis.line];
-  var end = borderBox[axis.end] + displaceBy[axis.line];
-  var size = borderBox[axis.size];
-  var twoThirdsOfSize = size * 0.666;
-  var whenEntered = getWhenEntered$1(id, currentUserDirection, lastCombineImpact);
-  var isMovingForward = isUserMovingForward(axis, whenEntered);
-  var targetCenter = currentCenter[axis.line];
-
-  if (isMovingForward) {
-    return isWithin(start, start + twoThirdsOfSize)(targetCenter);
-  }
-
-  return isWithin(end - twoThirdsOfSize, end)(targetCenter);
-};
-
-function tryGetCombineImpact$1(impact) {
-  if (impact.at && impact.at.type === 'COMBINE') {
-    return impact.at;
-  }
-
-  return null;
-}
-
-var getCombineImpact = (function (_ref2) {
-  var draggable = _ref2.draggable,
-      currentCenter = _ref2.pageBorderBoxCenterWithDroppableScrollChange,
-      previousImpact = _ref2.previousImpact,
-      destination = _ref2.destination,
-      insideDestination = _ref2.insideDestination,
-      userDirection = _ref2.userDirection,
-      afterCritical = _ref2.afterCritical;
-
-  if (!destination.isCombineEnabled) {
-    return null;
-  }
-
-  var axis = destination.axis;
-  var displaced = previousImpact.displaced;
-  var canBeDisplacedBy = getDisplacedBy(destination.axis, draggable.displaceBy);
-  var lastCombineImpact = tryGetCombineImpact$1(previousImpact);
-  var combineWith = find(removeDraggableFromList(draggable, insideDestination), function (child) {
-    var id = child.descriptor.id;
-    var displaceBy = getCombinedItemDisplacement({
-      displaced: displaced,
-      afterCritical: afterCritical,
-      combineWith: id,
-      displacedBy: canBeDisplacedBy
-    });
-    return isCombiningWith({
-      id: id,
-      currentCenter: currentCenter,
-      axis: axis,
-      borderBox: child.page.borderBox,
-      displaceBy: displaceBy,
-      currentUserDirection: userDirection,
-      lastCombineImpact: lastCombineImpact
-    });
-  });
-
-  if (!combineWith) {
-    return null;
-  }
-
-  return calculateCombineImpact({
-    combineWithId: combineWith.descriptor.id,
-    destinationId: destination.descriptor.id,
-    previousImpact: previousImpact,
-    userDirection: userDirection
-  });
-});
-
-var getDragImpact = (function (_ref) {
-  var pageBorderBoxCenter = _ref.pageBorderBoxCenter,
-      draggable = _ref.draggable,
-      draggables = _ref.draggables,
-      droppables = _ref.droppables,
-      previousImpact = _ref.previousImpact,
-      viewport = _ref.viewport,
-      userDirection = _ref.userDirection,
-      afterCritical = _ref.afterCritical;
-  var destinationId = getDroppableOver$1({
-    target: pageBorderBoxCenter,
-    droppables: droppables
-  });
-
-  if (!destinationId) {
-    return noImpact;
-  }
-
-  var destination = droppables[destinationId];
-  var insideDestination = getDraggablesInsideDroppable(destination.descriptor.id, draggables);
-  var pageBorderBoxCenterWithDroppableScrollChange = withDroppableScroll(destination, pageBorderBoxCenter);
-  return getCombineImpact({
-    pageBorderBoxCenterWithDroppableScrollChange: pageBorderBoxCenterWithDroppableScrollChange,
-    draggable: draggable,
-    previousImpact: previousImpact,
-    destination: destination,
-    insideDestination: insideDestination,
-    userDirection: userDirection,
-    afterCritical: afterCritical
-  }) || getReorderImpact({
-    pageBorderBoxCenterWithDroppableScrollChange: pageBorderBoxCenterWithDroppableScrollChange,
-    draggable: draggable,
-    destination: destination,
-    insideDestination: insideDestination,
-    last: previousImpact.displaced,
-    viewport: viewport,
-    userDirection: userDirection,
-    afterCritical: afterCritical
-  });
-});
-
-var getVertical = function getVertical(previous, diff) {
-  if (diff === 0) {
-    return previous;
-  }
-
-  return diff > 0 ? 'down' : 'up';
-};
-
-var getHorizontal = function getHorizontal(previous, diff) {
-  if (diff === 0) {
-    return previous;
-  }
-
-  return diff > 0 ? 'right' : 'left';
-};
-
-var getUserDirection = (function (previous, oldPageBorderBoxCenter, newPageBorderBoxCenter) {
-  var diff = subtract(newPageBorderBoxCenter, oldPageBorderBoxCenter);
-  return {
-    horizontal: getHorizontal(previous.horizontal, diff.x),
-    vertical: getVertical(previous.vertical, diff.y)
-  };
-});
-
-var patchDroppableMap = (function (droppables, updated) {
-  var _extends2;
-
-  return Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_3__["default"])({}, droppables, (_extends2 = {}, _extends2[updated.descriptor.id] = updated, _extends2));
-});
-
-var clearUnusedPlaceholder = function clearUnusedPlaceholder(_ref) {
-  var previousImpact = _ref.previousImpact,
-      impact = _ref.impact,
-      droppables = _ref.droppables;
-  var last = whatIsDraggedOver(previousImpact);
-  var now = whatIsDraggedOver(impact);
-
-  if (!last) {
-    return droppables;
-  }
-
-  if (last === now) {
-    return droppables;
-  }
-
-  var lastDroppable = droppables[last];
-
-  if (!lastDroppable.subject.withPlaceholder) {
-    return droppables;
-  }
-
-  var updated = removePlaceholder(lastDroppable);
-  return patchDroppableMap(droppables, updated);
-};
-
-var recomputePlaceholders = (function (_ref2) {
-  var draggable = _ref2.draggable,
-      draggables = _ref2.draggables,
-      droppables = _ref2.droppables,
-      previousImpact = _ref2.previousImpact,
-      impact = _ref2.impact;
-  var cleaned = clearUnusedPlaceholder({
-    previousImpact: previousImpact,
-    impact: impact,
-    droppables: droppables
-  });
-  var isOver = whatIsDraggedOver(impact);
-
-  if (!isOver) {
-    return cleaned;
-  }
-
-  var droppable = droppables[isOver];
-
-  if (isHomeOf(draggable, droppable)) {
-    return cleaned;
-  }
-
-  if (droppable.subject.withPlaceholder) {
-    return cleaned;
-  }
-
-  var patched = addPlaceholder(droppable, draggable, draggables);
-  return patchDroppableMap(cleaned, patched);
-});
-
-var update = (function (_ref) {
-  var state = _ref.state,
-      forcedClientSelection = _ref.clientSelection,
-      forcedDimensions = _ref.dimensions,
-      forcedViewport = _ref.viewport,
-      forcedImpact = _ref.impact,
-      scrollJumpRequest = _ref.scrollJumpRequest;
-  var viewport = forcedViewport || state.viewport;
-  var currentWindowScroll = viewport.scroll.current;
-  var dimensions = forcedDimensions || state.dimensions;
-  var clientSelection = forcedClientSelection || state.current.client.selection;
-  var offset = subtract(clientSelection, state.initial.client.selection);
-  var client = {
-    offset: offset,
-    selection: clientSelection,
-    borderBoxCenter: add(state.initial.client.borderBoxCenter, offset)
-  };
-  var page = {
-    selection: add(client.selection, currentWindowScroll),
-    borderBoxCenter: add(client.borderBoxCenter, currentWindowScroll)
-  };
-  var current = {
-    client: client,
-    page: page
-  };
-  var userDirection = getUserDirection(state.userDirection, state.current.page.borderBoxCenter, current.page.borderBoxCenter);
-
-  if (state.phase === 'COLLECTING') {
-    return Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_3__["default"])({
-      phase: 'COLLECTING'
-    }, state, {
-      dimensions: dimensions,
-      viewport: viewport,
-      current: current,
-      userDirection: userDirection
-    });
-  }
-
-  var draggable = dimensions.draggables[state.critical.draggable.id];
-  var newImpact = forcedImpact || getDragImpact({
-    pageBorderBoxCenter: page.borderBoxCenter,
-    draggable: draggable,
-    draggables: dimensions.draggables,
-    droppables: dimensions.droppables,
-    previousImpact: state.impact,
-    viewport: viewport,
-    userDirection: userDirection,
-    afterCritical: state.afterCritical
-  });
-  var withUpdatedPlaceholders = recomputePlaceholders({
-    draggable: draggable,
-    impact: newImpact,
-    previousImpact: state.impact,
-    draggables: dimensions.draggables,
-    droppables: dimensions.droppables
-  });
-
-  var result = Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_3__["default"])({}, state, {
-    current: current,
-    userDirection: userDirection,
-    dimensions: {
-      draggables: dimensions.draggables,
-      droppables: withUpdatedPlaceholders
+      return new Error('You provided a `value` prop to a form field without an ' + '`onChange` handler. This will render a read-only field. If ' + 'the field should be mutable use `defaultValue`. Otherwise, ' + 'set either `onChange` or `readOnly`.');
     },
-    impact: newImpact,
-    viewport: viewport,
-    scrollJumpRequest: scrollJumpRequest || null,
-    forceShouldAnimate: scrollJumpRequest ? false : null
-  });
-
-  return result;
-});
-
-function getDraggables$1(ids, draggables) {
-  return ids.map(function (id) {
-    return draggables[id];
-  });
-}
-
-var recompute = (function (_ref) {
-  var impact = _ref.impact,
-      viewport = _ref.viewport,
-      draggables = _ref.draggables,
-      destination = _ref.destination,
-      forceShouldAnimate = _ref.forceShouldAnimate;
-  var last = impact.displaced;
-  var afterDragging = getDraggables$1(last.all, draggables);
-  var displaced = getDisplacementGroups({
-    afterDragging: afterDragging,
-    destination: destination,
-    displacedBy: impact.displacedBy,
-    viewport: viewport.frame,
-    forceShouldAnimate: forceShouldAnimate,
-    last: last
-  });
-  return Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_3__["default"])({}, impact, {
-    displaced: displaced
-  });
-});
-
-var getClientBorderBoxCenter = (function (_ref) {
-  var impact = _ref.impact,
-      draggable = _ref.draggable,
-      droppable = _ref.droppable,
-      draggables = _ref.draggables,
-      viewport = _ref.viewport,
-      afterCritical = _ref.afterCritical;
-  var pageBorderBoxCenter = getPageBorderBoxCenterFromImpact({
-    impact: impact,
-    draggable: draggable,
-    draggables: draggables,
-    droppable: droppable,
-    afterCritical: afterCritical
-  });
-  return getClientFromPageBorderBoxCenter({
-    pageBorderBoxCenter: pageBorderBoxCenter,
-    draggable: draggable,
-    viewport: viewport
-  });
-});
-
-var refreshSnap = (function (_ref) {
-  var state = _ref.state,
-      forcedDimensions = _ref.dimensions,
-      forcedViewport = _ref.viewport;
-  !(state.movementMode === 'SNAP') ?  true ? invariant(false) : undefined : void 0;
-  var needsVisibilityCheck = state.impact;
-  var viewport = forcedViewport || state.viewport;
-  var dimensions = forcedDimensions || state.dimensions;
-  var draggables = dimensions.draggables,
-      droppables = dimensions.droppables;
-  var draggable = draggables[state.critical.draggable.id];
-  var isOver = whatIsDraggedOver(needsVisibilityCheck);
-  !isOver ?  true ? invariant(false, 'Must be over a destination in SNAP movement mode') : undefined : void 0;
-  var destination = droppables[isOver];
-  var impact = recompute({
-    impact: needsVisibilityCheck,
-    viewport: viewport,
-    destination: destination,
-    draggables: draggables
-  });
-  var clientSelection = getClientBorderBoxCenter({
-    impact: impact,
-    draggable: draggable,
-    droppable: destination,
-    draggables: draggables,
-    viewport: viewport,
-    afterCritical: state.afterCritical
-  });
-  return update({
-    impact: impact,
-    clientSelection: clientSelection,
-    state: state,
-    dimensions: dimensions,
-    viewport: viewport
-  });
-});
-
-var getHomeLocation = (function (descriptor) {
-  return {
-    index: descriptor.index,
-    droppableId: descriptor.droppableId
-  };
-});
-
-var getLiftEffect = (function (_ref) {
-  var draggable = _ref.draggable,
-      home = _ref.home,
-      draggables = _ref.draggables,
-      viewport = _ref.viewport;
-  var displacedBy = getDisplacedBy(home.axis, draggable.displaceBy);
-  var insideHome = getDraggablesInsideDroppable(home.descriptor.id, draggables);
-  var rawIndex = insideHome.indexOf(draggable);
-  !(rawIndex !== -1) ?  true ? invariant(false, 'Expected draggable to be inside home list') : undefined : void 0;
-  var afterDragging = insideHome.slice(rawIndex + 1);
-  var effected = afterDragging.reduce(function (previous, item) {
-    previous[item.descriptor.id] = true;
-    return previous;
-  }, {});
-  var afterCritical = {
-    inVirtualList: home.descriptor.mode === 'virtual',
-    displacedBy: displacedBy,
-    effected: effected
-  };
-  var displaced = getDisplacementGroups({
-    afterDragging: afterDragging,
-    destination: home,
-    displacedBy: displacedBy,
-    last: null,
-    viewport: viewport.frame,
-    forceShouldAnimate: false
-  });
-  var impact = {
-    displaced: displaced,
-    displacedBy: displacedBy,
-    at: {
-      type: 'REORDER',
-      destination: getHomeLocation(draggable.descriptor)
-    }
-  };
-  return {
-    impact: impact,
-    afterCritical: afterCritical
-  };
-});
-
-var patchDimensionMap = (function (dimensions, updated) {
-  return {
-    draggables: dimensions.draggables,
-    droppables: patchDroppableMap(dimensions.droppables, updated)
-  };
-});
-
-var records = {};
-var isEnabled = false;
-
-var isTimingsEnabled = function isTimingsEnabled() {
-  return isEnabled;
-};
-var start = function start(key) {
-  if (true) {
-    if (!isTimingsEnabled()) {
-      return;
-    }
-
-    var now = performance.now();
-    records[key] = now;
-  }
-};
-var finish = function finish(key) {
-  if (true) {
-    if (!isTimingsEnabled()) {
-      return;
-    }
-
-    var now = performance.now();
-    var previous = records[key];
-
-    if (!previous) {
-      console.warn('cannot finish timing as no previous time found', key);
-      return;
-    }
-
-    var result = now - previous;
-    var rounded = result.toFixed(2);
-
-    var style = function () {
-      if (result < 12) {
-        return {
-          textColor: 'green',
-          symbol: '✅'
-        };
+    checked: function (props, propName, componentName) {
+      if (props.onChange || props.readOnly || props.disabled || props[propName] == null || enableFlareAPI && props.listeners) {
+        return null;
       }
 
-      if (result < 40) {
-        return {
-          textColor: 'orange',
-          symbol: '⚠️'
-        };
-      }
-
-      return {
-        textColor: 'red',
-        symbol: '❌'
-      };
-    }();
-
-    console.log(style.symbol + " %cTiming %c" + rounded + " %cms %c" + key, 'color: blue; font-weight: bold;', "color: " + style.textColor + "; font-size: 1.1em;", 'color: grey;', 'color: purple; font-weight: bold;');
-  }
-};
-
-var offsetDraggable = (function (_ref) {
-  var draggable = _ref.draggable,
-      offset$1 = _ref.offset,
-      initialWindowScroll = _ref.initialWindowScroll;
-  var client = Object(css_box_model__WEBPACK_IMPORTED_MODULE_6__["offset"])(draggable.client, offset$1);
-  var page = Object(css_box_model__WEBPACK_IMPORTED_MODULE_6__["withScroll"])(client, initialWindowScroll);
-
-  var moved = Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_3__["default"])({}, draggable, {
-    placeholder: Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_3__["default"])({}, draggable.placeholder, {
-      client: client
-    }),
-    client: client,
-    page: page
-  });
-
-  return moved;
-});
-
-var getFrame = (function (droppable) {
-  var frame = droppable.frame;
-  !frame ?  true ? invariant(false, 'Expected Droppable to have a frame') : undefined : void 0;
-  return frame;
-});
-
-var adjustAdditionsForScrollChanges = (function (_ref) {
-  var additions = _ref.additions,
-      updatedDroppables = _ref.updatedDroppables,
-      viewport = _ref.viewport;
-  var windowScrollChange = viewport.scroll.diff.value;
-  return additions.map(function (draggable) {
-    var droppableId = draggable.descriptor.droppableId;
-    var modified = updatedDroppables[droppableId];
-    var frame = getFrame(modified);
-    var droppableScrollChange = frame.scroll.diff.value;
-    var totalChange = add(windowScrollChange, droppableScrollChange);
-    var moved = offsetDraggable({
-      draggable: draggable,
-      offset: totalChange,
-      initialWindowScroll: viewport.scroll.initial
-    });
-    return moved;
-  });
-});
-
-var timingsKey = 'Processing dynamic changes';
-var publishWhileDraggingInVirtual = (function (_ref) {
-  var _extends2, _extends3;
-
-  var state = _ref.state,
-      published = _ref.published;
-  start(timingsKey);
-  var withScrollChange = published.modified.map(function (update) {
-    var existing = state.dimensions.droppables[update.droppableId];
-    var scrolled = scrollDroppable(existing, update.scroll);
-    return scrolled;
-  });
-
-  var droppables = Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_3__["default"])({}, state.dimensions.droppables, {}, toDroppableMap(withScrollChange));
-
-  var updatedAdditions = toDraggableMap(adjustAdditionsForScrollChanges({
-    additions: published.additions,
-    updatedDroppables: droppables,
-    viewport: state.viewport
-  }));
-
-  var draggables = Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_3__["default"])({}, state.dimensions.draggables, {}, updatedAdditions);
-
-  published.removals.forEach(function (id) {
-    delete draggables[id];
-  });
-  var dimensions = {
-    droppables: droppables,
-    draggables: draggables
-  };
-  var wasOverId = whatIsDraggedOver(state.impact);
-  var wasOver = wasOverId ? dimensions.droppables[wasOverId] : null;
-  var draggable = dimensions.draggables[state.critical.draggable.id];
-  var home = dimensions.droppables[state.critical.droppable.id];
-
-  var _getLiftEffect = getLiftEffect({
-    draggable: draggable,
-    home: home,
-    draggables: draggables,
-    viewport: state.viewport
-  }),
-      onLiftImpact = _getLiftEffect.impact,
-      afterCritical = _getLiftEffect.afterCritical;
-
-  var previousImpact = wasOver && wasOver.isCombineEnabled ? state.impact : onLiftImpact;
-  var impact = getDragImpact({
-    pageBorderBoxCenter: state.current.page.borderBoxCenter,
-    draggable: dimensions.draggables[state.critical.draggable.id],
-    draggables: dimensions.draggables,
-    droppables: dimensions.droppables,
-    previousImpact: previousImpact,
-    viewport: state.viewport,
-    userDirection: state.userDirection,
-    afterCritical: afterCritical
-  });
-  finish(timingsKey);
-
-  var draggingState = Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_3__["default"])({
-    phase: 'DRAGGING'
-  }, state, (_extends2 = {}, _extends2["phase"] = 'DRAGGING', _extends2.impact = impact, _extends2.onLiftImpact = onLiftImpact, _extends2.dimensions = dimensions, _extends2.afterCritical = afterCritical, _extends2.forceShouldAnimate = false, _extends2));
-
-  if (state.phase === 'COLLECTING') {
-    return draggingState;
-  }
-
-  var dropPending = Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_3__["default"])({
-    phase: 'DROP_PENDING'
-  }, draggingState, (_extends3 = {}, _extends3["phase"] = 'DROP_PENDING', _extends3.reason = state.reason, _extends3.isWaiting = false, _extends3));
-
-  return dropPending;
-});
-
-var isSnapping = function isSnapping(state) {
-  return state.movementMode === 'SNAP';
-};
-
-var postDroppableChange = function postDroppableChange(state, updated, isEnabledChanging) {
-  var dimensions = patchDimensionMap(state.dimensions, updated);
-
-  if (!isSnapping(state) || isEnabledChanging) {
-    return update({
-      state: state,
-      dimensions: dimensions
-    });
-  }
-
-  return refreshSnap({
-    state: state,
-    dimensions: dimensions
-  });
-};
-
-function removeScrollJumpRequest(state) {
-  if (state.isDragging && state.movementMode === 'SNAP') {
-    return Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_3__["default"])({
-      phase: 'DRAGGING'
-    }, state, {
-      scrollJumpRequest: null
-    });
-  }
-
-  return state;
-}
-
-var idle = {
-  phase: 'IDLE',
-  completed: null,
-  shouldFlush: false
-};
-var reducer = (function (state, action) {
-  if (state === void 0) {
-    state = idle;
-  }
-
-  if (action.type === 'FLUSH') {
-    return Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_3__["default"])({}, idle, {
-      shouldFlush: true
-    });
-  }
-
-  if (action.type === 'INITIAL_PUBLISH') {
-    !(state.phase === 'IDLE') ?  true ? invariant(false, 'INITIAL_PUBLISH must come after a IDLE phase') : undefined : void 0;
-    var _action$payload = action.payload,
-        critical = _action$payload.critical,
-        clientSelection = _action$payload.clientSelection,
-        viewport = _action$payload.viewport,
-        dimensions = _action$payload.dimensions,
-        movementMode = _action$payload.movementMode;
-    var draggable = dimensions.draggables[critical.draggable.id];
-    var home = dimensions.droppables[critical.droppable.id];
-    var client = {
-      selection: clientSelection,
-      borderBoxCenter: draggable.client.borderBox.center,
-      offset: origin
-    };
-    var initial = {
-      client: client,
-      page: {
-        selection: add(client.selection, viewport.scroll.initial),
-        borderBoxCenter: add(client.selection, viewport.scroll.initial)
-      }
-    };
-    var isWindowScrollAllowed = toDroppableList(dimensions.droppables).every(function (item) {
-      return !item.isFixedOnPage;
-    });
-
-    var _getLiftEffect = getLiftEffect({
-      draggable: draggable,
-      home: home,
-      draggables: dimensions.draggables,
-      viewport: viewport
-    }),
-        impact = _getLiftEffect.impact,
-        afterCritical = _getLiftEffect.afterCritical;
-
-    var result = {
-      phase: 'DRAGGING',
-      isDragging: true,
-      critical: critical,
-      movementMode: movementMode,
-      dimensions: dimensions,
-      initial: initial,
-      current: initial,
-      isWindowScrollAllowed: isWindowScrollAllowed,
-      impact: impact,
-      afterCritical: afterCritical,
-      onLiftImpact: impact,
-      viewport: viewport,
-      userDirection: forward,
-      scrollJumpRequest: null,
-      forceShouldAnimate: null
-    };
-    return result;
-  }
-
-  if (action.type === 'COLLECTION_STARTING') {
-    var _extends2;
-
-    if (state.phase === 'COLLECTING' || state.phase === 'DROP_PENDING') {
-      return state;
+      return new Error('You provided a `checked` prop to a form field without an ' + '`onChange` handler. This will render a read-only field. If ' + 'the field should be mutable use `defaultChecked`. Otherwise, ' + 'set either `onChange` or `readOnly`.');
     }
-
-    !(state.phase === 'DRAGGING') ?  true ? invariant(false, "Collection cannot start from phase " + state.phase) : undefined : void 0;
-
-    var _result = Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_3__["default"])({
-      phase: 'COLLECTING'
-    }, state, (_extends2 = {}, _extends2["phase"] = 'COLLECTING', _extends2));
-
-    return _result;
-  }
-
-  if (action.type === 'PUBLISH_WHILE_DRAGGING') {
-    !(state.phase === 'COLLECTING' || state.phase === 'DROP_PENDING') ?  true ? invariant(false, "Unexpected " + action.type + " received in phase " + state.phase) : undefined : void 0;
-    return publishWhileDraggingInVirtual({
-      state: state,
-      published: action.payload
-    });
-  }
-
-  if (action.type === 'MOVE') {
-    if (state.phase === 'DROP_PENDING') {
-      return state;
-    }
-
-    !isMovementAllowed(state) ?  true ? invariant(false, action.type + " not permitted in phase " + state.phase) : undefined : void 0;
-    var _clientSelection = action.payload.client;
-
-    if (isEqual(_clientSelection, state.current.client.selection)) {
-      return state;
-    }
-
-    return update({
-      state: state,
-      clientSelection: _clientSelection,
-      impact: isSnapping(state) ? state.impact : null
-    });
-  }
-
-  if (action.type === 'UPDATE_DROPPABLE_SCROLL') {
-    if (state.phase === 'DROP_PENDING') {
-      return removeScrollJumpRequest(state);
-    }
-
-    if (state.phase === 'COLLECTING') {
-      return removeScrollJumpRequest(state);
-    }
-
-    !isMovementAllowed(state) ?  true ? invariant(false, action.type + " not permitted in phase " + state.phase) : undefined : void 0;
-    var _action$payload2 = action.payload,
-        id = _action$payload2.id,
-        newScroll = _action$payload2.newScroll;
-    var target = state.dimensions.droppables[id];
-
-    if (!target) {
-      return state;
-    }
-
-    var scrolled = scrollDroppable(target, newScroll);
-    return postDroppableChange(state, scrolled, false);
-  }
-
-  if (action.type === 'UPDATE_DROPPABLE_IS_ENABLED') {
-    if (state.phase === 'DROP_PENDING') {
-      return state;
-    }
-
-    !isMovementAllowed(state) ?  true ? invariant(false, "Attempting to move in an unsupported phase " + state.phase) : undefined : void 0;
-    var _action$payload3 = action.payload,
-        _id = _action$payload3.id,
-        isEnabled = _action$payload3.isEnabled;
-    var _target = state.dimensions.droppables[_id];
-    !_target ?  true ? invariant(false, "Cannot find Droppable[id: " + _id + "] to toggle its enabled state") : undefined : void 0;
-    !(_target.isEnabled !== isEnabled) ?  true ? invariant(false, "Trying to set droppable isEnabled to " + String(isEnabled) + "\n      but it is already " + String(_target.isEnabled)) : undefined : void 0;
-
-    var updated = Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_3__["default"])({}, _target, {
-      isEnabled: isEnabled
-    });
-
-    return postDroppableChange(state, updated, true);
-  }
-
-  if (action.type === 'UPDATE_DROPPABLE_IS_COMBINE_ENABLED') {
-    if (state.phase === 'DROP_PENDING') {
-      return state;
-    }
-
-    !isMovementAllowed(state) ?  true ? invariant(false, "Attempting to move in an unsupported phase " + state.phase) : undefined : void 0;
-    var _action$payload4 = action.payload,
-        _id2 = _action$payload4.id,
-        isCombineEnabled = _action$payload4.isCombineEnabled;
-    var _target2 = state.dimensions.droppables[_id2];
-    !_target2 ?  true ? invariant(false, "Cannot find Droppable[id: " + _id2 + "] to toggle its isCombineEnabled state") : undefined : void 0;
-    !(_target2.isCombineEnabled !== isCombineEnabled) ?  true ? invariant(false, "Trying to set droppable isCombineEnabled to " + String(isCombineEnabled) + "\n      but it is already " + String(_target2.isCombineEnabled)) : undefined : void 0;
-
-    var _updated = Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_3__["default"])({}, _target2, {
-      isCombineEnabled: isCombineEnabled
-    });
-
-    return postDroppableChange(state, _updated, true);
-  }
-
-  if (action.type === 'MOVE_BY_WINDOW_SCROLL') {
-    if (state.phase === 'DROP_PENDING' || state.phase === 'DROP_ANIMATING') {
-      return state;
-    }
-
-    !isMovementAllowed(state) ?  true ? invariant(false, "Cannot move by window in phase " + state.phase) : undefined : void 0;
-    !state.isWindowScrollAllowed ?  true ? invariant(false, 'Window scrolling is currently not supported for fixed lists') : undefined : void 0;
-    var _newScroll = action.payload.newScroll;
-
-    if (isEqual(state.viewport.scroll.current, _newScroll)) {
-      return removeScrollJumpRequest(state);
-    }
-
-    var _viewport = scrollViewport(state.viewport, _newScroll);
-
-    if (isSnapping(state)) {
-      return refreshSnap({
-        state: state,
-        viewport: _viewport
-      });
-    }
-
-    return update({
-      state: state,
-      viewport: _viewport
-    });
-  }
-
-  if (action.type === 'UPDATE_VIEWPORT_MAX_SCROLL') {
-    if (!isMovementAllowed(state)) {
-      return state;
-    }
-
-    var maxScroll = action.payload.maxScroll;
-
-    if (isEqual(maxScroll, state.viewport.scroll.max)) {
-      return state;
-    }
-
-    var withMaxScroll = Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_3__["default"])({}, state.viewport, {
-      scroll: Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_3__["default"])({}, state.viewport.scroll, {
-        max: maxScroll
-      })
-    });
-
-    return Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_3__["default"])({
-      phase: 'DRAGGING'
-    }, state, {
-      viewport: withMaxScroll
-    });
-  }
-
-  if (action.type === 'MOVE_UP' || action.type === 'MOVE_DOWN' || action.type === 'MOVE_LEFT' || action.type === 'MOVE_RIGHT') {
-    if (state.phase === 'COLLECTING' || state.phase === 'DROP_PENDING') {
-      return state;
-    }
-
-    !(state.phase === 'DRAGGING') ?  true ? invariant(false, action.type + " received while not in DRAGGING phase") : undefined : void 0;
-
-    var _result2 = moveInDirection({
-      state: state,
-      type: action.type
-    });
-
-    if (!_result2) {
-      return state;
-    }
-
-    return update({
-      state: state,
-      impact: _result2.impact,
-      clientSelection: _result2.clientSelection,
-      scrollJumpRequest: _result2.scrollJumpRequest
-    });
-  }
-
-  if (action.type === 'DROP_PENDING') {
-    var _extends3;
-
-    var reason = action.payload.reason;
-    !(state.phase === 'COLLECTING') ?  true ? invariant(false, 'Can only move into the DROP_PENDING phase from the COLLECTING phase') : undefined : void 0;
-
-    var newState = Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_3__["default"])({
-      phase: 'DROP_PENDING'
-    }, state, (_extends3 = {}, _extends3["phase"] = 'DROP_PENDING', _extends3.isWaiting = true, _extends3.reason = reason, _extends3));
-
-    return newState;
-  }
-
-  if (action.type === 'DROP_ANIMATE') {
-    var _action$payload5 = action.payload,
-        completed = _action$payload5.completed,
-        dropDuration = _action$payload5.dropDuration,
-        newHomeClientOffset = _action$payload5.newHomeClientOffset;
-    !(state.phase === 'DRAGGING' || state.phase === 'DROP_PENDING') ?  true ? invariant(false, "Cannot animate drop from phase " + state.phase) : undefined : void 0;
-    var _result3 = {
-      phase: 'DROP_ANIMATING',
-      completed: completed,
-      dropDuration: dropDuration,
-      newHomeClientOffset: newHomeClientOffset,
-      dimensions: state.dimensions
-    };
-    return _result3;
-  }
-
-  if (action.type === 'DROP_COMPLETE') {
-    var _completed = action.payload.completed;
-    return {
-      phase: 'IDLE',
-      completed: _completed,
-      shouldFlush: false
-    };
-  }
-
-  return state;
-});
-
-var lift = function lift(args) {
-  return {
-    type: 'LIFT',
-    payload: args
   };
-};
-var initialPublish = function initialPublish(args) {
-  return {
-    type: 'INITIAL_PUBLISH',
-    payload: args
-  };
-};
-var publishWhileDragging = function publishWhileDragging(args) {
-  return {
-    type: 'PUBLISH_WHILE_DRAGGING',
-    payload: args
-  };
-};
-var collectionStarting = function collectionStarting() {
-  return {
-    type: 'COLLECTION_STARTING',
-    payload: null
-  };
-};
-var updateDroppableScroll = function updateDroppableScroll(args) {
-  return {
-    type: 'UPDATE_DROPPABLE_SCROLL',
-    payload: args
-  };
-};
-var updateDroppableIsEnabled = function updateDroppableIsEnabled(args) {
-  return {
-    type: 'UPDATE_DROPPABLE_IS_ENABLED',
-    payload: args
-  };
-};
-var updateDroppableIsCombineEnabled = function updateDroppableIsCombineEnabled(args) {
-  return {
-    type: 'UPDATE_DROPPABLE_IS_COMBINE_ENABLED',
-    payload: args
-  };
-};
-var move = function move(args) {
-  return {
-    type: 'MOVE',
-    payload: args
-  };
-};
-var moveByWindowScroll = function moveByWindowScroll(args) {
-  return {
-    type: 'MOVE_BY_WINDOW_SCROLL',
-    payload: args
-  };
-};
-var updateViewportMaxScroll = function updateViewportMaxScroll(args) {
-  return {
-    type: 'UPDATE_VIEWPORT_MAX_SCROLL',
-    payload: args
-  };
-};
-var moveUp = function moveUp() {
-  return {
-    type: 'MOVE_UP',
-    payload: null
-  };
-};
-var moveDown = function moveDown() {
-  return {
-    type: 'MOVE_DOWN',
-    payload: null
-  };
-};
-var moveRight = function moveRight() {
-  return {
-    type: 'MOVE_RIGHT',
-    payload: null
-  };
-};
-var moveLeft = function moveLeft() {
-  return {
-    type: 'MOVE_LEFT',
-    payload: null
-  };
-};
-var flush = function flush() {
-  return {
-    type: 'FLUSH',
-    payload: null
-  };
-};
-var animateDrop = function animateDrop(args) {
-  return {
-    type: 'DROP_ANIMATE',
-    payload: args
-  };
-};
-var completeDrop = function completeDrop(args) {
-  return {
-    type: 'DROP_COMPLETE',
-    payload: args
-  };
-};
-var drop = function drop(args) {
-  return {
-    type: 'DROP',
-    payload: args
-  };
-};
-var dropPending = function dropPending(args) {
-  return {
-    type: 'DROP_PENDING',
-    payload: args
-  };
-};
-var dropAnimationFinished = function dropAnimationFinished() {
-  return {
-    type: 'DROP_ANIMATION_FINISHED',
-    payload: null
-  };
-};
+  /**
+   * Provide a linked `value` attribute for controlled forms. You should not use
+   * this outside of the ReactDOM controlled form components.
+   */
 
-function checkIndexes(insideDestination) {
-  if (insideDestination.length <= 1) {
-    return;
-  }
-
-  var indexes = insideDestination.map(function (d) {
-    return d.descriptor.index;
-  });
-  var errors = {};
-
-  for (var i = 1; i < indexes.length; i++) {
-    var current = indexes[i];
-    var previous = indexes[i - 1];
-
-    if (current !== previous + 1) {
-      errors[current] = true;
-    }
-  }
-
-  if (!_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_9___default()(errors).length) {
-    return;
-  }
-
-  var formatted = indexes.map(function (index) {
-    var hasError = Boolean(errors[index]);
-    return hasError ? "[\uD83D\uDD25" + index + "]" : "" + index;
-  }).join(', ');
-   true ? warning("\n    Detected non-consecutive <Draggable /> indexes.\n\n    (This can cause unexpected bugs)\n\n    " + formatted + "\n  ") : undefined;
-}
-
-function validateDimensions(critical, dimensions) {
-  if (true) {
-    var insideDestination = getDraggablesInsideDroppable(critical.droppable.id, dimensions.draggables);
-    checkIndexes(insideDestination);
-  }
-}
-
-var lift$1 = (function (marshal) {
-  return function (_ref) {
-    var getState = _ref.getState,
-        dispatch = _ref.dispatch;
-    return function (next) {
-      return function (action) {
-        if (action.type !== 'LIFT') {
-          next(action);
-          return;
-        }
-
-        var _action$payload = action.payload,
-            id = _action$payload.id,
-            clientSelection = _action$payload.clientSelection,
-            movementMode = _action$payload.movementMode;
-        var initial = getState();
-
-        if (initial.phase === 'DROP_ANIMATING') {
-          dispatch(completeDrop({
-            completed: initial.completed
-          }));
-        }
-
-        !(getState().phase === 'IDLE') ?  true ? invariant(false, 'Unexpected phase to start a drag') : undefined : void 0;
-        dispatch(flush());
-        var scrollOptions = {
-          shouldPublishImmediately: movementMode === 'SNAP'
-        };
-        var request = {
-          draggableId: id,
-          scrollOptions: scrollOptions
-        };
-
-        var _marshal$startPublish = marshal.startPublishing(request),
-            critical = _marshal$startPublish.critical,
-            dimensions = _marshal$startPublish.dimensions,
-            viewport = _marshal$startPublish.viewport;
-
-        validateDimensions(critical, dimensions);
-        dispatch(initialPublish({
-          critical: critical,
-          dimensions: dimensions,
-          clientSelection: clientSelection,
-          movementMode: movementMode,
-          viewport: viewport
-        }));
-      };
-    };
-  };
-});
-
-var style = (function (marshal) {
-  return function () {
-    return function (next) {
-      return function (action) {
-        if (action.type === 'INITIAL_PUBLISH') {
-          marshal.dragging();
-        }
-
-        if (action.type === 'DROP_ANIMATE') {
-          marshal.dropping(action.payload.completed.result.reason);
-        }
-
-        if (action.type === 'FLUSH' || action.type === 'DROP_COMPLETE') {
-          marshal.resting();
-        }
-
-        next(action);
-      };
-    };
-  };
-});
-
-var curves = {
-  outOfTheWay: 'cubic-bezier(0.2, 0, 0, 1)',
-  drop: 'cubic-bezier(.2,1,.1,1)'
-};
-var combine = {
-  opacity: {
-    drop: 0,
-    combining: 0.7
-  },
-  scale: {
-    drop: 0.75
-  }
-};
-var timings = {
-  outOfTheWay: 0.2,
-  minDropTime: 0.33,
-  maxDropTime: 0.55
-};
-var outOfTheWayTiming = timings.outOfTheWay + "s " + curves.outOfTheWay;
-var transitions = {
-  fluid: "opacity " + outOfTheWayTiming,
-  snap: "transform " + outOfTheWayTiming + ", opacity " + outOfTheWayTiming,
-  drop: function drop(duration) {
-    var timing = duration + "s " + curves.drop;
-    return "transform " + timing + ", opacity " + timing;
-  },
-  outOfTheWay: "transform " + outOfTheWayTiming,
-  placeholder: "height " + outOfTheWayTiming + ", width " + outOfTheWayTiming + ", margin " + outOfTheWayTiming
-};
-
-var moveTo = function moveTo(offset) {
-  return isEqual(offset, origin) ? null : "translate(" + offset.x + "px, " + offset.y + "px)";
-};
-
-var transforms = {
-  moveTo: moveTo,
-  drop: function drop(offset, isCombining) {
-    var translate = moveTo(offset);
-
-    if (!translate) {
-      return null;
-    }
-
-    if (!isCombining) {
-      return translate;
-    }
-
-    return translate + " scale(" + combine.scale.drop + ")";
-  }
-};
-
-var minDropTime = timings.minDropTime,
-    maxDropTime = timings.maxDropTime;
-var dropTimeRange = maxDropTime - minDropTime;
-var maxDropTimeAtDistance = 1500;
-var cancelDropModifier = 0.6;
-var getDropDuration = (function (_ref) {
-  var current = _ref.current,
-      destination = _ref.destination,
-      reason = _ref.reason;
-  var distance$1 = distance(current, destination);
-
-  if (distance$1 <= 0) {
-    return minDropTime;
-  }
-
-  if (distance$1 >= maxDropTimeAtDistance) {
-    return maxDropTime;
-  }
-
-  var percentage = distance$1 / maxDropTimeAtDistance;
-  var duration = minDropTime + dropTimeRange * percentage;
-  var withDuration = reason === 'CANCEL' ? duration * cancelDropModifier : duration;
-  return Number(withDuration.toFixed(2));
-});
-
-var getNewHomeClientOffset = (function (_ref) {
-  var impact = _ref.impact,
-      draggable = _ref.draggable,
-      dimensions = _ref.dimensions,
-      viewport = _ref.viewport,
-      afterCritical = _ref.afterCritical;
-  var draggables = dimensions.draggables,
-      droppables = dimensions.droppables;
-  var droppableId = whatIsDraggedOver(impact);
-  var destination = droppableId ? droppables[droppableId] : null;
-  var home = droppables[draggable.descriptor.droppableId];
-  var newClientCenter = getClientBorderBoxCenter({
-    impact: impact,
-    draggable: draggable,
-    draggables: draggables,
-    afterCritical: afterCritical,
-    droppable: destination || home,
-    viewport: viewport
-  });
-  var offset = subtract(newClientCenter, draggable.client.borderBox.center);
-  return offset;
-});
-
-var getDropImpact = (function (_ref) {
-  var draggables = _ref.draggables,
-      reason = _ref.reason,
-      lastImpact = _ref.lastImpact,
-      home = _ref.home,
-      viewport = _ref.viewport,
-      onLiftImpact = _ref.onLiftImpact;
-
-  if (!lastImpact.at || reason !== 'DROP') {
-    var recomputedHomeImpact = recompute({
-      draggables: draggables,
-      impact: onLiftImpact,
-      destination: home,
-      viewport: viewport,
-      forceShouldAnimate: true
-    });
-    return {
-      impact: recomputedHomeImpact,
-      didDropInsideDroppable: false
-    };
-  }
-
-  if (lastImpact.at.type === 'REORDER') {
-    return {
-      impact: lastImpact,
-      didDropInsideDroppable: true
-    };
-  }
-
-  var withoutMovement = Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_3__["default"])({}, lastImpact, {
-    displaced: emptyGroups
-  });
-
-  return {
-    impact: withoutMovement,
-    didDropInsideDroppable: true
-  };
-});
-
-var drop$1 = (function (_ref) {
-  var getState = _ref.getState,
-      dispatch = _ref.dispatch;
-  return function (next) {
-    return function (action) {
-      if (action.type !== 'DROP') {
-        next(action);
-        return;
-      }
-
-      var state = getState();
-      var reason = action.payload.reason;
-
-      if (state.phase === 'COLLECTING') {
-        dispatch(dropPending({
-          reason: reason
-        }));
-        return;
-      }
-
-      if (state.phase === 'IDLE') {
-        return;
-      }
-
-      var isWaitingForDrop = state.phase === 'DROP_PENDING' && state.isWaiting;
-      !!isWaitingForDrop ?  true ? invariant(false, 'A DROP action occurred while DROP_PENDING and still waiting') : undefined : void 0;
-      !(state.phase === 'DRAGGING' || state.phase === 'DROP_PENDING') ?  true ? invariant(false, "Cannot drop in phase: " + state.phase) : undefined : void 0;
-      var critical = state.critical;
-      var dimensions = state.dimensions;
-      var draggable = dimensions.draggables[state.critical.draggable.id];
-
-      var _getDropImpact = getDropImpact({
-        reason: reason,
-        lastImpact: state.impact,
-        afterCritical: state.afterCritical,
-        onLiftImpact: state.onLiftImpact,
-        home: state.dimensions.droppables[state.critical.droppable.id],
-        viewport: state.viewport,
-        draggables: state.dimensions.draggables
-      }),
-          impact = _getDropImpact.impact,
-          didDropInsideDroppable = _getDropImpact.didDropInsideDroppable;
-
-      var destination = didDropInsideDroppable ? tryGetDestination(impact) : null;
-      var combine = didDropInsideDroppable ? tryGetCombine(impact) : null;
-      var source = {
-        index: critical.draggable.index,
-        droppableId: critical.droppable.id
-      };
-      var result = {
-        draggableId: draggable.descriptor.id,
-        type: draggable.descriptor.type,
-        source: source,
-        reason: reason,
-        mode: state.movementMode,
-        destination: destination,
-        combine: combine
-      };
-      var newHomeClientOffset = getNewHomeClientOffset({
-        impact: impact,
-        draggable: draggable,
-        dimensions: dimensions,
-        viewport: state.viewport,
-        afterCritical: state.afterCritical
-      });
-      var completed = {
-        critical: state.critical,
-        afterCritical: state.afterCritical,
-        result: result,
-        impact: impact
-      };
-      var isAnimationRequired = !isEqual(state.current.client.offset, newHomeClientOffset) || Boolean(result.combine);
-
-      if (!isAnimationRequired) {
-        dispatch(completeDrop({
-          completed: completed
-        }));
-        return;
-      }
-
-      var dropDuration = getDropDuration({
-        current: state.current.client.offset,
-        destination: newHomeClientOffset,
-        reason: reason
-      });
-      var args = {
-        newHomeClientOffset: newHomeClientOffset,
-        dropDuration: dropDuration,
-        completed: completed
-      };
-      dispatch(animateDrop(args));
-    };
-  };
-});
-
-var getWindowScroll = (function () {
-  return {
-    x: window.pageXOffset,
-    y: window.pageYOffset
-  };
-});
-
-function getWindowScrollBinding(update) {
-  return {
-    eventName: 'scroll',
-    options: {
-      passive: true,
-      capture: false
-    },
-    fn: function fn(event) {
-      if (event.target !== window && event.target !== window.document) {
-        return;
-      }
-
-      update();
-    }
+  ReactControlledValuePropTypes.checkPropTypes = function (tagName, props) {
+    checkPropTypes(propTypes, props, 'prop', tagName, ReactDebugCurrentFrame$3.getStackAddendum);
   };
 }
 
-function getScrollListener(_ref) {
-  var onWindowScroll = _ref.onWindowScroll;
-
-  function updateScroll() {
-    onWindowScroll(getWindowScroll());
-  }
-
-  var scheduled = Object(raf_schd__WEBPACK_IMPORTED_MODULE_10__["default"])(updateScroll);
-  var binding = getWindowScrollBinding(scheduled);
-  var unbind = noop;
-
-  function isActive() {
-    return unbind !== noop;
-  }
-
-  function start() {
-    !!isActive() ?  true ? invariant(false, 'Cannot start scroll listener when already active') : undefined : void 0;
-    unbind = bindEvents(window, [binding]);
-  }
-
-  function stop() {
-    !isActive() ?  true ? invariant(false, 'Cannot stop scroll listener when not active') : undefined : void 0;
-    scheduled.cancel();
-    unbind();
-    unbind = noop;
-  }
-
-  return {
-    start: start,
-    stop: stop,
-    isActive: isActive
-  };
-}
-
-var shouldEnd = function shouldEnd(action) {
-  return action.type === 'DROP_COMPLETE' || action.type === 'DROP_ANIMATE' || action.type === 'FLUSH';
-};
-
-var scrollListener = (function (store) {
-  var listener = getScrollListener({
-    onWindowScroll: function onWindowScroll(newScroll) {
-      store.dispatch(moveByWindowScroll({
-        newScroll: newScroll
-      }));
-    }
-  });
-  return function (next) {
-    return function (action) {
-      if (!listener.isActive() && action.type === 'INITIAL_PUBLISH') {
-        listener.start();
-      }
-
-      if (listener.isActive() && shouldEnd(action)) {
-        listener.stop();
-      }
-
-      next(action);
-    };
-  };
-});
-
-var getExpiringAnnounce = (function (announce) {
-  var wasCalled = false;
-  var isExpired = false;
-  var timeoutId = setTimeout(function () {
-    isExpired = true;
-  });
-
-  var result = function result(message) {
-    if (wasCalled) {
-       true ? warning('Announcement already made. Not making a second announcement') : undefined;
-      return;
-    }
-
-    if (isExpired) {
-       true ? warning("\n        Announcements cannot be made asynchronously.\n        Default message has already been announced.\n      ") : undefined;
-      return;
-    }
-
-    wasCalled = true;
-    announce(message);
-    clearTimeout(timeoutId);
-  };
-
-  result.wasCalled = function () {
-    return wasCalled;
-  };
-
-  return result;
-});
-
-var getAsyncMarshal = (function () {
-  var entries = [];
-
-  var execute = function execute(timerId) {
-    var index = findIndex(entries, function (item) {
-      return item.timerId === timerId;
-    });
-    !(index !== -1) ?  true ? invariant(false, 'Could not find timer') : undefined : void 0;
-
-    var _entries$splice = entries.splice(index, 1),
-        entry = _entries$splice[0];
-
-    entry.callback();
-  };
-
-  var add = function add(fn) {
-    var timerId = setTimeout(function () {
-      return execute(timerId);
-    });
-    var entry = {
-      timerId: timerId,
-      callback: fn
-    };
-    entries.push(entry);
-  };
-
-  var flush = function flush() {
-    if (!entries.length) {
-      return;
-    }
-
-    var shallow = [].concat(entries);
-    entries.length = 0;
-    shallow.forEach(function (entry) {
-      clearTimeout(entry.timerId);
-      entry.callback();
-    });
-  };
-
-  return {
-    add: add,
-    flush: flush
-  };
-});
-
-var areLocationsEqual = function areLocationsEqual(first, second) {
-  if (first == null && second == null) {
-    return true;
-  }
-
-  if (first == null || second == null) {
-    return false;
-  }
-
-  return first.droppableId === second.droppableId && first.index === second.index;
-};
-var isCombineEqual = function isCombineEqual(first, second) {
-  if (first == null && second == null) {
-    return true;
-  }
-
-  if (first == null || second == null) {
-    return false;
-  }
-
-  return first.draggableId === second.draggableId && first.droppableId === second.droppableId;
-};
-var isCriticalEqual = function isCriticalEqual(first, second) {
-  if (first === second) {
-    return true;
-  }
-
-  var isDraggableEqual = first.draggable.id === second.draggable.id && first.draggable.droppableId === second.draggable.droppableId && first.draggable.type === second.draggable.type && first.draggable.index === second.draggable.index;
-  var isDroppableEqual = first.droppable.id === second.droppable.id && first.droppable.type === second.droppable.type;
-  return isDraggableEqual && isDroppableEqual;
-};
-
-var withTimings = function withTimings(key, fn) {
-  start(key);
-  fn();
-  finish(key);
-};
-
-var getDragStart = function getDragStart(critical, mode) {
-  return {
-    draggableId: critical.draggable.id,
-    type: critical.droppable.type,
-    source: {
-      droppableId: critical.droppable.id,
-      index: critical.draggable.index
-    },
-    mode: mode
-  };
-};
-
-var execute = function execute(responder, data, announce, getDefaultMessage) {
-  if (!responder) {
-    announce(getDefaultMessage(data));
-    return;
-  }
-
-  var willExpire = getExpiringAnnounce(announce);
-  var provided = {
-    announce: willExpire
-  };
-  responder(data, provided);
-
-  if (!willExpire.wasCalled()) {
-    announce(getDefaultMessage(data));
-  }
-};
-
-var getPublisher = (function (getResponders, announce) {
-  var asyncMarshal = getAsyncMarshal();
-  var dragging = null;
-
-  var beforeStart = function beforeStart(critical, mode) {
-    !!dragging ?  true ? invariant(false, 'Cannot fire onBeforeDragStart as a drag start has already been published') : undefined : void 0;
-    withTimings('onBeforeDragStart', function () {
-      var fn = getResponders().onBeforeDragStart;
-
-      if (fn) {
-        fn(getDragStart(critical, mode));
-      }
-    });
-  };
-
-  var start = function start(critical, mode) {
-    !!dragging ?  true ? invariant(false, 'Cannot fire onBeforeDragStart as a drag start has already been published') : undefined : void 0;
-    var data = getDragStart(critical, mode);
-    dragging = {
-      mode: mode,
-      lastCritical: critical,
-      lastLocation: data.source,
-      lastCombine: null
-    };
-    asyncMarshal.add(function () {
-      withTimings('onDragStart', function () {
-        return execute(getResponders().onDragStart, data, announce, preset.onDragStart);
-      });
-    });
-  };
-
-  var update = function update(critical, impact) {
-    var location = tryGetDestination(impact);
-    var combine = tryGetCombine(impact);
-    !dragging ?  true ? invariant(false, 'Cannot fire onDragMove when onDragStart has not been called') : undefined : void 0;
-    var hasCriticalChanged = !isCriticalEqual(critical, dragging.lastCritical);
-
-    if (hasCriticalChanged) {
-      dragging.lastCritical = critical;
-    }
-
-    var hasLocationChanged = !areLocationsEqual(dragging.lastLocation, location);
-
-    if (hasLocationChanged) {
-      dragging.lastLocation = location;
-    }
-
-    var hasGroupingChanged = !isCombineEqual(dragging.lastCombine, combine);
-
-    if (hasGroupingChanged) {
-      dragging.lastCombine = combine;
-    }
-
-    if (!hasCriticalChanged && !hasLocationChanged && !hasGroupingChanged) {
-      return;
-    }
-
-    var data = Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_3__["default"])({}, getDragStart(critical, dragging.mode), {
-      combine: combine,
-      destination: location
-    });
-
-    asyncMarshal.add(function () {
-      withTimings('onDragUpdate', function () {
-        return execute(getResponders().onDragUpdate, data, announce, preset.onDragUpdate);
-      });
-    });
-  };
-
-  var flush = function flush() {
-    !dragging ?  true ? invariant(false, 'Can only flush responders while dragging') : undefined : void 0;
-    asyncMarshal.flush();
-  };
-
-  var drop = function drop(result) {
-    !dragging ?  true ? invariant(false, 'Cannot fire onDragEnd when there is no matching onDragStart') : undefined : void 0;
-    dragging = null;
-    withTimings('onDragEnd', function () {
-      return execute(getResponders().onDragEnd, result, announce, preset.onDragEnd);
-    });
-  };
-
-  var abort = function abort() {
-    if (!dragging) {
-      return;
-    }
-
-    var result = Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_3__["default"])({}, getDragStart(dragging.lastCritical, dragging.mode), {
-      combine: null,
-      destination: null,
-      reason: 'CANCEL'
-    });
-
-    drop(result);
-  };
-
-  return {
-    beforeStart: beforeStart,
-    start: start,
-    update: update,
-    flush: flush,
-    drop: drop,
-    abort: abort
-  };
-});
-
-var responders = (function (getResponders, announce) {
-  var publisher = getPublisher(getResponders, announce);
-  return function (store) {
-    return function (next) {
-      return function (action) {
-        if (action.type === 'INITIAL_PUBLISH') {
-          var critical = action.payload.critical;
-          publisher.beforeStart(critical, action.payload.movementMode);
-          next(action);
-          publisher.start(critical, action.payload.movementMode);
-          return;
-        }
-
-        if (action.type === 'DROP_COMPLETE') {
-          var result = action.payload.completed.result;
-          publisher.flush();
-          next(action);
-          publisher.drop(result);
-          return;
-        }
-
-        next(action);
-
-        if (action.type === 'FLUSH') {
-          publisher.abort();
-          return;
-        }
-
-        var state = store.getState();
-
-        if (state.phase === 'DRAGGING') {
-          publisher.update(state.critical, state.impact);
-        }
-      };
-    };
-  };
-});
-
-var dropAnimationFinish = (function (store) {
-  return function (next) {
-    return function (action) {
-      if (action.type !== 'DROP_ANIMATION_FINISHED') {
-        next(action);
-        return;
-      }
-
-      var state = store.getState();
-      !(state.phase === 'DROP_ANIMATING') ?  true ? invariant(false, 'Cannot finish a drop animating when no drop is occurring') : undefined : void 0;
-      store.dispatch(completeDrop({
-        completed: state.completed
-      }));
-    };
-  };
-});
-
-var dropAnimationFlushOnScroll = (function (store) {
-  var unbind = null;
-  var frameId = null;
-
-  function clear() {
-    if (frameId) {
-      cancelAnimationFrame(frameId);
-      frameId = null;
-    }
-
-    if (unbind) {
-      unbind();
-      unbind = null;
-    }
-  }
-
-  return function (next) {
-    return function (action) {
-      if (action.type === 'FLUSH' || action.type === 'DROP_COMPLETE' || action.type === 'DROP_ANIMATION_FINISHED') {
-        clear();
-      }
-
-      next(action);
-
-      if (action.type !== 'DROP_ANIMATE') {
-        return;
-      }
-
-      var binding = {
-        eventName: 'scroll',
-        options: {
-          capture: true,
-          passive: false,
-          once: true
-        },
-        fn: function flushDropAnimation() {
-          var state = store.getState();
-
-          if (state.phase === 'DROP_ANIMATING') {
-            store.dispatch(dropAnimationFinished());
-          }
-        }
-      };
-      frameId = requestAnimationFrame(function () {
-        frameId = null;
-        unbind = bindEvents(window, [binding]);
-      });
-    };
-  };
-});
-
-var dimensionMarshalStopper = (function (marshal) {
-  return function () {
-    return function (next) {
-      return function (action) {
-        if (action.type === 'DROP_COMPLETE' || action.type === 'FLUSH' || action.type === 'DROP_ANIMATE') {
-          marshal.stopPublishing();
-        }
-
-        next(action);
-      };
-    };
-  };
-});
-
-var focus = (function (marshal) {
-  var isWatching = false;
-  return function () {
-    return function (next) {
-      return function (action) {
-        if (action.type === 'INITIAL_PUBLISH') {
-          isWatching = true;
-          marshal.tryRecordFocus(action.payload.critical.draggable.id);
-          next(action);
-          marshal.tryRestoreFocusRecorded();
-          return;
-        }
-
-        next(action);
-
-        if (!isWatching) {
-          return;
-        }
-
-        if (action.type === 'FLUSH') {
-          isWatching = false;
-          marshal.tryRestoreFocusRecorded();
-          return;
-        }
-
-        if (action.type === 'DROP_COMPLETE') {
-          isWatching = false;
-          var result = action.payload.completed.result;
-
-          if (result.combine) {
-            marshal.tryShiftRecord(result.draggableId, result.combine.draggableId);
-          }
-
-          marshal.tryRestoreFocusRecorded();
-        }
-      };
-    };
-  };
-});
-
-var shouldStop = function shouldStop(action) {
-  return action.type === 'DROP_COMPLETE' || action.type === 'DROP_ANIMATE' || action.type === 'FLUSH';
-};
-
-var autoScroll = (function (autoScroller) {
-  return function (store) {
-    return function (next) {
-      return function (action) {
-        if (shouldStop(action)) {
-          autoScroller.stop();
-          next(action);
-          return;
-        }
-
-        if (action.type === 'INITIAL_PUBLISH') {
-          next(action);
-          var state = store.getState();
-          !(state.phase === 'DRAGGING') ?  true ? invariant(false, 'Expected phase to be DRAGGING after INITIAL_PUBLISH') : undefined : void 0;
-          autoScroller.start(state);
-          return;
-        }
-
-        next(action);
-        autoScroller.scroll(store.getState());
-      };
-    };
-  };
-});
-
-var pendingDrop = (function (store) {
-  return function (next) {
-    return function (action) {
-      next(action);
-
-      if (action.type !== 'PUBLISH_WHILE_DRAGGING') {
-        return;
-      }
-
-      var postActionState = store.getState();
-
-      if (postActionState.phase !== 'DROP_PENDING') {
-        return;
-      }
-
-      if (postActionState.isWaiting) {
-        return;
-      }
-
-      store.dispatch(drop({
-        reason: postActionState.reason
-      }));
-    };
-  };
-});
-
-var composeEnhancers =  true && typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : redux__WEBPACK_IMPORTED_MODULE_4__["compose"];
-var createStore = (function (_ref) {
-  var dimensionMarshal = _ref.dimensionMarshal,
-      focusMarshal = _ref.focusMarshal,
-      styleMarshal = _ref.styleMarshal,
-      getResponders = _ref.getResponders,
-      announce = _ref.announce,
-      autoScroller = _ref.autoScroller;
-  return Object(redux__WEBPACK_IMPORTED_MODULE_4__["createStore"])(reducer, composeEnhancers(Object(redux__WEBPACK_IMPORTED_MODULE_4__["applyMiddleware"])(style(styleMarshal), dimensionMarshalStopper(dimensionMarshal), lift$1(dimensionMarshal), drop$1, dropAnimationFinish, dropAnimationFlushOnScroll, pendingDrop, autoScroll(autoScroller), scrollListener, focus(focusMarshal), responders(getResponders, announce))));
-});
-
-var clean$1 = function clean() {
-  return {
-    additions: {},
-    removals: {},
-    modified: {}
-  };
-};
-
-var timingKey = 'Publish collection from DOM';
-function createPublisher(_ref) {
-  var registry = _ref.registry,
-      callbacks = _ref.callbacks;
-  var staging = clean$1();
-  var frameId = null;
-
-  var collect = function collect() {
-    if (frameId) {
-      return;
-    }
-
-    callbacks.collectionStarting();
-    frameId = requestAnimationFrame(function () {
-      frameId = null;
-      start(timingKey);
-      var _staging = staging,
-          additions = _staging.additions,
-          removals = _staging.removals,
-          modified = _staging.modified;
-
-      var added = _babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_9___default()(additions).map(function (id) {
-        return registry.draggable.getById(id).getDimension(origin);
-      }).sort(function (a, b) {
-        return a.descriptor.index - b.descriptor.index;
-      });
-
-      var updated = _babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_9___default()(modified).map(function (id) {
-        var entry = registry.droppable.getById(id);
-        var scroll = entry.callbacks.getScrollWhileDragging();
-        return {
-          droppableId: id,
-          scroll: scroll
-        };
-      });
-
-      var result = {
-        additions: added,
-        removals: _babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_9___default()(removals),
-        modified: updated
-      };
-      staging = clean$1();
-      finish(timingKey);
-      callbacks.publish(result);
-    });
-  };
-
-  var add = function add(entry) {
-    var id = entry.descriptor.id;
-    staging.additions[id] = entry;
-    staging.modified[entry.descriptor.droppableId] = true;
-
-    if (staging.removals[id]) {
-      delete staging.removals[id];
-    }
-
-    collect();
-  };
-
-  var remove = function remove(entry) {
-    var descriptor = entry.descriptor;
-    staging.removals[descriptor.id] = true;
-    staging.modified[descriptor.droppableId] = true;
-
-    if (staging.additions[descriptor.id]) {
-      delete staging.additions[descriptor.id];
-    }
-
-    collect();
-  };
-
-  var stop = function stop() {
-    if (!frameId) {
-      return;
-    }
-
-    cancelAnimationFrame(frameId);
-    frameId = null;
-    staging = clean$1();
-  };
-
-  return {
-    add: add,
-    remove: remove,
-    stop: stop
-  };
-}
-
-var getMaxScroll = (function (_ref) {
-  var scrollHeight = _ref.scrollHeight,
-      scrollWidth = _ref.scrollWidth,
-      height = _ref.height,
-      width = _ref.width;
-  var maxScroll = subtract({
-    x: scrollWidth,
-    y: scrollHeight
-  }, {
-    x: width,
-    y: height
-  });
-  var adjustedMaxScroll = {
-    x: Math.max(0, maxScroll.x),
-    y: Math.max(0, maxScroll.y)
-  };
-  return adjustedMaxScroll;
-});
-
-var getDocumentElement = (function () {
-  var doc = document.documentElement;
-  !doc ?  true ? invariant(false, 'Cannot find document.documentElement') : undefined : void 0;
-  return doc;
-});
-
-var getMaxWindowScroll = (function () {
-  var doc = getDocumentElement();
-  var maxScroll = getMaxScroll({
-    scrollHeight: doc.scrollHeight,
-    scrollWidth: doc.scrollWidth,
-    width: doc.clientWidth,
-    height: doc.clientHeight
-  });
-  return maxScroll;
-});
-
-var getViewport = (function () {
-  var scroll = getWindowScroll();
-  var maxScroll = getMaxWindowScroll();
-  var top = scroll.y;
-  var left = scroll.x;
-  var doc = getDocumentElement();
-  var width = doc.clientWidth;
-  var height = doc.clientHeight;
-  var right = left + width;
-  var bottom = top + height;
-  var frame = Object(css_box_model__WEBPACK_IMPORTED_MODULE_6__["getRect"])({
-    top: top,
-    left: left,
-    right: right,
-    bottom: bottom
-  });
-  var viewport = {
-    frame: frame,
-    scroll: {
-      initial: scroll,
-      current: scroll,
-      max: maxScroll,
-      diff: {
-        value: origin,
-        displacement: origin
-      }
-    }
-  };
-  return viewport;
-});
-
-var getInitialPublish = (function (_ref) {
-  var critical = _ref.critical,
-      scrollOptions = _ref.scrollOptions,
-      registry = _ref.registry;
-  var timingKey = 'Initial collection from DOM';
-  start(timingKey);
-  var viewport = getViewport();
-  var windowScroll = viewport.scroll.current;
-  var home = critical.droppable;
-  var droppables = registry.droppable.getAllByType(home.type).map(function (entry) {
-    return entry.callbacks.getDimensionAndWatchScroll(windowScroll, scrollOptions);
-  });
-  var draggables = registry.draggable.getAllByType(critical.draggable.type).map(function (entry) {
-    return entry.getDimension(windowScroll);
-  });
-  var dimensions = {
-    draggables: toDraggableMap(draggables),
-    droppables: toDroppableMap(droppables)
-  };
-  finish(timingKey);
-  var result = {
-    dimensions: dimensions,
-    critical: critical,
-    viewport: viewport
-  };
-  return result;
-});
-
-function shouldPublishUpdate(registry, dragging, entry) {
-  if (entry.descriptor.id === dragging.id) {
-    return false;
-  }
-
-  if (entry.descriptor.type !== dragging.type) {
-    return false;
-  }
-
-  var home = registry.droppable.getById(entry.descriptor.droppableId);
-
-  if (home.descriptor.mode !== 'virtual') {
-     true ? warning("\n      You are attempting to add or remove a Draggable [id: " + entry.descriptor.id + "]\n      while a drag is occurring. This is only supported for virtual lists.\n\n      See https://github.com/atlassian/react-beautiful-dnd/blob/master/docs/patterns/virtual-lists.md\n    ") : undefined;
-    return false;
-  }
-
-  return true;
-}
-
-var createDimensionMarshal = (function (registry, callbacks) {
-  var collection = null;
-  var publisher = createPublisher({
-    callbacks: {
-      publish: callbacks.publishWhileDragging,
-      collectionStarting: callbacks.collectionStarting
-    },
-    registry: registry
-  });
-
-  var updateDroppableIsEnabled = function updateDroppableIsEnabled(id, isEnabled) {
-    !registry.droppable.exists(id) ?  true ? invariant(false, "Cannot update is enabled flag of Droppable " + id + " as it is not registered") : undefined : void 0;
-
-    if (!collection) {
-      return;
-    }
-
-    callbacks.updateDroppableIsEnabled({
-      id: id,
-      isEnabled: isEnabled
-    });
-  };
-
-  var updateDroppableIsCombineEnabled = function updateDroppableIsCombineEnabled(id, isCombineEnabled) {
-    if (!collection) {
-      return;
-    }
-
-    !registry.droppable.exists(id) ?  true ? invariant(false, "Cannot update isCombineEnabled flag of Droppable " + id + " as it is not registered") : undefined : void 0;
-    callbacks.updateDroppableIsCombineEnabled({
-      id: id,
-      isCombineEnabled: isCombineEnabled
-    });
-  };
-
-  var updateDroppableScroll = function updateDroppableScroll(id, newScroll) {
-    if (!collection) {
-      return;
-    }
-
-    !registry.droppable.exists(id) ?  true ? invariant(false, "Cannot update the scroll on Droppable " + id + " as it is not registered") : undefined : void 0;
-    callbacks.updateDroppableScroll({
-      id: id,
-      newScroll: newScroll
-    });
-  };
-
-  var scrollDroppable = function scrollDroppable(id, change) {
-    if (!collection) {
-      return;
-    }
-
-    registry.droppable.getById(id).callbacks.scroll(change);
-  };
-
-  var stopPublishing = function stopPublishing() {
-    if (!collection) {
-      return;
-    }
-
-    publisher.stop();
-    var home = collection.critical.droppable;
-    registry.droppable.getAllByType(home.type).forEach(function (entry) {
-      return entry.callbacks.dragStopped();
-    });
-    collection.unsubscribe();
-    collection = null;
-  };
-
-  var subscriber = function subscriber(event) {
-    !collection ?  true ? invariant(false, 'Should only be subscribed when a collection is occurring') : undefined : void 0;
-    var dragging = collection.critical.draggable;
-
-    if (event.type === 'ADDITION') {
-      if (shouldPublishUpdate(registry, dragging, event.value)) {
-        publisher.add(event.value);
-      }
-    }
-
-    if (event.type === 'REMOVAL') {
-      if (shouldPublishUpdate(registry, dragging, event.value)) {
-        publisher.remove(event.value);
-      }
-    }
-  };
-
-  var startPublishing = function startPublishing(request) {
-    !!collection ?  true ? invariant(false, 'Cannot start capturing critical dimensions as there is already a collection') : undefined : void 0;
-    var entry = registry.draggable.getById(request.draggableId);
-    var home = registry.droppable.getById(entry.descriptor.droppableId);
-    var critical = {
-      draggable: entry.descriptor,
-      droppable: home.descriptor
-    };
-    var unsubscribe = registry.subscribe(subscriber);
-    collection = {
-      critical: critical,
-      unsubscribe: unsubscribe
-    };
-    return getInitialPublish({
-      critical: critical,
-      registry: registry,
-      scrollOptions: request.scrollOptions
-    });
-  };
-
-  var marshal = {
-    updateDroppableIsEnabled: updateDroppableIsEnabled,
-    updateDroppableIsCombineEnabled: updateDroppableIsCombineEnabled,
-    scrollDroppable: scrollDroppable,
-    updateDroppableScroll: updateDroppableScroll,
-    startPublishing: startPublishing,
-    stopPublishing: stopPublishing
-  };
-  return marshal;
-});
-
-var canStartDrag = (function (state, id) {
-  if (state.phase === 'IDLE') {
-    return true;
-  }
-
-  if (state.phase !== 'DROP_ANIMATING') {
-    return false;
-  }
-
-  if (state.completed.result.draggableId === id) {
-    return false;
-  }
-
-  return state.completed.result.reason === 'DROP';
-});
-
-var scrollWindow = (function (change) {
-  window.scrollBy(change.x, change.y);
-});
-
-var getScrollableDroppables = Object(memoize_one__WEBPACK_IMPORTED_MODULE_7__["default"])(function (droppables) {
-  return toDroppableList(droppables).filter(function (droppable) {
-    if (!droppable.isEnabled) {
-      return false;
-    }
-
-    if (!droppable.frame) {
-      return false;
-    }
-
-    return true;
-  });
-});
-
-var getScrollableDroppableOver = function getScrollableDroppableOver(target, droppables) {
-  var maybe = find(getScrollableDroppables(droppables), function (droppable) {
-    !droppable.frame ?  true ? invariant(false, 'Invalid result') : undefined : void 0;
-    return isPositionInFrame(droppable.frame.pageMarginBox)(target);
-  });
-  return maybe;
-};
-
-var getBestScrollableDroppable = (function (_ref) {
-  var center = _ref.center,
-      destination = _ref.destination,
-      droppables = _ref.droppables;
-
-  if (destination) {
-    var _dimension = droppables[destination];
-
-    if (!_dimension.frame) {
-      return null;
-    }
-
-    return _dimension;
-  }
-
-  var dimension = getScrollableDroppableOver(center, droppables);
-  return dimension;
-});
-
-var config = {
-  startFromPercentage: 0.25,
-  maxScrollAtPercentage: 0.05,
-  maxPixelScroll: 28,
-  ease: function ease(percentage) {
-    return Math.pow(percentage, 2);
-  },
-  durationDampening: {
-    stopDampeningAt: 1200,
-    accelerateAt: 360
-  }
-};
-
-var getDistanceThresholds = (function (container, axis) {
-  var startScrollingFrom = container[axis.size] * config.startFromPercentage;
-  var maxScrollValueAt = container[axis.size] * config.maxScrollAtPercentage;
-  var thresholds = {
-    startScrollingFrom: startScrollingFrom,
-    maxScrollValueAt: maxScrollValueAt
-  };
-  return thresholds;
-});
-
-var getPercentage = (function (_ref) {
-  var startOfRange = _ref.startOfRange,
-      endOfRange = _ref.endOfRange,
-      current = _ref.current;
-  var range = endOfRange - startOfRange;
-
-  if (range === 0) {
-     true ? warning("\n      Detected distance range of 0 in the fluid auto scroller\n      This is unexpected and would cause a divide by 0 issue.\n      Not allowing an auto scroll\n    ") : undefined;
-    return 0;
-  }
-
-  var currentInRange = current - startOfRange;
-  var percentage = currentInRange / range;
-  return percentage;
-});
-
-var minScroll = 1;
-
-var getValueFromDistance = (function (distanceToEdge, thresholds) {
-  if (distanceToEdge > thresholds.startScrollingFrom) {
-    return 0;
-  }
-
-  if (distanceToEdge <= thresholds.maxScrollValueAt) {
-    return config.maxPixelScroll;
-  }
-
-  if (distanceToEdge === thresholds.startScrollingFrom) {
-    return minScroll;
-  }
-
-  var percentageFromMaxScrollValueAt = getPercentage({
-    startOfRange: thresholds.maxScrollValueAt,
-    endOfRange: thresholds.startScrollingFrom,
-    current: distanceToEdge
-  });
-  var percentageFromStartScrollingFrom = 1 - percentageFromMaxScrollValueAt;
-  var scroll = config.maxPixelScroll * config.ease(percentageFromStartScrollingFrom);
-  return Math.ceil(scroll);
-});
-
-var accelerateAt = config.durationDampening.accelerateAt;
-var stopAt = config.durationDampening.stopDampeningAt;
-var dampenValueByTime = (function (proposedScroll, dragStartTime) {
-  var startOfRange = dragStartTime;
-  var endOfRange = stopAt;
-
-  var now = _babel_runtime_corejs2_core_js_date_now__WEBPACK_IMPORTED_MODULE_11___default()();
-
-  var runTime = now - startOfRange;
-
-  if (runTime >= stopAt) {
-    return proposedScroll;
-  }
-
-  if (runTime < accelerateAt) {
-    return minScroll;
-  }
-
-  var betweenAccelerateAtAndStopAtPercentage = getPercentage({
-    startOfRange: accelerateAt,
-    endOfRange: endOfRange,
-    current: runTime
-  });
-  var scroll = proposedScroll * config.ease(betweenAccelerateAtAndStopAtPercentage);
-  return Math.ceil(scroll);
-});
-
-var getValue = (function (_ref) {
-  var distanceToEdge = _ref.distanceToEdge,
-      thresholds = _ref.thresholds,
-      dragStartTime = _ref.dragStartTime,
-      shouldUseTimeDampening = _ref.shouldUseTimeDampening;
-  var scroll = getValueFromDistance(distanceToEdge, thresholds);
-
-  if (scroll === 0) {
-    return 0;
-  }
-
-  if (!shouldUseTimeDampening) {
-    return scroll;
-  }
-
-  return Math.max(dampenValueByTime(scroll, dragStartTime), minScroll);
-});
-
-var getScrollOnAxis = (function (_ref) {
-  var container = _ref.container,
-      distanceToEdges = _ref.distanceToEdges,
-      dragStartTime = _ref.dragStartTime,
-      axis = _ref.axis,
-      shouldUseTimeDampening = _ref.shouldUseTimeDampening;
-  var thresholds = getDistanceThresholds(container, axis);
-  var isCloserToEnd = distanceToEdges[axis.end] < distanceToEdges[axis.start];
-
-  if (isCloserToEnd) {
-    return getValue({
-      distanceToEdge: distanceToEdges[axis.end],
-      thresholds: thresholds,
-      dragStartTime: dragStartTime,
-      shouldUseTimeDampening: shouldUseTimeDampening
-    });
-  }
-
-  return -1 * getValue({
-    distanceToEdge: distanceToEdges[axis.start],
-    thresholds: thresholds,
-    dragStartTime: dragStartTime,
-    shouldUseTimeDampening: shouldUseTimeDampening
-  });
-});
-
-var adjustForSizeLimits = (function (_ref) {
-  var container = _ref.container,
-      subject = _ref.subject,
-      proposedScroll = _ref.proposedScroll;
-  var isTooBigVertically = subject.height > container.height;
-  var isTooBigHorizontally = subject.width > container.width;
-
-  if (!isTooBigHorizontally && !isTooBigVertically) {
-    return proposedScroll;
-  }
-
-  if (isTooBigHorizontally && isTooBigVertically) {
-    return null;
-  }
-
-  return {
-    x: isTooBigHorizontally ? 0 : proposedScroll.x,
-    y: isTooBigVertically ? 0 : proposedScroll.y
-  };
-});
-
-var clean$2 = apply(function (value) {
-  return value === 0 ? 0 : value;
-});
-var getScroll = (function (_ref) {
-  var dragStartTime = _ref.dragStartTime,
-      container = _ref.container,
-      subject = _ref.subject,
-      center = _ref.center,
-      shouldUseTimeDampening = _ref.shouldUseTimeDampening;
-  var distanceToEdges = {
-    top: center.y - container.top,
-    right: container.right - center.x,
-    bottom: container.bottom - center.y,
-    left: center.x - container.left
-  };
-  var y = getScrollOnAxis({
-    container: container,
-    distanceToEdges: distanceToEdges,
-    dragStartTime: dragStartTime,
-    axis: vertical,
-    shouldUseTimeDampening: shouldUseTimeDampening
-  });
-  var x = getScrollOnAxis({
-    container: container,
-    distanceToEdges: distanceToEdges,
-    dragStartTime: dragStartTime,
-    axis: horizontal,
-    shouldUseTimeDampening: shouldUseTimeDampening
-  });
-  var required = clean$2({
-    x: x,
-    y: y
-  });
-
-  if (isEqual(required, origin)) {
-    return null;
-  }
-
-  var limited = adjustForSizeLimits({
-    container: container,
-    subject: subject,
-    proposedScroll: required
-  });
-
-  if (!limited) {
-    return null;
-  }
-
-  return isEqual(limited, origin) ? null : limited;
-});
-
-var smallestSigned = apply(function (value) {
-  if (value === 0) {
-    return 0;
-  }
-
-  return value > 0 ? 1 : -1;
-});
-var getOverlap = function () {
-  var getRemainder = function getRemainder(target, max) {
-    if (target < 0) {
-      return target;
-    }
-
-    if (target > max) {
-      return target - max;
-    }
-
-    return 0;
-  };
-
-  return function (_ref) {
-    var current = _ref.current,
-        max = _ref.max,
-        change = _ref.change;
-    var targetScroll = add(current, change);
-    var overlap = {
-      x: getRemainder(targetScroll.x, max.x),
-      y: getRemainder(targetScroll.y, max.y)
-    };
-
-    if (isEqual(overlap, origin)) {
-      return null;
-    }
-
-    return overlap;
-  };
-}();
-var canPartiallyScroll = function canPartiallyScroll(_ref2) {
-  var rawMax = _ref2.max,
-      current = _ref2.current,
-      change = _ref2.change;
-  var max = {
-    x: Math.max(current.x, rawMax.x),
-    y: Math.max(current.y, rawMax.y)
-  };
-  var smallestChange = smallestSigned(change);
-  var overlap = getOverlap({
-    max: max,
-    current: current,
-    change: smallestChange
-  });
-
-  if (!overlap) {
-    return true;
-  }
-
-  if (smallestChange.x !== 0 && overlap.x === 0) {
-    return true;
-  }
-
-  if (smallestChange.y !== 0 && overlap.y === 0) {
-    return true;
-  }
-
-  return false;
-};
-var canScrollWindow = function canScrollWindow(viewport, change) {
-  return canPartiallyScroll({
-    current: viewport.scroll.current,
-    max: viewport.scroll.max,
-    change: change
-  });
-};
-var getWindowOverlap = function getWindowOverlap(viewport, change) {
-  if (!canScrollWindow(viewport, change)) {
-    return null;
-  }
-
-  var max = viewport.scroll.max;
-  var current = viewport.scroll.current;
-  return getOverlap({
-    current: current,
-    max: max,
-    change: change
-  });
-};
-var canScrollDroppable = function canScrollDroppable(droppable, change) {
-  var frame = droppable.frame;
-
-  if (!frame) {
-    return false;
-  }
-
-  return canPartiallyScroll({
-    current: frame.scroll.current,
-    max: frame.scroll.max,
-    change: change
-  });
-};
-var getDroppableOverlap = function getDroppableOverlap(droppable, change) {
-  var frame = droppable.frame;
-
-  if (!frame) {
-    return null;
-  }
-
-  if (!canScrollDroppable(droppable, change)) {
-    return null;
-  }
-
-  return getOverlap({
-    current: frame.scroll.current,
-    max: frame.scroll.max,
-    change: change
-  });
-};
-
-var getWindowScrollChange = (function (_ref) {
-  var viewport = _ref.viewport,
-      subject = _ref.subject,
-      center = _ref.center,
-      dragStartTime = _ref.dragStartTime,
-      shouldUseTimeDampening = _ref.shouldUseTimeDampening;
-  var scroll = getScroll({
-    dragStartTime: dragStartTime,
-    container: viewport.frame,
-    subject: subject,
-    center: center,
-    shouldUseTimeDampening: shouldUseTimeDampening
-  });
-  return scroll && canScrollWindow(viewport, scroll) ? scroll : null;
-});
-
-var getDroppableScrollChange = (function (_ref) {
-  var droppable = _ref.droppable,
-      subject = _ref.subject,
-      center = _ref.center,
-      dragStartTime = _ref.dragStartTime,
-      shouldUseTimeDampening = _ref.shouldUseTimeDampening;
-  var frame = droppable.frame;
-
-  if (!frame) {
-    return null;
-  }
-
-  var scroll = getScroll({
-    dragStartTime: dragStartTime,
-    container: frame.pageMarginBox,
-    subject: subject,
-    center: center,
-    shouldUseTimeDampening: shouldUseTimeDampening
-  });
-  return scroll && canScrollDroppable(droppable, scroll) ? scroll : null;
-});
-
-var scroll$1 = (function (_ref) {
-  var state = _ref.state,
-      dragStartTime = _ref.dragStartTime,
-      shouldUseTimeDampening = _ref.shouldUseTimeDampening,
-      scrollWindow = _ref.scrollWindow,
-      scrollDroppable = _ref.scrollDroppable;
-  var center = state.current.page.borderBoxCenter;
-  var draggable = state.dimensions.draggables[state.critical.draggable.id];
-  var subject = draggable.page.marginBox;
-
-  if (state.isWindowScrollAllowed) {
-    var viewport = state.viewport;
-
-    var _change = getWindowScrollChange({
-      dragStartTime: dragStartTime,
-      viewport: viewport,
-      subject: subject,
-      center: center,
-      shouldUseTimeDampening: shouldUseTimeDampening
-    });
-
-    if (_change) {
-      scrollWindow(_change);
-      return;
-    }
-  }
-
-  var droppable = getBestScrollableDroppable({
-    center: center,
-    destination: whatIsDraggedOver(state.impact),
-    droppables: state.dimensions.droppables
-  });
-
-  if (!droppable) {
-    return;
-  }
-
-  var change = getDroppableScrollChange({
-    dragStartTime: dragStartTime,
-    droppable: droppable,
-    subject: subject,
-    center: center,
-    shouldUseTimeDampening: shouldUseTimeDampening
-  });
-
-  if (change) {
-    scrollDroppable(droppable.descriptor.id, change);
-  }
-});
-
-var createFluidScroller = (function (_ref) {
-  var scrollWindow = _ref.scrollWindow,
-      scrollDroppable = _ref.scrollDroppable;
-  var scheduleWindowScroll = Object(raf_schd__WEBPACK_IMPORTED_MODULE_10__["default"])(scrollWindow);
-  var scheduleDroppableScroll = Object(raf_schd__WEBPACK_IMPORTED_MODULE_10__["default"])(scrollDroppable);
-  var dragging = null;
-
-  var tryScroll = function tryScroll(state) {
-    !dragging ?  true ? invariant(false, 'Cannot fluid scroll if not dragging') : undefined : void 0;
-    var _dragging = dragging,
-        shouldUseTimeDampening = _dragging.shouldUseTimeDampening,
-        dragStartTime = _dragging.dragStartTime;
-    scroll$1({
-      state: state,
-      scrollWindow: scheduleWindowScroll,
-      scrollDroppable: scheduleDroppableScroll,
-      dragStartTime: dragStartTime,
-      shouldUseTimeDampening: shouldUseTimeDampening
-    });
-  };
-
-  var start$1 = function start$1(state) {
-    start('starting fluid scroller');
-    !!dragging ?  true ? invariant(false, 'Cannot start auto scrolling when already started') : undefined : void 0;
-
-    var dragStartTime = _babel_runtime_corejs2_core_js_date_now__WEBPACK_IMPORTED_MODULE_11___default()();
-
-    var wasScrollNeeded = false;
-
-    var fakeScrollCallback = function fakeScrollCallback() {
-      wasScrollNeeded = true;
-    };
-
-    scroll$1({
-      state: state,
-      dragStartTime: 0,
-      shouldUseTimeDampening: false,
-      scrollWindow: fakeScrollCallback,
-      scrollDroppable: fakeScrollCallback
-    });
-    dragging = {
-      dragStartTime: dragStartTime,
-      shouldUseTimeDampening: wasScrollNeeded
-    };
-    finish('starting fluid scroller');
-
-    if (wasScrollNeeded) {
-      tryScroll(state);
-    }
-  };
-
-  var stop = function stop() {
-    if (!dragging) {
-      return;
-    }
-
-    scheduleWindowScroll.cancel();
-    scheduleDroppableScroll.cancel();
-    dragging = null;
-  };
-
-  return {
-    start: start$1,
-    stop: stop,
-    scroll: tryScroll
-  };
-});
-
-var createJumpScroller = (function (_ref) {
-  var move = _ref.move,
-      scrollDroppable = _ref.scrollDroppable,
-      scrollWindow = _ref.scrollWindow;
-
-  var moveByOffset = function moveByOffset(state, offset) {
-    var client = add(state.current.client.selection, offset);
-    move({
-      client: client
-    });
-  };
-
-  var scrollDroppableAsMuchAsItCan = function scrollDroppableAsMuchAsItCan(droppable, change) {
-    if (!canScrollDroppable(droppable, change)) {
-      return change;
-    }
-
-    var overlap = getDroppableOverlap(droppable, change);
-
-    if (!overlap) {
-      scrollDroppable(droppable.descriptor.id, change);
-      return null;
-    }
-
-    var whatTheDroppableCanScroll = subtract(change, overlap);
-    scrollDroppable(droppable.descriptor.id, whatTheDroppableCanScroll);
-    var remainder = subtract(change, whatTheDroppableCanScroll);
-    return remainder;
-  };
-
-  var scrollWindowAsMuchAsItCan = function scrollWindowAsMuchAsItCan(isWindowScrollAllowed, viewport, change) {
-    if (!isWindowScrollAllowed) {
-      return change;
-    }
-
-    if (!canScrollWindow(viewport, change)) {
-      return change;
-    }
-
-    var overlap = getWindowOverlap(viewport, change);
-
-    if (!overlap) {
-      scrollWindow(change);
-      return null;
-    }
-
-    var whatTheWindowCanScroll = subtract(change, overlap);
-    scrollWindow(whatTheWindowCanScroll);
-    var remainder = subtract(change, whatTheWindowCanScroll);
-    return remainder;
-  };
-
-  var jumpScroller = function jumpScroller(state) {
-    var request = state.scrollJumpRequest;
-
-    if (!request) {
-      return;
-    }
-
-    var destination = whatIsDraggedOver(state.impact);
-    !destination ?  true ? invariant(false, 'Cannot perform a jump scroll when there is no destination') : undefined : void 0;
-    var droppableRemainder = scrollDroppableAsMuchAsItCan(state.dimensions.droppables[destination], request);
-
-    if (!droppableRemainder) {
-      return;
-    }
-
-    var viewport = state.viewport;
-    var windowRemainder = scrollWindowAsMuchAsItCan(state.isWindowScrollAllowed, viewport, droppableRemainder);
-
-    if (!windowRemainder) {
-      return;
-    }
-
-    moveByOffset(state, windowRemainder);
-  };
-
-  return jumpScroller;
-});
-
-var createAutoScroller = (function (_ref) {
-  var scrollDroppable = _ref.scrollDroppable,
-      scrollWindow = _ref.scrollWindow,
-      move = _ref.move;
-  var fluidScroller = createFluidScroller({
-    scrollWindow: scrollWindow,
-    scrollDroppable: scrollDroppable
-  });
-  var jumpScroll = createJumpScroller({
-    move: move,
-    scrollWindow: scrollWindow,
-    scrollDroppable: scrollDroppable
-  });
-
-  var scroll = function scroll(state) {
-    if (state.phase !== 'DRAGGING') {
-      return;
-    }
-
-    if (state.movementMode === 'FLUID') {
-      fluidScroller.scroll(state);
-      return;
-    }
-
-    if (!state.scrollJumpRequest) {
-      return;
-    }
-
-    jumpScroll(state);
-  };
-
-  var scroller = {
-    scroll: scroll,
-    start: fluidScroller.start,
-    stop: fluidScroller.stop
-  };
-  return scroller;
-});
-
-var prefix$1 = 'data-rbd';
-var dragHandle = function () {
-  var base = prefix$1 + "-drag-handle";
-  return {
-    base: base,
-    draggableId: base + "-draggable-id",
-    contextId: base + "-context-id"
-  };
-}();
-var draggable = function () {
-  var base = prefix$1 + "-draggable";
-  return {
-    base: base,
-    contextId: base + "-context-id",
-    id: base + "-id"
-  };
-}();
-var droppable = function () {
-  var base = prefix$1 + "-droppable";
-  return {
-    base: base,
-    contextId: base + "-context-id",
-    id: base + "-id"
-  };
-}();
-var scrollContainer = {
-  contextId: prefix$1 + "-scroll-container-context-id"
-};
-
-var makeGetSelector = function makeGetSelector(context) {
-  return function (attribute) {
-    return "[" + attribute + "=\"" + context + "\"]";
-  };
-};
-
-var getStyles = function getStyles(rules, property) {
-  return rules.map(function (rule) {
-    var value = rule.styles[property];
-
-    if (!value) {
-      return '';
-    }
-
-    return rule.selector + " { " + value + " }";
-  }).join(' ');
-};
-
-var noPointerEvents = 'pointer-events: none;';
-var getStyles$1 = (function (contextId) {
-  var getSelector = makeGetSelector(contextId);
-
-  var dragHandle$1 = function () {
-    var grabCursor = "\n      cursor: -webkit-grab;\n      cursor: grab;\n    ";
-    return {
-      selector: getSelector(dragHandle.contextId),
-      styles: {
-        always: "\n          -webkit-touch-callout: none;\n          -webkit-tap-highlight-color: rgba(0,0,0,0);\n          touch-action: manipulation;\n        ",
-        resting: grabCursor,
-        dragging: noPointerEvents,
-        dropAnimating: grabCursor
-      }
-    };
-  }();
-
-  var draggable$1 = function () {
-    var transition = "\n      transition: " + transitions.outOfTheWay + ";\n    ";
-    return {
-      selector: getSelector(draggable.contextId),
-      styles: {
-        dragging: transition,
-        dropAnimating: transition,
-        userCancel: transition
-      }
-    };
-  }();
-
-  var droppable$1 = {
-    selector: getSelector(droppable.contextId),
-    styles: {
-      always: "overflow-anchor: none;"
-    }
-  };
-  var body = {
-    selector: 'body',
-    styles: {
-      dragging: "\n        cursor: grabbing;\n        cursor: -webkit-grabbing;\n        user-select: none;\n        -webkit-user-select: none;\n        -moz-user-select: none;\n        -ms-user-select: none;\n        overflow-anchor: none;\n      "
-    }
-  };
-  var rules = [draggable$1, dragHandle$1, droppable$1, body];
-  return {
-    always: getStyles(rules, 'always'),
-    resting: getStyles(rules, 'resting'),
-    dragging: getStyles(rules, 'dragging'),
-    dropAnimating: getStyles(rules, 'dropAnimating'),
-    userCancel: getStyles(rules, 'userCancel')
-  };
-});
-
-var useIsomorphicLayoutEffect = typeof window !== 'undefined' ? react__WEBPACK_IMPORTED_MODULE_0__["useLayoutEffect"] : react__WEBPACK_IMPORTED_MODULE_0__["useEffect"];
-
-var getHead = function getHead() {
-  var head = document.querySelector('head');
-  !head ?  true ? invariant(false, 'Cannot find the head to append a style to') : undefined : void 0;
-  return head;
-};
-
-var createStyleEl = function createStyleEl(nonce) {
-  var el = document.createElement('style');
-
-  if (nonce) {
-    el.setAttribute('nonce', nonce);
-  }
-
-  el.type = 'text/css';
-  return el;
-};
-
-function useStyleMarshal(contextId, nonce) {
-  var styles = Object(use_memo_one__WEBPACK_IMPORTED_MODULE_1__["useMemo"])(function () {
-    return getStyles$1(contextId);
-  }, [contextId]);
-  var alwaysRef = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(null);
-  var dynamicRef = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(null);
-  var setDynamicStyle = Object(use_memo_one__WEBPACK_IMPORTED_MODULE_1__["useCallback"])(Object(memoize_one__WEBPACK_IMPORTED_MODULE_7__["default"])(function (proposed) {
-    var el = dynamicRef.current;
-    !el ?  true ? invariant(false, 'Cannot set dynamic style element if it is not set') : undefined : void 0;
-    el.textContent = proposed;
-  }), []);
-  var setAlwaysStyle = Object(use_memo_one__WEBPACK_IMPORTED_MODULE_1__["useCallback"])(function (proposed) {
-    var el = alwaysRef.current;
-    !el ?  true ? invariant(false, 'Cannot set dynamic style element if it is not set') : undefined : void 0;
-    el.textContent = proposed;
-  }, []);
-  useIsomorphicLayoutEffect(function () {
-    !(!alwaysRef.current && !dynamicRef.current) ?  true ? invariant(false, 'style elements already mounted') : undefined : void 0;
-    var always = createStyleEl(nonce);
-    var dynamic = createStyleEl(nonce);
-    alwaysRef.current = always;
-    dynamicRef.current = dynamic;
-    always.setAttribute(prefix$1 + "-always", contextId);
-    dynamic.setAttribute(prefix$1 + "-dynamic", contextId);
-    getHead().appendChild(always);
-    getHead().appendChild(dynamic);
-    setAlwaysStyle(styles.always);
-    setDynamicStyle(styles.resting);
-    return function () {
-      var remove = function remove(ref) {
-        var current = ref.current;
-        !current ?  true ? invariant(false, 'Cannot unmount ref as it is not set') : undefined : void 0;
-        getHead().removeChild(current);
-        ref.current = null;
-      };
-
-      remove(alwaysRef);
-      remove(dynamicRef);
-    };
-  }, [nonce, setAlwaysStyle, setDynamicStyle, styles.always, styles.resting, contextId]);
-  var dragging = Object(use_memo_one__WEBPACK_IMPORTED_MODULE_1__["useCallback"])(function () {
-    return setDynamicStyle(styles.dragging);
-  }, [setDynamicStyle, styles.dragging]);
-  var dropping = Object(use_memo_one__WEBPACK_IMPORTED_MODULE_1__["useCallback"])(function (reason) {
-    if (reason === 'DROP') {
-      setDynamicStyle(styles.dropAnimating);
-      return;
-    }
-
-    setDynamicStyle(styles.userCancel);
-  }, [setDynamicStyle, styles.dropAnimating, styles.userCancel]);
-  var resting = Object(use_memo_one__WEBPACK_IMPORTED_MODULE_1__["useCallback"])(function () {
-    if (!dynamicRef.current) {
-      return;
-    }
-
-    setDynamicStyle(styles.resting);
-  }, [setDynamicStyle, styles.resting]);
-  var marshal = Object(use_memo_one__WEBPACK_IMPORTED_MODULE_1__["useMemo"])(function () {
-    return {
-      dragging: dragging,
-      dropping: dropping,
-      resting: resting
-    };
-  }, [dragging, dropping, resting]);
-  return marshal;
-}
-
-var getWindowFromEl = (function (el) {
-  return el && el.ownerDocument ? el.ownerDocument.defaultView : window;
-});
-
-function isHtmlElement(el) {
-  return el instanceof getWindowFromEl(el).HTMLElement;
-}
-
-function findDragHandle(contextId, draggableId) {
-  var selector = "[" + dragHandle.contextId + "=\"" + contextId + "\"]";
-  var possible = toArray(document.querySelectorAll(selector));
-
-  if (!possible.length) {
-     true ? warning("Unable to find any drag handles in the context \"" + contextId + "\"") : undefined;
-    return null;
-  }
-
-  var handle = find(possible, function (el) {
-    return el.getAttribute(dragHandle.draggableId) === draggableId;
-  });
-
-  if (!handle) {
-     true ? warning("Unable to find drag handle with id \"" + draggableId + "\" as no handle with a matching id was found") : undefined;
-    return null;
-  }
-
-  if (!isHtmlElement(handle)) {
-     true ? warning('drag handle needs to be a HTMLElement') : undefined;
-    return null;
-  }
-
-  return handle;
-}
-
-function useFocusMarshal(contextId) {
-  var entriesRef = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])({});
-  var recordRef = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(null);
-  var restoreFocusFrameRef = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(null);
-  var isMountedRef = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(false);
-  var register = Object(use_memo_one__WEBPACK_IMPORTED_MODULE_1__["useCallback"])(function register(id, focus) {
-    var entry = {
-      id: id,
-      focus: focus
-    };
-    entriesRef.current[id] = entry;
-    return function unregister() {
-      var entries = entriesRef.current;
-      var current = entries[id];
-
-      if (current !== entry) {
-        delete entries[id];
-      }
-    };
-  }, []);
-  var tryGiveFocus = Object(use_memo_one__WEBPACK_IMPORTED_MODULE_1__["useCallback"])(function tryGiveFocus(tryGiveFocusTo) {
-    var handle = findDragHandle(contextId, tryGiveFocusTo);
-
-    if (handle && handle !== document.activeElement) {
-      handle.focus();
-    }
-  }, [contextId]);
-  var tryShiftRecord = Object(use_memo_one__WEBPACK_IMPORTED_MODULE_1__["useCallback"])(function tryShiftRecord(previous, redirectTo) {
-    if (recordRef.current === previous) {
-      recordRef.current = redirectTo;
-    }
-  }, []);
-  var tryRestoreFocusRecorded = Object(use_memo_one__WEBPACK_IMPORTED_MODULE_1__["useCallback"])(function tryRestoreFocusRecorded() {
-    if (restoreFocusFrameRef.current) {
-      return;
-    }
-
-    if (!isMountedRef.current) {
-      return;
-    }
-
-    restoreFocusFrameRef.current = requestAnimationFrame(function () {
-      restoreFocusFrameRef.current = null;
-      var record = recordRef.current;
-
-      if (record) {
-        tryGiveFocus(record);
-      }
-    });
-  }, [tryGiveFocus]);
-  var tryRecordFocus = Object(use_memo_one__WEBPACK_IMPORTED_MODULE_1__["useCallback"])(function tryRecordFocus(id) {
-    recordRef.current = null;
-    var focused = document.activeElement;
-
-    if (!focused) {
-      return;
-    }
-
-    if (focused.getAttribute(dragHandle.draggableId) !== id) {
-      return;
-    }
-
-    recordRef.current = id;
-  }, []);
-  useIsomorphicLayoutEffect(function () {
-    isMountedRef.current = true;
-    return function clearFrameOnUnmount() {
-      isMountedRef.current = false;
-      var frameId = restoreFocusFrameRef.current;
-
-      if (frameId) {
-        cancelAnimationFrame(frameId);
-      }
-    };
-  }, []);
-  var marshal = Object(use_memo_one__WEBPACK_IMPORTED_MODULE_1__["useMemo"])(function () {
-    return {
-      register: register,
-      tryRecordFocus: tryRecordFocus,
-      tryRestoreFocusRecorded: tryRestoreFocusRecorded,
-      tryShiftRecord: tryShiftRecord
-    };
-  }, [register, tryRecordFocus, tryRestoreFocusRecorded, tryShiftRecord]);
-  return marshal;
-}
-
-function createRegistry() {
-  var entries = {
-    draggables: {},
-    droppables: {}
-  };
-  var subscribers = [];
-
-  function subscribe(cb) {
-    subscribers.push(cb);
-    return function unsubscribe() {
-      var index = subscribers.indexOf(cb);
-
-      if (index === -1) {
-        return;
-      }
-
-      subscribers.splice(index, 1);
-    };
-  }
-
-  function notify(event) {
-    if (subscribers.length) {
-      subscribers.forEach(function (cb) {
-        return cb(event);
-      });
-    }
-  }
-
-  function findDraggableById(id) {
-    return entries.draggables[id] || null;
-  }
-
-  function getDraggableById(id) {
-    var entry = findDraggableById(id);
-    !entry ?  true ? invariant(false, "Cannot find draggable entry with id [" + id + "]") : undefined : void 0;
-    return entry;
-  }
-
-  var draggableAPI = {
-    register: function register(entry) {
-      entries.draggables[entry.descriptor.id] = entry;
-      notify({
-        type: 'ADDITION',
-        value: entry
-      });
-    },
-    update: function update(entry, last) {
-      var current = entries.draggables[last.descriptor.id];
-
-      if (!current) {
-        return;
-      }
-
-      if (current.uniqueId !== entry.uniqueId) {
-        return;
-      }
-
-      delete entries.draggables[last.descriptor.id];
-      entries.draggables[entry.descriptor.id] = entry;
-    },
-    unregister: function unregister(entry) {
-      var draggableId = entry.descriptor.id;
-      var current = findDraggableById(draggableId);
-
-      if (!current) {
-        return;
-      }
-
-      if (entry.uniqueId !== current.uniqueId) {
-        return;
-      }
-
-      delete entries.draggables[draggableId];
-      notify({
-        type: 'REMOVAL',
-        value: entry
-      });
-    },
-    getById: getDraggableById,
-    findById: findDraggableById,
-    exists: function exists(id) {
-      return Boolean(findDraggableById(id));
-    },
-    getAllByType: function getAllByType(type) {
-      return values(entries.draggables).filter(function (entry) {
-        return entry.descriptor.type === type;
-      });
-    }
-  };
-
-  function findDroppableById(id) {
-    return entries.droppables[id] || null;
-  }
-
-  function getDroppableById(id) {
-    var entry = findDroppableById(id);
-    !entry ?  true ? invariant(false, "Cannot find droppable entry with id [" + id + "]") : undefined : void 0;
-    return entry;
-  }
-
-  var droppableAPI = {
-    register: function register(entry) {
-      entries.droppables[entry.descriptor.id] = entry;
-    },
-    unregister: function unregister(entry) {
-      var current = findDroppableById(entry.descriptor.id);
-
-      if (!current) {
-        return;
-      }
-
-      if (entry.uniqueId !== current.uniqueId) {
-        return;
-      }
-
-      delete entries.droppables[entry.descriptor.id];
-    },
-    getById: getDroppableById,
-    findById: findDroppableById,
-    exists: function exists(id) {
-      return Boolean(findDroppableById(id));
-    },
-    getAllByType: function getAllByType(type) {
-      return values(entries.droppables).filter(function (entry) {
-        return entry.descriptor.type === type;
-      });
-    }
-  };
-
-  function clean() {
-    entries.draggables = {};
-    entries.droppables = {};
-    subscribers.length = 0;
-  }
-
-  return {
-    draggable: draggableAPI,
-    droppable: droppableAPI,
-    subscribe: subscribe,
-    clean: clean
-  };
-}
-
-function useRegistry() {
-  var registry = Object(use_memo_one__WEBPACK_IMPORTED_MODULE_1__["useMemo"])(createRegistry, []);
-  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-    return function unmount() {
-      requestAnimationFrame(registry.clean);
-    };
-  }, [registry]);
-  return registry;
-}
-
-var StoreContext = react__WEBPACK_IMPORTED_MODULE_0___default.a.createContext(null);
-
-var getBodyElement = (function () {
-  var body = document.body;
-  !body ?  true ? invariant(false, 'Cannot find document.body') : undefined : void 0;
-  return body;
-});
-
-var visuallyHidden = {
-  position: 'absolute',
-  width: '1px',
-  height: '1px',
-  margin: '-1px',
-  border: '0',
-  padding: '0',
-  overflow: 'hidden',
-  clip: 'rect(0 0 0 0)',
-  'clip-path': 'inset(100%)'
-};
-
-var getId = function getId(contextId) {
-  return "rbd-announcement-" + contextId;
-};
-function useAnnouncer(contextId) {
-  var id = Object(use_memo_one__WEBPACK_IMPORTED_MODULE_1__["useMemo"])(function () {
-    return getId(contextId);
-  }, [contextId]);
-  var ref = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(null);
-  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-    !!ref.current ?  true ? invariant(false, 'Announcement node already mounted') : undefined : void 0;
-    var el = document.createElement('div');
-    ref.current = el;
-    el.id = id;
-    el.setAttribute('aria-live', 'assertive');
-    el.setAttribute('role', 'log');
-    el.setAttribute('aria-atomic', 'true');
-
-    _babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_12___default()(el.style, visuallyHidden);
-
-    getBodyElement().appendChild(el);
-    return function () {
-      setTimeout(function remove() {
-        var toBeRemoved = ref.current;
-        !toBeRemoved ?  true ? invariant(false, 'Cannot unmount announcement node') : undefined : void 0;
-        getBodyElement().removeChild(toBeRemoved);
-        ref.current = null;
-      });
-    };
-  }, [id]);
-  var announce = Object(use_memo_one__WEBPACK_IMPORTED_MODULE_1__["useCallback"])(function (message) {
-    var el = ref.current;
-
-    if (el) {
-      el.textContent = message;
-      return;
-    }
-
-     true ? warning("\n      A screen reader message was trying to be announced but it was unable to do so.\n      This can occur if you unmount your <DragDropContext /> in your onDragEnd.\n      Consider calling provided.announce() before the unmount so that the instruction will\n      not be lost for users relying on a screen reader.\n\n      Message not passed to screen reader:\n\n      \"" + message + "\"\n    ") : undefined;
-  }, []);
-  return announce;
-}
-
-var getId$1 = function getId(contextId) {
-  return "rbd-lift-instruction-" + contextId;
-};
-function useLiftInstruction(contextId, liftInstruction) {
-  var id = Object(use_memo_one__WEBPACK_IMPORTED_MODULE_1__["useMemo"])(function () {
-    return getId$1(contextId);
-  }, [contextId]);
-  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function mount() {
-    var el = document.createElement('div');
-    el.id = id;
-    el.textContent = liftInstruction;
-
-    _babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_12___default()(el.style, visuallyHidden);
-
-    getBodyElement().appendChild(el);
-    return function unmount() {
-      getBodyElement().removeChild(el);
-    };
-  }, [id, liftInstruction]);
-  return id;
-}
-
-var AppContext = react__WEBPACK_IMPORTED_MODULE_0___default.a.createContext(null);
-
-var peerDependencies = {
-	react: "^16.8.5",
-	"react-dom": "^16.8.5"
-};
-
-var semver = /(\d+)\.(\d+)\.(\d+)/;
-
-var getVersion = function getVersion(value) {
-  var result = semver.exec(value);
-  !(result != null) ?  true ? invariant(false, "Unable to parse React version " + value) : undefined : void 0;
-  var major = Number(result[1]);
-  var minor = Number(result[2]);
-  var patch = Number(result[3]);
-  return {
-    major: major,
-    minor: minor,
-    patch: patch,
-    raw: value
-  };
-};
-
-var isSatisfied = function isSatisfied(expected, actual) {
-  if (actual.major > expected.major) {
-    return true;
-  }
-
-  if (actual.major < expected.major) {
-    return false;
-  }
-
-  if (actual.minor > expected.minor) {
-    return true;
-  }
-
-  if (actual.minor < expected.minor) {
-    return false;
-  }
-
-  return actual.patch >= expected.patch;
-};
-
-var checkReactVersion = (function (peerDepValue, actualValue) {
-  var peerDep = getVersion(peerDepValue);
-  var actual = getVersion(actualValue);
-
-  if (isSatisfied(peerDep, actual)) {
-    return;
-  }
-
-   true ? warning("\n    React version: [" + actual.raw + "]\n    does not satisfy expected peer dependency version: [" + peerDep.raw + "]\n\n    This can result in run time bugs, and even fatal crashes\n  ") : undefined;
-});
-
-var suffix = "\n  We expect a html5 doctype: <!doctype html>\n  This is to ensure consistent browser layout and measurement\n\n  More information: https://github.com/atlassian/react-beautiful-dnd/blob/master/docs/guides/doctype.md\n";
-var checkDoctype = (function (doc) {
-  var doctype = doc.doctype;
-
-  if (!doctype) {
-     true ? warning("\n      No <!doctype html> found.\n\n      " + suffix + "\n    ") : undefined;
-    return;
-  }
-
-  if (doctype.name.toLowerCase() !== 'html') {
-     true ? warning("\n      Unexpected <!doctype> found: (" + doctype.name + ")\n\n      " + suffix + "\n    ") : undefined;
-  }
-
-  if (doctype.publicId !== '') {
-     true ? warning("\n      Unexpected <!doctype> publicId found: (" + doctype.publicId + ")\n      A html5 doctype does not have a publicId\n\n      " + suffix + "\n    ") : undefined;
-  }
-});
-
-function useDev(useHook) {
-  if (true) {
-    useHook();
-  }
-}
-
-function useDevSetupWarning(fn, inputs) {
-  useDev(function () {
-    Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-      try {
-        fn();
-      } catch (e) {
-        error("\n          A setup problem was encountered.\n\n          > " + e.message + "\n        ");
-      }
-    }, inputs);
-  });
-}
-
-function useStartupValidation() {
-  useDevSetupWarning(function () {
-    checkReactVersion(peerDependencies.react, react__WEBPACK_IMPORTED_MODULE_0___default.a.version);
-    checkDoctype(document);
-  }, []);
-}
-
-function usePrevious(current) {
-  var ref = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(current);
-  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-    ref.current = current;
-  });
-  return ref;
-}
-
-function create() {
-  var lock = null;
-
-  function isClaimed() {
-    return Boolean(lock);
-  }
-
-  function isActive(value) {
-    return value === lock;
-  }
-
-  function claim(abandon) {
-    !!lock ?  true ? invariant(false, 'Cannot claim lock as it is already claimed') : undefined : void 0;
-    var newLock = {
-      abandon: abandon
-    };
-    lock = newLock;
-    return newLock;
-  }
-
-  function release() {
-    !lock ?  true ? invariant(false, 'Cannot release lock when there is no lock') : undefined : void 0;
-    lock = null;
-  }
-
-  function tryAbandon() {
-    if (lock) {
-      lock.abandon();
-      release();
-    }
-  }
-
-  return {
-    isClaimed: isClaimed,
-    isActive: isActive,
-    claim: claim,
-    release: release,
-    tryAbandon: tryAbandon
-  };
-}
-
-var tab = 9;
-var enter = 13;
-var escape = 27;
-var space = 32;
-var pageUp = 33;
-var pageDown = 34;
-var end = 35;
-var home = 36;
-var arrowLeft = 37;
-var arrowUp = 38;
-var arrowRight = 39;
-var arrowDown = 40;
-
-var _preventedKeys;
-var preventedKeys = (_preventedKeys = {}, _preventedKeys[enter] = true, _preventedKeys[tab] = true, _preventedKeys);
-var preventStandardKeyEvents = (function (event) {
-  if (preventedKeys[event.keyCode]) {
-    event.preventDefault();
-  }
-});
-
-var supportedEventName = function () {
-  var base = 'visibilitychange';
-
-  if (typeof document === 'undefined') {
-    return base;
-  }
-
-  var candidates = [base, "ms" + base, "webkit" + base, "moz" + base, "o" + base];
-  var supported = find(candidates, function (eventName) {
-    return "on" + eventName in document;
-  });
-  return supported || base;
-}();
-
-var primaryButton = 0;
-var sloppyClickThreshold = 5;
-
-function isSloppyClickThresholdExceeded(original, current) {
-  return Math.abs(current.x - original.x) >= sloppyClickThreshold || Math.abs(current.y - original.y) >= sloppyClickThreshold;
-}
-
-var idle$1 = {
-  type: 'IDLE'
-};
-
-function getCaptureBindings(_ref) {
-  var cancel = _ref.cancel,
-      completed = _ref.completed,
-      getPhase = _ref.getPhase,
-      setPhase = _ref.setPhase;
-  return [{
-    eventName: 'mousemove',
-    fn: function fn(event) {
-      var button = event.button,
-          clientX = event.clientX,
-          clientY = event.clientY;
-
-      if (button !== primaryButton) {
-        return;
-      }
-
-      var point = {
-        x: clientX,
-        y: clientY
-      };
-      var phase = getPhase();
-
-      if (phase.type === 'DRAGGING') {
-        event.preventDefault();
-        phase.actions.move(point);
-        return;
-      }
-
-      !(phase.type === 'PENDING') ?  true ? invariant(false, 'Cannot be IDLE') : undefined : void 0;
-      var pending = phase.point;
-
-      if (!isSloppyClickThresholdExceeded(pending, point)) {
-        return;
-      }
-
-      event.preventDefault();
-      var actions = phase.actions.fluidLift(point);
-      setPhase({
-        type: 'DRAGGING',
-        actions: actions
-      });
-    }
-  }, {
-    eventName: 'mouseup',
-    fn: function fn(event) {
-      var phase = getPhase();
-
-      if (phase.type !== 'DRAGGING') {
-        cancel();
-        return;
-      }
-
-      event.preventDefault();
-      phase.actions.drop({
-        shouldBlockNextClick: true
-      });
-      completed();
-    }
-  }, {
-    eventName: 'mousedown',
-    fn: function fn(event) {
-      if (getPhase().type === 'DRAGGING') {
-        event.preventDefault();
-      }
-
-      cancel();
-    }
-  }, {
-    eventName: 'keydown',
-    fn: function fn(event) {
-      var phase = getPhase();
-
-      if (phase.type === 'PENDING') {
-        cancel();
-        return;
-      }
-
-      if (event.keyCode === escape) {
-        event.preventDefault();
-        cancel();
-        return;
-      }
-
-      preventStandardKeyEvents(event);
-    }
-  }, {
-    eventName: 'resize',
-    fn: cancel
-  }, {
-    eventName: 'scroll',
-    options: {
-      passive: true,
-      capture: false
-    },
-    fn: function fn() {
-      if (getPhase().type === 'PENDING') {
-        cancel();
-      }
-    }
-  }, {
-    eventName: 'webkitmouseforcedown',
-    fn: function fn(event) {
-      var phase = getPhase();
-      !(phase.type !== 'IDLE') ?  true ? invariant(false, 'Unexpected phase') : undefined : void 0;
-
-      if (phase.actions.shouldRespectForcePress()) {
-        cancel();
-        return;
-      }
-
-      event.preventDefault();
-    }
-  }, {
-    eventName: supportedEventName,
-    fn: cancel
-  }];
-}
-
-function useMouseSensor(api) {
-  var phaseRef = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(idle$1);
-  var unbindEventsRef = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(noop);
-  var startCaptureBinding = Object(use_memo_one__WEBPACK_IMPORTED_MODULE_1__["useMemo"])(function () {
-    return {
-      eventName: 'mousedown',
-      fn: function onMouseDown(event) {
-        if (event.defaultPrevented) {
-          return;
-        }
-
-        if (event.button !== primaryButton) {
-          return;
-        }
-
-        if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) {
-          return;
-        }
-
-        var draggableId = api.findClosestDraggableId(event);
-
-        if (!draggableId) {
-          return;
-        }
-
-        var actions = api.tryGetLock(draggableId, stop, {
-          sourceEvent: event
-        });
-
-        if (!actions) {
-          return;
-        }
-
-        event.preventDefault();
-        var point = {
-          x: event.clientX,
-          y: event.clientY
-        };
-        unbindEventsRef.current();
-        startPendingDrag(actions, point);
-      }
-    };
-  }, [api]);
-  var preventForcePressBinding = Object(use_memo_one__WEBPACK_IMPORTED_MODULE_1__["useMemo"])(function () {
-    return {
-      eventName: 'webkitmouseforcewillbegin',
-      fn: function fn(event) {
-        if (event.defaultPrevented) {
-          return;
-        }
-
-        var id = api.findClosestDraggableId(event);
-
-        if (!id) {
-          return;
-        }
-
-        var options = api.findOptionsForDraggable(id);
-
-        if (!options) {
-          return;
-        }
-
-        if (options.shouldRespectForcePress) {
-          return;
-        }
-
-        if (!api.canGetLock(id)) {
-          return;
-        }
-
-        event.preventDefault();
-      }
-    };
-  }, [api]);
-  var listenForCapture = Object(use_memo_one__WEBPACK_IMPORTED_MODULE_1__["useCallback"])(function listenForCapture() {
-    var options = {
-      passive: false,
-      capture: true
-    };
-    unbindEventsRef.current = bindEvents(window, [preventForcePressBinding, startCaptureBinding], options);
-  }, [preventForcePressBinding, startCaptureBinding]);
-  var stop = Object(use_memo_one__WEBPACK_IMPORTED_MODULE_1__["useCallback"])(function () {
-    var current = phaseRef.current;
-
-    if (current.type === 'IDLE') {
-      return;
-    }
-
-    phaseRef.current = idle$1;
-    unbindEventsRef.current();
-    listenForCapture();
-  }, [listenForCapture]);
-  var cancel = Object(use_memo_one__WEBPACK_IMPORTED_MODULE_1__["useCallback"])(function () {
-    var phase = phaseRef.current;
-    stop();
-
-    if (phase.type === 'DRAGGING') {
-      phase.actions.cancel({
-        shouldBlockNextClick: true
-      });
-    }
-
-    if (phase.type === 'PENDING') {
-      phase.actions.abort();
-    }
-  }, [stop]);
-  var bindCapturingEvents = Object(use_memo_one__WEBPACK_IMPORTED_MODULE_1__["useCallback"])(function bindCapturingEvents() {
-    var options = {
-      capture: true,
-      passive: false
-    };
-    var bindings = getCaptureBindings({
-      cancel: cancel,
-      completed: stop,
-      getPhase: function getPhase() {
-        return phaseRef.current;
-      },
-      setPhase: function setPhase(phase) {
-        phaseRef.current = phase;
-      }
-    });
-    unbindEventsRef.current = bindEvents(window, bindings, options);
-  }, [cancel, stop]);
-  var startPendingDrag = Object(use_memo_one__WEBPACK_IMPORTED_MODULE_1__["useCallback"])(function startPendingDrag(actions, point) {
-    !(phaseRef.current.type === 'IDLE') ?  true ? invariant(false, 'Expected to move from IDLE to PENDING drag') : undefined : void 0;
-    phaseRef.current = {
-      type: 'PENDING',
-      point: point,
-      actions: actions
-    };
-    bindCapturingEvents();
-  }, [bindCapturingEvents]);
-  useIsomorphicLayoutEffect(function mount() {
-    listenForCapture();
-    return function unmount() {
-      unbindEventsRef.current();
-    };
-  }, [listenForCapture]);
-}
-
-var _scrollJumpKeys;
-
-function noop$1() {}
-
-var scrollJumpKeys = (_scrollJumpKeys = {}, _scrollJumpKeys[pageDown] = true, _scrollJumpKeys[pageUp] = true, _scrollJumpKeys[home] = true, _scrollJumpKeys[end] = true, _scrollJumpKeys);
-
-function getDraggingBindings(actions, stop) {
-  function cancel() {
-    stop();
-    actions.cancel();
-  }
-
-  function drop() {
-    stop();
-    actions.drop();
-  }
-
-  return [{
-    eventName: 'keydown',
-    fn: function fn(event) {
-      if (event.keyCode === escape) {
-        event.preventDefault();
-        cancel();
-        return;
-      }
-
-      if (event.keyCode === space) {
-        event.preventDefault();
-        drop();
-        return;
-      }
-
-      if (event.keyCode === arrowDown) {
-        event.preventDefault();
-        actions.moveDown();
-        return;
-      }
-
-      if (event.keyCode === arrowUp) {
-        event.preventDefault();
-        actions.moveUp();
-        return;
-      }
-
-      if (event.keyCode === arrowRight) {
-        event.preventDefault();
-        actions.moveRight();
-        return;
-      }
-
-      if (event.keyCode === arrowLeft) {
-        event.preventDefault();
-        actions.moveLeft();
-        return;
-      }
-
-      if (scrollJumpKeys[event.keyCode]) {
-        event.preventDefault();
-        return;
-      }
-
-      preventStandardKeyEvents(event);
-    }
-  }, {
-    eventName: 'mousedown',
-    fn: cancel
-  }, {
-    eventName: 'mouseup',
-    fn: cancel
-  }, {
-    eventName: 'click',
-    fn: cancel
-  }, {
-    eventName: 'touchstart',
-    fn: cancel
-  }, {
-    eventName: 'resize',
-    fn: cancel
-  }, {
-    eventName: 'wheel',
-    fn: cancel,
-    options: {
-      passive: true
-    }
-  }, {
-    eventName: supportedEventName,
-    fn: cancel
-  }];
-}
-
-function useKeyboardSensor(api) {
-  var unbindEventsRef = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(noop$1);
-  var startCaptureBinding = Object(use_memo_one__WEBPACK_IMPORTED_MODULE_1__["useMemo"])(function () {
-    return {
-      eventName: 'keydown',
-      fn: function onKeyDown(event) {
-        if (event.defaultPrevented) {
-          return;
-        }
-
-        if (event.keyCode !== space) {
-          return;
-        }
-
-        var draggableId = api.findClosestDraggableId(event);
-
-        if (!draggableId) {
-          return;
-        }
-
-        var preDrag = api.tryGetLock(draggableId, stop, {
-          sourceEvent: event
-        });
-
-        if (!preDrag) {
-          return;
-        }
-
-        event.preventDefault();
-        var isCapturing = true;
-        var actions = preDrag.snapLift();
-        unbindEventsRef.current();
-
-        function stop() {
-          !isCapturing ?  true ? invariant(false, 'Cannot stop capturing a keyboard drag when not capturing') : undefined : void 0;
-          isCapturing = false;
-          unbindEventsRef.current();
-          listenForCapture();
-        }
-
-        unbindEventsRef.current = bindEvents(window, getDraggingBindings(actions, stop), {
-          capture: true,
-          passive: false
-        });
-      }
-    };
-  }, [api]);
-  var listenForCapture = Object(use_memo_one__WEBPACK_IMPORTED_MODULE_1__["useCallback"])(function tryStartCapture() {
-    var options = {
-      passive: false,
-      capture: true
-    };
-    unbindEventsRef.current = bindEvents(window, [startCaptureBinding], options);
-  }, [startCaptureBinding]);
-  useIsomorphicLayoutEffect(function mount() {
-    listenForCapture();
-    return function unmount() {
-      unbindEventsRef.current();
-    };
-  }, [listenForCapture]);
-}
-
-var idle$2 = {
-  type: 'IDLE'
-};
-var timeForLongPress = 120;
-var forcePressThreshold = 0.15;
-
-function getWindowBindings(_ref) {
-  var cancel = _ref.cancel,
-      getPhase = _ref.getPhase;
-  return [{
-    eventName: 'orientationchange',
-    fn: cancel
-  }, {
-    eventName: 'resize',
-    fn: cancel
-  }, {
-    eventName: 'contextmenu',
-    fn: function fn(event) {
-      event.preventDefault();
-    }
-  }, {
-    eventName: 'keydown',
-    fn: function fn(event) {
-      if (getPhase().type !== 'DRAGGING') {
-        cancel();
-        return;
-      }
-
-      if (event.keyCode === escape) {
-        event.preventDefault();
-      }
-
-      cancel();
-    }
-  }, {
-    eventName: supportedEventName,
-    fn: cancel
-  }];
-}
-
-function getHandleBindings(_ref2) {
-  var cancel = _ref2.cancel,
-      completed = _ref2.completed,
-      getPhase = _ref2.getPhase;
-  return [{
-    eventName: 'touchmove',
-    options: {
-      capture: false
-    },
-    fn: function fn(event) {
-      var phase = getPhase();
-
-      if (phase.type !== 'DRAGGING') {
-        cancel();
-        return;
-      }
-
-      phase.hasMoved = true;
-      var _event$touches$ = event.touches[0],
-          clientX = _event$touches$.clientX,
-          clientY = _event$touches$.clientY;
-      var point = {
-        x: clientX,
-        y: clientY
-      };
-      event.preventDefault();
-      phase.actions.move(point);
-    }
-  }, {
-    eventName: 'touchend',
-    fn: function fn(event) {
-      var phase = getPhase();
-
-      if (phase.type !== 'DRAGGING') {
-        cancel();
-        return;
-      }
-
-      event.preventDefault();
-      phase.actions.drop({
-        shouldBlockNextClick: true
-      });
-      completed();
-    }
-  }, {
-    eventName: 'touchcancel',
-    fn: function fn(event) {
-      if (getPhase().type !== 'DRAGGING') {
-        cancel();
-        return;
-      }
-
-      event.preventDefault();
-      cancel();
-    }
-  }, {
-    eventName: 'touchforcechange',
-    fn: function fn(event) {
-      var phase = getPhase();
-      !(phase.type !== 'IDLE') ?  true ? invariant(false) : undefined : void 0;
-      var touch = event.touches[0];
-
-      if (!touch) {
-        return;
-      }
-
-      var isForcePress = touch.force >= forcePressThreshold;
-
-      if (!isForcePress) {
-        return;
-      }
-
-      var shouldRespect = phase.actions.shouldRespectForcePress();
-
-      if (phase.type === 'PENDING') {
-        if (shouldRespect) {
-          cancel();
-        }
-
-        return;
-      }
-
-      if (shouldRespect) {
-        if (phase.hasMoved) {
-          event.preventDefault();
-          return;
-        }
-
-        cancel();
-        return;
-      }
-
-      event.preventDefault();
-    }
-  }, {
-    eventName: supportedEventName,
-    fn: cancel
-  }];
-}
-
-function useMouseSensor$1(api) {
-  var phaseRef = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(idle$2);
-  var unbindEventsRef = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(noop);
-  var getPhase = Object(use_memo_one__WEBPACK_IMPORTED_MODULE_1__["useCallback"])(function getPhase() {
-    return phaseRef.current;
-  }, []);
-  var setPhase = Object(use_memo_one__WEBPACK_IMPORTED_MODULE_1__["useCallback"])(function setPhase(phase) {
-    phaseRef.current = phase;
-  }, []);
-  var startCaptureBinding = Object(use_memo_one__WEBPACK_IMPORTED_MODULE_1__["useMemo"])(function () {
-    return {
-      eventName: 'touchstart',
-      fn: function onTouchStart(event) {
-        if (event.defaultPrevented) {
-          return;
-        }
-
-        var draggableId = api.findClosestDraggableId(event);
-
-        if (!draggableId) {
-          return;
-        }
-
-        var actions = api.tryGetLock(draggableId, stop, {
-          sourceEvent: event
-        });
-
-        if (!actions) {
-          return;
-        }
-
-        var touch = event.touches[0];
-        var clientX = touch.clientX,
-            clientY = touch.clientY;
-        var point = {
-          x: clientX,
-          y: clientY
-        };
-        unbindEventsRef.current();
-        startPendingDrag(actions, point);
-      }
-    };
-  }, [api]);
-  var listenForCapture = Object(use_memo_one__WEBPACK_IMPORTED_MODULE_1__["useCallback"])(function listenForCapture() {
-    var options = {
-      capture: true,
-      passive: false
-    };
-    unbindEventsRef.current = bindEvents(window, [startCaptureBinding], options);
-  }, [startCaptureBinding]);
-  var stop = Object(use_memo_one__WEBPACK_IMPORTED_MODULE_1__["useCallback"])(function () {
-    var current = phaseRef.current;
-
-    if (current.type === 'IDLE') {
-      return;
-    }
-
-    if (current.type === 'PENDING') {
-      clearTimeout(current.longPressTimerId);
-    }
-
-    setPhase(idle$2);
-    unbindEventsRef.current();
-    listenForCapture();
-  }, [listenForCapture, setPhase]);
-  var cancel = Object(use_memo_one__WEBPACK_IMPORTED_MODULE_1__["useCallback"])(function () {
-    var phase = phaseRef.current;
-    stop();
-
-    if (phase.type === 'DRAGGING') {
-      phase.actions.cancel({
-        shouldBlockNextClick: true
-      });
-    }
-
-    if (phase.type === 'PENDING') {
-      phase.actions.abort();
-    }
-  }, [stop]);
-  var bindCapturingEvents = Object(use_memo_one__WEBPACK_IMPORTED_MODULE_1__["useCallback"])(function bindCapturingEvents() {
-    var options = {
-      capture: true,
-      passive: false
-    };
-    var args = {
-      cancel: cancel,
-      completed: stop,
-      getPhase: getPhase
-    };
-    var unbindTarget = bindEvents(window, getHandleBindings(args), options);
-    var unbindWindow = bindEvents(window, getWindowBindings(args), options);
-
-    unbindEventsRef.current = function unbindAll() {
-      unbindTarget();
-      unbindWindow();
-    };
-  }, [cancel, getPhase, stop]);
-  var startDragging = Object(use_memo_one__WEBPACK_IMPORTED_MODULE_1__["useCallback"])(function startDragging() {
-    var phase = getPhase();
-    !(phase.type === 'PENDING') ?  true ? invariant(false, "Cannot start dragging from phase " + phase.type) : undefined : void 0;
-    var actions = phase.actions.fluidLift(phase.point);
-    setPhase({
-      type: 'DRAGGING',
-      actions: actions,
-      hasMoved: false
-    });
-  }, [getPhase, setPhase]);
-  var startPendingDrag = Object(use_memo_one__WEBPACK_IMPORTED_MODULE_1__["useCallback"])(function startPendingDrag(actions, point) {
-    !(getPhase().type === 'IDLE') ?  true ? invariant(false, 'Expected to move from IDLE to PENDING drag') : undefined : void 0;
-    var longPressTimerId = setTimeout(startDragging, timeForLongPress);
-    setPhase({
-      type: 'PENDING',
-      point: point,
-      actions: actions,
-      longPressTimerId: longPressTimerId
-    });
-    bindCapturingEvents();
-  }, [bindCapturingEvents, getPhase, setPhase, startDragging]);
-  useIsomorphicLayoutEffect(function mount() {
-    listenForCapture();
-    return function unmount() {
-      unbindEventsRef.current();
-      var phase = getPhase();
-
-      if (phase.type === 'PENDING') {
-        clearTimeout(phase.longPressTimerId);
-        setPhase(idle$2);
-      }
-    };
-  }, [getPhase, listenForCapture, setPhase]);
-  useIsomorphicLayoutEffect(function webkitHack() {
-    var unbind = bindEvents(window, [{
-      eventName: 'touchmove',
-      fn: function fn() {},
-      options: {
-        capture: false,
-        passive: false
-      }
-    }]);
-    return unbind;
-  }, []);
-}
-
-function useValidateSensorHooks(sensorHooks) {
-  useDev(function () {
-    var previousRef = usePrevious(sensorHooks);
-    useDevSetupWarning(function () {
-      !(previousRef.current.length === sensorHooks.length) ?  true ? invariant(false, 'Cannot change the amount of sensor hooks after mounting') : undefined : void 0;
-    });
-  });
-}
-
-var interactiveTagNames = {
+// For HTML, certain tags should omit their close tag. We keep a whitelist for
+// those special-case tags.
+var omittedCloseTags = {
+  area: true,
+  base: true,
+  br: true,
+  col: true,
+  embed: true,
+  hr: true,
+  img: true,
   input: true,
-  button: true,
-  textarea: true,
-  select: true,
-  option: true,
-  optgroup: true,
-  video: true,
-  audio: true
+  keygen: true,
+  link: true,
+  meta: true,
+  param: true,
+  source: true,
+  track: true,
+  wbr: true // NOTE: menuitem's close tag should be omitted, but that causes problems.
+
 };
 
-function isAnInteractiveElement(parent, current) {
-  if (current == null) {
-    return false;
-  }
+// `omittedCloseTags` except that `menuitem` should still have its closing tag.
 
-  var hasAnInteractiveTag = Boolean(interactiveTagNames[current.tagName.toLowerCase()]);
+var voidElementTags = _assign({
+  menuitem: true
+}, omittedCloseTags);
 
-  if (hasAnInteractiveTag) {
-    return true;
-  }
+// or add stack by default to invariants where possible.
 
-  var attribute = current.getAttribute('contenteditable');
+var HTML = '__html';
+var ReactDebugCurrentFrame$4 = null;
 
-  if (attribute === 'true' || attribute === '') {
-    return true;
-  }
-
-  if (current === parent) {
-    return false;
-  }
-
-  return isAnInteractiveElement(parent, current.parentElement);
+{
+  ReactDebugCurrentFrame$4 = ReactSharedInternals.ReactDebugCurrentFrame;
 }
 
-function isEventInInteractiveElement(draggable, event) {
-  var target = event.target;
-
-  if (!isHtmlElement(target)) {
-    return false;
-  }
-
-  return isAnInteractiveElement(draggable, target);
-}
-
-var getBorderBoxCenterPosition = (function (el) {
-  return Object(css_box_model__WEBPACK_IMPORTED_MODULE_6__["getRect"])(el.getBoundingClientRect()).center;
-});
-
-function isElement(el) {
-  return el instanceof getWindowFromEl(el).Element;
-}
-
-var supportedMatchesName = function () {
-  var base = 'matches';
-
-  if (typeof document === 'undefined') {
-    return base;
-  }
-
-  var candidates = [base, 'msMatchesSelector', 'webkitMatchesSelector'];
-  var value = find(candidates, function (name) {
-    return name in Element.prototype;
-  });
-  return value || base;
-}();
-
-function closestPonyfill(el, selector) {
-  if (el == null) {
-    return null;
-  }
-
-  if (el[supportedMatchesName](selector)) {
-    return el;
-  }
-
-  return closestPonyfill(el.parentElement, selector);
-}
-
-function closest$1(el, selector) {
-  if (el.closest) {
-    return el.closest(selector);
-  }
-
-  return closestPonyfill(el, selector);
-}
-
-function getSelector(contextId) {
-  return "[" + dragHandle.contextId + "=\"" + contextId + "\"]";
-}
-
-function findClosestDragHandleFromEvent(contextId, event) {
-  var target = event.target;
-
-  if (!isElement(target)) {
-     true ? warning('event.target must be a Element') : undefined;
-    return null;
-  }
-
-  var selector = getSelector(contextId);
-  var handle = closest$1(target, selector);
-
-  if (!handle) {
-    return null;
-  }
-
-  if (!isHtmlElement(handle)) {
-     true ? warning('drag handle must be a HTMLElement') : undefined;
-    return null;
-  }
-
-  return handle;
-}
-
-function tryGetClosestDraggableIdFromEvent(contextId, event) {
-  var handle = findClosestDragHandleFromEvent(contextId, event);
-
-  if (!handle) {
-    return null;
-  }
-
-  return handle.getAttribute(dragHandle.draggableId);
-}
-
-function findDraggable(contextId, draggableId) {
-  var selector = "[" + draggable.contextId + "=\"" + contextId + "\"]";
-  var possible = toArray(document.querySelectorAll(selector));
-  var draggable$1 = find(possible, function (el) {
-    return el.getAttribute(draggable.id) === draggableId;
-  });
-
-  if (!draggable$1) {
-    return null;
-  }
-
-  if (!isHtmlElement(draggable$1)) {
-     true ? warning('Draggable element is not a HTMLElement') : undefined;
-    return null;
-  }
-
-  return draggable$1;
-}
-
-function preventDefault(event) {
-  event.preventDefault();
-}
-
-function _isActive(_ref) {
-  var expected = _ref.expected,
-      phase = _ref.phase,
-      isLockActive = _ref.isLockActive,
-      shouldWarn = _ref.shouldWarn;
-
-  if (!isLockActive()) {
-    if (shouldWarn) {
-       true ? warning("\n        Cannot perform action.\n        The sensor no longer has an action lock.\n\n        Tips:\n\n        - Throw away your action handlers when forceStop() is called\n        - Check actions.isActive() if you really need to\n      ") : undefined;
-    }
-
-    return false;
-  }
-
-  if (expected !== phase) {
-    if (shouldWarn) {
-       true ? warning("\n        Cannot perform action.\n        The actions you used belong to an outdated phase\n\n        Current phase: " + expected + "\n        You called an action from outdated phase: " + phase + "\n\n        Tips:\n\n        - Do not use preDragActions actions after calling preDragActions.lift()\n      ") : undefined;
-    }
-
-    return false;
-  }
-
-  return true;
-}
-
-function canStart(_ref2) {
-  var lockAPI = _ref2.lockAPI,
-      store = _ref2.store,
-      registry = _ref2.registry,
-      draggableId = _ref2.draggableId;
-
-  if (lockAPI.isClaimed()) {
-    return false;
-  }
-
-  var entry = registry.draggable.findById(draggableId);
-
-  if (!entry) {
-     true ? warning("Unable to find draggable with id: " + draggableId) : undefined;
-    return false;
-  }
-
-  if (!entry.options.isEnabled) {
-    return false;
-  }
-
-  if (!canStartDrag(store.getState(), draggableId)) {
-    return false;
-  }
-
-  return true;
-}
-
-function tryStart(_ref3) {
-  var lockAPI = _ref3.lockAPI,
-      contextId = _ref3.contextId,
-      store = _ref3.store,
-      registry = _ref3.registry,
-      draggableId = _ref3.draggableId,
-      forceSensorStop = _ref3.forceSensorStop,
-      sourceEvent = _ref3.sourceEvent;
-  var shouldStart = canStart({
-    lockAPI: lockAPI,
-    store: store,
-    registry: registry,
-    draggableId: draggableId
-  });
-
-  if (!shouldStart) {
-    return null;
-  }
-
-  var entry = registry.draggable.getById(draggableId);
-  var el = findDraggable(contextId, entry.descriptor.id);
-
-  if (!el) {
-     true ? warning("Unable to find draggable element with id: " + draggableId) : undefined;
-    return null;
-  }
-
-  if (sourceEvent && !entry.options.canDragInteractiveElements && isEventInInteractiveElement(el, sourceEvent)) {
-    return null;
-  }
-
-  var lock = lockAPI.claim(forceSensorStop || noop);
-  var phase = 'PRE_DRAG';
-
-  function getShouldRespectForcePress() {
-    return entry.options.shouldRespectForcePress;
-  }
-
-  function isLockActive() {
-    return lockAPI.isActive(lock);
-  }
-
-  function tryDispatch(expected, getAction) {
-    if (_isActive({
-      expected: expected,
-      phase: phase,
-      isLockActive: isLockActive,
-      shouldWarn: true
-    })) {
-      store.dispatch(getAction());
-    }
-  }
-
-  var tryDispatchWhenDragging = tryDispatch.bind(this, 'DRAGGING');
-
-  function lift$1(args) {
-    function completed() {
-      lockAPI.release();
-      phase = 'COMPLETED';
-    }
-
-    if (phase !== 'PRE_DRAG') {
-      completed();
-      !(phase === 'PRE_DRAG') ?  true ? invariant(false, "Cannot lift in phase " + phase) : undefined : void 0;
-    }
-
-    store.dispatch(lift(args.liftActionArgs));
-    phase = 'DRAGGING';
-
-    function finish(reason, options) {
-      if (options === void 0) {
-        options = {
-          shouldBlockNextClick: false
-        };
-      }
-
-      args.cleanup();
-
-      if (options.shouldBlockNextClick) {
-        var unbind = bindEvents(window, [{
-          eventName: 'click',
-          fn: preventDefault,
-          options: {
-            once: true,
-            passive: false,
-            capture: true
-          }
-        }]);
-        setTimeout(unbind);
-      }
-
-      completed();
-      store.dispatch(drop({
-        reason: reason
-      }));
-    }
-
-    return Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_3__["default"])({
-      isActive: function isActive() {
-        return _isActive({
-          expected: 'DRAGGING',
-          phase: phase,
-          isLockActive: isLockActive,
-          shouldWarn: false
-        });
-      },
-      shouldRespectForcePress: getShouldRespectForcePress,
-      drop: function drop(options) {
-        return finish('DROP', options);
-      },
-      cancel: function cancel(options) {
-        return finish('CANCEL', options);
-      }
-    }, args.actions);
-  }
-
-  function fluidLift(clientSelection) {
-    var move$1 = Object(raf_schd__WEBPACK_IMPORTED_MODULE_10__["default"])(function (client) {
-      tryDispatchWhenDragging(function () {
-        return move({
-          client: client
-        });
-      });
-    });
-    var api = lift$1({
-      liftActionArgs: {
-        id: draggableId,
-        clientSelection: clientSelection,
-        movementMode: 'FLUID'
-      },
-      cleanup: function cleanup() {
-        return move$1.cancel();
-      },
-      actions: {
-        move: move$1
-      }
-    });
-    return Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_3__["default"])({}, api, {
-      move: move$1
-    });
-  }
-
-  function snapLift() {
-    var actions = {
-      moveUp: function moveUp$1() {
-        return tryDispatchWhenDragging(moveUp);
-      },
-      moveRight: function moveRight$1() {
-        return tryDispatchWhenDragging(moveRight);
-      },
-      moveDown: function moveDown$1() {
-        return tryDispatchWhenDragging(moveDown);
-      },
-      moveLeft: function moveLeft$1() {
-        return tryDispatchWhenDragging(moveLeft);
-      }
-    };
-    return lift$1({
-      liftActionArgs: {
-        id: draggableId,
-        clientSelection: getBorderBoxCenterPosition(el),
-        movementMode: 'SNAP'
-      },
-      cleanup: noop,
-      actions: actions
-    });
-  }
-
-  function abortPreDrag() {
-    var shouldRelease = _isActive({
-      expected: 'PRE_DRAG',
-      phase: phase,
-      isLockActive: isLockActive,
-      shouldWarn: true
-    });
-
-    if (shouldRelease) {
-      lockAPI.release();
-    }
-  }
-
-  var preDrag = {
-    isActive: function isActive() {
-      return _isActive({
-        expected: 'PRE_DRAG',
-        phase: phase,
-        isLockActive: isLockActive,
-        shouldWarn: false
-      });
-    },
-    shouldRespectForcePress: getShouldRespectForcePress,
-    fluidLift: fluidLift,
-    snapLift: snapLift,
-    abort: abortPreDrag
-  };
-  return preDrag;
-}
-
-var defaultSensors = [useMouseSensor, useKeyboardSensor, useMouseSensor$1];
-function useSensorMarshal(_ref4) {
-  var contextId = _ref4.contextId,
-      store = _ref4.store,
-      registry = _ref4.registry,
-      customSensors = _ref4.customSensors,
-      enableDefaultSensors = _ref4.enableDefaultSensors;
-  var useSensors = [].concat(enableDefaultSensors ? defaultSensors : [], customSensors || []);
-  var lockAPI = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(function () {
-    return create();
-  })[0];
-  var tryAbandonLock = Object(use_memo_one__WEBPACK_IMPORTED_MODULE_1__["useCallback"])(function tryAbandonLock(previous, current) {
-    if (previous.isDragging && !current.isDragging) {
-      lockAPI.tryAbandon();
-    }
-  }, [lockAPI]);
-  useIsomorphicLayoutEffect(function listenToStore() {
-    var previous = store.getState();
-    var unsubscribe = store.subscribe(function () {
-      var current = store.getState();
-      tryAbandonLock(previous, current);
-      previous = current;
-    });
-    return unsubscribe;
-  }, [lockAPI, store, tryAbandonLock]);
-  useIsomorphicLayoutEffect(function () {
-    return lockAPI.tryAbandon;
-  }, [lockAPI.tryAbandon]);
-  var canGetLock = Object(use_memo_one__WEBPACK_IMPORTED_MODULE_1__["useCallback"])(function (draggableId) {
-    return canStart({
-      lockAPI: lockAPI,
-      registry: registry,
-      store: store,
-      draggableId: draggableId
-    });
-  }, [lockAPI, registry, store]);
-  var tryGetLock = Object(use_memo_one__WEBPACK_IMPORTED_MODULE_1__["useCallback"])(function (draggableId, forceStop, options) {
-    return tryStart({
-      lockAPI: lockAPI,
-      registry: registry,
-      contextId: contextId,
-      store: store,
-      draggableId: draggableId,
-      forceSensorStop: forceStop,
-      sourceEvent: options && options.sourceEvent ? options.sourceEvent : null
-    });
-  }, [contextId, lockAPI, registry, store]);
-  var findClosestDraggableId = Object(use_memo_one__WEBPACK_IMPORTED_MODULE_1__["useCallback"])(function (event) {
-    return tryGetClosestDraggableIdFromEvent(contextId, event);
-  }, [contextId]);
-  var findOptionsForDraggable = Object(use_memo_one__WEBPACK_IMPORTED_MODULE_1__["useCallback"])(function (id) {
-    var entry = registry.draggable.findById(id);
-    return entry ? entry.options : null;
-  }, [registry.draggable]);
-  var tryReleaseLock = Object(use_memo_one__WEBPACK_IMPORTED_MODULE_1__["useCallback"])(lockAPI.tryAbandon, [lockAPI]);
-  var isLockClaimed = Object(use_memo_one__WEBPACK_IMPORTED_MODULE_1__["useCallback"])(lockAPI.isClaimed, [lockAPI]);
-  var api = Object(use_memo_one__WEBPACK_IMPORTED_MODULE_1__["useMemo"])(function () {
-    return {
-      canGetLock: canGetLock,
-      tryGetLock: tryGetLock,
-      findClosestDraggableId: findClosestDraggableId,
-      findOptionsForDraggable: findOptionsForDraggable,
-      tryReleaseLock: tryReleaseLock,
-      isLockClaimed: isLockClaimed
-    };
-  }, [canGetLock, tryGetLock, findClosestDraggableId, findOptionsForDraggable, tryReleaseLock, isLockClaimed]);
-  useValidateSensorHooks(useSensors);
-
-  for (var i = 0; i < useSensors.length; i++) {
-    useSensors[i](api);
-  }
-}
-
-var createResponders = function createResponders(props) {
-  return {
-    onBeforeDragStart: props.onBeforeDragStart,
-    onDragStart: props.onDragStart,
-    onDragEnd: props.onDragEnd,
-    onDragUpdate: props.onDragUpdate
-  };
-};
-
-function getStore(lazyRef) {
-  !lazyRef.current ?  true ? invariant(false, 'Could not find store from lazy ref') : undefined : void 0;
-  return lazyRef.current;
-}
-
-function App(props) {
-  var contextId = props.contextId,
-      setCallbacks = props.setCallbacks,
-      sensors = props.sensors,
-      nonce = props.nonce,
-      liftInstruction = props.liftInstruction;
-  var lazyStoreRef = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(null);
-  useStartupValidation();
-  var lastPropsRef = usePrevious(props);
-  var getResponders = Object(use_memo_one__WEBPACK_IMPORTED_MODULE_1__["useCallback"])(function () {
-    return createResponders(lastPropsRef.current);
-  }, [lastPropsRef]);
-  var announce = useAnnouncer(contextId);
-  var liftInstructionId = useLiftInstruction(contextId, liftInstruction);
-  var styleMarshal = useStyleMarshal(contextId, nonce);
-  var lazyDispatch = Object(use_memo_one__WEBPACK_IMPORTED_MODULE_1__["useCallback"])(function (action) {
-    getStore(lazyStoreRef).dispatch(action);
-  }, []);
-  var marshalCallbacks = Object(use_memo_one__WEBPACK_IMPORTED_MODULE_1__["useMemo"])(function () {
-    return Object(redux__WEBPACK_IMPORTED_MODULE_4__["bindActionCreators"])({
-      publishWhileDragging: publishWhileDragging,
-      updateDroppableScroll: updateDroppableScroll,
-      updateDroppableIsEnabled: updateDroppableIsEnabled,
-      updateDroppableIsCombineEnabled: updateDroppableIsCombineEnabled,
-      collectionStarting: collectionStarting
-    }, lazyDispatch);
-  }, [lazyDispatch]);
-  var registry = useRegistry();
-  var dimensionMarshal = Object(use_memo_one__WEBPACK_IMPORTED_MODULE_1__["useMemo"])(function () {
-    return createDimensionMarshal(registry, marshalCallbacks);
-  }, [registry, marshalCallbacks]);
-  var autoScroller = Object(use_memo_one__WEBPACK_IMPORTED_MODULE_1__["useMemo"])(function () {
-    return createAutoScroller(Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_3__["default"])({
-      scrollWindow: scrollWindow,
-      scrollDroppable: dimensionMarshal.scrollDroppable
-    }, Object(redux__WEBPACK_IMPORTED_MODULE_4__["bindActionCreators"])({
-      move: move
-    }, lazyDispatch)));
-  }, [dimensionMarshal.scrollDroppable, lazyDispatch]);
-  var focusMarshal = useFocusMarshal(contextId);
-  var store = Object(use_memo_one__WEBPACK_IMPORTED_MODULE_1__["useMemo"])(function () {
-    return createStore({
-      announce: announce,
-      autoScroller: autoScroller,
-      dimensionMarshal: dimensionMarshal,
-      focusMarshal: focusMarshal,
-      getResponders: getResponders,
-      styleMarshal: styleMarshal
-    });
-  }, [announce, autoScroller, dimensionMarshal, focusMarshal, getResponders, styleMarshal]);
-
-  if (true) {
-    if (lazyStoreRef.current && lazyStoreRef.current !== store) {
-       true ? warning('unexpected store change') : undefined;
-    }
-  }
-
-  lazyStoreRef.current = store;
-  var tryResetStore = Object(use_memo_one__WEBPACK_IMPORTED_MODULE_1__["useCallback"])(function () {
-    var current = getStore(lazyStoreRef);
-    var state = current.getState();
-
-    if (state.phase !== 'IDLE') {
-      current.dispatch(flush());
-    }
-  }, []);
-  var isDragging = Object(use_memo_one__WEBPACK_IMPORTED_MODULE_1__["useCallback"])(function () {
-    var state = getStore(lazyStoreRef).getState();
-    return state.isDragging || state.phase === 'DROP_ANIMATING';
-  }, []);
-  var appCallbacks = Object(use_memo_one__WEBPACK_IMPORTED_MODULE_1__["useMemo"])(function () {
-    return {
-      isDragging: isDragging,
-      tryAbort: tryResetStore
-    };
-  }, [isDragging, tryResetStore]);
-  setCallbacks(appCallbacks);
-  var getCanLift = Object(use_memo_one__WEBPACK_IMPORTED_MODULE_1__["useCallback"])(function (id) {
-    return canStartDrag(getStore(lazyStoreRef).getState(), id);
-  }, []);
-  var getIsMovementAllowed = Object(use_memo_one__WEBPACK_IMPORTED_MODULE_1__["useCallback"])(function () {
-    return isMovementAllowed(getStore(lazyStoreRef).getState());
-  }, []);
-  var appContext = Object(use_memo_one__WEBPACK_IMPORTED_MODULE_1__["useMemo"])(function () {
-    return {
-      marshal: dimensionMarshal,
-      focus: focusMarshal,
-      contextId: contextId,
-      canLift: getCanLift,
-      isMovementAllowed: getIsMovementAllowed,
-      liftInstructionId: liftInstructionId,
-      registry: registry
-    };
-  }, [contextId, dimensionMarshal, focusMarshal, getCanLift, getIsMovementAllowed, liftInstructionId, registry]);
-  useSensorMarshal({
-    contextId: contextId,
-    store: store,
-    registry: registry,
-    customSensors: sensors,
-    enableDefaultSensors: props.enableDefaultSensors !== false
-  });
-  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-    return tryResetStore;
-  }, [tryResetStore]);
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(AppContext.Provider, {
-    value: appContext
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_redux__WEBPACK_IMPORTED_MODULE_5__["Provider"], {
-    context: StoreContext,
-    store: store
-  }, props.children));
-}
-
-var instanceCount = 0;
-function resetServerContext() {
-  instanceCount = 0;
-}
-function DragDropContext(props) {
-  var contextId = Object(use_memo_one__WEBPACK_IMPORTED_MODULE_1__["useMemo"])(function () {
-    return "" + instanceCount++;
-  }, []);
-  var liftInstruction = props.liftInstruction || preset.liftInstruction;
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(ErrorBoundary, null, function (setCallbacks) {
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(App, {
-      nonce: props.nonce,
-      contextId: contextId,
-      setCallbacks: setCallbacks,
-      liftInstruction: liftInstruction,
-      enableDefaultSensors: props.enableDefaultSensors,
-      sensors: props.sensors,
-      onBeforeDragStart: props.onBeforeDragStart,
-      onDragStart: props.onDragStart,
-      onDragUpdate: props.onDragUpdate,
-      onDragEnd: props.onDragEnd
-    }, props.children);
-  });
-}
-
-var isEqual$1 = function isEqual(base) {
-  return function (value) {
-    return base === value;
-  };
-};
-
-var isScroll = isEqual$1('scroll');
-var isAuto = isEqual$1('auto');
-var isVisible$1 = isEqual$1('visible');
-
-var isEither = function isEither(overflow, fn) {
-  return fn(overflow.overflowX) || fn(overflow.overflowY);
-};
-
-var isBoth = function isBoth(overflow, fn) {
-  return fn(overflow.overflowX) && fn(overflow.overflowY);
-};
-
-var isElementScrollable = function isElementScrollable(el) {
-  var style = window.getComputedStyle(el);
-  var overflow = {
-    overflowX: style.overflowX,
-    overflowY: style.overflowY
-  };
-  return isEither(overflow, isScroll) || isEither(overflow, isAuto);
-};
-
-var isBodyScrollable = function isBodyScrollable() {
-  if (false) {}
-
-  var body = getBodyElement();
-  var html = document.documentElement;
-  !html ?  true ? invariant(false) : undefined : void 0;
-
-  if (!isElementScrollable(body)) {
-    return false;
-  }
-
-  var htmlStyle = window.getComputedStyle(html);
-  var htmlOverflow = {
-    overflowX: htmlStyle.overflowX,
-    overflowY: htmlStyle.overflowY
-  };
-
-  if (isBoth(htmlOverflow, isVisible$1)) {
-    return false;
-  }
-
-   true ? warning("\n    We have detected that your <body> element might be a scroll container.\n    We have found no reliable way of detecting whether the <body> element is a scroll container.\n    Under most circumstances a <body> scroll bar will be on the <html> element (document.documentElement)\n\n    Because we cannot determine if the <body> is a scroll container, and generally it is not one,\n    we will be treating the <body> as *not* a scroll container\n\n    More information: https://github.com/atlassian/react-beautiful-dnd/blob/master/docs/guides/how-we-detect-scroll-containers.md\n  ") : undefined;
-  return false;
-};
-
-var getClosestScrollable = function getClosestScrollable(el) {
-  if (el == null) {
-    return null;
-  }
-
-  if (el === document.body) {
-    return isBodyScrollable() ? el : null;
-  }
-
-  if (el === document.documentElement) {
-    return null;
-  }
-
-  if (!isElementScrollable(el)) {
-    return getClosestScrollable(el.parentElement);
-  }
-
-  return el;
-};
-
-var checkForNestedScrollContainers = (function (scrollable) {
-  if (!scrollable) {
+function assertValidProps(tag, props) {
+  if (!props) {
     return;
-  }
+  } // Note the use of `==` which checks for null or undefined.
 
-  var anotherScrollParent = getClosestScrollable(scrollable.parentElement);
 
-  if (!anotherScrollParent) {
-    return;
-  }
-
-   true ? warning("\n    Droppable: unsupported nested scroll container detected.\n    A Droppable can only have one scroll parent (which can be itself)\n    Nested scroll containers are currently not supported.\n\n    We hope to support nested scroll containers soon: https://github.com/atlassian/react-beautiful-dnd/issues/131\n  ") : undefined;
-});
-
-var getScroll$1 = (function (el) {
-  return {
-    x: el.scrollLeft,
-    y: el.scrollTop
-  };
-});
-
-var getIsFixed = function getIsFixed(el) {
-  if (!el) {
-    return false;
-  }
-
-  var style = window.getComputedStyle(el);
-
-  if (style.position === 'fixed') {
-    return true;
-  }
-
-  return getIsFixed(el.parentElement);
-};
-
-var getEnv = (function (start) {
-  var closestScrollable = getClosestScrollable(start);
-  var isFixedOnPage = getIsFixed(start);
-  return {
-    closestScrollable: closestScrollable,
-    isFixedOnPage: isFixedOnPage
-  };
-});
-
-var getDroppableDimension = (function (_ref) {
-  var descriptor = _ref.descriptor,
-      isEnabled = _ref.isEnabled,
-      isCombineEnabled = _ref.isCombineEnabled,
-      isFixedOnPage = _ref.isFixedOnPage,
-      direction = _ref.direction,
-      client = _ref.client,
-      page = _ref.page,
-      closest = _ref.closest;
-
-  var frame = function () {
-    if (!closest) {
-      return null;
-    }
-
-    var scrollSize = closest.scrollSize,
-        frameClient = closest.client;
-    var maxScroll = getMaxScroll({
-      scrollHeight: scrollSize.scrollHeight,
-      scrollWidth: scrollSize.scrollWidth,
-      height: frameClient.paddingBox.height,
-      width: frameClient.paddingBox.width
-    });
-    return {
-      pageMarginBox: closest.page.marginBox,
-      frameClient: frameClient,
-      scrollSize: scrollSize,
-      shouldClipSubject: closest.shouldClipSubject,
-      scroll: {
-        initial: closest.scroll,
-        current: closest.scroll,
-        max: maxScroll,
-        diff: {
-          value: origin,
-          displacement: origin
+  if (voidElementTags[tag]) {
+    (function () {
+      if (!(props.children == null && props.dangerouslySetInnerHTML == null)) {
+        {
+          throw ReactError(Error(tag + " is a void element tag and must neither have `children` nor use `dangerouslySetInnerHTML`." + (ReactDebugCurrentFrame$4.getStackAddendum())));
         }
       }
-    };
-  }();
+    })();
+  }
 
-  var axis = direction === 'vertical' ? vertical : horizontal;
-  var subject = getSubject({
-    page: page,
-    withPlaceholder: null,
-    axis: axis,
-    frame: frame
+  if (props.dangerouslySetInnerHTML != null) {
+    (function () {
+      if (!(props.children == null)) {
+        {
+          throw ReactError(Error("Can only set one of `children` or `props.dangerouslySetInnerHTML`."));
+        }
+      }
+    })();
+
+    (function () {
+      if (!(typeof props.dangerouslySetInnerHTML === 'object' && HTML in props.dangerouslySetInnerHTML)) {
+        {
+          throw ReactError(Error("`props.dangerouslySetInnerHTML` must be in the form `{__html: ...}`. Please visit https://fb.me/react-invariant-dangerously-set-inner-html for more information."));
+        }
+      }
+    })();
+  }
+
+  {
+    !(props.suppressContentEditableWarning || !props.contentEditable || props.children == null) ? warning$1(false, 'A component is `contentEditable` and contains `children` managed by ' + 'React. It is now your responsibility to guarantee that none of ' + 'those nodes are unexpectedly modified or duplicated. This is ' + 'probably not intentional.') : void 0;
+  }
+
+  (function () {
+    if (!(props.style == null || typeof props.style === 'object')) {
+      {
+        throw ReactError(Error("The `style` prop expects a mapping from style properties to values, not a string. For example, style={{marginRight: spacing + 'em'}} when using JSX." + (ReactDebugCurrentFrame$4.getStackAddendum())));
+      }
+    }
+  })();
+}
+
+/**
+ * CSS properties which accept numbers but are not in units of "px".
+ */
+var isUnitlessNumber = {
+  animationIterationCount: true,
+  borderImageOutset: true,
+  borderImageSlice: true,
+  borderImageWidth: true,
+  boxFlex: true,
+  boxFlexGroup: true,
+  boxOrdinalGroup: true,
+  columnCount: true,
+  columns: true,
+  flex: true,
+  flexGrow: true,
+  flexPositive: true,
+  flexShrink: true,
+  flexNegative: true,
+  flexOrder: true,
+  gridArea: true,
+  gridRow: true,
+  gridRowEnd: true,
+  gridRowSpan: true,
+  gridRowStart: true,
+  gridColumn: true,
+  gridColumnEnd: true,
+  gridColumnSpan: true,
+  gridColumnStart: true,
+  fontWeight: true,
+  lineClamp: true,
+  lineHeight: true,
+  opacity: true,
+  order: true,
+  orphans: true,
+  tabSize: true,
+  widows: true,
+  zIndex: true,
+  zoom: true,
+  // SVG-related properties
+  fillOpacity: true,
+  floodOpacity: true,
+  stopOpacity: true,
+  strokeDasharray: true,
+  strokeDashoffset: true,
+  strokeMiterlimit: true,
+  strokeOpacity: true,
+  strokeWidth: true
+};
+/**
+ * @param {string} prefix vendor-specific prefix, eg: Webkit
+ * @param {string} key style name, eg: transitionDuration
+ * @return {string} style name prefixed with `prefix`, properly camelCased, eg:
+ * WebkitTransitionDuration
+ */
+
+function prefixKey(prefix, key) {
+  return prefix + key.charAt(0).toUpperCase() + key.substring(1);
+}
+/**
+ * Support style names that may come passed in prefixed by adding permutations
+ * of vendor prefixes.
+ */
+
+
+var prefixes = ['Webkit', 'ms', 'Moz', 'O']; // Using Object.keys here, or else the vanilla for-in loop makes IE8 go into an
+// infinite loop, because it iterates over the newly added props too.
+
+Object.keys(isUnitlessNumber).forEach(function (prop) {
+  prefixes.forEach(function (prefix) {
+    isUnitlessNumber[prefixKey(prefix, prop)] = isUnitlessNumber[prop];
   });
-  var dimension = {
-    descriptor: descriptor,
-    isCombineEnabled: isCombineEnabled,
-    isFixedOnPage: isFixedOnPage,
-    axis: axis,
-    isEnabled: isEnabled,
-    client: client,
-    page: page,
-    frame: frame,
-    subject: subject
-  };
-  return dimension;
 });
 
-var getClient = function getClient(targetRef, closestScrollable) {
-  var base = Object(css_box_model__WEBPACK_IMPORTED_MODULE_6__["getBox"])(targetRef);
+/**
+ * Convert a value into the proper css writable value. The style name `name`
+ * should be logical (no hyphens), as specified
+ * in `CSSProperty.isUnitlessNumber`.
+ *
+ * @param {string} name CSS property name such as `topMargin`.
+ * @param {*} value CSS property value such as `10px`.
+ * @return {string} Normalized style value with dimensions applied.
+ */
 
-  if (!closestScrollable) {
-    return base;
+function dangerousStyleValue(name, value, isCustomProperty) {
+  // Note that we've removed escapeTextForBrowser() calls here since the
+  // whole string will be escaped when the attribute is injected into
+  // the markup. If you provide unsafe user data here they can inject
+  // arbitrary CSS which may be problematic (I couldn't repro this):
+  // https://www.owasp.org/index.php/XSS_Filter_Evasion_Cheat_Sheet
+  // http://www.thespanner.co.uk/2007/11/26/ultimate-xss-css-injection/
+  // This is not an XSS hole but instead a potential CSS injection issue
+  // which has lead to a greater discussion about how we're going to
+  // trust URLs moving forward. See #2115901
+  var isEmpty = value == null || typeof value === 'boolean' || value === '';
+
+  if (isEmpty) {
+    return '';
   }
 
-  if (targetRef !== closestScrollable) {
-    return base;
+  if (!isCustomProperty && typeof value === 'number' && value !== 0 && !(isUnitlessNumber.hasOwnProperty(name) && isUnitlessNumber[name])) {
+    return value + 'px'; // Presumes implicit 'px' suffix for unitless numbers
   }
 
-  var top = base.paddingBox.top - closestScrollable.scrollTop;
-  var left = base.paddingBox.left - closestScrollable.scrollLeft;
-  var bottom = top + closestScrollable.scrollHeight;
-  var right = left + closestScrollable.scrollWidth;
-  var paddingBox = {
-    top: top,
-    right: right,
-    bottom: bottom,
-    left: left
+  return ('' + value).trim();
+}
+
+var uppercasePattern = /([A-Z])/g;
+var msPattern = /^ms-/;
+/**
+ * Hyphenates a camelcased CSS property name, for example:
+ *
+ *   > hyphenateStyleName('backgroundColor')
+ *   < "background-color"
+ *   > hyphenateStyleName('MozTransition')
+ *   < "-moz-transition"
+ *   > hyphenateStyleName('msTransition')
+ *   < "-ms-transition"
+ *
+ * As Modernizr suggests (http://modernizr.com/docs/#prefixed), an `ms` prefix
+ * is converted to `-ms-`.
+ */
+
+function hyphenateStyleName(name) {
+  return name.replace(uppercasePattern, '-$1').toLowerCase().replace(msPattern, '-ms-');
+}
+
+function isCustomComponent(tagName, props) {
+  if (tagName.indexOf('-') === -1) {
+    return typeof props.is === 'string';
+  }
+
+  switch (tagName) {
+    // These are reserved SVG and MathML elements.
+    // We don't mind this whitelist too much because we expect it to never grow.
+    // The alternative is to track the namespace in a few places which is convoluted.
+    // https://w3c.github.io/webcomponents/spec/custom/#custom-elements-core-concepts
+    case 'annotation-xml':
+    case 'color-profile':
+    case 'font-face':
+    case 'font-face-src':
+    case 'font-face-uri':
+    case 'font-face-format':
+    case 'font-face-name':
+    case 'missing-glyph':
+      return false;
+
+    default:
+      return true;
+  }
+}
+
+var warnValidStyle = function () {};
+
+{
+  // 'msTransform' is correct, but the other prefixes should be capitalized
+  var badVendoredStyleNamePattern = /^(?:webkit|moz|o)[A-Z]/;
+  var msPattern$1 = /^-ms-/;
+  var hyphenPattern = /-(.)/g; // style values shouldn't contain a semicolon
+
+  var badStyleValueWithSemicolonPattern = /;\s*$/;
+  var warnedStyleNames = {};
+  var warnedStyleValues = {};
+  var warnedForNaNValue = false;
+  var warnedForInfinityValue = false;
+
+  var camelize = function (string) {
+    return string.replace(hyphenPattern, function (_, character) {
+      return character.toUpperCase();
+    });
   };
-  var borderBox = Object(css_box_model__WEBPACK_IMPORTED_MODULE_6__["expand"])(paddingBox, base.border);
-  var client = Object(css_box_model__WEBPACK_IMPORTED_MODULE_6__["createBox"])({
-    borderBox: borderBox,
-    margin: base.margin,
-    border: base.border,
-    padding: base.padding
-  });
-  return client;
-};
 
-var getDimension = (function (_ref) {
-  var ref = _ref.ref,
-      descriptor = _ref.descriptor,
-      env = _ref.env,
-      windowScroll = _ref.windowScroll,
-      direction = _ref.direction,
-      isDropDisabled = _ref.isDropDisabled,
-      isCombineEnabled = _ref.isCombineEnabled,
-      shouldClipSubject = _ref.shouldClipSubject;
-  var closestScrollable = env.closestScrollable;
-  var client = getClient(ref, closestScrollable);
-  var page = Object(css_box_model__WEBPACK_IMPORTED_MODULE_6__["withScroll"])(client, windowScroll);
-
-  var closest = function () {
-    if (!closestScrollable) {
-      return null;
+  var warnHyphenatedStyleName = function (name) {
+    if (warnedStyleNames.hasOwnProperty(name) && warnedStyleNames[name]) {
+      return;
     }
 
-    var frameClient = Object(css_box_model__WEBPACK_IMPORTED_MODULE_6__["getBox"])(closestScrollable);
-    var scrollSize = {
-      scrollHeight: closestScrollable.scrollHeight,
-      scrollWidth: closestScrollable.scrollWidth
-    };
-    return {
-      client: frameClient,
-      page: Object(css_box_model__WEBPACK_IMPORTED_MODULE_6__["withScroll"])(frameClient, windowScroll),
-      scroll: getScroll$1(closestScrollable),
-      scrollSize: scrollSize,
-      shouldClipSubject: shouldClipSubject
-    };
-  }();
+    warnedStyleNames[name] = true;
+    warning$1(false, 'Unsupported style property %s. Did you mean %s?', name, // As Andi Smith suggests
+    // (http://www.andismith.com/blog/2012/02/modernizr-prefixed/), an `-ms` prefix
+    // is converted to lowercase `ms`.
+    camelize(name.replace(msPattern$1, 'ms-')));
+  };
 
-  var dimension = getDroppableDimension({
-    descriptor: descriptor,
-    isEnabled: !isDropDisabled,
-    isCombineEnabled: isCombineEnabled,
-    isFixedOnPage: env.isFixedOnPage,
-    direction: direction,
-    client: client,
-    page: page,
-    closest: closest
-  });
-  return dimension;
-});
+  var warnBadVendoredStyleName = function (name) {
+    if (warnedStyleNames.hasOwnProperty(name) && warnedStyleNames[name]) {
+      return;
+    }
 
-var immediate = {
-  passive: false
+    warnedStyleNames[name] = true;
+    warning$1(false, 'Unsupported vendor-prefixed style property %s. Did you mean %s?', name, name.charAt(0).toUpperCase() + name.slice(1));
+  };
+
+  var warnStyleValueWithSemicolon = function (name, value) {
+    if (warnedStyleValues.hasOwnProperty(value) && warnedStyleValues[value]) {
+      return;
+    }
+
+    warnedStyleValues[value] = true;
+    warning$1(false, "Style property values shouldn't contain a semicolon. " + 'Try "%s: %s" instead.', name, value.replace(badStyleValueWithSemicolonPattern, ''));
+  };
+
+  var warnStyleValueIsNaN = function (name, value) {
+    if (warnedForNaNValue) {
+      return;
+    }
+
+    warnedForNaNValue = true;
+    warning$1(false, '`NaN` is an invalid value for the `%s` css style property.', name);
+  };
+
+  var warnStyleValueIsInfinity = function (name, value) {
+    if (warnedForInfinityValue) {
+      return;
+    }
+
+    warnedForInfinityValue = true;
+    warning$1(false, '`Infinity` is an invalid value for the `%s` css style property.', name);
+  };
+
+  warnValidStyle = function (name, value) {
+    if (name.indexOf('-') > -1) {
+      warnHyphenatedStyleName(name);
+    } else if (badVendoredStyleNamePattern.test(name)) {
+      warnBadVendoredStyleName(name);
+    } else if (badStyleValueWithSemicolonPattern.test(value)) {
+      warnStyleValueWithSemicolon(name, value);
+    }
+
+    if (typeof value === 'number') {
+      if (isNaN(value)) {
+        warnStyleValueIsNaN(name, value);
+      } else if (!isFinite(value)) {
+        warnStyleValueIsInfinity(name, value);
+      }
+    }
+  };
+}
+
+var warnValidStyle$1 = warnValidStyle;
+
+var ariaProperties = {
+  'aria-current': 0,
+  // state
+  'aria-details': 0,
+  'aria-disabled': 0,
+  // state
+  'aria-hidden': 0,
+  // state
+  'aria-invalid': 0,
+  // state
+  'aria-keyshortcuts': 0,
+  'aria-label': 0,
+  'aria-roledescription': 0,
+  // Widget Attributes
+  'aria-autocomplete': 0,
+  'aria-checked': 0,
+  'aria-expanded': 0,
+  'aria-haspopup': 0,
+  'aria-level': 0,
+  'aria-modal': 0,
+  'aria-multiline': 0,
+  'aria-multiselectable': 0,
+  'aria-orientation': 0,
+  'aria-placeholder': 0,
+  'aria-pressed': 0,
+  'aria-readonly': 0,
+  'aria-required': 0,
+  'aria-selected': 0,
+  'aria-sort': 0,
+  'aria-valuemax': 0,
+  'aria-valuemin': 0,
+  'aria-valuenow': 0,
+  'aria-valuetext': 0,
+  // Live Region Attributes
+  'aria-atomic': 0,
+  'aria-busy': 0,
+  'aria-live': 0,
+  'aria-relevant': 0,
+  // Drag-and-Drop Attributes
+  'aria-dropeffect': 0,
+  'aria-grabbed': 0,
+  // Relationship Attributes
+  'aria-activedescendant': 0,
+  'aria-colcount': 0,
+  'aria-colindex': 0,
+  'aria-colspan': 0,
+  'aria-controls': 0,
+  'aria-describedby': 0,
+  'aria-errormessage': 0,
+  'aria-flowto': 0,
+  'aria-labelledby': 0,
+  'aria-owns': 0,
+  'aria-posinset': 0,
+  'aria-rowcount': 0,
+  'aria-rowindex': 0,
+  'aria-rowspan': 0,
+  'aria-setsize': 0
 };
-var delayed = {
-  passive: true
-};
-var getListenerOptions = (function (options) {
-  return options.shouldPublishImmediately ? immediate : delayed;
-});
 
-function useRequiredContext(Context) {
-  var result = Object(react__WEBPACK_IMPORTED_MODULE_0__["useContext"])(Context);
-  !result ?  true ? invariant(false, 'Could not find required context') : undefined : void 0;
+var warnedProperties = {};
+var rARIA = new RegExp('^(aria)-[' + ATTRIBUTE_NAME_CHAR + ']*$');
+var rARIACamel = new RegExp('^(aria)[A-Z][' + ATTRIBUTE_NAME_CHAR + ']*$');
+var hasOwnProperty$2 = Object.prototype.hasOwnProperty;
+
+function validateProperty(tagName, name) {
+  if (hasOwnProperty$2.call(warnedProperties, name) && warnedProperties[name]) {
+    return true;
+  }
+
+  if (rARIACamel.test(name)) {
+    var ariaName = 'aria-' + name.slice(4).toLowerCase();
+    var correctName = ariaProperties.hasOwnProperty(ariaName) ? ariaName : null; // If this is an aria-* attribute, but is not listed in the known DOM
+    // DOM properties, then it is an invalid aria-* attribute.
+
+    if (correctName == null) {
+      warning$1(false, 'Invalid ARIA attribute `%s`. ARIA attributes follow the pattern aria-* and must be lowercase.', name);
+      warnedProperties[name] = true;
+      return true;
+    } // aria-* attributes should be lowercase; suggest the lowercase version.
+
+
+    if (name !== correctName) {
+      warning$1(false, 'Invalid ARIA attribute `%s`. Did you mean `%s`?', name, correctName);
+      warnedProperties[name] = true;
+      return true;
+    }
+  }
+
+  if (rARIA.test(name)) {
+    var lowerCasedName = name.toLowerCase();
+    var standardName = ariaProperties.hasOwnProperty(lowerCasedName) ? lowerCasedName : null; // If this is an aria-* attribute, but is not listed in the known DOM
+    // DOM properties, then it is an invalid aria-* attribute.
+
+    if (standardName == null) {
+      warnedProperties[name] = true;
+      return false;
+    } // aria-* attributes should be lowercase; suggest the lowercase version.
+
+
+    if (name !== standardName) {
+      warning$1(false, 'Unknown ARIA attribute `%s`. Did you mean `%s`?', name, standardName);
+      warnedProperties[name] = true;
+      return true;
+    }
+  }
+
+  return true;
+}
+
+function warnInvalidARIAProps(type, props) {
+  var invalidProps = [];
+
+  for (var key in props) {
+    var isValid = validateProperty(type, key);
+
+    if (!isValid) {
+      invalidProps.push(key);
+    }
+  }
+
+  var unknownPropString = invalidProps.map(function (prop) {
+    return '`' + prop + '`';
+  }).join(', ');
+
+  if (invalidProps.length === 1) {
+    warning$1(false, 'Invalid aria prop %s on <%s> tag. ' + 'For details, see https://fb.me/invalid-aria-prop', unknownPropString, type);
+  } else if (invalidProps.length > 1) {
+    warning$1(false, 'Invalid aria props %s on <%s> tag. ' + 'For details, see https://fb.me/invalid-aria-prop', unknownPropString, type);
+  }
+}
+
+function validateProperties(type, props) {
+  if (isCustomComponent(type, props)) {
+    return;
+  }
+
+  warnInvalidARIAProps(type, props);
+}
+
+var didWarnValueNull = false;
+function validateProperties$1(type, props) {
+  if (type !== 'input' && type !== 'textarea' && type !== 'select') {
+    return;
+  }
+
+  if (props != null && props.value === null && !didWarnValueNull) {
+    didWarnValueNull = true;
+
+    if (type === 'select' && props.multiple) {
+      warning$1(false, '`value` prop on `%s` should not be null. ' + 'Consider using an empty array when `multiple` is set to `true` ' + 'to clear the component or `undefined` for uncontrolled components.', type);
+    } else {
+      warning$1(false, '`value` prop on `%s` should not be null. ' + 'Consider using an empty string to clear the component or `undefined` ' + 'for uncontrolled components.', type);
+    }
+  }
+}
+
+/**
+ * Registers plugins so that they can extract and dispatch events.
+ *
+ * @see {EventPluginHub}
+ */
+
+/**
+ * Ordered list of injected plugins.
+ */
+
+
+
+/**
+ * Mapping from event name to dispatch config
+ */
+
+
+/**
+ * Mapping from registration name to plugin module
+ */
+
+var registrationNameModules = {};
+/**
+ * Mapping from registration name to event name
+ */
+
+
+/**
+ * Mapping from lowercase registration names to the properly cased version,
+ * used to warn in the case of missing event handlers. Available
+ * only in true.
+ * @type {Object}
+ */
+
+var possibleRegistrationNames = {}; // Trust the developer to only use possibleRegistrationNames in true
+
+/**
+ * Injects an ordering of plugins (by plugin name). This allows the ordering
+ * to be decoupled from injection of the actual plugins so that ordering is
+ * always deterministic regardless of packaging, on-the-fly injection, etc.
+ *
+ * @param {array} InjectedEventPluginOrder
+ * @internal
+ * @see {EventPluginHub.injection.injectEventPluginOrder}
+ */
+
+
+/**
+ * Injects plugins to be used by `EventPluginHub`. The plugin names must be
+ * in the ordering injected by `injectEventPluginOrder`.
+ *
+ * Plugins can be injected as part of page initialization or on-the-fly.
+ *
+ * @param {object} injectedNamesToPlugins Map from names to plugin modules.
+ * @internal
+ * @see {EventPluginHub.injection.injectEventPluginsByName}
+ */
+
+// When adding attributes to the HTML or SVG whitelist, be sure to
+// also add them to this module to ensure casing and incorrect name
+// warnings.
+var possibleStandardNames = {
+  // HTML
+  accept: 'accept',
+  acceptcharset: 'acceptCharset',
+  'accept-charset': 'acceptCharset',
+  accesskey: 'accessKey',
+  action: 'action',
+  allowfullscreen: 'allowFullScreen',
+  alt: 'alt',
+  as: 'as',
+  async: 'async',
+  autocapitalize: 'autoCapitalize',
+  autocomplete: 'autoComplete',
+  autocorrect: 'autoCorrect',
+  autofocus: 'autoFocus',
+  autoplay: 'autoPlay',
+  autosave: 'autoSave',
+  capture: 'capture',
+  cellpadding: 'cellPadding',
+  cellspacing: 'cellSpacing',
+  challenge: 'challenge',
+  charset: 'charSet',
+  checked: 'checked',
+  children: 'children',
+  cite: 'cite',
+  class: 'className',
+  classid: 'classID',
+  classname: 'className',
+  cols: 'cols',
+  colspan: 'colSpan',
+  content: 'content',
+  contenteditable: 'contentEditable',
+  contextmenu: 'contextMenu',
+  controls: 'controls',
+  controlslist: 'controlsList',
+  coords: 'coords',
+  crossorigin: 'crossOrigin',
+  dangerouslysetinnerhtml: 'dangerouslySetInnerHTML',
+  data: 'data',
+  datetime: 'dateTime',
+  default: 'default',
+  defaultchecked: 'defaultChecked',
+  defaultvalue: 'defaultValue',
+  defer: 'defer',
+  dir: 'dir',
+  disabled: 'disabled',
+  disablepictureinpicture: 'disablePictureInPicture',
+  download: 'download',
+  draggable: 'draggable',
+  enctype: 'encType',
+  for: 'htmlFor',
+  form: 'form',
+  formmethod: 'formMethod',
+  formaction: 'formAction',
+  formenctype: 'formEncType',
+  formnovalidate: 'formNoValidate',
+  formtarget: 'formTarget',
+  frameborder: 'frameBorder',
+  headers: 'headers',
+  height: 'height',
+  hidden: 'hidden',
+  high: 'high',
+  href: 'href',
+  hreflang: 'hrefLang',
+  htmlfor: 'htmlFor',
+  httpequiv: 'httpEquiv',
+  'http-equiv': 'httpEquiv',
+  icon: 'icon',
+  id: 'id',
+  innerhtml: 'innerHTML',
+  inputmode: 'inputMode',
+  integrity: 'integrity',
+  is: 'is',
+  itemid: 'itemID',
+  itemprop: 'itemProp',
+  itemref: 'itemRef',
+  itemscope: 'itemScope',
+  itemtype: 'itemType',
+  keyparams: 'keyParams',
+  keytype: 'keyType',
+  kind: 'kind',
+  label: 'label',
+  lang: 'lang',
+  list: 'list',
+  loop: 'loop',
+  low: 'low',
+  manifest: 'manifest',
+  marginwidth: 'marginWidth',
+  marginheight: 'marginHeight',
+  max: 'max',
+  maxlength: 'maxLength',
+  media: 'media',
+  mediagroup: 'mediaGroup',
+  method: 'method',
+  min: 'min',
+  minlength: 'minLength',
+  multiple: 'multiple',
+  muted: 'muted',
+  name: 'name',
+  nomodule: 'noModule',
+  nonce: 'nonce',
+  novalidate: 'noValidate',
+  open: 'open',
+  optimum: 'optimum',
+  pattern: 'pattern',
+  placeholder: 'placeholder',
+  playsinline: 'playsInline',
+  poster: 'poster',
+  preload: 'preload',
+  profile: 'profile',
+  radiogroup: 'radioGroup',
+  readonly: 'readOnly',
+  referrerpolicy: 'referrerPolicy',
+  rel: 'rel',
+  required: 'required',
+  reversed: 'reversed',
+  role: 'role',
+  rows: 'rows',
+  rowspan: 'rowSpan',
+  sandbox: 'sandbox',
+  scope: 'scope',
+  scoped: 'scoped',
+  scrolling: 'scrolling',
+  seamless: 'seamless',
+  selected: 'selected',
+  shape: 'shape',
+  size: 'size',
+  sizes: 'sizes',
+  span: 'span',
+  spellcheck: 'spellCheck',
+  src: 'src',
+  srcdoc: 'srcDoc',
+  srclang: 'srcLang',
+  srcset: 'srcSet',
+  start: 'start',
+  step: 'step',
+  style: 'style',
+  summary: 'summary',
+  tabindex: 'tabIndex',
+  target: 'target',
+  title: 'title',
+  type: 'type',
+  usemap: 'useMap',
+  value: 'value',
+  width: 'width',
+  wmode: 'wmode',
+  wrap: 'wrap',
+  // SVG
+  about: 'about',
+  accentheight: 'accentHeight',
+  'accent-height': 'accentHeight',
+  accumulate: 'accumulate',
+  additive: 'additive',
+  alignmentbaseline: 'alignmentBaseline',
+  'alignment-baseline': 'alignmentBaseline',
+  allowreorder: 'allowReorder',
+  alphabetic: 'alphabetic',
+  amplitude: 'amplitude',
+  arabicform: 'arabicForm',
+  'arabic-form': 'arabicForm',
+  ascent: 'ascent',
+  attributename: 'attributeName',
+  attributetype: 'attributeType',
+  autoreverse: 'autoReverse',
+  azimuth: 'azimuth',
+  basefrequency: 'baseFrequency',
+  baselineshift: 'baselineShift',
+  'baseline-shift': 'baselineShift',
+  baseprofile: 'baseProfile',
+  bbox: 'bbox',
+  begin: 'begin',
+  bias: 'bias',
+  by: 'by',
+  calcmode: 'calcMode',
+  capheight: 'capHeight',
+  'cap-height': 'capHeight',
+  clip: 'clip',
+  clippath: 'clipPath',
+  'clip-path': 'clipPath',
+  clippathunits: 'clipPathUnits',
+  cliprule: 'clipRule',
+  'clip-rule': 'clipRule',
+  color: 'color',
+  colorinterpolation: 'colorInterpolation',
+  'color-interpolation': 'colorInterpolation',
+  colorinterpolationfilters: 'colorInterpolationFilters',
+  'color-interpolation-filters': 'colorInterpolationFilters',
+  colorprofile: 'colorProfile',
+  'color-profile': 'colorProfile',
+  colorrendering: 'colorRendering',
+  'color-rendering': 'colorRendering',
+  contentscripttype: 'contentScriptType',
+  contentstyletype: 'contentStyleType',
+  cursor: 'cursor',
+  cx: 'cx',
+  cy: 'cy',
+  d: 'd',
+  datatype: 'datatype',
+  decelerate: 'decelerate',
+  descent: 'descent',
+  diffuseconstant: 'diffuseConstant',
+  direction: 'direction',
+  display: 'display',
+  divisor: 'divisor',
+  dominantbaseline: 'dominantBaseline',
+  'dominant-baseline': 'dominantBaseline',
+  dur: 'dur',
+  dx: 'dx',
+  dy: 'dy',
+  edgemode: 'edgeMode',
+  elevation: 'elevation',
+  enablebackground: 'enableBackground',
+  'enable-background': 'enableBackground',
+  end: 'end',
+  exponent: 'exponent',
+  externalresourcesrequired: 'externalResourcesRequired',
+  fill: 'fill',
+  fillopacity: 'fillOpacity',
+  'fill-opacity': 'fillOpacity',
+  fillrule: 'fillRule',
+  'fill-rule': 'fillRule',
+  filter: 'filter',
+  filterres: 'filterRes',
+  filterunits: 'filterUnits',
+  floodopacity: 'floodOpacity',
+  'flood-opacity': 'floodOpacity',
+  floodcolor: 'floodColor',
+  'flood-color': 'floodColor',
+  focusable: 'focusable',
+  fontfamily: 'fontFamily',
+  'font-family': 'fontFamily',
+  fontsize: 'fontSize',
+  'font-size': 'fontSize',
+  fontsizeadjust: 'fontSizeAdjust',
+  'font-size-adjust': 'fontSizeAdjust',
+  fontstretch: 'fontStretch',
+  'font-stretch': 'fontStretch',
+  fontstyle: 'fontStyle',
+  'font-style': 'fontStyle',
+  fontvariant: 'fontVariant',
+  'font-variant': 'fontVariant',
+  fontweight: 'fontWeight',
+  'font-weight': 'fontWeight',
+  format: 'format',
+  from: 'from',
+  fx: 'fx',
+  fy: 'fy',
+  g1: 'g1',
+  g2: 'g2',
+  glyphname: 'glyphName',
+  'glyph-name': 'glyphName',
+  glyphorientationhorizontal: 'glyphOrientationHorizontal',
+  'glyph-orientation-horizontal': 'glyphOrientationHorizontal',
+  glyphorientationvertical: 'glyphOrientationVertical',
+  'glyph-orientation-vertical': 'glyphOrientationVertical',
+  glyphref: 'glyphRef',
+  gradienttransform: 'gradientTransform',
+  gradientunits: 'gradientUnits',
+  hanging: 'hanging',
+  horizadvx: 'horizAdvX',
+  'horiz-adv-x': 'horizAdvX',
+  horizoriginx: 'horizOriginX',
+  'horiz-origin-x': 'horizOriginX',
+  ideographic: 'ideographic',
+  imagerendering: 'imageRendering',
+  'image-rendering': 'imageRendering',
+  in2: 'in2',
+  in: 'in',
+  inlist: 'inlist',
+  intercept: 'intercept',
+  k1: 'k1',
+  k2: 'k2',
+  k3: 'k3',
+  k4: 'k4',
+  k: 'k',
+  kernelmatrix: 'kernelMatrix',
+  kernelunitlength: 'kernelUnitLength',
+  kerning: 'kerning',
+  keypoints: 'keyPoints',
+  keysplines: 'keySplines',
+  keytimes: 'keyTimes',
+  lengthadjust: 'lengthAdjust',
+  letterspacing: 'letterSpacing',
+  'letter-spacing': 'letterSpacing',
+  lightingcolor: 'lightingColor',
+  'lighting-color': 'lightingColor',
+  limitingconeangle: 'limitingConeAngle',
+  local: 'local',
+  markerend: 'markerEnd',
+  'marker-end': 'markerEnd',
+  markerheight: 'markerHeight',
+  markermid: 'markerMid',
+  'marker-mid': 'markerMid',
+  markerstart: 'markerStart',
+  'marker-start': 'markerStart',
+  markerunits: 'markerUnits',
+  markerwidth: 'markerWidth',
+  mask: 'mask',
+  maskcontentunits: 'maskContentUnits',
+  maskunits: 'maskUnits',
+  mathematical: 'mathematical',
+  mode: 'mode',
+  numoctaves: 'numOctaves',
+  offset: 'offset',
+  opacity: 'opacity',
+  operator: 'operator',
+  order: 'order',
+  orient: 'orient',
+  orientation: 'orientation',
+  origin: 'origin',
+  overflow: 'overflow',
+  overlineposition: 'overlinePosition',
+  'overline-position': 'overlinePosition',
+  overlinethickness: 'overlineThickness',
+  'overline-thickness': 'overlineThickness',
+  paintorder: 'paintOrder',
+  'paint-order': 'paintOrder',
+  panose1: 'panose1',
+  'panose-1': 'panose1',
+  pathlength: 'pathLength',
+  patterncontentunits: 'patternContentUnits',
+  patterntransform: 'patternTransform',
+  patternunits: 'patternUnits',
+  pointerevents: 'pointerEvents',
+  'pointer-events': 'pointerEvents',
+  points: 'points',
+  pointsatx: 'pointsAtX',
+  pointsaty: 'pointsAtY',
+  pointsatz: 'pointsAtZ',
+  prefix: 'prefix',
+  preservealpha: 'preserveAlpha',
+  preserveaspectratio: 'preserveAspectRatio',
+  primitiveunits: 'primitiveUnits',
+  property: 'property',
+  r: 'r',
+  radius: 'radius',
+  refx: 'refX',
+  refy: 'refY',
+  renderingintent: 'renderingIntent',
+  'rendering-intent': 'renderingIntent',
+  repeatcount: 'repeatCount',
+  repeatdur: 'repeatDur',
+  requiredextensions: 'requiredExtensions',
+  requiredfeatures: 'requiredFeatures',
+  resource: 'resource',
+  restart: 'restart',
+  result: 'result',
+  results: 'results',
+  rotate: 'rotate',
+  rx: 'rx',
+  ry: 'ry',
+  scale: 'scale',
+  security: 'security',
+  seed: 'seed',
+  shaperendering: 'shapeRendering',
+  'shape-rendering': 'shapeRendering',
+  slope: 'slope',
+  spacing: 'spacing',
+  specularconstant: 'specularConstant',
+  specularexponent: 'specularExponent',
+  speed: 'speed',
+  spreadmethod: 'spreadMethod',
+  startoffset: 'startOffset',
+  stddeviation: 'stdDeviation',
+  stemh: 'stemh',
+  stemv: 'stemv',
+  stitchtiles: 'stitchTiles',
+  stopcolor: 'stopColor',
+  'stop-color': 'stopColor',
+  stopopacity: 'stopOpacity',
+  'stop-opacity': 'stopOpacity',
+  strikethroughposition: 'strikethroughPosition',
+  'strikethrough-position': 'strikethroughPosition',
+  strikethroughthickness: 'strikethroughThickness',
+  'strikethrough-thickness': 'strikethroughThickness',
+  string: 'string',
+  stroke: 'stroke',
+  strokedasharray: 'strokeDasharray',
+  'stroke-dasharray': 'strokeDasharray',
+  strokedashoffset: 'strokeDashoffset',
+  'stroke-dashoffset': 'strokeDashoffset',
+  strokelinecap: 'strokeLinecap',
+  'stroke-linecap': 'strokeLinecap',
+  strokelinejoin: 'strokeLinejoin',
+  'stroke-linejoin': 'strokeLinejoin',
+  strokemiterlimit: 'strokeMiterlimit',
+  'stroke-miterlimit': 'strokeMiterlimit',
+  strokewidth: 'strokeWidth',
+  'stroke-width': 'strokeWidth',
+  strokeopacity: 'strokeOpacity',
+  'stroke-opacity': 'strokeOpacity',
+  suppresscontenteditablewarning: 'suppressContentEditableWarning',
+  suppresshydrationwarning: 'suppressHydrationWarning',
+  surfacescale: 'surfaceScale',
+  systemlanguage: 'systemLanguage',
+  tablevalues: 'tableValues',
+  targetx: 'targetX',
+  targety: 'targetY',
+  textanchor: 'textAnchor',
+  'text-anchor': 'textAnchor',
+  textdecoration: 'textDecoration',
+  'text-decoration': 'textDecoration',
+  textlength: 'textLength',
+  textrendering: 'textRendering',
+  'text-rendering': 'textRendering',
+  to: 'to',
+  transform: 'transform',
+  typeof: 'typeof',
+  u1: 'u1',
+  u2: 'u2',
+  underlineposition: 'underlinePosition',
+  'underline-position': 'underlinePosition',
+  underlinethickness: 'underlineThickness',
+  'underline-thickness': 'underlineThickness',
+  unicode: 'unicode',
+  unicodebidi: 'unicodeBidi',
+  'unicode-bidi': 'unicodeBidi',
+  unicoderange: 'unicodeRange',
+  'unicode-range': 'unicodeRange',
+  unitsperem: 'unitsPerEm',
+  'units-per-em': 'unitsPerEm',
+  unselectable: 'unselectable',
+  valphabetic: 'vAlphabetic',
+  'v-alphabetic': 'vAlphabetic',
+  values: 'values',
+  vectoreffect: 'vectorEffect',
+  'vector-effect': 'vectorEffect',
+  version: 'version',
+  vertadvy: 'vertAdvY',
+  'vert-adv-y': 'vertAdvY',
+  vertoriginx: 'vertOriginX',
+  'vert-origin-x': 'vertOriginX',
+  vertoriginy: 'vertOriginY',
+  'vert-origin-y': 'vertOriginY',
+  vhanging: 'vHanging',
+  'v-hanging': 'vHanging',
+  videographic: 'vIdeographic',
+  'v-ideographic': 'vIdeographic',
+  viewbox: 'viewBox',
+  viewtarget: 'viewTarget',
+  visibility: 'visibility',
+  vmathematical: 'vMathematical',
+  'v-mathematical': 'vMathematical',
+  vocab: 'vocab',
+  widths: 'widths',
+  wordspacing: 'wordSpacing',
+  'word-spacing': 'wordSpacing',
+  writingmode: 'writingMode',
+  'writing-mode': 'writingMode',
+  x1: 'x1',
+  x2: 'x2',
+  x: 'x',
+  xchannelselector: 'xChannelSelector',
+  xheight: 'xHeight',
+  'x-height': 'xHeight',
+  xlinkactuate: 'xlinkActuate',
+  'xlink:actuate': 'xlinkActuate',
+  xlinkarcrole: 'xlinkArcrole',
+  'xlink:arcrole': 'xlinkArcrole',
+  xlinkhref: 'xlinkHref',
+  'xlink:href': 'xlinkHref',
+  xlinkrole: 'xlinkRole',
+  'xlink:role': 'xlinkRole',
+  xlinkshow: 'xlinkShow',
+  'xlink:show': 'xlinkShow',
+  xlinktitle: 'xlinkTitle',
+  'xlink:title': 'xlinkTitle',
+  xlinktype: 'xlinkType',
+  'xlink:type': 'xlinkType',
+  xmlbase: 'xmlBase',
+  'xml:base': 'xmlBase',
+  xmllang: 'xmlLang',
+  'xml:lang': 'xmlLang',
+  xmlns: 'xmlns',
+  'xml:space': 'xmlSpace',
+  xmlnsxlink: 'xmlnsXlink',
+  'xmlns:xlink': 'xmlnsXlink',
+  xmlspace: 'xmlSpace',
+  y1: 'y1',
+  y2: 'y2',
+  y: 'y',
+  ychannelselector: 'yChannelSelector',
+  z: 'z',
+  zoomandpan: 'zoomAndPan'
+};
+
+var validateProperty$1 = function () {};
+
+{
+  var warnedProperties$1 = {};
+  var _hasOwnProperty = Object.prototype.hasOwnProperty;
+  var EVENT_NAME_REGEX = /^on./;
+  var INVALID_EVENT_NAME_REGEX = /^on[^A-Z]/;
+  var rARIA$1 = new RegExp('^(aria)-[' + ATTRIBUTE_NAME_CHAR + ']*$');
+  var rARIACamel$1 = new RegExp('^(aria)[A-Z][' + ATTRIBUTE_NAME_CHAR + ']*$');
+
+  validateProperty$1 = function (tagName, name, value, canUseEventSystem) {
+    if (_hasOwnProperty.call(warnedProperties$1, name) && warnedProperties$1[name]) {
+      return true;
+    }
+
+    var lowerCasedName = name.toLowerCase();
+
+    if (lowerCasedName === 'onfocusin' || lowerCasedName === 'onfocusout') {
+      warning$1(false, 'React uses onFocus and onBlur instead of onFocusIn and onFocusOut. ' + 'All React events are normalized to bubble, so onFocusIn and onFocusOut ' + 'are not needed/supported by React.');
+      warnedProperties$1[name] = true;
+      return true;
+    } // We can't rely on the event system being injected on the server.
+
+
+    if (canUseEventSystem) {
+      if (registrationNameModules.hasOwnProperty(name)) {
+        return true;
+      }
+
+      var registrationName = possibleRegistrationNames.hasOwnProperty(lowerCasedName) ? possibleRegistrationNames[lowerCasedName] : null;
+
+      if (registrationName != null) {
+        warning$1(false, 'Invalid event handler property `%s`. Did you mean `%s`?', name, registrationName);
+        warnedProperties$1[name] = true;
+        return true;
+      }
+
+      if (EVENT_NAME_REGEX.test(name)) {
+        warning$1(false, 'Unknown event handler property `%s`. It will be ignored.', name);
+        warnedProperties$1[name] = true;
+        return true;
+      }
+    } else if (EVENT_NAME_REGEX.test(name)) {
+      // If no event plugins have been injected, we are in a server environment.
+      // So we can't tell if the event name is correct for sure, but we can filter
+      // out known bad ones like `onclick`. We can't suggest a specific replacement though.
+      if (INVALID_EVENT_NAME_REGEX.test(name)) {
+        warning$1(false, 'Invalid event handler property `%s`. ' + 'React events use the camelCase naming convention, for example `onClick`.', name);
+      }
+
+      warnedProperties$1[name] = true;
+      return true;
+    } // Let the ARIA attribute hook validate ARIA attributes
+
+
+    if (rARIA$1.test(name) || rARIACamel$1.test(name)) {
+      return true;
+    }
+
+    if (lowerCasedName === 'innerhtml') {
+      warning$1(false, 'Directly setting property `innerHTML` is not permitted. ' + 'For more information, lookup documentation on `dangerouslySetInnerHTML`.');
+      warnedProperties$1[name] = true;
+      return true;
+    }
+
+    if (lowerCasedName === 'aria') {
+      warning$1(false, 'The `aria` attribute is reserved for future use in React. ' + 'Pass individual `aria-` attributes instead.');
+      warnedProperties$1[name] = true;
+      return true;
+    }
+
+    if (lowerCasedName === 'is' && value !== null && value !== undefined && typeof value !== 'string') {
+      warning$1(false, 'Received a `%s` for a string attribute `is`. If this is expected, cast ' + 'the value to a string.', typeof value);
+      warnedProperties$1[name] = true;
+      return true;
+    }
+
+    if (typeof value === 'number' && isNaN(value)) {
+      warning$1(false, 'Received NaN for the `%s` attribute. If this is expected, cast ' + 'the value to a string.', name);
+      warnedProperties$1[name] = true;
+      return true;
+    }
+
+    var propertyInfo = getPropertyInfo(name);
+    var isReserved = propertyInfo !== null && propertyInfo.type === RESERVED; // Known attributes should match the casing specified in the property config.
+
+    if (possibleStandardNames.hasOwnProperty(lowerCasedName)) {
+      var standardName = possibleStandardNames[lowerCasedName];
+
+      if (standardName !== name) {
+        warning$1(false, 'Invalid DOM property `%s`. Did you mean `%s`?', name, standardName);
+        warnedProperties$1[name] = true;
+        return true;
+      }
+    } else if (!isReserved && name !== lowerCasedName) {
+      // Unknown attributes should have lowercase casing since that's how they
+      // will be cased anyway with server rendering.
+      warning$1(false, 'React does not recognize the `%s` prop on a DOM element. If you ' + 'intentionally want it to appear in the DOM as a custom ' + 'attribute, spell it as lowercase `%s` instead. ' + 'If you accidentally passed it from a parent component, remove ' + 'it from the DOM element.', name, lowerCasedName);
+      warnedProperties$1[name] = true;
+      return true;
+    }
+
+    if (typeof value === 'boolean' && shouldRemoveAttributeWithWarning(name, value, propertyInfo, false)) {
+      if (value) {
+        warning$1(false, 'Received `%s` for a non-boolean attribute `%s`.\n\n' + 'If you want to write it to the DOM, pass a string instead: ' + '%s="%s" or %s={value.toString()}.', value, name, name, value, name);
+      } else {
+        warning$1(false, 'Received `%s` for a non-boolean attribute `%s`.\n\n' + 'If you want to write it to the DOM, pass a string instead: ' + '%s="%s" or %s={value.toString()}.\n\n' + 'If you used to conditionally omit it with %s={condition && value}, ' + 'pass %s={condition ? value : undefined} instead.', value, name, name, value, name, name, name);
+      }
+
+      warnedProperties$1[name] = true;
+      return true;
+    } // Now that we've validated casing, do not validate
+    // data types for reserved props
+
+
+    if (isReserved) {
+      return true;
+    } // Warn when a known attribute is a bad type
+
+
+    if (shouldRemoveAttributeWithWarning(name, value, propertyInfo, false)) {
+      warnedProperties$1[name] = true;
+      return false;
+    } // Warn when passing the strings 'false' or 'true' into a boolean prop
+
+
+    if ((value === 'false' || value === 'true') && propertyInfo !== null && propertyInfo.type === BOOLEAN) {
+      warning$1(false, 'Received the string `%s` for the boolean attribute `%s`. ' + '%s ' + 'Did you mean %s={%s}?', value, name, value === 'false' ? 'The browser will interpret it as a truthy value.' : 'Although this works, it will not work as expected if you pass the string "false".', name, value);
+      warnedProperties$1[name] = true;
+      return true;
+    }
+
+    return true;
+  };
+}
+
+var warnUnknownProperties = function (type, props, canUseEventSystem) {
+  var unknownProps = [];
+
+  for (var key in props) {
+    var isValid = validateProperty$1(type, key, props[key], canUseEventSystem);
+
+    if (!isValid) {
+      unknownProps.push(key);
+    }
+  }
+
+  var unknownPropString = unknownProps.map(function (prop) {
+    return '`' + prop + '`';
+  }).join(', ');
+
+  if (unknownProps.length === 1) {
+    warning$1(false, 'Invalid value for prop %s on <%s> tag. Either remove it from the element, ' + 'or pass a string or number value to keep it in the DOM. ' + 'For details, see https://fb.me/react-attribute-behavior', unknownPropString, type);
+  } else if (unknownProps.length > 1) {
+    warning$1(false, 'Invalid values for props %s on <%s> tag. Either remove them from the element, ' + 'or pass a string or number value to keep them in the DOM. ' + 'For details, see https://fb.me/react-attribute-behavior', unknownPropString, type);
+  }
+};
+
+function validateProperties$2(type, props, canUseEventSystem) {
+  if (isCustomComponent(type, props)) {
+    return;
+  }
+
+  warnUnknownProperties(type, props, canUseEventSystem);
+}
+
+var toArray = React.Children.toArray; // This is only used in DEV.
+// Each entry is `this.stack` from a currently executing renderer instance.
+// (There may be more than one because ReactDOMServer is reentrant).
+// Each stack is an array of frames which may contain nested stacks of elements.
+
+var currentDebugStacks = [];
+var ReactCurrentDispatcher = ReactSharedInternals.ReactCurrentDispatcher;
+var ReactDebugCurrentFrame;
+var prevGetCurrentStackImpl = null;
+
+var getCurrentServerStackImpl = function () {
+  return '';
+};
+
+var describeStackFrame = function (element) {
+  return '';
+};
+
+var validatePropertiesInDevelopment = function (type, props) {};
+
+var pushCurrentDebugStack = function (stack) {};
+
+var pushElementToDebugStack = function (element) {};
+
+var popCurrentDebugStack = function () {};
+
+var hasWarnedAboutUsingContextAsConsumer = false;
+
+{
+  ReactDebugCurrentFrame = ReactSharedInternals.ReactDebugCurrentFrame;
+
+  validatePropertiesInDevelopment = function (type, props) {
+    validateProperties(type, props);
+    validateProperties$1(type, props);
+    validateProperties$2(type, props,
+    /* canUseEventSystem */
+    false);
+  };
+
+  describeStackFrame = function (element) {
+    var source = element._source;
+    var type = element.type;
+    var name = getComponentName(type);
+    var ownerName = null;
+    return describeComponentFrame(name, source, ownerName);
+  };
+
+  pushCurrentDebugStack = function (stack) {
+    currentDebugStacks.push(stack);
+
+    if (currentDebugStacks.length === 1) {
+      // We are entering a server renderer.
+      // Remember the previous (e.g. client) global stack implementation.
+      prevGetCurrentStackImpl = ReactDebugCurrentFrame.getCurrentStack;
+      ReactDebugCurrentFrame.getCurrentStack = getCurrentServerStackImpl;
+    }
+  };
+
+  pushElementToDebugStack = function (element) {
+    // For the innermost executing ReactDOMServer call,
+    var stack = currentDebugStacks[currentDebugStacks.length - 1]; // Take the innermost executing frame (e.g. <Foo>),
+
+    var frame = stack[stack.length - 1]; // and record that it has one more element associated with it.
+
+    frame.debugElementStack.push(element); // We only need this because we tail-optimize single-element
+    // children and directly handle them in an inner loop instead of
+    // creating separate frames for them.
+  };
+
+  popCurrentDebugStack = function () {
+    currentDebugStacks.pop();
+
+    if (currentDebugStacks.length === 0) {
+      // We are exiting the server renderer.
+      // Restore the previous (e.g. client) global stack implementation.
+      ReactDebugCurrentFrame.getCurrentStack = prevGetCurrentStackImpl;
+      prevGetCurrentStackImpl = null;
+    }
+  };
+
+  getCurrentServerStackImpl = function () {
+    if (currentDebugStacks.length === 0) {
+      // Nothing is currently rendering.
+      return '';
+    } // ReactDOMServer is reentrant so there may be multiple calls at the same time.
+    // Take the frames from the innermost call which is the last in the array.
+
+
+    var frames = currentDebugStacks[currentDebugStacks.length - 1];
+    var stack = ''; // Go through every frame in the stack from the innermost one.
+
+    for (var i = frames.length - 1; i >= 0; i--) {
+      var frame = frames[i]; // Every frame might have more than one debug element stack entry associated with it.
+      // This is because single-child nesting doesn't create materialized frames.
+      // Instead it would push them through `pushElementToDebugStack()`.
+
+      var debugElementStack = frame.debugElementStack;
+
+      for (var ii = debugElementStack.length - 1; ii >= 0; ii--) {
+        stack += describeStackFrame(debugElementStack[ii]);
+      }
+    }
+
+    return stack;
+  };
+}
+
+var didWarnDefaultInputValue = false;
+var didWarnDefaultChecked = false;
+var didWarnDefaultSelectValue = false;
+var didWarnDefaultTextareaValue = false;
+var didWarnInvalidOptionChildren = false;
+var didWarnAboutNoopUpdateForComponent = {};
+var didWarnAboutBadClass = {};
+var didWarnAboutModulePatternComponent = {};
+var didWarnAboutDeprecatedWillMount = {};
+var didWarnAboutUndefinedDerivedState = {};
+var didWarnAboutUninitializedState = {};
+var valuePropNames = ['value', 'defaultValue'];
+var newlineEatingTags = {
+  listing: true,
+  pre: true,
+  textarea: true
+}; // We accept any tag to be rendered but since this gets injected into arbitrary
+// HTML, we want to make sure that it's a safe tag.
+// http://www.w3.org/TR/REC-xml/#NT-Name
+
+var VALID_TAG_REGEX = /^[a-zA-Z][a-zA-Z:_\.\-\d]*$/; // Simplified subset
+
+var validatedTagCache = {};
+
+function validateDangerousTag(tag) {
+  if (!validatedTagCache.hasOwnProperty(tag)) {
+    (function () {
+      if (!VALID_TAG_REGEX.test(tag)) {
+        {
+          throw ReactError(Error("Invalid tag: " + tag));
+        }
+      }
+    })();
+
+    validatedTagCache[tag] = true;
+  }
+}
+
+var styleNameCache = {};
+
+var processStyleName = function (styleName) {
+  if (styleNameCache.hasOwnProperty(styleName)) {
+    return styleNameCache[styleName];
+  }
+
+  var result = hyphenateStyleName(styleName);
+  styleNameCache[styleName] = result;
   return result;
-}
-
-var count = 0;
-function useUniqueId(prefix) {
-  var countRef = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(count++);
-  return prefix + "::" + countRef.current;
-}
-
-var getClosestScrollableFromDrag = function getClosestScrollableFromDrag(dragging) {
-  return dragging && dragging.env.closestScrollable || null;
 };
 
-function useDroppablePublisher(args) {
-  var whileDraggingRef = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(null);
-  var appContext = useRequiredContext(AppContext);
-  var uniqueId = useUniqueId('droppable');
-  var registry = appContext.registry,
-      marshal = appContext.marshal;
-  var previousRef = usePrevious(args);
-  var descriptor = Object(use_memo_one__WEBPACK_IMPORTED_MODULE_1__["useMemo"])(function () {
-    return {
-      id: args.droppableId,
-      type: args.type,
-      mode: args.mode
-    };
-  }, [args.droppableId, args.mode, args.type]);
-  var publishedDescriptorRef = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(descriptor);
-  var memoizedUpdateScroll = Object(use_memo_one__WEBPACK_IMPORTED_MODULE_1__["useMemo"])(function () {
-    return Object(memoize_one__WEBPACK_IMPORTED_MODULE_7__["default"])(function (x, y) {
-      !whileDraggingRef.current ?  true ? invariant(false, 'Can only update scroll when dragging') : undefined : void 0;
-      var scroll = {
-        x: x,
-        y: y
-      };
-      marshal.updateDroppableScroll(descriptor.id, scroll);
-    });
-  }, [descriptor.id, marshal]);
-  var getClosestScroll = Object(use_memo_one__WEBPACK_IMPORTED_MODULE_1__["useCallback"])(function () {
-    var dragging = whileDraggingRef.current;
+function createMarkupForStyles(styles) {
+  var serialized = '';
+  var delimiter = '';
 
-    if (!dragging || !dragging.env.closestScrollable) {
-      return origin;
+  for (var styleName in styles) {
+    if (!styles.hasOwnProperty(styleName)) {
+      continue;
     }
 
-    return getScroll$1(dragging.env.closestScrollable);
-  }, []);
-  var updateScroll = Object(use_memo_one__WEBPACK_IMPORTED_MODULE_1__["useCallback"])(function () {
-    var scroll = getClosestScroll();
-    memoizedUpdateScroll(scroll.x, scroll.y);
-  }, [getClosestScroll, memoizedUpdateScroll]);
-  var scheduleScrollUpdate = Object(use_memo_one__WEBPACK_IMPORTED_MODULE_1__["useMemo"])(function () {
-    return Object(raf_schd__WEBPACK_IMPORTED_MODULE_10__["default"])(updateScroll);
-  }, [updateScroll]);
-  var onClosestScroll = Object(use_memo_one__WEBPACK_IMPORTED_MODULE_1__["useCallback"])(function () {
-    var dragging = whileDraggingRef.current;
-    var closest = getClosestScrollableFromDrag(dragging);
-    !(dragging && closest) ?  true ? invariant(false, 'Could not find scroll options while scrolling') : undefined : void 0;
-    var options = dragging.scrollOptions;
+    var isCustomProperty = styleName.indexOf('--') === 0;
+    var styleValue = styles[styleName];
 
-    if (options.shouldPublishImmediately) {
-      updateScroll();
-      return;
-    }
-
-    scheduleScrollUpdate();
-  }, [scheduleScrollUpdate, updateScroll]);
-  var getDimensionAndWatchScroll = Object(use_memo_one__WEBPACK_IMPORTED_MODULE_1__["useCallback"])(function (windowScroll, options) {
-    !!whileDraggingRef.current ?  true ? invariant(false, 'Cannot collect a droppable while a drag is occurring') : undefined : void 0;
-    var previous = previousRef.current;
-    var ref = previous.getDroppableRef();
-    !ref ?  true ? invariant(false, 'Cannot collect without a droppable ref') : undefined : void 0;
-    var env = getEnv(ref);
-    var dragging = {
-      ref: ref,
-      descriptor: descriptor,
-      env: env,
-      scrollOptions: options
-    };
-    whileDraggingRef.current = dragging;
-    var dimension = getDimension({
-      ref: ref,
-      descriptor: descriptor,
-      env: env,
-      windowScroll: windowScroll,
-      direction: previous.direction,
-      isDropDisabled: previous.isDropDisabled,
-      isCombineEnabled: previous.isCombineEnabled,
-      shouldClipSubject: !previous.ignoreContainerClipping
-    });
-    var scrollable = env.closestScrollable;
-
-    if (scrollable) {
-      scrollable.setAttribute(scrollContainer.contextId, appContext.contextId);
-      scrollable.addEventListener('scroll', onClosestScroll, getListenerOptions(dragging.scrollOptions));
-
-      if (true) {
-        checkForNestedScrollContainers(scrollable);
+    {
+      if (!isCustomProperty) {
+        warnValidStyle$1(styleName, styleValue);
       }
     }
 
-    return dimension;
-  }, [appContext.contextId, descriptor, onClosestScroll, previousRef]);
-  var getScrollWhileDragging = Object(use_memo_one__WEBPACK_IMPORTED_MODULE_1__["useCallback"])(function () {
-    var dragging = whileDraggingRef.current;
-    var closest = getClosestScrollableFromDrag(dragging);
-    !(dragging && closest) ?  true ? invariant(false, 'Can only recollect Droppable client for Droppables that have a scroll container') : undefined : void 0;
-    return getScroll$1(closest);
-  }, []);
-  var dragStopped = Object(use_memo_one__WEBPACK_IMPORTED_MODULE_1__["useCallback"])(function () {
-    var dragging = whileDraggingRef.current;
-    !dragging ?  true ? invariant(false, 'Cannot stop drag when no active drag') : undefined : void 0;
-    var closest = getClosestScrollableFromDrag(dragging);
-    whileDraggingRef.current = null;
+    if (styleValue != null) {
+      serialized += delimiter + (isCustomProperty ? styleName : processStyleName(styleName)) + ':';
+      serialized += dangerousStyleValue(styleName, styleValue, isCustomProperty);
+      delimiter = ';';
+    }
+  }
 
-    if (!closest) {
+  return serialized || null;
+}
+
+function warnNoop(publicInstance, callerName) {
+  {
+    var _constructor = publicInstance.constructor;
+    var componentName = _constructor && getComponentName(_constructor) || 'ReactClass';
+    var warningKey = componentName + '.' + callerName;
+
+    if (didWarnAboutNoopUpdateForComponent[warningKey]) {
       return;
     }
 
-    scheduleScrollUpdate.cancel();
-    closest.removeAttribute(scrollContainer.contextId);
-    closest.removeEventListener('scroll', onClosestScroll, getListenerOptions(dragging.scrollOptions));
-  }, [onClosestScroll, scheduleScrollUpdate]);
-  var scroll = Object(use_memo_one__WEBPACK_IMPORTED_MODULE_1__["useCallback"])(function (change) {
-    var dragging = whileDraggingRef.current;
-    !dragging ?  true ? invariant(false, 'Cannot scroll when there is no drag') : undefined : void 0;
-    var closest = getClosestScrollableFromDrag(dragging);
-    !closest ?  true ? invariant(false, 'Cannot scroll a droppable with no closest scrollable') : undefined : void 0;
-    closest.scrollTop += change.y;
-    closest.scrollLeft += change.x;
-  }, []);
-  var callbacks = Object(use_memo_one__WEBPACK_IMPORTED_MODULE_1__["useMemo"])(function () {
-    return {
-      getDimensionAndWatchScroll: getDimensionAndWatchScroll,
-      getScrollWhileDragging: getScrollWhileDragging,
-      dragStopped: dragStopped,
-      scroll: scroll
-    };
-  }, [dragStopped, getDimensionAndWatchScroll, getScrollWhileDragging, scroll]);
-  var entry = Object(use_memo_one__WEBPACK_IMPORTED_MODULE_1__["useMemo"])(function () {
-    return {
-      uniqueId: uniqueId,
-      descriptor: descriptor,
-      callbacks: callbacks
-    };
-  }, [callbacks, descriptor, uniqueId]);
-  useIsomorphicLayoutEffect(function () {
-    publishedDescriptorRef.current = entry.descriptor;
-    registry.droppable.register(entry);
-    return function () {
-      if (whileDraggingRef.current) {
-         true ? warning('Unsupported: changing the droppableId or type of a Droppable during a drag') : undefined;
-        dragStopped();
-      }
-
-      registry.droppable.unregister(entry);
-    };
-  }, [callbacks, descriptor, dragStopped, entry, marshal, registry.droppable]);
-  useIsomorphicLayoutEffect(function () {
-    if (!whileDraggingRef.current) {
-      return;
-    }
-
-    marshal.updateDroppableIsEnabled(publishedDescriptorRef.current.id, !args.isDropDisabled);
-  }, [args.isDropDisabled, marshal]);
-  useIsomorphicLayoutEffect(function () {
-    if (!whileDraggingRef.current) {
-      return;
-    }
-
-    marshal.updateDroppableIsCombineEnabled(publishedDescriptorRef.current.id, args.isCombineEnabled);
-  }, [args.isCombineEnabled, marshal]);
-}
-
-function noop$2() {}
-
-var empty = {
-  width: 0,
-  height: 0,
-  margin: noSpacing
-};
-
-var getSize = function getSize(_ref) {
-  var isAnimatingOpenOnMount = _ref.isAnimatingOpenOnMount,
-      placeholder = _ref.placeholder,
-      animate = _ref.animate;
-
-  if (isAnimatingOpenOnMount) {
-    return empty;
+    warningWithoutStack$1(false, '%s(...): Can only update a mounting component. ' + 'This usually means you called %s() outside componentWillMount() on the server. ' + 'This is a no-op.\n\nPlease check the code for the %s component.', callerName, callerName, componentName);
+    didWarnAboutNoopUpdateForComponent[warningKey] = true;
   }
-
-  if (animate === 'close') {
-    return empty;
-  }
-
-  return {
-    height: placeholder.client.borderBox.height,
-    width: placeholder.client.borderBox.width,
-    margin: placeholder.client.margin
-  };
-};
-
-var getStyle = function getStyle(_ref2) {
-  var isAnimatingOpenOnMount = _ref2.isAnimatingOpenOnMount,
-      placeholder = _ref2.placeholder,
-      animate = _ref2.animate;
-  var size = getSize({
-    isAnimatingOpenOnMount: isAnimatingOpenOnMount,
-    placeholder: placeholder,
-    animate: animate
-  });
-  return {
-    display: placeholder.display,
-    boxSizing: 'border-box',
-    width: size.width,
-    height: size.height,
-    marginTop: size.margin.top,
-    marginRight: size.margin.right,
-    marginBottom: size.margin.bottom,
-    marginLeft: size.margin.left,
-    flexShrink: '0',
-    flexGrow: '0',
-    pointerEvents: 'none',
-    transition: animate !== 'none' ? transitions.placeholder : null
-  };
-};
-
-function Placeholder(props) {
-  var animateOpenTimerRef = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(null);
-  var tryClearAnimateOpenTimer = Object(use_memo_one__WEBPACK_IMPORTED_MODULE_1__["useCallback"])(function () {
-    if (!animateOpenTimerRef.current) {
-      return;
-    }
-
-    clearTimeout(animateOpenTimerRef.current);
-    animateOpenTimerRef.current = null;
-  }, []);
-  var animate = props.animate,
-      onTransitionEnd = props.onTransitionEnd,
-      onClose = props.onClose,
-      contextId = props.contextId;
-
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(props.animate === 'open'),
-      isAnimatingOpenOnMount = _useState[0],
-      setIsAnimatingOpenOnMount = _useState[1];
-
-  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-    if (!isAnimatingOpenOnMount) {
-      return noop$2;
-    }
-
-    if (animate !== 'open') {
-      tryClearAnimateOpenTimer();
-      setIsAnimatingOpenOnMount(false);
-      return noop$2;
-    }
-
-    if (animateOpenTimerRef.current) {
-      return noop$2;
-    }
-
-    animateOpenTimerRef.current = setTimeout(function () {
-      animateOpenTimerRef.current = null;
-      setIsAnimatingOpenOnMount(false);
-    });
-    return tryClearAnimateOpenTimer;
-  }, [animate, isAnimatingOpenOnMount, tryClearAnimateOpenTimer]);
-  var onSizeChangeEnd = Object(use_memo_one__WEBPACK_IMPORTED_MODULE_1__["useCallback"])(function (event) {
-    if (event.propertyName !== 'height') {
-      return;
-    }
-
-    onTransitionEnd();
-
-    if (animate === 'close') {
-      onClose();
-    }
-  }, [animate, onClose, onTransitionEnd]);
-  var style = getStyle({
-    isAnimatingOpenOnMount: isAnimatingOpenOnMount,
-    animate: props.animate,
-    placeholder: props.placeholder
-  });
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(props.placeholder.tagName, {
-    style: style,
-    'data-rbd-placeholder-context-id': contextId,
-    onTransitionEnd: onSizeChangeEnd,
-    ref: props.innerRef
-  });
 }
 
-var Placeholder$1 = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(Placeholder);
-
-var DroppableContext = react__WEBPACK_IMPORTED_MODULE_0___default.a.createContext(null);
-
-function checkIsValidInnerRef(el) {
-  !(el && isHtmlElement(el)) ?  true ? invariant(false, "\n    provided.innerRef has not been provided with a HTMLElement.\n\n    You can find a guide on using the innerRef callback functions at:\n    https://github.com/atlassian/react-beautiful-dnd/blob/master/docs/guides/using-inner-ref.md\n  ") : undefined : void 0;
+function shouldConstruct(Component) {
+  return Component.prototype && Component.prototype.isReactComponent;
 }
 
-function isBoolean(value) {
-  return typeof value === 'boolean';
-}
+function getNonChildrenInnerMarkup(props) {
+  var innerHTML = props.dangerouslySetInnerHTML;
 
-function runChecks(args, checks) {
-  checks.forEach(function (check) {
-    return check(args);
-  });
-}
-
-var shared = [function required(_ref) {
-  var props = _ref.props;
-  !props.droppableId ?  true ? invariant(false, 'A Droppable requires a droppableId prop') : undefined : void 0;
-  !(typeof props.droppableId === 'string') ?  true ? invariant(false, "A Droppable requires a [string] droppableId. Provided: [" + typeof props.droppableId + "]") : undefined : void 0;
-}, function _boolean(_ref2) {
-  var props = _ref2.props;
-  !isBoolean(props.isDropDisabled) ?  true ? invariant(false, 'isDropDisabled must be a boolean') : undefined : void 0;
-  !isBoolean(props.isCombineEnabled) ?  true ? invariant(false, 'isCombineEnabled must be a boolean') : undefined : void 0;
-  !isBoolean(props.ignoreContainerClipping) ?  true ? invariant(false, 'ignoreContainerClipping must be a boolean') : undefined : void 0;
-}, function ref(_ref3) {
-  var getDroppableRef = _ref3.getDroppableRef;
-  checkIsValidInnerRef(getDroppableRef());
-}];
-var standard = [function placeholder(_ref4) {
-  var props = _ref4.props,
-      getPlaceholderRef = _ref4.getPlaceholderRef;
-
-  if (!props.placeholder) {
-    return;
-  }
-
-  var ref = getPlaceholderRef();
-
-  if (ref) {
-    return;
-  }
-
-   true ? warning("\n      Droppable setup issue [droppableId: \"" + props.droppableId + "\"]:\n      DroppableProvided > placeholder could not be found.\n\n      Please be sure to add the {provided.placeholder} React Node as a child of your Droppable.\n      More information: https://github.com/atlassian/react-beautiful-dnd/blob/master/docs/api/droppable.md\n    ") : undefined;
-}];
-var virtual = [function hasClone(_ref5) {
-  var props = _ref5.props;
-  !props.renderClone ?  true ? invariant(false, 'Must provide a clone render function (renderClone) for virtual lists') : undefined : void 0;
-}, function hasNoPlaceholder(_ref6) {
-  var getPlaceholderRef = _ref6.getPlaceholderRef;
-  !!getPlaceholderRef() ?  true ? invariant(false, 'Expected virtual list to not have a placeholder') : undefined : void 0;
-}];
-function useValidation(args) {
-  useDevSetupWarning(function () {
-    runChecks(args, shared);
-
-    if (args.props.mode === 'standard') {
-      runChecks(args, standard);
+  if (innerHTML != null) {
+    if (innerHTML.__html != null) {
+      return innerHTML.__html;
     }
+  } else {
+    var content = props.children;
 
-    if (args.props.mode === 'virtual') {
-      runChecks(args, virtual);
+    if (typeof content === 'string' || typeof content === 'number') {
+      return escapeTextForBrowser(content);
     }
-  });
-}
-
-var AnimateInOut = function (_React$PureComponent) {
-  Object(_babel_runtime_corejs2_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_2__["default"])(AnimateInOut, _React$PureComponent);
-
-  function AnimateInOut() {
-    var _this;
-
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    _this = _React$PureComponent.call.apply(_React$PureComponent, [this].concat(args)) || this;
-    _this.state = {
-      isVisible: Boolean(_this.props.on),
-      data: _this.props.on,
-      animate: _this.props.shouldAnimate && _this.props.on ? 'open' : 'none'
-    };
-
-    _this.onClose = function () {
-      if (_this.state.animate !== 'close') {
-        return;
-      }
-
-      _this.setState({
-        isVisible: false
-      });
-    };
-
-    return _this;
-  }
-
-  AnimateInOut.getDerivedStateFromProps = function getDerivedStateFromProps(props, state) {
-    if (!props.shouldAnimate) {
-      return {
-        isVisible: Boolean(props.on),
-        data: props.on,
-        animate: 'none'
-      };
-    }
-
-    if (props.on) {
-      return {
-        isVisible: true,
-        data: props.on,
-        animate: 'open'
-      };
-    }
-
-    if (state.isVisible) {
-      return {
-        isVisible: true,
-        data: state.data,
-        animate: 'close'
-      };
-    }
-
-    return {
-      isVisible: false,
-      animate: 'close',
-      data: null
-    };
-  };
-
-  var _proto = AnimateInOut.prototype;
-
-  _proto.render = function render() {
-    if (!this.state.isVisible) {
-      return null;
-    }
-
-    var provided = {
-      onClose: this.onClose,
-      data: this.state.data,
-      animate: this.state.animate
-    };
-    return this.props.children(provided);
-  };
-
-  return AnimateInOut;
-}(react__WEBPACK_IMPORTED_MODULE_0___default.a.PureComponent);
-
-var zIndexOptions = {
-  dragging: 5000,
-  dropAnimating: 4500
-};
-
-var getDraggingTransition = function getDraggingTransition(shouldAnimateDragMovement, dropping) {
-  if (dropping) {
-    return transitions.drop(dropping.duration);
-  }
-
-  if (shouldAnimateDragMovement) {
-    return transitions.snap;
-  }
-
-  return transitions.fluid;
-};
-
-var getDraggingOpacity = function getDraggingOpacity(isCombining, isDropAnimating) {
-  if (!isCombining) {
-    return null;
-  }
-
-  return isDropAnimating ? combine.opacity.drop : combine.opacity.combining;
-};
-
-var getShouldDraggingAnimate = function getShouldDraggingAnimate(dragging) {
-  if (dragging.forceShouldAnimate != null) {
-    return dragging.forceShouldAnimate;
-  }
-
-  return dragging.mode === 'SNAP';
-};
-
-function getDraggingStyle(dragging) {
-  var dimension = dragging.dimension;
-  var box = dimension.client;
-  var offset = dragging.offset,
-      combineWith = dragging.combineWith,
-      dropping = dragging.dropping;
-  var isCombining = Boolean(combineWith);
-  var shouldAnimate = getShouldDraggingAnimate(dragging);
-  var isDropAnimating = Boolean(dropping);
-  var transform = isDropAnimating ? transforms.drop(offset, isCombining) : transforms.moveTo(offset);
-  var style = {
-    position: 'fixed',
-    top: box.marginBox.top,
-    left: box.marginBox.left,
-    boxSizing: 'border-box',
-    width: box.borderBox.width,
-    height: box.borderBox.height,
-    transition: getDraggingTransition(shouldAnimate, dropping),
-    transform: transform,
-    opacity: getDraggingOpacity(isCombining, isDropAnimating),
-    zIndex: isDropAnimating ? zIndexOptions.dropAnimating : zIndexOptions.dragging,
-    pointerEvents: 'none'
-  };
-  return style;
-}
-
-function getSecondaryStyle(secondary) {
-  return {
-    transform: transforms.moveTo(secondary.offset),
-    transition: secondary.shouldAnimateDisplacement ? null : 'none'
-  };
-}
-
-function getStyle$1(mapped) {
-  return mapped.type === 'DRAGGING' ? getDraggingStyle(mapped) : getSecondaryStyle(mapped);
-}
-
-function getDimension$1(descriptor, el, windowScroll) {
-  if (windowScroll === void 0) {
-    windowScroll = origin;
-  }
-
-  var computedStyles = window.getComputedStyle(el);
-  var borderBox = el.getBoundingClientRect();
-  var client = Object(css_box_model__WEBPACK_IMPORTED_MODULE_6__["calculateBox"])(borderBox, computedStyles);
-  var page = Object(css_box_model__WEBPACK_IMPORTED_MODULE_6__["withScroll"])(client, windowScroll);
-  var placeholder = {
-    client: client,
-    tagName: el.tagName.toLowerCase(),
-    display: computedStyles.display
-  };
-  var displaceBy = {
-    x: client.marginBox.width,
-    y: client.marginBox.height
-  };
-  var dimension = {
-    descriptor: descriptor,
-    placeholder: placeholder,
-    displaceBy: displaceBy,
-    client: client,
-    page: page
-  };
-  return dimension;
-}
-
-function useDraggablePublisher(args) {
-  var uniqueId = useUniqueId('draggable');
-  var descriptor = args.descriptor,
-      registry = args.registry,
-      getDraggableRef = args.getDraggableRef,
-      canDragInteractiveElements = args.canDragInteractiveElements,
-      shouldRespectForcePress = args.shouldRespectForcePress,
-      isEnabled = args.isEnabled;
-  var options = Object(use_memo_one__WEBPACK_IMPORTED_MODULE_1__["useMemo"])(function () {
-    return {
-      canDragInteractiveElements: canDragInteractiveElements,
-      shouldRespectForcePress: shouldRespectForcePress,
-      isEnabled: isEnabled
-    };
-  }, [canDragInteractiveElements, isEnabled, shouldRespectForcePress]);
-  var getDimension = Object(use_memo_one__WEBPACK_IMPORTED_MODULE_1__["useCallback"])(function (windowScroll) {
-    var el = getDraggableRef();
-    !el ?  true ? invariant(false, 'Cannot get dimension when no ref is set') : undefined : void 0;
-    return getDimension$1(descriptor, el, windowScroll);
-  }, [descriptor, getDraggableRef]);
-  var entry = Object(use_memo_one__WEBPACK_IMPORTED_MODULE_1__["useMemo"])(function () {
-    return {
-      uniqueId: uniqueId,
-      descriptor: descriptor,
-      options: options,
-      getDimension: getDimension
-    };
-  }, [descriptor, getDimension, options, uniqueId]);
-  var publishedRef = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(entry);
-  var isFirstPublishRef = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(true);
-  useIsomorphicLayoutEffect(function () {
-    registry.draggable.register(publishedRef.current);
-    return function () {
-      return registry.draggable.unregister(publishedRef.current);
-    };
-  }, [registry.draggable]);
-  useIsomorphicLayoutEffect(function () {
-    if (isFirstPublishRef.current) {
-      isFirstPublishRef.current = false;
-      return;
-    }
-
-    var last = publishedRef.current;
-    publishedRef.current = entry;
-    registry.draggable.update(entry, last);
-  }, [entry, registry.draggable]);
-}
-
-function useValidation$1(props, contextId, getRef) {
-  useDevSetupWarning(function () {
-    function prefix(id) {
-      return "Draggable[id: " + id + "]: ";
-    }
-
-    var id = props.draggableId;
-    !id ?  true ? invariant(false, 'Draggable requires a draggableId') : undefined : void 0;
-    !(typeof id === 'string') ?  true ? invariant(false, "Draggable requires a [string] draggableId.\n      Provided: [type: " + typeof id + "] (value: " + id + ")") : undefined : void 0;
-    !_babel_runtime_corejs2_core_js_number_is_integer__WEBPACK_IMPORTED_MODULE_14___default()(props.index) ?  true ? invariant(false, prefix(id) + " requires an integer index prop") : undefined : void 0;
-
-    if (props.mapped.type === 'DRAGGING') {
-      return;
-    }
-
-    checkIsValidInnerRef(getRef());
-
-    if (props.isEnabled) {
-      !findDragHandle(contextId, id) ?  true ? invariant(false, prefix(id) + " Unable to find drag handle") : undefined : void 0;
-    }
-  });
-}
-function useClonePropValidation(isClone) {
-  useDev(function () {
-    var initialRef = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(isClone);
-    useDevSetupWarning(function () {
-      !(isClone === initialRef.current) ?  true ? invariant(false, 'Draggable isClone prop value changed during component life') : undefined : void 0;
-    }, [isClone]);
-  });
-}
-
-function preventHtml5Dnd(event) {
-  event.preventDefault();
-}
-
-function Draggable(props) {
-  var ref = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(null);
-  var setRef = Object(use_memo_one__WEBPACK_IMPORTED_MODULE_1__["useCallback"])(function (el) {
-    ref.current = el;
-  }, []);
-  var getRef = Object(use_memo_one__WEBPACK_IMPORTED_MODULE_1__["useCallback"])(function () {
-    return ref.current;
-  }, []);
-
-  var _useRequiredContext = useRequiredContext(AppContext),
-      contextId = _useRequiredContext.contextId,
-      liftInstructionId = _useRequiredContext.liftInstructionId,
-      registry = _useRequiredContext.registry;
-
-  var _useRequiredContext2 = useRequiredContext(DroppableContext),
-      type = _useRequiredContext2.type,
-      droppableId = _useRequiredContext2.droppableId;
-
-  var descriptor = Object(use_memo_one__WEBPACK_IMPORTED_MODULE_1__["useMemo"])(function () {
-    return {
-      id: props.draggableId,
-      index: props.index,
-      type: type,
-      droppableId: droppableId
-    };
-  }, [props.draggableId, props.index, type, droppableId]);
-  var children = props.children,
-      draggableId = props.draggableId,
-      isEnabled = props.isEnabled,
-      shouldRespectForcePress = props.shouldRespectForcePress,
-      canDragInteractiveElements = props.canDragInteractiveElements,
-      isClone = props.isClone,
-      mapped = props.mapped,
-      dropAnimationFinishedAction = props.dropAnimationFinished;
-  useValidation$1(props, contextId, getRef);
-  useClonePropValidation(isClone);
-
-  if (!isClone) {
-    var forPublisher = Object(use_memo_one__WEBPACK_IMPORTED_MODULE_1__["useMemo"])(function () {
-      return {
-        descriptor: descriptor,
-        registry: registry,
-        getDraggableRef: getRef,
-        canDragInteractiveElements: canDragInteractiveElements,
-        shouldRespectForcePress: shouldRespectForcePress,
-        isEnabled: isEnabled
-      };
-    }, [descriptor, registry, getRef, canDragInteractiveElements, shouldRespectForcePress, isEnabled]);
-    useDraggablePublisher(forPublisher);
-  }
-
-  var dragHandleProps = Object(use_memo_one__WEBPACK_IMPORTED_MODULE_1__["useMemo"])(function () {
-    return isEnabled ? {
-      tabIndex: 0,
-      'data-rbd-drag-handle-draggable-id': draggableId,
-      'data-rbd-drag-handle-context-id': contextId,
-      'aria-labelledby': liftInstructionId,
-      draggable: false,
-      onDragStart: preventHtml5Dnd
-    } : null;
-  }, [contextId, draggableId, isEnabled, liftInstructionId]);
-  var onMoveEnd = Object(use_memo_one__WEBPACK_IMPORTED_MODULE_1__["useCallback"])(function (event) {
-    if (mapped.type !== 'DRAGGING') {
-      return;
-    }
-
-    if (!mapped.dropping) {
-      return;
-    }
-
-    if (event.propertyName !== 'transform') {
-      return;
-    }
-
-    dropAnimationFinishedAction();
-  }, [dropAnimationFinishedAction, mapped]);
-  var provided = Object(use_memo_one__WEBPACK_IMPORTED_MODULE_1__["useMemo"])(function () {
-    var style = getStyle$1(mapped);
-    var onTransitionEnd = mapped.type === 'DRAGGING' && mapped.dropping ? onMoveEnd : null;
-    var result = {
-      innerRef: setRef,
-      draggableProps: {
-        'data-rbd-draggable-context-id': contextId,
-        'data-rbd-draggable-id': draggableId,
-        style: style,
-        onTransitionEnd: onTransitionEnd
-      },
-      dragHandleProps: dragHandleProps
-    };
-    return result;
-  }, [contextId, dragHandleProps, draggableId, mapped, onMoveEnd, setRef]);
-  var rubric = Object(use_memo_one__WEBPACK_IMPORTED_MODULE_1__["useMemo"])(function () {
-    return {
-      draggableId: descriptor.id,
-      type: descriptor.type,
-      source: {
-        index: descriptor.index,
-        droppableId: descriptor.droppableId
-      }
-    };
-  }, [descriptor.droppableId, descriptor.id, descriptor.index, descriptor.type]);
-  return children(provided, mapped.snapshot, rubric);
-}
-
-var isStrictEqual = (function (a, b) {
-  return a === b;
-});
-
-var whatIsDraggedOverFromResult = (function (result) {
-  var combine = result.combine,
-      destination = result.destination;
-
-  if (destination) {
-    return destination.droppableId;
-  }
-
-  if (combine) {
-    return combine.droppableId;
   }
 
   return null;
-});
+}
 
-var getCombineWithFromResult = function getCombineWithFromResult(result) {
-  return result.combine ? result.combine.draggableId : null;
-};
+function flattenTopLevelChildren(children) {
+  if (!React.isValidElement(children)) {
+    return toArray(children);
+  }
 
-var getCombineWithFromImpact = function getCombineWithFromImpact(impact) {
-  return impact.at && impact.at.type === 'COMBINE' ? impact.at.combine.draggableId : null;
-};
+  var element = children;
 
-function getDraggableSelector() {
-  var memoizedOffset = Object(memoize_one__WEBPACK_IMPORTED_MODULE_7__["default"])(function (x, y) {
-    return {
-      x: x,
-      y: y
-    };
-  });
-  var getMemoizedSnapshot = Object(memoize_one__WEBPACK_IMPORTED_MODULE_7__["default"])(function (mode, isClone, draggingOver, combineWith, dropping) {
-    return {
-      isDragging: true,
-      isClone: isClone,
-      isDropAnimating: Boolean(dropping),
-      dropAnimation: dropping,
-      mode: mode,
-      draggingOver: draggingOver,
-      combineWith: combineWith,
-      combineTargetFor: null
-    };
-  });
-  var getMemoizedProps = Object(memoize_one__WEBPACK_IMPORTED_MODULE_7__["default"])(function (offset, mode, dimension, isClone, draggingOver, combineWith, forceShouldAnimate) {
-    return {
-      mapped: {
-        type: 'DRAGGING',
-        dropping: null,
-        draggingOver: draggingOver,
-        combineWith: combineWith,
-        mode: mode,
-        offset: offset,
-        dimension: dimension,
-        forceShouldAnimate: forceShouldAnimate,
-        snapshot: getMemoizedSnapshot(mode, isClone, draggingOver, combineWith, null)
-      }
-    };
-  });
+  if (element.type !== REACT_FRAGMENT_TYPE) {
+    return [element];
+  }
 
-  var selector = function selector(state, ownProps) {
-    if (state.isDragging) {
-      if (state.critical.draggable.id !== ownProps.draggableId) {
-        return null;
-      }
+  var fragmentChildren = element.props.children;
 
-      var offset = state.current.client.offset;
-      var dimension = state.dimensions.draggables[ownProps.draggableId];
-      var draggingOver = whatIsDraggedOver(state.impact);
-      var combineWith = getCombineWithFromImpact(state.impact);
-      var forceShouldAnimate = state.forceShouldAnimate;
-      return getMemoizedProps(memoizedOffset(offset.x, offset.y), state.movementMode, dimension, ownProps.isClone, draggingOver, combineWith, forceShouldAnimate);
+  if (!React.isValidElement(fragmentChildren)) {
+    return toArray(fragmentChildren);
+  }
+
+  var fragmentChildElement = fragmentChildren;
+  return [fragmentChildElement];
+}
+
+function flattenOptionChildren(children) {
+  if (children === undefined || children === null) {
+    return children;
+  }
+
+  var content = ''; // Flatten children and warn if they aren't strings or numbers;
+  // invalid types are ignored.
+
+  React.Children.forEach(children, function (child) {
+    if (child == null) {
+      return;
     }
 
-    if (state.phase === 'DROP_ANIMATING') {
-      var completed = state.completed;
+    content += child;
 
-      if (completed.result.draggableId !== ownProps.draggableId) {
-        return null;
+    {
+      if (!didWarnInvalidOptionChildren && typeof child !== 'string' && typeof child !== 'number') {
+        didWarnInvalidOptionChildren = true;
+        warning$1(false, 'Only strings and numbers are supported as <option> children.');
       }
+    }
+  });
+  return content;
+}
 
-      var isClone = ownProps.isClone;
-      var _dimension = state.dimensions.draggables[ownProps.draggableId];
-      var result = completed.result;
-      var mode = result.mode;
+var hasOwnProperty = Object.prototype.hasOwnProperty;
+var STYLE = 'style';
+var RESERVED_PROPS = {
+  children: null,
+  dangerouslySetInnerHTML: null,
+  suppressContentEditableWarning: null,
+  suppressHydrationWarning: null
+};
 
-      var _draggingOver = whatIsDraggedOverFromResult(result);
+function createOpenTagMarkup(tagVerbatim, tagLowercase, props, namespace, makeStaticMarkup, isRootElement) {
+  var ret = '<' + tagVerbatim;
 
-      var _combineWith = getCombineWithFromResult(result);
+  for (var propKey in props) {
+    if (!hasOwnProperty.call(props, propKey)) {
+      continue;
+    }
 
-      var duration = state.dropDuration;
-      var dropping = {
-        duration: duration,
-        curve: curves.drop,
-        moveTo: state.newHomeClientOffset,
-        opacity: _combineWith ? combine.opacity.drop : null,
-        scale: _combineWith ? combine.scale.drop : null
-      };
-      return {
-        mapped: {
-          type: 'DRAGGING',
-          offset: state.newHomeClientOffset,
-          dimension: _dimension,
-          dropping: dropping,
-          draggingOver: _draggingOver,
-          combineWith: _combineWith,
-          mode: mode,
-          forceShouldAnimate: null,
-          snapshot: getMemoizedSnapshot(mode, isClone, _draggingOver, _combineWith, dropping)
+    if (enableFlareAPI && propKey === 'listeners') {
+      continue;
+    }
+
+    var propValue = props[propKey];
+
+    if (propValue == null) {
+      continue;
+    }
+
+    if (propKey === STYLE) {
+      propValue = createMarkupForStyles(propValue);
+    }
+
+    var markup = null;
+
+    if (isCustomComponent(tagLowercase, props)) {
+      if (!RESERVED_PROPS.hasOwnProperty(propKey)) {
+        markup = createMarkupForCustomAttribute(propKey, propValue);
+      }
+    } else {
+      markup = createMarkupForProperty(propKey, propValue);
+    }
+
+    if (markup) {
+      ret += ' ' + markup;
+    }
+  } // For static pages, no need to put React ID and checksum. Saves lots of
+  // bytes.
+
+
+  if (makeStaticMarkup) {
+    return ret;
+  }
+
+  if (isRootElement) {
+    ret += ' ' + createMarkupForRoot();
+  }
+
+  return ret;
+}
+
+function validateRenderResult(child, type) {
+  if (child === undefined) {
+    (function () {
+      {
+        {
+          throw ReactError(Error((getComponentName(type) || 'Component') + "(...): Nothing was returned from render. This usually means a return statement is missing. Or, to render nothing, return null."));
         }
-      };
-    }
-
-    return null;
-  };
-
-  return selector;
+      }
+    })();
+  }
 }
 
-function getSecondarySnapshot(combineTargetFor) {
+function resolve(child, context, threadID) {
+  while (React.isValidElement(child)) {
+    // Safe because we just checked it's an element.
+    var element = child;
+    var Component = element.type;
+
+    {
+      pushElementToDebugStack(element);
+    }
+
+    if (typeof Component !== 'function') {
+      break;
+    }
+
+    processChild(element, Component);
+  } // Extra closure so queue and replace can be captured properly
+
+
+  function processChild(element, Component) {
+    var isClass = shouldConstruct(Component);
+    var publicContext = processContext(Component, context, threadID, isClass);
+    var queue = [];
+    var replace = false;
+    var updater = {
+      isMounted: function (publicInstance) {
+        return false;
+      },
+      enqueueForceUpdate: function (publicInstance) {
+        if (queue === null) {
+          warnNoop(publicInstance, 'forceUpdate');
+          return null;
+        }
+      },
+      enqueueReplaceState: function (publicInstance, completeState) {
+        replace = true;
+        queue = [completeState];
+      },
+      enqueueSetState: function (publicInstance, currentPartialState) {
+        if (queue === null) {
+          warnNoop(publicInstance, 'setState');
+          return null;
+        }
+
+        queue.push(currentPartialState);
+      }
+    };
+    var inst;
+
+    if (isClass) {
+      inst = new Component(element.props, publicContext, updater);
+
+      if (typeof Component.getDerivedStateFromProps === 'function') {
+        {
+          if (inst.state === null || inst.state === undefined) {
+            var componentName = getComponentName(Component) || 'Unknown';
+
+            if (!didWarnAboutUninitializedState[componentName]) {
+              warningWithoutStack$1(false, '`%s` uses `getDerivedStateFromProps` but its initial state is ' + '%s. This is not recommended. Instead, define the initial state by ' + 'assigning an object to `this.state` in the constructor of `%s`. ' + 'This ensures that `getDerivedStateFromProps` arguments have a consistent shape.', componentName, inst.state === null ? 'null' : 'undefined', componentName);
+              didWarnAboutUninitializedState[componentName] = true;
+            }
+          }
+        }
+
+        var partialState = Component.getDerivedStateFromProps.call(null, element.props, inst.state);
+
+        {
+          if (partialState === undefined) {
+            var _componentName = getComponentName(Component) || 'Unknown';
+
+            if (!didWarnAboutUndefinedDerivedState[_componentName]) {
+              warningWithoutStack$1(false, '%s.getDerivedStateFromProps(): A valid state object (or null) must be returned. ' + 'You have returned undefined.', _componentName);
+              didWarnAboutUndefinedDerivedState[_componentName] = true;
+            }
+          }
+        }
+
+        if (partialState != null) {
+          inst.state = _assign({}, inst.state, partialState);
+        }
+      }
+    } else {
+      {
+        if (Component.prototype && typeof Component.prototype.render === 'function') {
+          var _componentName2 = getComponentName(Component) || 'Unknown';
+
+          if (!didWarnAboutBadClass[_componentName2]) {
+            warningWithoutStack$1(false, "The <%s /> component appears to have a render method, but doesn't extend React.Component. " + 'This is likely to cause errors. Change %s to extend React.Component instead.', _componentName2, _componentName2);
+            didWarnAboutBadClass[_componentName2] = true;
+          }
+        }
+      }
+
+      var componentIdentity = {};
+      prepareToUseHooks(componentIdentity);
+      inst = Component(element.props, publicContext, updater);
+      inst = finishHooks(Component, element.props, inst, publicContext);
+
+      if (inst == null || inst.render == null) {
+        child = inst;
+        validateRenderResult(child, Component);
+        return;
+      }
+
+      {
+        var _componentName3 = getComponentName(Component) || 'Unknown';
+
+        if (!didWarnAboutModulePatternComponent[_componentName3]) {
+          warningWithoutStack$1(false, 'The <%s /> component appears to be a function component that returns a class instance. ' + 'Change %s to a class that extends React.Component instead. ' + "If you can't use a class try assigning the prototype on the function as a workaround. " + "`%s.prototype = React.Component.prototype`. Don't use an arrow function since it " + 'cannot be called with `new` by React.', _componentName3, _componentName3, _componentName3);
+          didWarnAboutModulePatternComponent[_componentName3] = true;
+        }
+      }
+    }
+
+    inst.props = element.props;
+    inst.context = publicContext;
+    inst.updater = updater;
+    var initialState = inst.state;
+
+    if (initialState === undefined) {
+      inst.state = initialState = null;
+    }
+
+    if (typeof inst.UNSAFE_componentWillMount === 'function' || typeof inst.componentWillMount === 'function') {
+      if (typeof inst.componentWillMount === 'function') {
+        {
+          if (warnAboutDeprecatedLifecycles && inst.componentWillMount.__suppressDeprecationWarning !== true) {
+            var _componentName4 = getComponentName(Component) || 'Unknown';
+
+            if (!didWarnAboutDeprecatedWillMount[_componentName4]) {
+              lowPriorityWarningWithoutStack$1(false, // keep this warning in sync with ReactStrictModeWarning.js
+              'componentWillMount has been renamed, and is not recommended for use. ' + 'See https://fb.me/react-unsafe-component-lifecycles for details.\n\n' + '* Move code from componentWillMount to componentDidMount (preferred in most cases) ' + 'or the constructor.\n' + '\nPlease update the following components: %s', _componentName4);
+              didWarnAboutDeprecatedWillMount[_componentName4] = true;
+            }
+          }
+        } // In order to support react-lifecycles-compat polyfilled components,
+        // Unsafe lifecycles should not be invoked for any component with the new gDSFP.
+
+
+        if (typeof Component.getDerivedStateFromProps !== 'function') {
+          inst.componentWillMount();
+        }
+      }
+
+      if (typeof inst.UNSAFE_componentWillMount === 'function' && typeof Component.getDerivedStateFromProps !== 'function') {
+        // In order to support react-lifecycles-compat polyfilled components,
+        // Unsafe lifecycles should not be invoked for any component with the new gDSFP.
+        inst.UNSAFE_componentWillMount();
+      }
+
+      if (queue.length) {
+        var oldQueue = queue;
+        var oldReplace = replace;
+        queue = null;
+        replace = false;
+
+        if (oldReplace && oldQueue.length === 1) {
+          inst.state = oldQueue[0];
+        } else {
+          var nextState = oldReplace ? oldQueue[0] : inst.state;
+          var dontMutate = true;
+
+          for (var i = oldReplace ? 1 : 0; i < oldQueue.length; i++) {
+            var partial = oldQueue[i];
+
+            var _partialState = typeof partial === 'function' ? partial.call(inst, nextState, element.props, publicContext) : partial;
+
+            if (_partialState != null) {
+              if (dontMutate) {
+                dontMutate = false;
+                nextState = _assign({}, nextState, _partialState);
+              } else {
+                _assign(nextState, _partialState);
+              }
+            }
+          }
+
+          inst.state = nextState;
+        }
+      } else {
+        queue = null;
+      }
+    }
+
+    child = inst.render();
+
+    {
+      if (child === undefined && inst.render._isMockFunction) {
+        // This is probably bad practice. Consider warning here and
+        // deprecating this convenience.
+        child = null;
+      }
+    }
+
+    validateRenderResult(child, Component);
+    var childContext;
+
+    if (disableLegacyContext) {
+      {
+        var childContextTypes = Component.childContextTypes;
+
+        if (childContextTypes !== undefined) {
+          warningWithoutStack$1(false, '%s uses the legacy childContextTypes API which is no longer supported. ' + 'Use React.createContext() instead.', getComponentName(Component) || 'Unknown');
+        }
+      }
+    } else {
+      if (typeof inst.getChildContext === 'function') {
+        var _childContextTypes = Component.childContextTypes;
+
+        if (typeof _childContextTypes === 'object') {
+          childContext = inst.getChildContext();
+
+          for (var contextKey in childContext) {
+            (function () {
+              if (!(contextKey in _childContextTypes)) {
+                {
+                  throw ReactError(Error((getComponentName(Component) || 'Unknown') + ".getChildContext(): key \"" + contextKey + "\" is not defined in childContextTypes."));
+                }
+              }
+            })();
+          }
+        } else {
+          warningWithoutStack$1(false, '%s.getChildContext(): childContextTypes must be defined in order to ' + 'use getChildContext().', getComponentName(Component) || 'Unknown');
+        }
+      }
+
+      if (childContext) {
+        context = _assign({}, context, childContext);
+      }
+    }
+  }
+
   return {
-    isDragging: false,
-    isDropAnimating: false,
-    isClone: false,
-    dropAnimation: null,
-    mode: null,
-    draggingOver: null,
-    combineTargetFor: combineTargetFor,
-    combineWith: null
+    child: child,
+    context: context
   };
 }
 
-var atRest = {
-  mapped: {
-    type: 'SECONDARY',
-    offset: origin,
-    combineTargetFor: null,
-    shouldAnimateDisplacement: true,
-    snapshot: getSecondarySnapshot(null)
-  }
-};
-
-function getSecondarySelector() {
-  var memoizedOffset = Object(memoize_one__WEBPACK_IMPORTED_MODULE_7__["default"])(function (x, y) {
-    return {
-      x: x,
-      y: y
+var ReactDOMServerRenderer =
+/*#__PURE__*/
+function () {
+  // TODO: type this more strictly:
+  // DEV-only
+  function ReactDOMServerRenderer(children, makeStaticMarkup) {
+    var flatChildren = flattenTopLevelChildren(children);
+    var topFrame = {
+      type: null,
+      // Assume all trees start in the HTML namespace (not totally true, but
+      // this is what we did historically)
+      domNamespace: Namespaces.html,
+      children: flatChildren,
+      childIndex: 0,
+      context: emptyObject,
+      footer: ''
     };
-  });
-  var getMemoizedSnapshot = Object(memoize_one__WEBPACK_IMPORTED_MODULE_7__["default"])(getSecondarySnapshot);
-  var getMemoizedProps = Object(memoize_one__WEBPACK_IMPORTED_MODULE_7__["default"])(function (offset, combineTargetFor, shouldAnimateDisplacement) {
-    if (combineTargetFor === void 0) {
-      combineTargetFor = null;
+
+    {
+      topFrame.debugElementStack = [];
     }
 
-    return {
-      mapped: {
-        type: 'SECONDARY',
-        offset: offset,
-        combineTargetFor: combineTargetFor,
-        shouldAnimateDisplacement: shouldAnimateDisplacement,
-        snapshot: getMemoizedSnapshot(combineTargetFor)
-      }
-    };
-  });
+    this.threadID = allocThreadID();
+    this.stack = [topFrame];
+    this.exhausted = false;
+    this.currentSelectValue = null;
+    this.previousWasTextNode = false;
+    this.makeStaticMarkup = makeStaticMarkup;
+    this.suspenseDepth = 0; // Context (new API)
 
-  var getFallback = function getFallback(combineTargetFor) {
-    return combineTargetFor ? getMemoizedProps(origin, combineTargetFor, true) : null;
-  };
+    this.contextIndex = -1;
+    this.contextStack = [];
+    this.contextValueStack = [];
 
-  var getProps = function getProps(ownId, draggingId, impact, afterCritical) {
-    var visualDisplacement = impact.displaced.visible[ownId];
-    var isAfterCriticalInVirtualList = Boolean(afterCritical.inVirtualList && afterCritical.effected[ownId]);
-    var combine = tryGetCombine(impact);
-    var combineTargetFor = combine && combine.draggableId === ownId ? draggingId : null;
-
-    if (!visualDisplacement) {
-      if (!isAfterCriticalInVirtualList) {
-        return getFallback(combineTargetFor);
-      }
-
-      if (impact.displaced.invisible[ownId]) {
-        return null;
-      }
-
-      var change = negate(afterCritical.displacedBy.point);
-
-      var _offset = memoizedOffset(change.x, change.y);
-
-      return getMemoizedProps(_offset, combineTargetFor, true);
+    {
+      this.contextProviderStack = [];
     }
-
-    if (isAfterCriticalInVirtualList) {
-      return getFallback(combineTargetFor);
-    }
-
-    var displaceBy = impact.displacedBy.point;
-    var offset = memoizedOffset(displaceBy.x, displaceBy.y);
-    return getMemoizedProps(offset, combineTargetFor, visualDisplacement.shouldAnimate);
-  };
-
-  var selector = function selector(state, ownProps) {
-    if (state.isDragging) {
-      if (state.critical.draggable.id === ownProps.draggableId) {
-        return null;
-      }
-
-      return getProps(ownProps.draggableId, state.critical.draggable.id, state.impact, state.afterCritical);
-    }
-
-    if (state.phase === 'DROP_ANIMATING') {
-      var completed = state.completed;
-
-      if (completed.result.draggableId === ownProps.draggableId) {
-        return null;
-      }
-
-      return getProps(ownProps.draggableId, completed.result.draggableId, completed.impact, completed.afterCritical);
-    }
-
-    return null;
-  };
-
-  return selector;
-}
-
-var makeMapStateToProps = function makeMapStateToProps() {
-  var draggingSelector = getDraggableSelector();
-  var secondarySelector = getSecondarySelector();
-
-  var selector = function selector(state, ownProps) {
-    return draggingSelector(state, ownProps) || secondarySelector(state, ownProps) || atRest;
-  };
-
-  return selector;
-};
-var mapDispatchToProps = {
-  dropAnimationFinished: dropAnimationFinished
-};
-var ConnectedDraggable = Object(react_redux__WEBPACK_IMPORTED_MODULE_5__["connect"])(makeMapStateToProps, mapDispatchToProps, null, {
-  context: StoreContext,
-  pure: true,
-  areStatePropsEqual: isStrictEqual
-})(Draggable);
-
-function PrivateDraggable(props) {
-  var droppableContext = useRequiredContext(DroppableContext);
-  var isUsingCloneFor = droppableContext.isUsingCloneFor;
-
-  if (isUsingCloneFor === props.draggableId && !props.isClone) {
-    return null;
   }
 
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(ConnectedDraggable, props);
-}
-function PublicDraggable(props) {
-  var isEnabled = typeof props.isDragDisabled === 'boolean' ? !props.isDragDisabled : true;
-  var canDragInteractiveElements = Boolean(props.disableInteractiveElementBlocking);
-  var shouldRespectForcePress = Boolean(props.shouldRespectForcePress);
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(PrivateDraggable, Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_3__["default"])({}, props, {
-    isClone: false,
-    isEnabled: isEnabled,
-    canDragInteractiveElements: canDragInteractiveElements,
-    shouldRespectForcePress: shouldRespectForcePress
-  }));
-}
+  var _proto = ReactDOMServerRenderer.prototype;
 
-function Droppable(props) {
-  var appContext = Object(react__WEBPACK_IMPORTED_MODULE_0__["useContext"])(AppContext);
-  !appContext ?  true ? invariant(false, 'Could not find app context') : undefined : void 0;
-  var contextId = appContext.contextId,
-      isMovementAllowed = appContext.isMovementAllowed;
-  var droppableRef = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(null);
-  var placeholderRef = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(null);
-  var children = props.children,
-      droppableId = props.droppableId,
-      type = props.type,
-      mode = props.mode,
-      direction = props.direction,
-      ignoreContainerClipping = props.ignoreContainerClipping,
-      isDropDisabled = props.isDropDisabled,
-      isCombineEnabled = props.isCombineEnabled,
-      snapshot = props.snapshot,
-      useClone = props.useClone,
-      updateViewportMaxScroll = props.updateViewportMaxScroll,
-      getContainerForClone = props.getContainerForClone;
-  var getDroppableRef = Object(use_memo_one__WEBPACK_IMPORTED_MODULE_1__["useCallback"])(function () {
-    return droppableRef.current;
-  }, []);
-  var setDroppableRef = Object(use_memo_one__WEBPACK_IMPORTED_MODULE_1__["useCallback"])(function (value) {
-    droppableRef.current = value;
-  }, []);
-  var getPlaceholderRef = Object(use_memo_one__WEBPACK_IMPORTED_MODULE_1__["useCallback"])(function () {
-    return placeholderRef.current;
-  }, []);
-  var setPlaceholderRef = Object(use_memo_one__WEBPACK_IMPORTED_MODULE_1__["useCallback"])(function (value) {
-    placeholderRef.current = value;
-  }, []);
-  useValidation({
-    props: props,
-    getDroppableRef: getDroppableRef,
-    getPlaceholderRef: getPlaceholderRef
-  });
-  var onPlaceholderTransitionEnd = Object(use_memo_one__WEBPACK_IMPORTED_MODULE_1__["useCallback"])(function () {
-    if (isMovementAllowed()) {
-      updateViewportMaxScroll({
-        maxScroll: getMaxWindowScroll()
-      });
+  _proto.destroy = function destroy() {
+    if (!this.exhausted) {
+      this.exhausted = true;
+      this.clearProviders();
+      freeThreadID(this.threadID);
     }
-  }, [isMovementAllowed, updateViewportMaxScroll]);
-  useDroppablePublisher({
-    droppableId: droppableId,
-    type: type,
-    mode: mode,
-    direction: direction,
-    isDropDisabled: isDropDisabled,
-    isCombineEnabled: isCombineEnabled,
-    ignoreContainerClipping: ignoreContainerClipping,
-    getDroppableRef: getDroppableRef
-  });
-  var placeholder = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(AnimateInOut, {
-    on: props.placeholder,
-    shouldAnimate: props.shouldAnimatePlaceholder
-  }, function (_ref) {
-    var onClose = _ref.onClose,
-        data = _ref.data,
-        animate = _ref.animate;
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Placeholder$1, {
-      placeholder: data,
-      onClose: onClose,
-      innerRef: setPlaceholderRef,
-      animate: animate,
-      contextId: contextId,
-      onTransitionEnd: onPlaceholderTransitionEnd
-    });
-  });
-  var provided = Object(use_memo_one__WEBPACK_IMPORTED_MODULE_1__["useMemo"])(function () {
-    return {
-      innerRef: setDroppableRef,
-      placeholder: placeholder,
-      droppableProps: {
-        'data-rbd-droppable-id': droppableId,
-        'data-rbd-droppable-context-id': contextId
-      }
-    };
-  }, [contextId, droppableId, placeholder, setDroppableRef]);
-  var isUsingCloneFor = useClone ? useClone.dragging.draggableId : null;
-  var droppableContext = Object(use_memo_one__WEBPACK_IMPORTED_MODULE_1__["useMemo"])(function () {
-    return {
-      droppableId: droppableId,
-      type: type,
-      isUsingCloneFor: isUsingCloneFor
-    };
-  }, [droppableId, isUsingCloneFor, type]);
+  }
+  /**
+   * Note: We use just two stacks regardless of how many context providers you have.
+   * Providers are always popped in the reverse order to how they were pushed
+   * so we always know on the way down which provider you'll encounter next on the way up.
+   * On the way down, we push the current provider, and its context value *before*
+   * we mutated it, onto the stacks. Therefore, on the way up, we always know which
+   * provider needs to be "restored" to which value.
+   * https://github.com/facebook/react/pull/12985#issuecomment-396301248
+   */
+  ;
 
-  function getClone() {
-    if (!useClone) {
+  _proto.pushProvider = function pushProvider(provider) {
+    var index = ++this.contextIndex;
+    var context = provider.type._context;
+    var threadID = this.threadID;
+    validateContextBounds(context, threadID);
+    var previousValue = context[threadID]; // Remember which value to restore this context to on our way up.
+
+    this.contextStack[index] = context;
+    this.contextValueStack[index] = previousValue;
+
+    {
+      // Only used for push/pop mismatch warnings.
+      this.contextProviderStack[index] = provider;
+    } // Mutate the current value.
+
+
+    context[threadID] = provider.props.value;
+  };
+
+  _proto.popProvider = function popProvider(provider) {
+    var index = this.contextIndex;
+
+    {
+      !(index > -1 && provider === this.contextProviderStack[index]) ? warningWithoutStack$1(false, 'Unexpected pop.') : void 0;
+    }
+
+    var context = this.contextStack[index];
+    var previousValue = this.contextValueStack[index]; // "Hide" these null assignments from Flow by using `any`
+    // because conceptually they are deletions--as long as we
+    // promise to never access values beyond `this.contextIndex`.
+
+    this.contextStack[index] = null;
+    this.contextValueStack[index] = null;
+
+    {
+      this.contextProviderStack[index] = null;
+    }
+
+    this.contextIndex--; // Restore to the previous value we stored as we were walking down.
+    // We've already verified that this context has been expanded to accommodate
+    // this thread id, so we don't need to do it again.
+
+    context[this.threadID] = previousValue;
+  };
+
+  _proto.clearProviders = function clearProviders() {
+    // Restore any remaining providers on the stack to previous values
+    for (var index = this.contextIndex; index >= 0; index--) {
+      var context = this.contextStack[index];
+      var previousValue = this.contextValueStack[index];
+      context[this.threadID] = previousValue;
+    }
+  };
+
+  _proto.read = function read(bytes) {
+    var _this = this;
+
+    if (this.exhausted) {
       return null;
     }
 
-    var dragging = useClone.dragging,
-        render = useClone.render;
-    var node = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(PrivateDraggable, {
-      draggableId: dragging.draggableId,
-      index: dragging.source.index,
-      isClone: true,
-      isEnabled: true,
-      shouldRespectForcePress: false,
-      canDragInteractiveElements: true
-    }, function (draggableProvided, draggableSnapshot) {
-      return render(draggableProvided, draggableSnapshot, dragging);
-    });
-    return react_dom__WEBPACK_IMPORTED_MODULE_13___default.a.createPortal(node, getContainerForClone());
-  }
+    var prevThreadID = currentThreadID;
+    setCurrentThreadID(this.threadID);
+    var prevDispatcher = ReactCurrentDispatcher.current;
+    ReactCurrentDispatcher.current = Dispatcher;
 
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(DroppableContext.Provider, {
-    value: droppableContext
-  }, children(provided, snapshot), getClone());
-}
+    try {
+      // Markup generated within <Suspense> ends up buffered until we know
+      // nothing in that boundary suspended
+      var out = [''];
+      var suspended = false;
 
-var isMatchingType = function isMatchingType(type, critical) {
-  return type === critical.droppable.type;
-};
-
-var getDraggable = function getDraggable(critical, dimensions) {
-  return dimensions.draggables[critical.draggable.id];
-};
-
-var makeMapStateToProps$1 = function makeMapStateToProps() {
-  var idleWithAnimation = {
-    placeholder: null,
-    shouldAnimatePlaceholder: true,
-    snapshot: {
-      isDraggingOver: false,
-      draggingOverWith: null,
-      draggingFromThisWith: null,
-      isUsingPlaceholder: false
-    },
-    useClone: null
-  };
-
-  var idleWithoutAnimation = Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_3__["default"])({}, idleWithAnimation, {
-    shouldAnimatePlaceholder: false
-  });
-
-  var getDraggableRubric = Object(memoize_one__WEBPACK_IMPORTED_MODULE_7__["default"])(function (descriptor) {
-    return {
-      draggableId: descriptor.id,
-      type: descriptor.type,
-      source: {
-        index: descriptor.index,
-        droppableId: descriptor.droppableId
-      }
-    };
-  });
-  var getMapProps = Object(memoize_one__WEBPACK_IMPORTED_MODULE_7__["default"])(function (id, isEnabled, isDraggingOverForConsumer, isDraggingOverForImpact, dragging, renderClone) {
-    var draggableId = dragging.descriptor.id;
-    var isHome = dragging.descriptor.droppableId === id;
-
-    if (isHome) {
-      var useClone = renderClone ? {
-        render: renderClone,
-        dragging: getDraggableRubric(dragging.descriptor)
-      } : null;
-      var _snapshot = {
-        isDraggingOver: isDraggingOverForConsumer,
-        draggingOverWith: isDraggingOverForConsumer ? draggableId : null,
-        draggingFromThisWith: draggableId,
-        isUsingPlaceholder: true
-      };
-      return {
-        placeholder: dragging.placeholder,
-        shouldAnimatePlaceholder: false,
-        snapshot: _snapshot,
-        useClone: useClone
-      };
-    }
-
-    if (!isEnabled) {
-      return idleWithoutAnimation;
-    }
-
-    if (!isDraggingOverForImpact) {
-      return idleWithAnimation;
-    }
-
-    var snapshot = {
-      isDraggingOver: isDraggingOverForConsumer,
-      draggingOverWith: draggableId,
-      draggingFromThisWith: null,
-      isUsingPlaceholder: true
-    };
-    return {
-      placeholder: dragging.placeholder,
-      shouldAnimatePlaceholder: true,
-      snapshot: snapshot,
-      useClone: null
-    };
-  });
-
-  var selector = function selector(state, ownProps) {
-    var id = ownProps.droppableId;
-    var type = ownProps.type;
-    var isEnabled = !ownProps.isDropDisabled;
-    var renderClone = ownProps.renderClone;
-
-    if (state.isDragging) {
-      var critical = state.critical;
-
-      if (!isMatchingType(type, critical)) {
-        return idleWithoutAnimation;
-      }
-
-      var dragging = getDraggable(critical, state.dimensions);
-      var isDraggingOver = whatIsDraggedOver(state.impact) === id;
-      return getMapProps(id, isEnabled, isDraggingOver, isDraggingOver, dragging, renderClone);
-    }
-
-    if (state.phase === 'DROP_ANIMATING') {
-      var completed = state.completed;
-
-      if (!isMatchingType(type, completed.critical)) {
-        return idleWithoutAnimation;
-      }
-
-      var _dragging = getDraggable(completed.critical, state.dimensions);
-
-      return getMapProps(id, isEnabled, whatIsDraggedOverFromResult(completed.result) === id, whatIsDraggedOver(completed.impact) === id, _dragging, renderClone);
-    }
-
-    if (state.phase === 'IDLE' && state.completed && !state.shouldFlush) {
-      var _completed = state.completed;
-
-      if (!isMatchingType(type, _completed.critical)) {
-        return idleWithoutAnimation;
-      }
-
-      var wasOver = whatIsDraggedOver(_completed.impact) === id;
-      var wasCombining = Boolean(_completed.impact.at && _completed.impact.at.type === 'COMBINE');
-      var isHome = _completed.critical.droppable.id === id;
-
-      if (wasOver) {
-        return wasCombining ? idleWithAnimation : idleWithoutAnimation;
-      }
-
-      if (isHome) {
-        return idleWithAnimation;
-      }
-
-      return idleWithoutAnimation;
-    }
-
-    return idleWithoutAnimation;
-  };
-
-  return selector;
-};
-var mapDispatchToProps$1 = {
-  updateViewportMaxScroll: updateViewportMaxScroll
-};
-
-function getBody() {
-  !document.body ?  true ? invariant(false, 'document.body is not ready') : undefined : void 0;
-  return document.body;
-}
-
-var defaultProps = {
-  mode: 'standard',
-  type: 'DEFAULT',
-  direction: 'vertical',
-  isDropDisabled: false,
-  isCombineEnabled: false,
-  ignoreContainerClipping: false,
-  renderClone: null,
-  getContainerForClone: getBody
-};
-var ConnectedDroppable = Object(react_redux__WEBPACK_IMPORTED_MODULE_5__["connect"])(makeMapStateToProps$1, mapDispatchToProps$1, null, {
-  context: StoreContext,
-  pure: true,
-  areStatePropsEqual: isStrictEqual
-})(Droppable);
-ConnectedDroppable.defaultProps = defaultProps;
-
-
-
-
-/***/ }),
-
-/***/ "./node_modules/react-beautiful-dnd/node_modules/@babel/runtime-corejs2/core-js/date/now.js":
-/*!**************************************************************************************************!*\
-  !*** ./node_modules/react-beautiful-dnd/node_modules/@babel/runtime-corejs2/core-js/date/now.js ***!
-  \**************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(/*! core-js/library/fn/date/now */ "./node_modules/core-js/library/fn/date/now.js");
-
-/***/ }),
-
-/***/ "./node_modules/react-beautiful-dnd/node_modules/@babel/runtime-corejs2/core-js/number/is-integer.js":
-/*!***********************************************************************************************************!*\
-  !*** ./node_modules/react-beautiful-dnd/node_modules/@babel/runtime-corejs2/core-js/number/is-integer.js ***!
-  \***********************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(/*! core-js/library/fn/number/is-integer */ "./node_modules/core-js/library/fn/number/is-integer.js");
-
-/***/ }),
-
-/***/ "./node_modules/react-beautiful-dnd/node_modules/@babel/runtime-corejs2/core-js/object/assign.js":
-/*!*******************************************************************************************************!*\
-  !*** ./node_modules/react-beautiful-dnd/node_modules/@babel/runtime-corejs2/core-js/object/assign.js ***!
-  \*******************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(/*! core-js/library/fn/object/assign */ "./node_modules/core-js/library/fn/object/assign.js");
-
-/***/ }),
-
-/***/ "./node_modules/react-beautiful-dnd/node_modules/@babel/runtime-corejs2/core-js/object/create.js":
-/*!*******************************************************************************************************!*\
-  !*** ./node_modules/react-beautiful-dnd/node_modules/@babel/runtime-corejs2/core-js/object/create.js ***!
-  \*******************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(/*! core-js/library/fn/object/create */ "./node_modules/core-js/library/fn/object/create.js");
-
-/***/ }),
-
-/***/ "./node_modules/react-beautiful-dnd/node_modules/@babel/runtime-corejs2/core-js/object/keys.js":
-/*!*****************************************************************************************************!*\
-  !*** ./node_modules/react-beautiful-dnd/node_modules/@babel/runtime-corejs2/core-js/object/keys.js ***!
-  \*****************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(/*! core-js/library/fn/object/keys */ "./node_modules/core-js/library/fn/object/keys.js");
-
-/***/ }),
-
-/***/ "./node_modules/react-beautiful-dnd/node_modules/@babel/runtime-corejs2/core-js/object/values.js":
-/*!*******************************************************************************************************!*\
-  !*** ./node_modules/react-beautiful-dnd/node_modules/@babel/runtime-corejs2/core-js/object/values.js ***!
-  \*******************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(/*! core-js/library/fn/object/values */ "./node_modules/core-js/library/fn/object/values.js");
-
-/***/ }),
-
-/***/ "./node_modules/react-beautiful-dnd/node_modules/@babel/runtime-corejs2/helpers/esm/extends.js":
-/*!*****************************************************************************************************!*\
-  !*** ./node_modules/react-beautiful-dnd/node_modules/@babel/runtime-corejs2/helpers/esm/extends.js ***!
-  \*****************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _extends; });
-/* harmony import */ var _core_js_object_assign__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core-js/object/assign */ "./node_modules/react-beautiful-dnd/node_modules/@babel/runtime-corejs2/core-js/object/assign.js");
-/* harmony import */ var _core_js_object_assign__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_core_js_object_assign__WEBPACK_IMPORTED_MODULE_0__);
-
-function _extends() {
-  _extends = _core_js_object_assign__WEBPACK_IMPORTED_MODULE_0___default.a || function (target) {
-    for (var i = 1; i < arguments.length; i++) {
-      var source = arguments[i];
-
-      for (var key in source) {
-        if (Object.prototype.hasOwnProperty.call(source, key)) {
-          target[key] = source[key];
+      while (out[0].length < bytes) {
+        if (this.stack.length === 0) {
+          this.exhausted = true;
+          freeThreadID(this.threadID);
+          break;
         }
+
+        var frame = this.stack[this.stack.length - 1];
+
+        if (suspended || frame.childIndex >= frame.children.length) {
+          var footer = frame.footer;
+
+          if (footer !== '') {
+            this.previousWasTextNode = false;
+          }
+
+          this.stack.pop();
+
+          if (frame.type === 'select') {
+            this.currentSelectValue = null;
+          } else if (frame.type != null && frame.type.type != null && frame.type.type.$$typeof === REACT_PROVIDER_TYPE) {
+            var provider = frame.type;
+            this.popProvider(provider);
+          } else if (frame.type === REACT_SUSPENSE_TYPE) {
+            this.suspenseDepth--;
+            var buffered = out.pop();
+
+            if (suspended) {
+              suspended = false; // If rendering was suspended at this boundary, render the fallbackFrame
+
+              var fallbackFrame = frame.fallbackFrame;
+
+              (function () {
+                if (!fallbackFrame) {
+                  {
+                    throw ReactError(Error("ReactDOMServer did not find an internal fallback frame for Suspense. This is a bug in React. Please file an issue."));
+                  }
+                }
+              })();
+
+              this.stack.push(fallbackFrame);
+              out[this.suspenseDepth] += '<!--$!-->'; // Skip flushing output since we're switching to the fallback
+
+              continue;
+            } else {
+              out[this.suspenseDepth] += buffered;
+            }
+          } // Flush output
+
+
+          out[this.suspenseDepth] += footer;
+          continue;
+        }
+
+        var child = frame.children[frame.childIndex++];
+        var outBuffer = '';
+
+        {
+          pushCurrentDebugStack(this.stack); // We're starting work on this frame, so reset its inner stack.
+
+          frame.debugElementStack.length = 0;
+        }
+
+        try {
+          outBuffer += this.render(child, frame.context, frame.domNamespace);
+        } catch (err) {
+          if (err != null && typeof err.then === 'function') {
+            if (enableSuspenseServerRenderer) {
+              (function () {
+                if (!(_this.suspenseDepth > 0)) {
+                  {
+                    throw ReactError(Error("A React component suspended while rendering, but no fallback UI was specified.\n\nAdd a <Suspense fallback=...> component higher in the tree to provide a loading indicator or placeholder to display."));
+                  }
+                }
+              })();
+
+              suspended = true;
+            } else {
+              (function () {
+                {
+                  {
+                    throw ReactError(Error("ReactDOMServer does not yet support Suspense."));
+                  }
+                }
+              })();
+            }
+          } else {
+            throw err;
+          }
+        } finally {
+          {
+            popCurrentDebugStack();
+          }
+        }
+
+        if (out.length <= this.suspenseDepth) {
+          out.push('');
+        }
+
+        out[this.suspenseDepth] += outBuffer;
       }
-    }
 
-    return target;
+      return out[0];
+    } finally {
+      ReactCurrentDispatcher.current = prevDispatcher;
+      setCurrentThreadID(prevThreadID);
+    }
   };
 
-  return _extends.apply(this, arguments);
-}
+  _proto.render = function render(child, context, parentNamespace) {
+    if (typeof child === 'string' || typeof child === 'number') {
+      var text = '' + child;
 
-/***/ }),
+      if (text === '') {
+        return '';
+      }
 
-/***/ "./node_modules/react-beautiful-dnd/node_modules/@babel/runtime-corejs2/helpers/esm/inheritsLoose.js":
-/*!***********************************************************************************************************!*\
-  !*** ./node_modules/react-beautiful-dnd/node_modules/@babel/runtime-corejs2/helpers/esm/inheritsLoose.js ***!
-  \***********************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+      if (this.makeStaticMarkup) {
+        return escapeTextForBrowser(text);
+      }
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _inheritsLoose; });
-/* harmony import */ var _core_js_object_create__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core-js/object/create */ "./node_modules/react-beautiful-dnd/node_modules/@babel/runtime-corejs2/core-js/object/create.js");
-/* harmony import */ var _core_js_object_create__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_core_js_object_create__WEBPACK_IMPORTED_MODULE_0__);
+      if (this.previousWasTextNode) {
+        return '<!-- -->' + escapeTextForBrowser(text);
+      }
 
-function _inheritsLoose(subClass, superClass) {
-  subClass.prototype = _core_js_object_create__WEBPACK_IMPORTED_MODULE_0___default()(superClass.prototype);
-  subClass.prototype.constructor = subClass;
-  subClass.__proto__ = superClass;
-}
+      this.previousWasTextNode = true;
+      return escapeTextForBrowser(text);
+    } else {
+      var nextChild;
 
-/***/ }),
+      var _resolve = resolve(child, context, this.threadID);
 
-/***/ "./node_modules/tiny-invariant/dist/tiny-invariant.esm.js":
-/*!****************************************************************!*\
-  !*** ./node_modules/tiny-invariant/dist/tiny-invariant.esm.js ***!
-  \****************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+      nextChild = _resolve.child;
+      context = _resolve.context;
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-var isProduction = "development" === 'production';
-var prefix = 'Invariant failed';
-function invariant(condition, message) {
-  if (condition) {
-    return;
-  }
+      if (nextChild === null || nextChild === false) {
+        return '';
+      } else if (!React.isValidElement(nextChild)) {
+        if (nextChild != null && nextChild.$$typeof != null) {
+          // Catch unexpected special types early.
+          var $$typeof = nextChild.$$typeof;
 
-  if (isProduction) {
-    throw new Error(prefix);
-  } else {
-    throw new Error(prefix + ": " + (message || ''));
-  }
-}
-
-/* harmony default export */ __webpack_exports__["default"] = (invariant);
+          (function () {
+            if (!($$typeof !== REACT_PORTAL_TYPE)) {
+              {
+                throw ReactError(Error("Portals are not currently supported by the server renderer. Render them conditionally so that they only appear on the client render."));
+              }
+            }
+          })(); // Catch-all to prevent an infinite loop if React.Children.toArray() supports some new type.
 
 
-/***/ }),
-
-/***/ "./node_modules/use-memo-one/dist/use-memo-one.esm.js":
-/*!************************************************************!*\
-  !*** ./node_modules/use-memo-one/dist/use-memo-one.esm.js ***!
-  \************************************************************/
-/*! exports provided: useCallback, useCallbackOne, useMemo, useMemoOne */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "useCallback", function() { return useCallback; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "useCallbackOne", function() { return useCallbackOne; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "useMemo", function() { return useMemo; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "useMemoOne", function() { return useMemoOne; });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-
-
-function areInputsEqual(newInputs, lastInputs) {
-  if (newInputs.length !== lastInputs.length) {
-    return false;
-  }
-
-  for (var i = 0; i < newInputs.length; i++) {
-    if (newInputs[i] !== lastInputs[i]) {
-      return false;
-    }
-  }
-
-  return true;
-}
-
-function useMemoOne(getResult, inputs) {
-  var initial = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(function () {
-    return {
-      inputs: inputs,
-      result: getResult()
-    };
-  })[0];
-  var committed = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(initial);
-  var isInputMatch = Boolean(inputs && committed.current.inputs && areInputsEqual(inputs, committed.current.inputs));
-  var cache = isInputMatch ? committed.current : {
-    inputs: inputs,
-    result: getResult()
-  };
-  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-    committed.current = cache;
-  }, [cache]);
-  return cache.result;
-}
-function useCallbackOne(callback, inputs) {
-  return useMemoOne(function () {
-    return callback;
-  }, inputs);
-}
-var useMemo = useMemoOne;
-var useCallback = useCallbackOne;
-
-
-
-
-/***/ }),
-
-/***/ "./src/components/inputscreen-components/simulator/simulator.tsx":
-/*!***********************************************************************!*\
-  !*** ./src/components/inputscreen-components/simulator/simulator.tsx ***!
-  \***********************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/extends */ "./node_modules/@babel/runtime-corejs2/helpers/esm/extends.js");
-/* harmony import */ var _babel_runtime_corejs2_core_js_array_from__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/array/from */ "./node_modules/@babel/runtime-corejs2/core-js/array/from.js");
-/* harmony import */ var _babel_runtime_corejs2_core_js_array_from__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_array_from__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _babel_runtime_corejs2_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/classCallCheck */ "./node_modules/@babel/runtime-corejs2/helpers/esm/classCallCheck.js");
-/* harmony import */ var _babel_runtime_corejs2_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/createClass */ "./node_modules/@babel/runtime-corejs2/helpers/esm/createClass.js");
-/* harmony import */ var _babel_runtime_corejs2_helpers_esm_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/possibleConstructorReturn */ "./node_modules/@babel/runtime-corejs2/helpers/esm/possibleConstructorReturn.js");
-/* harmony import */ var _babel_runtime_corejs2_helpers_esm_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/getPrototypeOf */ "./node_modules/@babel/runtime-corejs2/helpers/esm/getPrototypeOf.js");
-/* harmony import */ var _babel_runtime_corejs2_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/assertThisInitialized */ "./node_modules/@babel/runtime-corejs2/helpers/esm/assertThisInitialized.js");
-/* harmony import */ var _babel_runtime_corejs2_helpers_esm_inherits__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/inherits */ "./node_modules/@babel/runtime-corejs2/helpers/esm/inherits.js");
-/* harmony import */ var _babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/defineProperty */ "./node_modules/@babel/runtime-corejs2/helpers/esm/defineProperty.js");
-/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var react_beautiful_dnd__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! react-beautiful-dnd */ "./node_modules/react-beautiful-dnd/dist/react-beautiful-dnd.esm.js");
-/* harmony import */ var _simulatorComponents_headline__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./simulatorComponents/headline */ "./src/components/inputscreen-components/simulator/simulatorComponents/headline.tsx");
-/* harmony import */ var _redux_actions_dataActions__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../../redux/actions/dataActions */ "./src/redux/actions/dataActions.ts");
-
-
-
-
-
-
-
-
-
-var _jsxFileName = "/home/christian/Development/fible-frontend-nextjs/src/components/inputscreen-components/simulator/simulator.tsx";
-var __jsx = react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement;
-
-
-
-
-
-
-
-var Simulator =
-/*#__PURE__*/
-function (_React$Component) {
-  Object(_babel_runtime_corejs2_helpers_esm_inherits__WEBPACK_IMPORTED_MODULE_7__["default"])(Simulator, _React$Component);
-
-  function Simulator() {
-    var _getPrototypeOf2;
-
-    var _this;
-
-    Object(_babel_runtime_corejs2_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_2__["default"])(this, Simulator);
-
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    _this = Object(_babel_runtime_corejs2_helpers_esm_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_4__["default"])(this, (_getPrototypeOf2 = Object(_babel_runtime_corejs2_helpers_esm_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5__["default"])(Simulator)).call.apply(_getPrototypeOf2, [this].concat(args)));
-
-    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_8__["default"])(Object(_babel_runtime_corejs2_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_6__["default"])(_this), "componentCreator", function () {
-      return _this.props.dataState[_this.props.uiState.simulator.show][_this.props.dataState.selectedHtypeId] != undefined ? _this.props.dataState[_this.props.uiState.simulator.show][_this.props.dataState.selectedHtypeId].order.map(function (id, index) {
-        var component = _this.props.dataState[_this.props.uiState.simulator.show][_this.props.dataState.selectedHtypeId].components[id];
-
-        switch (component.type) {
-          case "HEADLINE":
+          (function () {
             {
-              return __jsx(_simulatorComponents_headline__WEBPACK_IMPORTED_MODULE_13__["default"], {
-                key: component.id,
-                component: component,
-                index: index,
-                __source: {
-                  fileName: _jsxFileName,
-                  lineNumber: 18
-                },
-                __self: this
-              });
+              {
+                throw ReactError(Error("Unknown element-like object type: " + $$typeof.toString() + ". This is likely a bug in React. Please file an issue."));
+              }
+            }
+          })();
+        }
+
+        var nextChildren = toArray(nextChild);
+        var frame = {
+          type: null,
+          domNamespace: parentNamespace,
+          children: nextChildren,
+          childIndex: 0,
+          context: context,
+          footer: ''
+        };
+
+        {
+          frame.debugElementStack = [];
+        }
+
+        this.stack.push(frame);
+        return '';
+      } // Safe because we just checked it's an element.
+
+
+      var nextElement = nextChild;
+      var elementType = nextElement.type;
+
+      if (typeof elementType === 'string') {
+        return this.renderDOM(nextElement, context, parentNamespace);
+      }
+
+      switch (elementType) {
+        case REACT_STRICT_MODE_TYPE:
+        case REACT_CONCURRENT_MODE_TYPE:
+        case REACT_PROFILER_TYPE:
+        case REACT_SUSPENSE_LIST_TYPE:
+        case REACT_FRAGMENT_TYPE:
+          {
+            var _nextChildren = toArray(nextChild.props.children);
+
+            var _frame = {
+              type: null,
+              domNamespace: parentNamespace,
+              children: _nextChildren,
+              childIndex: 0,
+              context: context,
+              footer: ''
+            };
+
+            {
+              _frame.debugElementStack = [];
             }
 
-          default:
-            return __jsx("div", {
-              __source: {
-                fileName: _jsxFileName,
-                lineNumber: 21
-              },
-              __self: this
-            });
+            this.stack.push(_frame);
+            return '';
+          }
+
+        case REACT_SUSPENSE_TYPE:
+          {
+            if (enableSuspenseServerRenderer) {
+              var fallback = nextChild.props.fallback;
+
+              if (fallback === undefined) {
+                // If there is no fallback, then this just behaves as a fragment.
+                var _nextChildren3 = toArray(nextChild.props.children);
+
+                var _frame3 = {
+                  type: null,
+                  domNamespace: parentNamespace,
+                  children: _nextChildren3,
+                  childIndex: 0,
+                  context: context,
+                  footer: ''
+                };
+
+                {
+                  _frame3.debugElementStack = [];
+                }
+
+                this.stack.push(_frame3);
+                return '';
+              }
+
+              var fallbackChildren = toArray(fallback);
+
+              var _nextChildren2 = toArray(nextChild.props.children);
+
+              var fallbackFrame = {
+                type: null,
+                domNamespace: parentNamespace,
+                children: fallbackChildren,
+                childIndex: 0,
+                context: context,
+                footer: '<!--/$-->'
+              };
+              var _frame2 = {
+                fallbackFrame: fallbackFrame,
+                type: REACT_SUSPENSE_TYPE,
+                domNamespace: parentNamespace,
+                children: _nextChildren2,
+                childIndex: 0,
+                context: context,
+                footer: '<!--/$-->'
+              };
+
+              {
+                _frame2.debugElementStack = [];
+                fallbackFrame.debugElementStack = [];
+              }
+
+              this.stack.push(_frame2);
+              this.suspenseDepth++;
+              return '<!--$-->';
+            } else {
+              (function () {
+                {
+                  {
+                    throw ReactError(Error("ReactDOMServer does not yet support Suspense."));
+                  }
+                }
+              })();
+            }
+          }
+        // eslint-disable-next-line-no-fallthrough
+
+        default:
+          break;
+      }
+
+      if (typeof elementType === 'object' && elementType !== null) {
+        switch (elementType.$$typeof) {
+          case REACT_FORWARD_REF_TYPE:
+            {
+              var element = nextChild;
+
+              var _nextChildren4;
+
+              var componentIdentity = {};
+              prepareToUseHooks(componentIdentity);
+              _nextChildren4 = elementType.render(element.props, element.ref);
+              _nextChildren4 = finishHooks(elementType.render, element.props, _nextChildren4, element.ref);
+              _nextChildren4 = toArray(_nextChildren4);
+              var _frame4 = {
+                type: null,
+                domNamespace: parentNamespace,
+                children: _nextChildren4,
+                childIndex: 0,
+                context: context,
+                footer: ''
+              };
+
+              {
+                _frame4.debugElementStack = [];
+              }
+
+              this.stack.push(_frame4);
+              return '';
+            }
+
+          case REACT_MEMO_TYPE:
+            {
+              var _element = nextChild;
+              var _nextChildren5 = [React.createElement(elementType.type, _assign({
+                ref: _element.ref
+              }, _element.props))];
+              var _frame5 = {
+                type: null,
+                domNamespace: parentNamespace,
+                children: _nextChildren5,
+                childIndex: 0,
+                context: context,
+                footer: ''
+              };
+
+              {
+                _frame5.debugElementStack = [];
+              }
+
+              this.stack.push(_frame5);
+              return '';
+            }
+
+          case REACT_PROVIDER_TYPE:
+            {
+              var provider = nextChild;
+              var nextProps = provider.props;
+
+              var _nextChildren6 = toArray(nextProps.children);
+
+              var _frame6 = {
+                type: provider,
+                domNamespace: parentNamespace,
+                children: _nextChildren6,
+                childIndex: 0,
+                context: context,
+                footer: ''
+              };
+
+              {
+                _frame6.debugElementStack = [];
+              }
+
+              this.pushProvider(provider);
+              this.stack.push(_frame6);
+              return '';
+            }
+
+          case REACT_CONTEXT_TYPE:
+            {
+              var reactContext = nextChild.type; // The logic below for Context differs depending on PROD or DEV mode. In
+              // DEV mode, we create a separate object for Context.Consumer that acts
+              // like a proxy to Context. This proxy object adds unnecessary code in PROD
+              // so we use the old behaviour (Context.Consumer references Context) to
+              // reduce size and overhead. The separate object references context via
+              // a property called "_context", which also gives us the ability to check
+              // in DEV mode if this property exists or not and warn if it does not.
+
+              {
+                if (reactContext._context === undefined) {
+                  // This may be because it's a Context (rather than a Consumer).
+                  // Or it may be because it's older React where they're the same thing.
+                  // We only want to warn if we're sure it's a new React.
+                  if (reactContext !== reactContext.Consumer) {
+                    if (!hasWarnedAboutUsingContextAsConsumer) {
+                      hasWarnedAboutUsingContextAsConsumer = true;
+                      warning$1(false, 'Rendering <Context> directly is not supported and will be removed in ' + 'a future major release. Did you mean to render <Context.Consumer> instead?');
+                    }
+                  }
+                } else {
+                  reactContext = reactContext._context;
+                }
+              }
+
+              var _nextProps = nextChild.props;
+              var threadID = this.threadID;
+              validateContextBounds(reactContext, threadID);
+              var nextValue = reactContext[threadID];
+
+              var _nextChildren7 = toArray(_nextProps.children(nextValue));
+
+              var _frame7 = {
+                type: nextChild,
+                domNamespace: parentNamespace,
+                children: _nextChildren7,
+                childIndex: 0,
+                context: context,
+                footer: ''
+              };
+
+              {
+                _frame7.debugElementStack = [];
+              }
+
+              this.stack.push(_frame7);
+              return '';
+            }
+          // eslint-disable-next-line-no-fallthrough
+
+          case REACT_FUNDAMENTAL_TYPE:
+            {
+              if (enableFundamentalAPI) {
+                var fundamentalImpl = elementType.impl;
+                var open = fundamentalImpl.getServerSideString(null, nextElement.props);
+                var getServerSideStringClose = fundamentalImpl.getServerSideStringClose;
+                var close = getServerSideStringClose !== undefined ? getServerSideStringClose(null, nextElement.props) : '';
+
+                var _nextChildren8 = fundamentalImpl.reconcileChildren !== false ? toArray(nextChild.props.children) : [];
+
+                var _frame8 = {
+                  type: null,
+                  domNamespace: parentNamespace,
+                  children: _nextChildren8,
+                  childIndex: 0,
+                  context: context,
+                  footer: close
+                };
+
+                {
+                  _frame8.debugElementStack = [];
+                }
+
+                this.stack.push(_frame8);
+                return open;
+              }
+
+              (function () {
+                {
+                  {
+                    throw ReactError(Error("ReactDOMServer does not yet support the fundamental API."));
+                  }
+                }
+              })();
+            }
+          // eslint-disable-next-line-no-fallthrough
+
+          case REACT_LAZY_TYPE:
+            {
+              var _element2 = nextChild;
+              var lazyComponent = nextChild.type; // Attempt to initialize lazy component regardless of whether the
+              // suspense server-side renderer is enabled so synchronously
+              // resolved constructors are supported.
+
+              initializeLazyComponentType(lazyComponent);
+
+              switch (lazyComponent._status) {
+                case Resolved:
+                  {
+                    var _nextChildren9 = [React.createElement(lazyComponent._result, _assign({
+                      ref: _element2.ref
+                    }, _element2.props))];
+                    var _frame9 = {
+                      type: null,
+                      domNamespace: parentNamespace,
+                      children: _nextChildren9,
+                      childIndex: 0,
+                      context: context,
+                      footer: ''
+                    };
+
+                    {
+                      _frame9.debugElementStack = [];
+                    }
+
+                    this.stack.push(_frame9);
+                    return '';
+                  }
+
+                case Rejected:
+                  throw lazyComponent._result;
+
+                case Pending:
+                default:
+                  (function () {
+                    {
+                      {
+                        throw ReactError(Error("ReactDOMServer does not yet support lazy-loaded components."));
+                      }
+                    }
+                  })();
+
+              }
+            }
+          // eslint-disable-next-line-no-fallthrough
+
+          case REACT_SCOPE_TYPE:
+            {
+              if (enableScopeAPI) {
+                var _nextChildren10 = toArray(nextChild.props.children);
+
+                var _frame10 = {
+                  type: null,
+                  domNamespace: parentNamespace,
+                  children: _nextChildren10,
+                  childIndex: 0,
+                  context: context,
+                  footer: ''
+                };
+
+                {
+                  _frame10.debugElementStack = [];
+                }
+
+                this.stack.push(_frame10);
+                return '';
+              }
+
+              (function () {
+                {
+                  {
+                    throw ReactError(Error("ReactDOMServer does not yet support scope components."));
+                  }
+                }
+              })();
+            }
         }
-      }) : [1].map(function (index) {
-        return __jsx("div", {
-          key: index,
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 25
-          },
-          __self: this
-        });
-      });
-    });
-
-    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_8__["default"])(Object(_babel_runtime_corejs2_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_6__["default"])(_this), "onDragEnd", function (result) {
-      var destination = result.destination,
-          source = result.source,
-          draggableId = result.draggableId;
-
-      if (!destination) {
-        return;
       }
 
-      if (destination.droppableId == source.droppableId && destination.index == source.index) {
-        return;
+      var info = '';
+
+      {
+        var owner = nextElement._owner;
+
+        if (elementType === undefined || typeof elementType === 'object' && elementType !== null && Object.keys(elementType).length === 0) {
+          info += ' You likely forgot to export your component from the file ' + "it's defined in, or you might have mixed up default and " + 'named imports.';
+        }
+
+        var ownerName = owner ? getComponentName(owner) : null;
+
+        if (ownerName) {
+          info += '\n\nCheck the render method of `' + ownerName + '`.';
+        }
       }
 
-      var newOrder = _babel_runtime_corejs2_core_js_array_from__WEBPACK_IMPORTED_MODULE_1___default()(_this.props.dataState[_this.props.uiState.simulator.show][_this.props.dataState.selectedHtypeId].order);
-
-      var htype = _this.props.uiState.simulator.show;
-      var htypeId = _this.props.dataState.selectedHtypeId; // const columnId = source.droppableId;
-      //const column = this.props.uiState.columns[source.droppableId]
-      //const newOrder = Array.from(column.ids);
-
-      newOrder.splice(source.index, 1);
-      newOrder.splice(destination.index, 0, draggableId);
-      console.log(newOrder);
-
-      _this.props.updateComponentsOrder({
-        newOrder: newOrder,
-        htype: htype,
-        htypeId: htypeId
-      });
-    });
-
-    return _this;
-  }
-
-  Object(_babel_runtime_corejs2_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_3__["default"])(Simulator, [{
-    key: "render",
-    value: function render() {
-      var _this2 = this;
-
-      return __jsx(BackgroundWrapper, {
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 53
-        },
-        __self: this
-      }, __jsx(react_beautiful_dnd__WEBPACK_IMPORTED_MODULE_12__["DragDropContext"], {
-        onDragEnd: this.onDragEnd,
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 54
-        },
-        __self: this
-      }, __jsx(react_beautiful_dnd__WEBPACK_IMPORTED_MODULE_12__["Droppable"], {
-        droppableId: "simulator",
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 55
-        },
-        __self: this
-      }, function (provided) {
-        return __jsx(FilledSimulator, Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
-          ref: provided.innerRef
-        }, provided.droppableProps, {
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 57
-          },
-          __self: this
-        }), _this2.componentCreator(), provided.placeholder);
-      })));
+      (function () {
+        {
+          {
+            throw ReactError(Error("Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: " + (elementType == null ? elementType : typeof elementType) + "." + info));
+          }
+        }
+      })();
     }
-  }]);
-
-  return Simulator;
-}(react__WEBPACK_IMPORTED_MODULE_10___default.a.Component);
-
-var mapStateToProps = function mapStateToProps(state) {
-  return {
-    uiState: state.ui,
-    dataState: state.data
   };
-};
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_11__["connect"])(mapStateToProps, {
-  updateComponentsOrder: _redux_actions_dataActions__WEBPACK_IMPORTED_MODULE_14__["updateComponentsOrder"]
-})(Simulator));
-/*
-function Simulator() {
-    return (
-        <BackgroundWrapper>
-            <ForegroundWrapper>
-              <Image src="mountains.png"></Image>
-            </ForegroundWrapper>
-        </BackgroundWrapper>
-    )
+  _proto.renderDOM = function renderDOM(element, context, parentNamespace) {
+    var tag = element.type.toLowerCase();
+    var namespace = parentNamespace;
+
+    if (parentNamespace === Namespaces.html) {
+      namespace = getIntrinsicNamespace(tag);
+    }
+
+    {
+      if (namespace === Namespaces.html) {
+        // Should this check be gated by parent namespace? Not sure we want to
+        // allow <SVG> or <mATH>.
+        !(tag === element.type) ? warning$1(false, '<%s /> is using incorrect casing. ' + 'Use PascalCase for React components, ' + 'or lowercase for HTML elements.', element.type) : void 0;
+      }
+    }
+
+    validateDangerousTag(tag);
+    var props = element.props;
+
+    if (tag === 'input') {
+      {
+        ReactControlledValuePropTypes.checkPropTypes('input', props);
+
+        if (props.checked !== undefined && props.defaultChecked !== undefined && !didWarnDefaultChecked) {
+          warning$1(false, '%s contains an input of type %s with both checked and defaultChecked props. ' + 'Input elements must be either controlled or uncontrolled ' + '(specify either the checked prop, or the defaultChecked prop, but not ' + 'both). Decide between using a controlled or uncontrolled input ' + 'element and remove one of these props. More info: ' + 'https://fb.me/react-controlled-components', 'A component', props.type);
+          didWarnDefaultChecked = true;
+        }
+
+        if (props.value !== undefined && props.defaultValue !== undefined && !didWarnDefaultInputValue) {
+          warning$1(false, '%s contains an input of type %s with both value and defaultValue props. ' + 'Input elements must be either controlled or uncontrolled ' + '(specify either the value prop, or the defaultValue prop, but not ' + 'both). Decide between using a controlled or uncontrolled input ' + 'element and remove one of these props. More info: ' + 'https://fb.me/react-controlled-components', 'A component', props.type);
+          didWarnDefaultInputValue = true;
+        }
+      }
+
+      props = _assign({
+        type: undefined
+      }, props, {
+        defaultChecked: undefined,
+        defaultValue: undefined,
+        value: props.value != null ? props.value : props.defaultValue,
+        checked: props.checked != null ? props.checked : props.defaultChecked
+      });
+    } else if (tag === 'textarea') {
+      {
+        ReactControlledValuePropTypes.checkPropTypes('textarea', props);
+
+        if (props.value !== undefined && props.defaultValue !== undefined && !didWarnDefaultTextareaValue) {
+          warning$1(false, 'Textarea elements must be either controlled or uncontrolled ' + '(specify either the value prop, or the defaultValue prop, but not ' + 'both). Decide between using a controlled or uncontrolled textarea ' + 'and remove one of these props. More info: ' + 'https://fb.me/react-controlled-components');
+          didWarnDefaultTextareaValue = true;
+        }
+      }
+
+      var initialValue = props.value;
+
+      if (initialValue == null) {
+        var defaultValue = props.defaultValue; // TODO (yungsters): Remove support for children content in <textarea>.
+
+        var textareaChildren = props.children;
+
+        if (textareaChildren != null) {
+          {
+            warning$1(false, 'Use the `defaultValue` or `value` props instead of setting ' + 'children on <textarea>.');
+          }
+
+          (function () {
+            if (!(defaultValue == null)) {
+              {
+                throw ReactError(Error("If you supply `defaultValue` on a <textarea>, do not pass children."));
+              }
+            }
+          })();
+
+          if (Array.isArray(textareaChildren)) {
+            (function () {
+              if (!(textareaChildren.length <= 1)) {
+                {
+                  throw ReactError(Error("<textarea> can only have at most one child."));
+                }
+              }
+            })();
+
+            textareaChildren = textareaChildren[0];
+          }
+
+          defaultValue = '' + textareaChildren;
+        }
+
+        if (defaultValue == null) {
+          defaultValue = '';
+        }
+
+        initialValue = defaultValue;
+      }
+
+      props = _assign({}, props, {
+        value: undefined,
+        children: '' + initialValue
+      });
+    } else if (tag === 'select') {
+      {
+        ReactControlledValuePropTypes.checkPropTypes('select', props);
+
+        for (var i = 0; i < valuePropNames.length; i++) {
+          var propName = valuePropNames[i];
+
+          if (props[propName] == null) {
+            continue;
+          }
+
+          var isArray = Array.isArray(props[propName]);
+
+          if (props.multiple && !isArray) {
+            warning$1(false, 'The `%s` prop supplied to <select> must be an array if ' + '`multiple` is true.', propName);
+          } else if (!props.multiple && isArray) {
+            warning$1(false, 'The `%s` prop supplied to <select> must be a scalar ' + 'value if `multiple` is false.', propName);
+          }
+        }
+
+        if (props.value !== undefined && props.defaultValue !== undefined && !didWarnDefaultSelectValue) {
+          warning$1(false, 'Select elements must be either controlled or uncontrolled ' + '(specify either the value prop, or the defaultValue prop, but not ' + 'both). Decide between using a controlled or uncontrolled select ' + 'element and remove one of these props. More info: ' + 'https://fb.me/react-controlled-components');
+          didWarnDefaultSelectValue = true;
+        }
+      }
+
+      this.currentSelectValue = props.value != null ? props.value : props.defaultValue;
+      props = _assign({}, props, {
+        value: undefined
+      });
+    } else if (tag === 'option') {
+      var selected = null;
+      var selectValue = this.currentSelectValue;
+      var optionChildren = flattenOptionChildren(props.children);
+
+      if (selectValue != null) {
+        var value;
+
+        if (props.value != null) {
+          value = props.value + '';
+        } else {
+          value = optionChildren;
+        }
+
+        selected = false;
+
+        if (Array.isArray(selectValue)) {
+          // multiple
+          for (var j = 0; j < selectValue.length; j++) {
+            if ('' + selectValue[j] === value) {
+              selected = true;
+              break;
+            }
+          }
+        } else {
+          selected = '' + selectValue === value;
+        }
+
+        props = _assign({
+          selected: undefined,
+          children: undefined
+        }, props, {
+          selected: selected,
+          children: optionChildren
+        });
+      }
+    }
+
+    {
+      validatePropertiesInDevelopment(tag, props);
+    }
+
+    assertValidProps(tag, props);
+    var out = createOpenTagMarkup(element.type, tag, props, namespace, this.makeStaticMarkup, this.stack.length === 1);
+    var footer = '';
+
+    if (omittedCloseTags.hasOwnProperty(tag)) {
+      out += '/>';
+    } else {
+      out += '>';
+      footer = '</' + element.type + '>';
+    }
+
+    var children;
+    var innerMarkup = getNonChildrenInnerMarkup(props);
+
+    if (innerMarkup != null) {
+      children = [];
+
+      if (newlineEatingTags[tag] && innerMarkup.charAt(0) === '\n') {
+        // text/html ignores the first character in these tags if it's a newline
+        // Prefer to break application/xml over text/html (for now) by adding
+        // a newline specifically to get eaten by the parser. (Alternately for
+        // textareas, replacing "^\n" with "\r\n" doesn't get eaten, and the first
+        // \r is normalized out by HTMLTextAreaElement#value.)
+        // See: <http://www.w3.org/TR/html-polyglot/#newlines-in-textarea-and-pre>
+        // See: <http://www.w3.org/TR/html5/syntax.html#element-restrictions>
+        // See: <http://www.w3.org/TR/html5/syntax.html#newlines>
+        // See: Parsing of "textarea" "listing" and "pre" elements
+        //  from <http://www.w3.org/TR/html5/syntax.html#parsing-main-inbody>
+        out += '\n';
+      }
+
+      out += innerMarkup;
+    } else {
+      children = toArray(props.children);
+    }
+
+    var frame = {
+      domNamespace: getChildNamespace(parentNamespace, element.type),
+      type: tag,
+      children: children,
+      childIndex: 0,
+      context: context,
+      footer: footer
+    };
+
+    {
+      frame.debugElementStack = [];
+    }
+
+    this.stack.push(frame);
+    this.previousWasTextNode = false;
+    return out;
+  };
+
+  return ReactDOMServerRenderer;
+}();
+
+/**
+ * Render a ReactElement to its initial HTML. This should only be used on the
+ * server.
+ * See https://reactjs.org/docs/react-dom-server.html#rendertostring
+ */
+
+function renderToString(element) {
+  var renderer = new ReactDOMServerRenderer(element, false);
+
+  try {
+    var markup = renderer.read(Infinity);
+    return markup;
+  } finally {
+    renderer.destroy();
+  }
+}
+/**
+ * Similar to renderToString, except this doesn't create extra DOM attributes
+ * such as data-react-id that React uses internally.
+ * See https://reactjs.org/docs/react-dom-server.html#rendertostaticmarkup
+ */
+
+function renderToStaticMarkup(element) {
+  var renderer = new ReactDOMServerRenderer(element, true);
+
+  try {
+    var markup = renderer.read(Infinity);
+    return markup;
+  } finally {
+    renderer.destroy();
+  }
 }
 
-export default Simulator
-*/
+function renderToNodeStream() {
+  (function () {
+    {
+      {
+        throw ReactError(Error("ReactDOMServer.renderToNodeStream(): The streaming API is not available in the browser. Use ReactDOMServer.renderToString() instead."));
+      }
+    }
+  })();
+}
 
-var BackgroundWrapper = styled_components__WEBPACK_IMPORTED_MODULE_9__["default"].div.withConfig({
-  displayName: "simulator__BackgroundWrapper",
-  componentId: "sc-19oy64e-0"
-})(["width:50vw;height:100vh;display:flex;background:white;align-content:center;justify-content:center;"]);
-var FilledSimulator = styled_components__WEBPACK_IMPORTED_MODULE_9__["default"].div.withConfig({
-  displayName: "simulator__FilledSimulator",
-  componentId: "sc-19oy64e-1"
-})(["width:40vh;height:84vh;align-self:center;display:flex;border-style:solid;border-radius:1.5em;border-color:lightgrey;border-width:0.05em;flex-direction:column;"]);
-var Image = styled_components__WEBPACK_IMPORTED_MODULE_9__["default"].img.withConfig({
-  displayName: "simulator__Image",
-  componentId: "sc-19oy64e-2"
-})(["border-radius:1.5em;max-width:100%;max-height:30%;height:auto;width:auto;display:block;object-fit:cover;overflow:hidden;"]);
+function renderToStaticNodeStream() {
+  (function () {
+    {
+      {
+        throw ReactError(Error("ReactDOMServer.renderToStaticNodeStream(): The streaming API is not available in the browser. Use ReactDOMServer.renderToStaticMarkup() instead."));
+      }
+    }
+  })();
+} // Note: when changing this, also consider https://github.com/facebook/react/issues/11526
+
+
+var ReactDOMServerBrowser = {
+  renderToString: renderToString,
+  renderToStaticMarkup: renderToStaticMarkup,
+  renderToNodeStream: renderToNodeStream,
+  renderToStaticNodeStream: renderToStaticNodeStream,
+  version: ReactVersion
+};
+
+var ReactDOMServerBrowser$1 = Object.freeze({
+	default: ReactDOMServerBrowser
+});
+
+var ReactDOMServer = ( ReactDOMServerBrowser$1 && ReactDOMServerBrowser ) || ReactDOMServerBrowser$1;
+
+// TODO: decide on the top-level export form.
+// This is hacky but makes it work with both Rollup and Jest
+
+
+var server_browser = ReactDOMServer.default || ReactDOMServer;
+
+module.exports = server_browser;
+  })();
+}
+
 
 /***/ }),
 
-/***/ "./src/components/inputscreen-components/simulator/simulatorComponents/headline.tsx":
-/*!******************************************************************************************!*\
-  !*** ./src/components/inputscreen-components/simulator/simulatorComponents/headline.tsx ***!
-  \******************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ "./node_modules/react-dom/server.browser.js":
+/*!**************************************************!*\
+  !*** ./node_modules/react-dom/server.browser.js ***!
+  \**************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/extends */ "./node_modules/@babel/runtime-corejs2/helpers/esm/extends.js");
-/* harmony import */ var _babel_runtime_corejs2_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/classCallCheck */ "./node_modules/@babel/runtime-corejs2/helpers/esm/classCallCheck.js");
-/* harmony import */ var _babel_runtime_corejs2_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/createClass */ "./node_modules/@babel/runtime-corejs2/helpers/esm/createClass.js");
-/* harmony import */ var _babel_runtime_corejs2_helpers_esm_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/possibleConstructorReturn */ "./node_modules/@babel/runtime-corejs2/helpers/esm/possibleConstructorReturn.js");
-/* harmony import */ var _babel_runtime_corejs2_helpers_esm_getPrototypeOf__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/getPrototypeOf */ "./node_modules/@babel/runtime-corejs2/helpers/esm/getPrototypeOf.js");
-/* harmony import */ var _babel_runtime_corejs2_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/assertThisInitialized */ "./node_modules/@babel/runtime-corejs2/helpers/esm/assertThisInitialized.js");
-/* harmony import */ var _babel_runtime_corejs2_helpers_esm_inherits__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/inherits */ "./node_modules/@babel/runtime-corejs2/helpers/esm/inherits.js");
-/* harmony import */ var _babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/defineProperty */ "./node_modules/@babel/runtime-corejs2/helpers/esm/defineProperty.js");
-/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var react_beautiful_dnd__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! react-beautiful-dnd */ "./node_modules/react-beautiful-dnd/dist/react-beautiful-dnd.esm.js");
-/* harmony import */ var _redux_actions_uiActions__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../../../redux/actions/uiActions */ "./src/redux/actions/uiActions.ts");
-/* harmony import */ var _redux_actions_dataActions__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../../../redux/actions/dataActions */ "./src/redux/actions/dataActions.ts");
-/* harmony import */ var react_autosize_textarea__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! react-autosize-textarea */ "./node_modules/react-autosize-textarea/lib/index.js");
-/* harmony import */ var react_autosize_textarea__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(react_autosize_textarea__WEBPACK_IMPORTED_MODULE_14__);
 
 
+if (false) {} else {
+  module.exports = __webpack_require__(/*! ./cjs/react-dom-server.browser.development.js */ "./node_modules/react-dom/cjs/react-dom-server.browser.development.js");
+}
 
-
-
-
-
-
-var _jsxFileName = "/home/christian/Development/fible-frontend-nextjs/src/components/inputscreen-components/simulator/simulatorComponents/headline.tsx";
-var __jsx = react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement;
-
-
-
-
-
-
-
-
-
-var Headline =
-/*#__PURE__*/
-function (_React$Component) {
-  Object(_babel_runtime_corejs2_helpers_esm_inherits__WEBPACK_IMPORTED_MODULE_6__["default"])(Headline, _React$Component);
-
-  function Headline() {
-    var _getPrototypeOf2;
-
-    var _this;
-
-    Object(_babel_runtime_corejs2_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_1__["default"])(this, Headline);
-
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    _this = Object(_babel_runtime_corejs2_helpers_esm_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_3__["default"])(this, (_getPrototypeOf2 = Object(_babel_runtime_corejs2_helpers_esm_getPrototypeOf__WEBPACK_IMPORTED_MODULE_4__["default"])(Headline)).call.apply(_getPrototypeOf2, [this].concat(args)));
-
-    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_7__["default"])(Object(_babel_runtime_corejs2_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_5__["default"])(_this), "handleSelection", function () {
-      var selectedComponentId = _this.props.component.id;
-
-      if (_this.props.component.id != _this.props.uiState.simulator.selected) {
-        _this.props.updateSimulatorSelection({
-          selectedComponentId: selectedComponentId
-        });
-
-        _this.props.setSelectedComponent({
-          selectedComponentId: selectedComponentId
-        });
-
-        _this.props.updateInputScreenUi("HEADLINE_INPUT");
-      } else {
-        selectedComponentId = "empty";
-
-        _this.props.updateSimulatorSelection({
-          selectedComponentId: selectedComponentId
-        });
-
-        _this.props.setSelectedComponent({
-          selectedComponentId: selectedComponentId
-        });
-
-        _this.props.updateInputScreenUi("MENU");
-      }
-    });
-
-    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_7__["default"])(Object(_babel_runtime_corejs2_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_5__["default"])(_this), "handleHeadline", function (e) {
-      var type = _this.props.uiState.menu.htype;
-      var headline = e.target.value;
-      var selectedHtypeId = _this.props.dataState.selectedHtypeId;
-      var selectedComponentId = _this.props.dataState.selectedComponentId;
-      var dispatch = "UPDATE_HEADLINE";
-
-      _this.props.addOrUpdateHeadline({
-        type: type,
-        headline: headline,
-        selectedHtypeId: selectedHtypeId,
-        dispatch: dispatch,
-        selectedComponentId: selectedComponentId
-      });
-    });
-
-    return _this;
-  }
-
-  Object(_babel_runtime_corejs2_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_2__["default"])(Headline, [{
-    key: "handleKeyDown",
-    value: function handleKeyDown(e) {
-      e.target.style.height = 'inherit';
-      e.target.style.height = "".concat(e.target.scrollHeight, "px"); // In case you have a limitation
-      // e.target.style.height = `${Math.min(e.target.scrollHeight, limit)}px`;
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var _this2 = this;
-
-      return __jsx(react_beautiful_dnd__WEBPACK_IMPORTED_MODULE_11__["Draggable"], {
-        draggableId: this.props.component.id,
-        index: this.props.index,
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 46
-        },
-        __self: this
-      }, function (provided) {
-        return __jsx(Container, Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
-          key: _this2.props.component.id
-        }, provided.draggableProps, provided.dragHandleProps, {
-          ref: provided.innerRef,
-          onClick: _this2.handleSelection,
-          datatype: _this2.props.component.id == _this2.props.uiState.simulator.selected ? "-0.2vh" : "0",
-          property: _this2.props.component.id == _this2.props.uiState.simulator.selected ? "dashed" : "none",
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 48
-          },
-          __self: this
-        }), __jsx(HeadlineText, {
-          value: _this2.props.component.headline,
-          onChange: function onChange(e) {
-            return _this2.handleHeadline(e);
-          },
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 57
-          },
-          __self: this
-        }));
-      });
-    }
-  }]);
-
-  return Headline;
-}(react__WEBPACK_IMPORTED_MODULE_9___default.a.Component);
-
-var mapStateToProps = function mapStateToProps(state) {
-  return {
-    uiState: state.ui,
-    dataState: state.data
-  };
-};
-
-var Container = styled_components__WEBPACK_IMPORTED_MODULE_8__["default"].div.withConfig({
-  displayName: "headline__Container",
-  componentId: "sc-19yc47e-0"
-})(["height:auto;width:98%;outline:0px solid transparent;word-wrap:break-word;padding:1%;border:", " 0.2vh;margin:", ";border-radius:2.5vh;display:flex;align-content:center;"], function (props) {
-  return props.property;
-}, function (props) {
-  return props.datatype;
-});
-var HeadlineText = Object(styled_components__WEBPACK_IMPORTED_MODULE_8__["default"])(react_autosize_textarea__WEBPACK_IMPORTED_MODULE_14___default.a).withConfig({
-  displayName: "headline__HeadlineText",
-  componentId: "sc-19yc47e-1"
-})(["font-weight:lighter;position:relative;user-select:none;left:2%;height:94%;width:96%;font-size:3vh;margin:0.1vh;padding:0.5vh;text-align:center;resize:none;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;align-self:center;border:0;display:flex;:focus{outline:none;caret-color:salmon;}"]);
-var HeadlineText2 = styled_components__WEBPACK_IMPORTED_MODULE_8__["default"].textarea.withConfig({
-  displayName: "headline__HeadlineText2",
-  componentId: "sc-19yc47e-2"
-})(["font-weight:lighter;height:94%;width:90%;font-size:3vh;margin:0;padding:0.5vh;text-align:center;resize:none;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;align-self:center;border:0;display:flex;:focus{outline:none;caret-color:salmon;}"]);
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_10__["connect"])(mapStateToProps, {
-  updateSimulatorSelection: _redux_actions_uiActions__WEBPACK_IMPORTED_MODULE_12__["updateSimulatorSelection"],
-  setSelectedComponent: _redux_actions_dataActions__WEBPACK_IMPORTED_MODULE_13__["setSelectedComponent"],
-  updateInputScreenUi: _redux_actions_uiActions__WEBPACK_IMPORTED_MODULE_12__["updateInputScreenUi"],
-  addOrUpdateHeadline: _redux_actions_dataActions__WEBPACK_IMPORTED_MODULE_13__["addOrUpdateHeadline"]
-})(Headline));
 
 /***/ })
 

@@ -3,6 +3,12 @@ module.exports =
 /******/ 	// The module cache
 /******/ 	var installedModules = require('../../../ssr-module-cache.js');
 /******/
+/******/ 	// object to store loaded chunks
+/******/ 	// "0" means "already loaded"
+/******/ 	var installedChunks = {
+/******/ 		"static/development/pages/index.js": 0
+/******/ 	};
+/******/
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
 /******/
@@ -86,23 +92,19 @@ module.exports =
 /******/ 	// __webpack_public_path__
 /******/ 	__webpack_require__.p = "";
 /******/
+/******/ 	// uncaught error handler for webpack runtime
+/******/ 	__webpack_require__.oe = function(err) {
+/******/ 		process.nextTick(function() {
+/******/ 			throw err; // catch this error by using import().catch()
+/******/ 		});
+/******/ 	};
+/******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 5);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ({
-
-/***/ "./node_modules/@babel/runtime-corejs2/core-js/map.js":
-/*!************************************************************!*\
-  !*** ./node_modules/@babel/runtime-corejs2/core-js/map.js ***!
-  \************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(/*! core-js/library/fn/map */ "core-js/library/fn/map");
-
-/***/ }),
 
 /***/ "./node_modules/@babel/runtime-corejs2/core-js/object/assign.js":
 /*!**********************************************************************!*\
@@ -137,6 +139,17 @@ module.exports = __webpack_require__(/*! core-js/library/fn/object/define-proper
 
 /***/ }),
 
+/***/ "./node_modules/@babel/runtime-corejs2/core-js/object/entries.js":
+/*!***********************************************************************!*\
+  !*** ./node_modules/@babel/runtime-corejs2/core-js/object/entries.js ***!
+  \***********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(/*! core-js/library/fn/object/entries */ "core-js/library/fn/object/entries");
+
+/***/ }),
+
 /***/ "./node_modules/@babel/runtime-corejs2/core-js/object/get-own-property-descriptor.js":
 /*!*******************************************************************************************!*\
   !*** ./node_modules/@babel/runtime-corejs2/core-js/object/get-own-property-descriptor.js ***!
@@ -145,6 +158,17 @@ module.exports = __webpack_require__(/*! core-js/library/fn/object/define-proper
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(/*! core-js/library/fn/object/get-own-property-descriptor */ "core-js/library/fn/object/get-own-property-descriptor");
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime-corejs2/core-js/object/get-own-property-symbols.js":
+/*!****************************************************************************************!*\
+  !*** ./node_modules/@babel/runtime-corejs2/core-js/object/get-own-property-symbols.js ***!
+  \****************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(/*! core-js/library/fn/object/get-own-property-symbols */ "core-js/library/fn/object/get-own-property-symbols");
 
 /***/ }),
 
@@ -167,6 +191,229 @@ module.exports = __webpack_require__(/*! core-js/library/fn/object/keys */ "core
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(/*! core-js/library/fn/promise */ "core-js/library/fn/promise");
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime-corejs2/helpers/asyncToGenerator.js":
+/*!*************************************************************************!*\
+  !*** ./node_modules/@babel/runtime-corejs2/helpers/asyncToGenerator.js ***!
+  \*************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var _Promise = __webpack_require__(/*! ../core-js/promise */ "./node_modules/@babel/runtime-corejs2/core-js/promise.js");
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
+  try {
+    var info = gen[key](arg);
+    var value = info.value;
+  } catch (error) {
+    reject(error);
+    return;
+  }
+
+  if (info.done) {
+    resolve(value);
+  } else {
+    _Promise.resolve(value).then(_next, _throw);
+  }
+}
+
+function _asyncToGenerator(fn) {
+  return function () {
+    var self = this,
+        args = arguments;
+    return new _Promise(function (resolve, reject) {
+      var gen = fn.apply(self, args);
+
+      function _next(value) {
+        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);
+      }
+
+      function _throw(err) {
+        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);
+      }
+
+      _next(undefined);
+    });
+  };
+}
+
+module.exports = _asyncToGenerator;
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime-corejs2/helpers/esm/defineProperty.js":
+/*!***************************************************************************!*\
+  !*** ./node_modules/@babel/runtime-corejs2/helpers/esm/defineProperty.js ***!
+  \***************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _defineProperty; });
+/* harmony import */ var _core_js_object_define_property__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core-js/object/define-property */ "./node_modules/@babel/runtime-corejs2/core-js/object/define-property.js");
+/* harmony import */ var _core_js_object_define_property__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_core_js_object_define_property__WEBPACK_IMPORTED_MODULE_0__);
+
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    _core_js_object_define_property__WEBPACK_IMPORTED_MODULE_0___default()(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime-corejs2/helpers/esm/extends.js":
+/*!********************************************************************!*\
+  !*** ./node_modules/@babel/runtime-corejs2/helpers/esm/extends.js ***!
+  \********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _extends; });
+/* harmony import */ var _core_js_object_assign__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core-js/object/assign */ "./node_modules/@babel/runtime-corejs2/core-js/object/assign.js");
+/* harmony import */ var _core_js_object_assign__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_core_js_object_assign__WEBPACK_IMPORTED_MODULE_0__);
+
+function _extends() {
+  _extends = _core_js_object_assign__WEBPACK_IMPORTED_MODULE_0___default.a || function (target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+
+    return target;
+  };
+
+  return _extends.apply(this, arguments);
+}
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime-corejs2/helpers/esm/objectSpread.js":
+/*!*************************************************************************!*\
+  !*** ./node_modules/@babel/runtime-corejs2/helpers/esm/objectSpread.js ***!
+  \*************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _objectSpread; });
+/* harmony import */ var _core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core-js/object/get-own-property-descriptor */ "./node_modules/@babel/runtime-corejs2/core-js/object/get-own-property-descriptor.js");
+/* harmony import */ var _core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../core-js/object/get-own-property-symbols */ "./node_modules/@babel/runtime-corejs2/core-js/object/get-own-property-symbols.js");
+/* harmony import */ var _core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _core_js_object_keys__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../core-js/object/keys */ "./node_modules/@babel/runtime-corejs2/core-js/object/keys.js");
+/* harmony import */ var _core_js_object_keys__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_core_js_object_keys__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _defineProperty__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./defineProperty */ "./node_modules/@babel/runtime-corejs2/helpers/esm/defineProperty.js");
+
+
+
+
+function _objectSpread(target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i] != null ? arguments[i] : {};
+
+    var ownKeys = _core_js_object_keys__WEBPACK_IMPORTED_MODULE_2___default()(source);
+
+    if (typeof _core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_1___default.a === 'function') {
+      ownKeys = ownKeys.concat(_core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_1___default()(source).filter(function (sym) {
+        return _core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default()(source, sym).enumerable;
+      }));
+    }
+
+    ownKeys.forEach(function (key) {
+      Object(_defineProperty__WEBPACK_IMPORTED_MODULE_3__["default"])(target, key, source[key]);
+    });
+  }
+
+  return target;
+}
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime-corejs2/helpers/esm/objectWithoutProperties.js":
+/*!************************************************************************************!*\
+  !*** ./node_modules/@babel/runtime-corejs2/helpers/esm/objectWithoutProperties.js ***!
+  \************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _objectWithoutProperties; });
+/* harmony import */ var _core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core-js/object/get-own-property-symbols */ "./node_modules/@babel/runtime-corejs2/core-js/object/get-own-property-symbols.js");
+/* harmony import */ var _core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./objectWithoutPropertiesLoose */ "./node_modules/@babel/runtime-corejs2/helpers/esm/objectWithoutPropertiesLoose.js");
+
+
+function _objectWithoutProperties(source, excluded) {
+  if (source == null) return {};
+  var target = Object(_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(source, excluded);
+  var key, i;
+
+  if (_core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_0___default.a) {
+    var sourceSymbolKeys = _core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_0___default()(source);
+
+    for (i = 0; i < sourceSymbolKeys.length; i++) {
+      key = sourceSymbolKeys[i];
+      if (excluded.indexOf(key) >= 0) continue;
+      if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
+      target[key] = source[key];
+    }
+  }
+
+  return target;
+}
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime-corejs2/helpers/esm/objectWithoutPropertiesLoose.js":
+/*!*****************************************************************************************!*\
+  !*** ./node_modules/@babel/runtime-corejs2/helpers/esm/objectWithoutPropertiesLoose.js ***!
+  \*****************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _objectWithoutPropertiesLoose; });
+/* harmony import */ var _core_js_object_keys__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core-js/object/keys */ "./node_modules/@babel/runtime-corejs2/core-js/object/keys.js");
+/* harmony import */ var _core_js_object_keys__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_core_js_object_keys__WEBPACK_IMPORTED_MODULE_0__);
+
+function _objectWithoutPropertiesLoose(source, excluded) {
+  if (source == null) return {};
+  var target = {};
+
+  var sourceKeys = _core_js_object_keys__WEBPACK_IMPORTED_MODULE_0___default()(source);
+
+  var key, i;
+
+  for (i = 0; i < sourceKeys.length; i++) {
+    key = sourceKeys[i];
+    if (excluded.indexOf(key) >= 0) continue;
+    target[key] = source[key];
+  }
+
+  return target;
+}
 
 /***/ }),
 
@@ -258,310 +505,15 @@ module.exports = _interopRequireWildcard;
 
 /***/ }),
 
-/***/ "./node_modules/next/dist/client/link.js":
-/*!***********************************************!*\
-  !*** ./node_modules/next/dist/client/link.js ***!
-  \***********************************************/
+/***/ "./node_modules/next/app.js":
+/*!**********************************!*\
+  !*** ./node_modules/next/app.js ***!
+  \**********************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
+module.exports = __webpack_require__(/*! ./dist/pages/_app */ "./node_modules/next/dist/pages/_app.js")
 
-
-var _interopRequireWildcard = __webpack_require__(/*! @babel/runtime-corejs2/helpers/interopRequireWildcard */ "./node_modules/@babel/runtime-corejs2/helpers/interopRequireWildcard.js");
-
-var _interopRequireDefault = __webpack_require__(/*! @babel/runtime-corejs2/helpers/interopRequireDefault */ "./node_modules/@babel/runtime-corejs2/helpers/interopRequireDefault.js");
-
-exports.__esModule = true;
-exports.default = void 0;
-
-var _map = _interopRequireDefault(__webpack_require__(/*! @babel/runtime-corejs2/core-js/map */ "./node_modules/@babel/runtime-corejs2/core-js/map.js"));
-
-var _url = __webpack_require__(/*! url */ "url");
-
-var _react = _interopRequireWildcard(__webpack_require__(/*! react */ "react"));
-
-var _propTypes = _interopRequireDefault(__webpack_require__(/*! prop-types */ "prop-types"));
-
-var _router = _interopRequireDefault(__webpack_require__(/*! ./router */ "./node_modules/next/dist/client/router.js"));
-
-var _rewriteUrlForExport = __webpack_require__(/*! ../next-server/lib/router/rewrite-url-for-export */ "./node_modules/next/dist/next-server/lib/router/rewrite-url-for-export.js");
-
-var _utils = __webpack_require__(/*! ../next-server/lib/utils */ "./node_modules/next/dist/next-server/lib/utils.js");
-/* global __NEXT_DATA__ */
-
-
-function isLocal(href) {
-  const url = (0, _url.parse)(href, false, true);
-  const origin = (0, _url.parse)((0, _utils.getLocationOrigin)(), false, true);
-  return !url.host || url.protocol === origin.protocol && url.host === origin.host;
-}
-
-function memoizedFormatUrl(formatFunc) {
-  let lastHref = null;
-  let lastAs = null;
-  let lastResult = null;
-  return (href, as) => {
-    if (lastResult && href === lastHref && as === lastAs) {
-      return lastResult;
-    }
-
-    const result = formatFunc(href, as);
-    lastHref = href;
-    lastAs = as;
-    lastResult = result;
-    return result;
-  };
-}
-
-function formatUrl(url) {
-  return url && typeof url === 'object' ? (0, _utils.formatWithValidation)(url) : url;
-}
-
-let observer;
-const listeners = new _map.default();
-const IntersectionObserver = false ? undefined : null;
-
-function getObserver() {
-  // Return shared instance of IntersectionObserver if already created
-  if (observer) {
-    return observer;
-  } // Only create shared IntersectionObserver if supported in browser
-
-
-  if (!IntersectionObserver) {
-    return undefined;
-  }
-
-  return observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (!listeners.has(entry.target)) {
-        return;
-      }
-
-      const cb = listeners.get(entry.target);
-
-      if (entry.isIntersecting || entry.intersectionRatio > 0) {
-        observer.unobserve(entry.target);
-        listeners.delete(entry.target);
-        cb();
-      }
-    });
-  }, {
-    rootMargin: '200px'
-  });
-}
-
-const listenToIntersections = (el, cb) => {
-  const observer = getObserver();
-
-  if (!observer) {
-    return () => {};
-  }
-
-  observer.observe(el);
-  listeners.set(el, cb);
-  return () => {
-    try {
-      observer.unobserve(el);
-    } catch (err) {
-      console.error(err);
-    }
-
-    listeners.delete(el);
-  };
-};
-
-class Link extends _react.Component {
-  constructor(props) {
-    super(props);
-    this.p = void 0;
-
-    this.cleanUpListeners = () => {};
-
-    this.formatUrls = memoizedFormatUrl((href, asHref) => {
-      return {
-        href: formatUrl(href),
-        as: asHref ? formatUrl(asHref) : asHref
-      };
-    });
-
-    this.linkClicked = e => {
-      // @ts-ignore target exists on currentTarget
-      const {
-        nodeName,
-        target
-      } = e.currentTarget;
-
-      if (nodeName === 'A' && (target && target !== '_self' || e.metaKey || e.ctrlKey || e.shiftKey || e.nativeEvent && e.nativeEvent.which === 2)) {
-        // ignore click for new tab / new window behavior
-        return;
-      }
-
-      let {
-        href,
-        as
-      } = this.formatUrls(this.props.href, this.props.as);
-
-      if (!isLocal(href)) {
-        // ignore click if it's outside our scope (e.g. https://google.com)
-        return;
-      }
-
-      const {
-        pathname
-      } = window.location;
-      href = (0, _url.resolve)(pathname, href);
-      as = as ? (0, _url.resolve)(pathname, as) : href;
-      e.preventDefault(); //  avoid scroll for urls with anchor refs
-
-      let {
-        scroll
-      } = this.props;
-
-      if (scroll == null) {
-        scroll = as.indexOf('#') < 0;
-      } // replace state instead of push if prop is present
-
-
-      _router.default[this.props.replace ? 'replace' : 'push'](href, as, {
-        shallow: this.props.shallow
-      }).then(success => {
-        if (!success) return;
-
-        if (scroll) {
-          window.scrollTo(0, 0);
-          document.body.focus();
-        }
-      });
-    };
-
-    if (true) {
-      if (props.prefetch) {
-        console.warn('Next.js auto-prefetches automatically based on viewport. The prefetch attribute is no longer needed. More: https://err.sh/zeit/next.js/prefetch-true-deprecated');
-      }
-    }
-
-    this.p = props.prefetch !== false;
-  }
-
-  componentWillUnmount() {
-    this.cleanUpListeners();
-  }
-
-  handleRef(ref) {
-    if (this.p && IntersectionObserver && ref && ref.tagName) {
-      this.cleanUpListeners();
-      this.cleanUpListeners = listenToIntersections(ref, () => {
-        this.prefetch();
-      });
-    }
-  } // The function is memoized so that no extra lifecycles are needed
-  // as per https://reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html
-
-
-  prefetch() {
-    if (!this.p || true) return; // Prefetch the JSON page if asked (only in the client)
-
-    const {
-      pathname
-    } = window.location;
-    const {
-      href: parsedHref
-    } = this.formatUrls(this.props.href, this.props.as);
-    const href = (0, _url.resolve)(pathname, parsedHref);
-
-    _router.default.prefetch(href);
-  }
-
-  render() {
-    let {
-      children
-    } = this.props;
-    const {
-      href,
-      as
-    } = this.formatUrls(this.props.href, this.props.as); // Deprecated. Warning shown by propType check. If the children provided is a string (<Link>example</Link>) we wrap it in an <a> tag
-
-    if (typeof children === 'string') {
-      children = _react.default.createElement("a", null, children);
-    } // This will return the first child, if multiple are provided it will throw an error
-
-
-    const child = _react.Children.only(children);
-
-    const props = {
-      ref: el => {
-        this.handleRef(el);
-
-        if (child && typeof child === 'object' && child.ref) {
-          if (typeof child.ref === 'function') child.ref(el);else if (typeof child.ref === 'object') {
-            child.ref.current = el;
-          }
-        }
-      },
-      onMouseEnter: e => {
-        if (child.props && typeof child.props.onMouseEnter === 'function') {
-          child.props.onMouseEnter(e);
-        }
-
-        this.prefetch();
-      },
-      onClick: e => {
-        if (child.props && typeof child.props.onClick === 'function') {
-          child.props.onClick(e);
-        }
-
-        if (!e.defaultPrevented) {
-          this.linkClicked(e);
-        }
-      } // If child is an <a> tag and doesn't have a href attribute, or if the 'passHref' property is
-      // defined, we specify the current 'href', so that repetition is not needed by the user
-
-    };
-
-    if (this.props.passHref || child.type === 'a' && !('href' in child.props)) {
-      props.href = as || href;
-    } // Add the ending slash to the paths. So, we can serve the
-    // "<page>/index.html" directly.
-
-
-    if (false) {}
-
-    return _react.default.cloneElement(child, props);
-  }
-
-}
-
-Link.propTypes = void 0;
-
-if (true) {
-  const warn = (0, _utils.execOnce)(console.error); // This module gets removed by webpack.IgnorePlugin
-
-  const exact = __webpack_require__(/*! prop-types-exact */ "prop-types-exact");
-
-  Link.propTypes = exact({
-    href: _propTypes.default.oneOfType([_propTypes.default.string, _propTypes.default.object]).isRequired,
-    as: _propTypes.default.oneOfType([_propTypes.default.string, _propTypes.default.object]),
-    prefetch: _propTypes.default.bool,
-    replace: _propTypes.default.bool,
-    shallow: _propTypes.default.bool,
-    passHref: _propTypes.default.bool,
-    scroll: _propTypes.default.bool,
-    children: _propTypes.default.oneOfType([_propTypes.default.element, (props, propName) => {
-      const value = props[propName];
-
-      if (typeof value === 'string') {
-        warn("Warning: You're using a string directly inside <Link>. This usage has been deprecated. Please add an <a> tag as child of <Link>");
-      }
-
-      return null;
-    }]).isRequired
-  });
-}
-
-var _default = Link;
-exports.default = _default;
 
 /***/ }),
 
@@ -1769,93 +1721,528 @@ exports.SUPPORTS_PERFORMANCE_USER_TIMING = exports.SUPPORTS_PERFORMANCE && typeo
 
 /***/ }),
 
-/***/ "./node_modules/next/link.js":
-/*!***********************************!*\
-  !*** ./node_modules/next/link.js ***!
-  \***********************************/
+/***/ "./node_modules/next/dist/pages/_app.js":
+/*!**********************************************!*\
+  !*** ./node_modules/next/dist/pages/_app.js ***!
+  \**********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! ./dist/client/link */ "./node_modules/next/dist/client/link.js")
+"use strict";
 
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime-corejs2/helpers/interopRequireDefault */ "./node_modules/@babel/runtime-corejs2/helpers/interopRequireDefault.js");
+
+exports.__esModule = true;
+exports.Container = Container;
+exports.createUrl = createUrl;
+exports.default = void 0;
+
+var _extends2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime-corejs2/helpers/extends */ "./node_modules/@babel/runtime-corejs2/helpers/extends.js"));
+
+var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime-corejs2/helpers/asyncToGenerator */ "./node_modules/@babel/runtime-corejs2/helpers/asyncToGenerator.js"));
+
+var _react = _interopRequireDefault(__webpack_require__(/*! react */ "react"));
+
+var _propTypes = _interopRequireDefault(__webpack_require__(/*! prop-types */ "prop-types"));
+
+var _utils = __webpack_require__(/*! ../next-server/lib/utils */ "./node_modules/next/dist/next-server/lib/utils.js");
+
+exports.AppInitialProps = _utils.AppInitialProps;
+
+var _router = __webpack_require__(/*! ../client/router */ "./node_modules/next/dist/client/router.js");
+/**
+* `App` component is used for initialize of pages. It allows for overwriting and full control of the `page` initialization.
+* This allows for keeping state between navigation, custom error handling, injecting additional data.
+*/
+
+
+function appGetInitialProps(_x) {
+  return _appGetInitialProps.apply(this, arguments);
+}
+
+function _appGetInitialProps() {
+  _appGetInitialProps = (0, _asyncToGenerator2.default)(function* (_ref) {
+    let {
+      Component,
+      ctx
+    } = _ref;
+    const pageProps = yield (0, _utils.loadGetInitialProps)(Component, ctx);
+    return {
+      pageProps
+    };
+  });
+  return _appGetInitialProps.apply(this, arguments);
+}
+
+class App extends _react.default.Component {
+  getChildContext() {
+    return {
+      router: (0, _router.makePublicRouterInstance)(this.props.router)
+    };
+  } // Kept here for backwards compatibility.
+  // When someone ended App they could call `super.componentDidCatch`.
+  // @deprecated This method is no longer needed. Errors are caught at the top level
+
+
+  componentDidCatch(error, _errorInfo) {
+    throw error;
+  }
+
+  render() {
+    const {
+      router,
+      Component,
+      pageProps
+    } = this.props;
+    const url = createUrl(router);
+    return _react.default.createElement(Component, (0, _extends2.default)({}, pageProps, {
+      url: url
+    }));
+  }
+
+}
+
+exports.default = App;
+App.childContextTypes = {
+  router: _propTypes.default.object
+};
+App.origGetInitialProps = appGetInitialProps;
+App.getInitialProps = appGetInitialProps;
+let warnContainer;
+let warnUrl;
+
+if (true) {
+  warnContainer = (0, _utils.execOnce)(() => {
+    console.warn("Warning: the `Container` in `_app` has been deprecated and should be removed. https://err.sh/zeit/next.js/app-container-deprecated");
+  });
+  warnUrl = (0, _utils.execOnce)(() => {
+    console.error("Warning: the 'url' property is deprecated. https://err.sh/zeit/next.js/url-deprecated");
+  });
+} // @deprecated noop for now until removal
+
+
+function Container(p) {
+  if (true) warnContainer();
+  return p.children;
+}
+
+function createUrl(router) {
+  // This is to make sure we don't references the router object at call time
+  const {
+    pathname,
+    asPath,
+    query
+  } = router;
+  return {
+    get query() {
+      if (true) warnUrl();
+      return query;
+    },
+
+    get pathname() {
+      if (true) warnUrl();
+      return pathname;
+    },
+
+    get asPath() {
+      if (true) warnUrl();
+      return asPath;
+    },
+
+    back: () => {
+      if (true) warnUrl();
+      router.back();
+    },
+    push: (url, as) => {
+      if (true) warnUrl();
+      return router.push(url, as);
+    },
+    pushTo: (href, as) => {
+      if (true) warnUrl();
+      const pushRoute = as ? href : '';
+      const pushUrl = as || href;
+      return router.push(pushRoute, pushUrl);
+    },
+    replace: (url, as) => {
+      if (true) warnUrl();
+      return router.replace(url, as);
+    },
+    replaceTo: (href, as) => {
+      if (true) warnUrl();
+      const replaceRoute = as ? href : '';
+      const replaceUrl = as || href;
+      return router.replace(replaceRoute, replaceUrl);
+    }
+  };
+}
 
 /***/ }),
 
-/***/ "./src/components/homepage-components/list-menu.tsx":
-/*!**********************************************************!*\
-  !*** ./src/components/homepage-components/list-menu.tsx ***!
-  \**********************************************************/
-/*! exports provided: default */
+/***/ "./src/lib/apollo.jsx":
+/*!****************************!*\
+  !*** ./src/lib/apollo.jsx ***!
+  \****************************/
+/*! exports provided: withApollo */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! styled-components */ "styled-components");
-/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(styled_components__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! next/link */ "./node_modules/next/link.js");
-/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_2__);
-var _jsxFileName = "/home/christian/Development/fible-frontend-nextjs/src/components/homepage-components/list-menu.tsx";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "withApollo", function() { return withApollo; });
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/objectSpread */ "./node_modules/@babel/runtime-corejs2/helpers/esm/objectSpread.js");
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/extends */ "./node_modules/@babel/runtime-corejs2/helpers/esm/extends.js");
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/objectWithoutProperties */ "./node_modules/@babel/runtime-corejs2/helpers/esm/objectWithoutProperties.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! prop-types */ "prop-types");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var cookie__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! cookie */ "cookie");
+/* harmony import */ var cookie__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(cookie__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var next_head__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! next/head */ "next/head");
+/* harmony import */ var next_head__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(next_head__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var apollo_client__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! apollo-client */ "apollo-client");
+/* harmony import */ var apollo_client__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(apollo_client__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var apollo_cache_inmemory__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! apollo-cache-inmemory */ "apollo-cache-inmemory");
+/* harmony import */ var apollo_cache_inmemory__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(apollo_cache_inmemory__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var apollo_link_http__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! apollo-link-http */ "apollo-link-http");
+/* harmony import */ var apollo_link_http__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(apollo_link_http__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var apollo_link_context__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! apollo-link-context */ "apollo-link-context");
+/* harmony import */ var apollo_link_context__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(apollo_link_context__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var _apollo_react_hooks__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @apollo/react-hooks */ "@apollo/react-hooks");
+/* harmony import */ var _apollo_react_hooks__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_apollo_react_hooks__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! isomorphic-unfetch */ "isomorphic-unfetch");
+/* harmony import */ var isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_12__);
 
-var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
+
+var _jsxFileName = "/home/christian/Development/fible-frontend-nextjs/src/lib/apollo.jsx";
+var __jsx = react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement;
 
 
 
-__webpack_require__(/*! @material/ripple */ "@material/ripple");
 
-const MenuItem = props => __jsx(Wrapper, {
-  __source: {
-    fileName: _jsxFileName,
-    lineNumber: 7
-  },
-  __self: undefined
-}, __jsx(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
-  href: props.page,
-  __source: {
-    fileName: _jsxFileName,
-    lineNumber: 8
-  },
-  __self: undefined
-}, __jsx(Container, {
-  __source: {
-    fileName: _jsxFileName,
-    lineNumber: 9
-  },
-  __self: undefined
-}, __jsx(StyledText, {
-  __source: {
-    fileName: _jsxFileName,
-    lineNumber: 10
-  },
-  __self: undefined
-}, props.name), __jsx(Arrow, {
-  src: "/arrow.svg",
-  alt: "my arrow",
-  __source: {
-    fileName: _jsxFileName,
-    lineNumber: 11
-  },
-  __self: undefined
-}))));
 
-/* harmony default export */ __webpack_exports__["default"] = (MenuItem);
-const Arrow = styled_components__WEBPACK_IMPORTED_MODULE_1___default.a.img.withConfig({
-  displayName: "list-menu__Arrow",
-  componentId: "kjcxvp-0"
-})(["height:2em;display:flex;justify-content:flex-end;padding-left:10em;"]);
-const Wrapper = styled_components__WEBPACK_IMPORTED_MODULE_1___default.a.li.withConfig({
-  displayName: "list-menu__Wrapper",
-  componentId: "kjcxvp-1"
-})(["display:flex;justify-content:flex-start;"]);
-const StyledText = styled_components__WEBPACK_IMPORTED_MODULE_1___default.a.a.withConfig({
-  displayName: "list-menu__StyledText",
-  componentId: "kjcxvp-2"
-})(["font-size:2em;color:black;border:none;background:none;text-decoration:none;padding-left:1em;"]);
-const Container = styled_components__WEBPACK_IMPORTED_MODULE_1___default.a.div.withConfig({
-  displayName: "list-menu__Container",
-  componentId: "kjcxvp-3"
-})(["display:flex;flex-direction:row;cursor:pointer;"]);
+
+
+
+
+
+/**
+ * Creates and provides the apolloContext
+ * to a next.js PageTree. Use it by wrapping
+ * your PageComponent via HOC pattern.
+ * @param {Function|Class} PageComponent
+ * @param {Object} [config]
+ * @param {Boolean} [config.ssr=true]
+ */
+
+function withApollo(PageComponent, {
+  ssr = true
+} = {}) {
+  const WithApollo = (_ref) => {
+    let {
+      apolloClient,
+      apolloState
+    } = _ref,
+        pageProps = Object(_babel_runtime_corejs2_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_2__["default"])(_ref, ["apolloClient", "apolloState"]);
+
+    const client = apolloClient || initApolloClient(apolloState, {
+      getToken
+    });
+    return __jsx(_apollo_react_hooks__WEBPACK_IMPORTED_MODULE_11__["ApolloProvider"], {
+      client: client,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 25
+      },
+      __self: this
+    }, __jsx(PageComponent, Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_1__["default"])({}, pageProps, {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 26
+      },
+      __self: this
+    })));
+  };
+
+  if (true) {
+    // Find correct display name
+    const displayName = PageComponent.displayName || PageComponent.name || 'Component'; // Warn if old way of installing apollo is used
+
+    if (displayName === 'App') {
+      console.warn('This withApollo HOC only works with PageComponents.');
+    } // Set correct display name for devtools
+
+
+    WithApollo.displayName = `withApollo(${displayName})`; // Add some prop types
+
+    WithApollo.propTypes = {
+      // Used for getDataFromTree rendering
+      apolloClient: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.object,
+      // Used for client/server rendering
+      apolloState: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.object
+    };
+  }
+
+  if (ssr || PageComponent.getInitialProps) {
+    WithApollo.getInitialProps = async ctx => {
+      const {
+        AppTree
+      } = ctx; // Run all GraphQL queries in the component tree
+      // and extract the resulting data
+
+      const apolloClient = ctx.apolloClient = initApolloClient({}, {
+        getToken: () => getToken(ctx.req)
+      });
+      const pageProps = PageComponent.getInitialProps ? await PageComponent.getInitialProps(ctx) : {}; // Only on the server
+
+      if (true) {
+        // When redirecting, the response is finished.
+        // No point in continuing to render
+        if (ctx.res && ctx.res.finished) {
+          return {};
+        }
+
+        if (ssr) {
+          try {
+            // Run all GraphQL queries
+            const {
+              getDataFromTree
+            } = await Promise.resolve(/*! import() */).then(__webpack_require__.t.bind(null, /*! @apollo/react-ssr */ "@apollo/react-ssr", 7));
+            await getDataFromTree(__jsx(AppTree, {
+              pageProps: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, pageProps, {
+                apolloClient
+              }),
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 83
+              },
+              __self: this
+            }));
+          } catch (error) {
+            // Prevent Apollo Client GraphQL errors from crashing SSR.
+            // Handle them in components via the data.error prop:
+            // https://www.apollographql.com/docs/react/api/react-apollo.html#graphql-query-data-error
+            console.error('Error while running `getDataFromTree`', error);
+          }
+        } // getDataFromTree does not call componentWillUnmount
+        // head side effect therefore need to be cleared manually
+
+
+        next_head__WEBPACK_IMPORTED_MODULE_6___default.a.rewind();
+      } // Extract query data from the Apollo store
+
+
+      const apolloState = apolloClient.cache.extract();
+      return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, pageProps, {
+        apolloState
+      });
+    };
+  }
+
+  return WithApollo;
+}
+let apolloClient = null;
+/**
+ * Always creates a new apollo client on the server
+ * Creates or reuses apollo client in the browser.
+ */
+
+function initApolloClient(...args) {
+  // Make sure to create a new client for every server-side request so that data
+  // isn't shared between connections (which would be bad)
+  if (true) {
+    return createApolloClient(...args);
+  } // Reuse client on the client-side
+
+
+  if (!apolloClient) {
+    apolloClient = createApolloClient(...args);
+  }
+
+  return apolloClient;
+}
+/**
+ * Creates and configures the ApolloClient
+ * @param  {Object} [initialState={}]
+ * @param  {Object} config
+ */
+
+
+function createApolloClient(initialState = {}, {
+  getToken
+}) {
+  const fetchOptions = {
+    agent: ""
+  }; // If you are using a https_proxy, add fetchOptions with 'https-proxy-agent' agent instance
+  // 'https-proxy-agent' is required here because it's a sever-side only module
+
+  if (true) {
+    if (process.env.https_proxy) {
+      fetchOptions.agent = new (__webpack_require__(/*! https-proxy-agent */ "https-proxy-agent"))(process.env.https_proxy);
+    }
+  }
+
+  const httpLink = new apollo_link_http__WEBPACK_IMPORTED_MODULE_9__["HttpLink"]({
+    uri: 'http://localhost:8000/graphql',
+    // Server URL (must be absolute)
+    credentials: 'include',
+    fetch: (isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_12___default()),
+    fetchOptions
+  });
+  const authLink = Object(apollo_link_context__WEBPACK_IMPORTED_MODULE_10__["setContext"])((request, {
+    headers
+  }) => {
+    const token = getToken();
+    return {
+      headers: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, headers, {
+        cookie: token ? `qid=${token}` : ''
+      })
+    };
+  }); // Check out https://github.com/zeit/next.js/pull/4611 if you want to use the AWSAppSyncClient
+
+  return new apollo_client__WEBPACK_IMPORTED_MODULE_7__["ApolloClient"]({
+    ssrMode: true,
+    // Disables forceFetch on the server (so queries are only run once)
+    link: authLink.concat(httpLink),
+    cache: new apollo_cache_inmemory__WEBPACK_IMPORTED_MODULE_8__["InMemoryCache"]().restore(initialState)
+  });
+}
+/**
+ * Get the user token from cookie
+ * @param {Object} req
+ */
+
+
+function getToken(req) {
+  const cookies = cookie__WEBPACK_IMPORTED_MODULE_5___default.a.parse(req ? req.headers.cookie || '' : document.cookie);
+  return cookies.qid;
+}
+/*import React from 'react'
+import Head from 'next/head'
+import { ApolloProvider } from '@apollo/react-hooks'
+import { ApolloClient } from 'apollo-client'
+import { InMemoryCache } from 'apollo-cache-inmemory'
+import { HttpLink } from 'apollo-link-http'
+import fetch from 'isomorphic-unfetch'
+
+let apolloClient = null
+
+
+export function withApollo(PageComponent, { ssr = true } = {}) {
+  const WithApollo = ({ apolloClient, apolloState, ...pageProps }) => {
+    const client = apolloClient || initApolloClient(apolloState)
+    return (
+      <ApolloProvider client={client}>
+        <PageComponent {...pageProps} />
+      </ApolloProvider>
+    )
+  }
+
+  // Set the correct displayName in development
+  if (process.env.NODE_ENV !== 'production') {
+    const displayName =
+      PageComponent.displayName || PageComponent.name || 'Component'
+
+    if (displayName === 'App') {
+      console.warn('This withApollo HOC only works with PageComponents.')
+    }
+
+    WithApollo.displayName = `withApollo(${displayName})`
+  }
+
+  if (ssr || PageComponent.getInitialProps) {
+    WithApollo.getInitialProps = async ctx => {
+      const { AppTree } = ctx
+
+      // Initialize ApolloClient, add it to the ctx object so
+      // we can use it in `PageComponent.getInitialProp`.
+      const apolloClient = (ctx.apolloClient = initApolloClient({}))
+
+      // Run wrapped getInitialProps methods
+      let pageProps = {}
+      if (PageComponent.getInitialProps) {
+        pageProps = await PageComponent.getInitialProps(ctx)
+      }
+
+      // Only on the server:
+      if (typeof window === 'undefined') {
+        // When redirecting, the response is finished.
+        // No point in continuing to render
+        if (ctx.res && ctx.res.finished) {
+          return pageProps
+        }
+
+        // Only if ssr is enabled
+        if (ssr) {
+          try {
+            // Run all GraphQL queries
+            const { getDataFromTree } = await import('@apollo/react-ssr')
+            await getDataFromTree(
+              <AppTree
+                pageProps={{
+                  ...pageProps,
+                  apolloClient,
+                }}
+              />
+            )
+          } catch (error) {
+            // Prevent Apollo Client GraphQL errors from crashing SSR.
+            // Handle them in components via the data.error prop:
+            // https://www.apollographql.com/docs/react/api/react-apollo.html#graphql-query-data-error
+            console.error('Error while running `getDataFromTree`', error)
+          }
+
+          // getDataFromTree does not call componentWillUnmount
+          // head side effect therefore need to be cleared manually
+          Head.rewind()
+        }
+      }
+
+      // Extract query data from the Apollo store
+      const apolloState = apolloClient.cache.extract()
+
+      return {
+        ...pageProps,
+        apolloState,
+      }
+    }
+  }
+
+  return WithApollo
+}
+
+
+function initApolloClient(initialState) {
+  // Make sure to create a new client for every server-side request so that data
+  // isn't shared between connections (which would be bad)
+  if (typeof window === 'undefined') {
+    return createApolloClient(initialState)
+  }
+
+  // Reuse client on the client-side
+  if (!apolloClient) {
+    apolloClient = createApolloClient(initialState)
+  }
+
+  return apolloClient
+}
+
+
+function createApolloClient(initialState = {}) {
+  // Check out https://github.com/zeit/next.js/pull/4611 if you want to use the AWSAppSyncClient
+  return new ApolloClient({
+    ssrMode: typeof window === 'undefined', // Disables forceFetch on the server (so queries are only run once)
+    link: new HttpLink({
+      uri: 'http://localhost:8000/graphql', // Server URL (must be absolute)
+      credentials: 'include', // Additional fetch() options like `credentials` or `headers`
+      fetch,
+    }),
+    cache: new InMemoryCache().restore(initialState),
+  })
+}
+
+*/
 
 /***/ }),
 
@@ -1868,66 +2255,1328 @@ const Container = styled_components__WEBPACK_IMPORTED_MODULE_1___default.a.div.w
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! styled-components */ "styled-components");
-/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(styled_components__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _components_homepage_components_list_menu__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/homepage-components/list-menu */ "./src/components/homepage-components/list-menu.tsx");
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! styled-components */ "styled-components");
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(styled_components__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _lib_apollo__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../lib/apollo */ "./src/lib/apollo.jsx");
+/* harmony import */ var graphql_tag__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! graphql-tag */ "graphql-tag");
+/* harmony import */ var graphql_tag__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(graphql_tag__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! next/router */ "next/router");
+/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _apollo_react_hooks__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @apollo/react-hooks */ "@apollo/react-hooks");
+/* harmony import */ var _apollo_react_hooks__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_apollo_react_hooks__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _redux_actions_dataActions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../redux/actions/dataActions */ "./src/redux/actions/dataActions.ts");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-redux */ "react-redux");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _redux_redux__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../redux/redux */ "./src/redux/redux.jsx");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! redux */ "redux");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(redux__WEBPACK_IMPORTED_MODULE_9__);
 var _jsxFileName = "/home/christian/Development/fible-frontend-nextjs/src/pages/index.tsx";
+var __jsx = react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement;
 
-var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
-const Wrapper = styled_components__WEBPACK_IMPORTED_MODULE_1___default.a.div.withConfig({
-  displayName: "pages__Wrapper",
-  componentId: "arfuc1-0"
-})(["background:white;height:100%;width:100%;display:flex;justify-content:center;align-items:center;"]);
-const HeaderImage = styled_components__WEBPACK_IMPORTED_MODULE_1___default.a.img.withConfig({
-  displayName: "pages__HeaderImage",
-  componentId: "arfuc1-1"
-})(["padding:10vh;height:10vh;"]);
-const List = styled_components__WEBPACK_IMPORTED_MODULE_1___default.a.ul.withConfig({
-  displayName: "pages__List",
-  componentId: "arfuc1-2"
-})(["display:flex;flex-direction:column;"]);
 
-function Home() {
+
+
+
+
+
+
+
+
+const Home = props => {
+  //const client = useApolloClient()
+  const {
+    0: email,
+    1: setEmail
+  } = Object(react__WEBPACK_IMPORTED_MODULE_3__["useState"])('');
+  const {
+    0: password,
+    1: setPassword
+  } = Object(react__WEBPACK_IMPORTED_MODULE_3__["useState"])('');
+  const SIGN_IN = graphql_tag__WEBPACK_IMPORTED_MODULE_2___default.a`
+  mutation Signin($email: String!, $password: String!) {
+    login(email: $email, password: $password ) {
+      user{id name ROUTES POIS STOPS email}
+    }
+  }`;
+
+  const onCompleted = data => {
+    //  client.cache.reset().then(() => {
+    //    redirect({}, '/')
+    //  })
+    //console.log(data)
+    props.loadUser(data);
+    next_router__WEBPACK_IMPORTED_MODULE_4___default.a.push({
+      pathname: '/routemanagement'
+    });
+  };
+
+  const onError = error => {
+    // If you want to send error to external service?
+    console.error(error);
+  };
+
+  const [signinUser, {
+    error
+  }] = Object(_apollo_react_hooks__WEBPACK_IMPORTED_MODULE_5__["useMutation"])(SIGN_IN, {
+    onCompleted,
+    onError
+  });
   return __jsx(Wrapper, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 29
+      lineNumber: 52
     },
-    __self: this
-  }, __jsx(List, {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 30
-    },
-    __self: this
+    __self: undefined
   }, __jsx(HeaderImage, {
     src: "/logo_fible.png",
     alt: "my image",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 31
+      lineNumber: 53
     },
-    __self: this
-  }), __jsx(_components_homepage_components_list_menu__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    page: "/routemanagement",
-    name: "Routes",
+    __self: undefined
+  }), __jsx(StyledInputRow, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 32
+      lineNumber: 54
     },
-    __self: this
-  })));
-}
+    __self: undefined
+  }, __jsx(StyledText, {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 55
+    },
+    __self: undefined
+  }, "Email:"), __jsx(StyledInput, {
+    type: "text",
+    name: "email",
+    value: email,
+    onChange: e => setEmail(e.target.value),
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 56
+    },
+    __self: undefined
+  })), __jsx(StyledInputRow, {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 58
+    },
+    __self: undefined
+  }, __jsx(StyledText, {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 59
+    },
+    __self: undefined
+  }, "Password:"), __jsx(StyledInput, {
+    type: "password",
+    name: "password",
+    value: password,
+    onChange: e => setPassword(e.target.value),
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 60
+    },
+    __self: undefined
+  })), __jsx(StyledButton, {
+    onClick: () => {
+      signinUser({
+        variables: {
+          email: email,
+          password: password
+        }
+      }); //setEmail(''), setPassword('')
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 62
+    },
+    __self: undefined
+  }, "Log in"));
+}; //        <MenuItem page="/routemanagement" name="Routes" />
 
-/* harmony default export */ __webpack_exports__["default"] = (Home);
+
+const mapStateToProps = state => {
+  return {
+    loadUser: state.loadUser
+  };
+};
+
+const enhance = Object(redux__WEBPACK_IMPORTED_MODULE_9__["compose"])(_redux_redux__WEBPACK_IMPORTED_MODULE_8__["withRedux"], _lib_apollo__WEBPACK_IMPORTED_MODULE_1__["withApollo"], Object(react_redux__WEBPACK_IMPORTED_MODULE_7__["connect"])(mapStateToProps, {
+  loadUser: _redux_actions_dataActions__WEBPACK_IMPORTED_MODULE_6__["loadUser"]
+}));
+/* harmony default export */ __webpack_exports__["default"] = (enhance(Home));
+const Wrapper = styled_components__WEBPACK_IMPORTED_MODULE_0___default.a.div.withConfig({
+  displayName: "pages__Wrapper",
+  componentId: "arfuc1-0"
+})(["position:absolute;left:50vw;translate:-50%;background:white;height:100%;width:40%;display:flex;flex-direction:column;transform:translate(-50%,0);"]);
+const HeaderImage = styled_components__WEBPACK_IMPORTED_MODULE_0___default.a.img.withConfig({
+  displayName: "pages__HeaderImage",
+  componentId: "arfuc1-1"
+})(["padding:10vh;max-height:15vh;height:auto;width:auto;align-self:center;object-fit:cover;"]);
+const StyledInputRow = styled_components__WEBPACK_IMPORTED_MODULE_0___default.a.div.withConfig({
+  displayName: "pages__StyledInputRow",
+  componentId: "arfuc1-2"
+})(["display:flex;width:60%;padding:2vh;flex-direction:row;align-self:center;"]);
+const StyledText = styled_components__WEBPACK_IMPORTED_MODULE_0___default.a.h3.withConfig({
+  displayName: "pages__StyledText",
+  componentId: "arfuc1-3"
+})(["align-self:flex-start;margin:0;padding:0;"]);
+const StyledInput = styled_components__WEBPACK_IMPORTED_MODULE_0___default.a.input.withConfig({
+  displayName: "pages__StyledInput",
+  componentId: "arfuc1-4"
+})(["display:flex;width:60%;padding:0.5vh;font-size:1.5vh;border:1px solid;border-color:lightgray;border-radius:1vh;position:absolute;width:16vw;right:10vw;"]);
+const StyledButton = styled_components__WEBPACK_IMPORTED_MODULE_0___default.a.button.withConfig({
+  displayName: "pages__StyledButton",
+  componentId: "arfuc1-5"
+})(["align-self:center;color:white;border:0;width:8vw;background:salmon;font-size:2vh;font-weight:bold;padding:1vh;padding-left:2vh;padding-right:2vh;border-radius:1vh;text-align:center;:focus{outline:none;}overflow:hidden;transform:translate3d(0,0,0);:after{content:\"\";display:block;position:absolute;width:100%;height:100%;top:0;left:0;pointer-events:none;background-image:radial-gradient(circle,#fff 10%,transparent 10.01%);background-repeat:no-repeat;background-position:50%;transform:scale(10,10);opacity:0;transition:transform .5s,opacity 1s;}:active:after{transform:scale(0,0);opacity:.3;transition:0s;}"]);
+/*
+class Home extends React.Component<{state:any}> {
+  constructor(props) {
+    super(props);
+    this.state = {
+      emailValue: '',
+      passwordValue:''
+    };
+  }
+  updateEmailValue(e) {
+    this.setState({
+      emailValue: e.target.value
+    });
+  }
+  updatePasswordValue(e) {
+    this.setState({
+      passwordValue: e.target.value
+    });
+  }
+
+ loginHandler = () => {
+  console.log(this.state)
+  const data = this.state.emailValue
+
+render() {
+  return ( <Wrapper>
+      <List>
+        <HeaderImage src="/logo_fible.png" alt="my image" />
+        <MenuItem page="/routemanagement" name="Routes" />
+          <StyledLabel>
+            Email:
+          <StyledInput type="text" name="email" onChange={(e) => this.updateEmailValue(e)} />
+          </StyledLabel>
+          <StyledLabel>
+            Password:
+          <StyledInput type="text" name="password" onChange={(e) => this.updatePasswordValue(e)} />
+          </StyledLabel>
+          <StyledButton onClick={() => this.loginHandler()}>Log in</StyledButton>
+      </List>
+    </Wrapper>
+  )}
+}
+*/
 
 /***/ }),
 
-/***/ 5:
+/***/ "./src/redux/actions/dataActions.ts":
+/*!******************************************!*\
+  !*** ./src/redux/actions/dataActions.ts ***!
+  \******************************************/
+/*! exports provided: addOrUpdateHeadline, initializeHtype, deleteHtype, emptySelectedComponent, setSelectedComponent, updateComponentsOrder, cleanNonsavedHtypes, loadUser, cleanUser */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addOrUpdateHeadline", function() { return addOrUpdateHeadline; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "initializeHtype", function() { return initializeHtype; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteHtype", function() { return deleteHtype; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "emptySelectedComponent", function() { return emptySelectedComponent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setSelectedComponent", function() { return setSelectedComponent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateComponentsOrder", function() { return updateComponentsOrder; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "cleanNonsavedHtypes", function() { return cleanNonsavedHtypes; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "loadUser", function() { return loadUser; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "cleanUser", function() { return cleanUser; });
+/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./types */ "./src/redux/actions/types.ts");
+
+let addHeadlineId = 0;
+let initializeHtypeId = 0;
+let deleteHtypeId = 0;
+let emptySelectedComponentId = 0;
+let setSelectedComponentId = 0;
+let updateComponentsOrderId = 0;
+let cleanNonsavedHtypesId = 0;
+let loadUserId = 0;
+let cleanUserId = 0;
+const addOrUpdateHeadline = content => ({
+  type: _types__WEBPACK_IMPORTED_MODULE_0__["HEADLINE"],
+  payload: {
+    id: ++addHeadlineId,
+    content
+  }
+});
+const initializeHtype = content => ({
+  type: _types__WEBPACK_IMPORTED_MODULE_0__["INITIALIZE_HTYPE"],
+  payload: {
+    id: ++initializeHtypeId,
+    content
+  }
+});
+const deleteHtype = content => ({
+  type: _types__WEBPACK_IMPORTED_MODULE_0__["DELETE_HTYPE"],
+  payload: {
+    id: ++deleteHtypeId,
+    content
+  }
+});
+const emptySelectedComponent = content => ({
+  type: _types__WEBPACK_IMPORTED_MODULE_0__["EMPTY_SELECTED_COMPONENT_ID"],
+  payload: {
+    id: ++emptySelectedComponentId
+  }
+});
+const setSelectedComponent = content => ({
+  type: _types__WEBPACK_IMPORTED_MODULE_0__["SET_SELECTED_COMPONENT"],
+  payload: {
+    id: ++setSelectedComponentId,
+    content
+  }
+});
+const updateComponentsOrder = content => ({
+  type: _types__WEBPACK_IMPORTED_MODULE_0__["UPDATE_COMPONENTS_ORDER"],
+  payload: {
+    id: ++updateComponentsOrderId,
+    content
+  }
+});
+const cleanNonsavedHtypes = () => ({
+  type: _types__WEBPACK_IMPORTED_MODULE_0__["CLEAN_NONSAVED_HTYPES"],
+  payload: {
+    id: ++cleanNonsavedHtypesId
+  }
+});
+const loadUser = content => ({
+  type: _types__WEBPACK_IMPORTED_MODULE_0__["LOAD_USER"],
+  payload: {
+    id: ++loadUserId,
+    content
+  }
+});
+const cleanUser = () => ({
+  type: _types__WEBPACK_IMPORTED_MODULE_0__["CLEAN_USER"],
+  payload: {
+    id: ++cleanUserId
+  }
+});
+
+/***/ }),
+
+/***/ "./src/redux/actions/types.ts":
+/*!************************************!*\
+  !*** ./src/redux/actions/types.ts ***!
+  \************************************/
+/*! exports provided: REMOVE_ROUTE, UPDATE_ROUTE_STATE, UPDATE_SELECTOR_MANAGER_STATE, UPDATE_INPUT_SCREEN_UI, INITIALIZE_INPUT_SCREEN_UI, HEADLINE, INITIALIZE_HTYPE, DELETE_HTYPE, EMPTY_SELECTED_COMPONENT_ID, UPDATE_SIMULATOR_SELECTION, SET_SELECTED_COMPONENT, UPDATE_COMPONENTS_ORDER, CLEAN_NONSAVED_HTYPES, STOP_AND_POI_MANAGER_CONTROLLER, SET_TITLE, LOAD_USER, CLEAN_USER */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_ROUTE", function() { return REMOVE_ROUTE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE_ROUTE_STATE", function() { return UPDATE_ROUTE_STATE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE_SELECTOR_MANAGER_STATE", function() { return UPDATE_SELECTOR_MANAGER_STATE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE_INPUT_SCREEN_UI", function() { return UPDATE_INPUT_SCREEN_UI; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "INITIALIZE_INPUT_SCREEN_UI", function() { return INITIALIZE_INPUT_SCREEN_UI; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HEADLINE", function() { return HEADLINE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "INITIALIZE_HTYPE", function() { return INITIALIZE_HTYPE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DELETE_HTYPE", function() { return DELETE_HTYPE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EMPTY_SELECTED_COMPONENT_ID", function() { return EMPTY_SELECTED_COMPONENT_ID; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE_SIMULATOR_SELECTION", function() { return UPDATE_SIMULATOR_SELECTION; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_SELECTED_COMPONENT", function() { return SET_SELECTED_COMPONENT; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE_COMPONENTS_ORDER", function() { return UPDATE_COMPONENTS_ORDER; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CLEAN_NONSAVED_HTYPES", function() { return CLEAN_NONSAVED_HTYPES; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "STOP_AND_POI_MANAGER_CONTROLLER", function() { return STOP_AND_POI_MANAGER_CONTROLLER; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_TITLE", function() { return SET_TITLE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOAD_USER", function() { return LOAD_USER; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CLEAN_USER", function() { return CLEAN_USER; });
+const REMOVE_ROUTE = "REMOVE_ROUTE";
+const UPDATE_ROUTE_STATE = "UPDATE_ROUTE_STATE";
+const UPDATE_SELECTOR_MANAGER_STATE = "UPDATE_SELECTOR_MANAGER_STATE";
+const UPDATE_INPUT_SCREEN_UI = "UPDATE_INPUT_SCREEN_UI";
+const INITIALIZE_INPUT_SCREEN_UI = "INITIALIZE_INPUT_SCREEN_UI";
+const HEADLINE = "ADD_HEADLINE";
+const INITIALIZE_HTYPE = "INITIALIZE_HTYPE";
+const DELETE_HTYPE = "DELETE_HTYPE";
+const EMPTY_SELECTED_COMPONENT_ID = "EMPTY_SELECTED_COMPONENT_ID";
+const UPDATE_SIMULATOR_SELECTION = "UPDATE_SIMULATOR_SELECTION";
+const SET_SELECTED_COMPONENT = "SET_SELECTED_COMPONENT";
+const UPDATE_COMPONENTS_ORDER = "UPDATE_COMPONENTS_ORDER";
+const CLEAN_NONSAVED_HTYPES = "CLEAN_NONSAVED_HTYPES";
+const STOP_AND_POI_MANAGER_CONTROLLER = "STOP_AND_POI_MANAGER_CONTROLLER";
+const SET_TITLE = "SET_TITLE";
+const LOAD_USER = "LOAD_USER";
+const CLEAN_USER = "CLEAN_USER";
+
+/***/ }),
+
+/***/ "./src/redux/reducers/dataReducer.ts":
+/*!*******************************************!*\
+  !*** ./src/redux/reducers/dataReducer.ts ***!
+  \*******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_entries__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/object/entries */ "./node_modules/@babel/runtime-corejs2/core-js/object/entries.js");
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_entries__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_object_entries__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/objectSpread */ "./node_modules/@babel/runtime-corejs2/helpers/esm/objectSpread.js");
+/* harmony import */ var _actions_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions/types */ "./src/redux/actions/types.ts");
+/* harmony import */ var nanoid__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! nanoid */ "nanoid");
+/* harmony import */ var nanoid__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(nanoid__WEBPACK_IMPORTED_MODULE_3__);
+
+
+
+ //HTYPE is the hierarchy type, aka route, stop, etc
+//DATA REDUCER + UI REDUCER + ROUTE MANAGEMENT SCREEN REDUCER
+
+const initialState = {
+  user: {
+    name: "Christian",
+    ROUTES: [],
+    STOPS: [],
+    POIS: [],
+    email: ""
+  },
+  //the id of the hcomponent being worked on
+  selectedHtypeId: "",
+  selectedComponentId: "empty",
+  ROUTES: {},
+  STOPS: {},
+  POIS: {}
+}; //make a reducer that cleans up the routes stops etc when you go to the route management screen.
+
+/* harmony default export */ __webpack_exports__["default"] = (function (state = initialState, action) {
+  switch (action.type) {
+    case _actions_types__WEBPACK_IMPORTED_MODULE_2__["LOAD_USER"]:
+      {
+        const {
+          name,
+          email,
+          ROUTES,
+          STOPS,
+          POIS
+        } = action.payload.content;
+        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state, {
+          user: {
+            name: name,
+            ROUTES: [ROUTES],
+            STOPS: [POIS],
+            POIS: [STOPS],
+            email: email
+          }
+        });
+      }
+
+    case _actions_types__WEBPACK_IMPORTED_MODULE_2__["CLEAN_USER"]:
+      {
+        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state, {
+          user: {
+            name: '',
+            ROUTES: [],
+            STOPS: [],
+            POIS: [],
+            email: ''
+          },
+          //the id of the hcomponent being worked on
+          selectedHtypeId: '',
+          selectedComponentId: "empty",
+          ROUTES: {},
+          STOPS: {},
+          POIS: {}
+        });
+      }
+
+    case _actions_types__WEBPACK_IMPORTED_MODULE_2__["INITIALIZE_HTYPE"]:
+      {
+        //     const selectedDispatch = action.payload.content.dispatch;
+        const htype = action.payload.content.htype;
+        const htypeid = htype.substring(0, 2) + "_" + nanoid__WEBPACK_IMPORTED_MODULE_3___default()(8);
+        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state, {
+          user: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state.user, {
+            [htype]: [...state.user[htype], htypeid]
+          }),
+          selectedHtypeId: htypeid,
+          [htype]: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state[htype], {
+            //taking the first two letters of the hierarchy type and combining it with a unique id of length 8
+            [htypeid]: {
+              //take the name of the account owner
+              saved: false,
+              owner: state.user.name,
+              //name to be filled out when the route is finished
+              name: "",
+              order: [],
+              components: {}
+            }
+          })
+        });
+      }
+
+    case _actions_types__WEBPACK_IMPORTED_MODULE_2__["EMPTY_SELECTED_COMPONENT_ID"]:
+      {
+        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state, {
+          selectedComponentId: "empty"
+        });
+      }
+
+    case _actions_types__WEBPACK_IMPORTED_MODULE_2__["DELETE_HTYPE"]:
+      {
+        const htype = action.payload.content.htype;
+        const htypeid = action.payload.content.htypeid;
+        delete state[htype][htypeid];
+        const index = state.user[htype].indexOf(htypeid);
+        delete state.user[htype][index];
+        return state;
+      }
+
+    /*   case FINISH_HTYPE: {
+           const selectedDispatch = action.payload.content.dispatch;
+           const id = action.payload.content.id
+           const htype = action.payload.content.dispatch;
+           return {
+               ...state,
+                       [htype.toLowerCase()]:{
+                       ...state.data[htype.toLowerCase()],
+                       //taking the first two letters of the hierarchy type and combining it with a unique id of length 8
+                       [htype.toLowerCase().substring(0, 2) + "_" + nanoid(8)]:{
+                           //take the name of the account owner
+                           owner:state.data.user.name,
+                           //name to be filled out when the route is finished
+                           name:""
+                           //location of stops?
+                           //pois that belong?
+                           
+                   }
+               }
+           };
+       },
+    */
+
+    case _actions_types__WEBPACK_IMPORTED_MODULE_2__["CLEAN_NONSAVED_HTYPES"]:
+      {
+        const htypes = ["ROUTES", "STOPS", "POIS"]; // const htype= action.payload.content.headline
+
+        for (var j in htypes) {
+          for (let [key] of _babel_runtime_corejs2_core_js_object_entries__WEBPACK_IMPORTED_MODULE_0___default()(state[htypes[j]])) {
+            if (state[htypes[j]][key].saved != true) {
+              delete state[htypes[j]][key];
+            }
+          }
+        }
+
+        return state;
+      }
+
+    case _actions_types__WEBPACK_IMPORTED_MODULE_2__["HEADLINE"]:
+      {
+        const headline = action.payload.content.headline;
+        const htype = action.payload.content.type;
+        const htypeid = action.payload.content.selectedHtypeId;
+        const dispatch = action.payload.content.dispatch;
+
+        switch (dispatch) {
+          case "ADD_HEADLINE":
+            {
+              //create the id because it has not been changed before
+              const headlineId = "HL_" + nanoid__WEBPACK_IMPORTED_MODULE_3___default()(8); //rebuilding the state object to add new data
+
+              console.log(state);
+              return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state, {
+                selectedComponentId: headlineId,
+                [htype]: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state[htype], {
+                  [htypeid]: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state[htype][htypeid], {
+                    order: [...state[htype][htypeid].order, headlineId],
+                    components: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state[htype][htypeid].components, {
+                      [headlineId]: {
+                        id: headlineId,
+                        type: "HEADLINE",
+                        headline: headline
+                      }
+                    })
+                  })
+                })
+              });
+            }
+          //case where you want to change the headline but it already exists
+
+          case "UPDATE_HEADLINE":
+            {
+              const headlineId = action.payload.content.selectedComponentId;
+              return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state, {
+                [htype]: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state[htype], {
+                  [htypeid]: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state[htype][htypeid], {
+                    components: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state[htype][htypeid].components, {
+                      [headlineId]: {
+                        id: headlineId,
+                        type: "HEADLINE",
+                        headline: headline
+                      }
+                    })
+                  })
+                })
+              });
+            }
+        }
+      }
+
+    case _actions_types__WEBPACK_IMPORTED_MODULE_2__["UPDATE_COMPONENTS_ORDER"]:
+      {
+        const newOrder = action.payload.content.newOrder;
+        const htype = action.payload.content.htype;
+        const htypeId = action.payload.content.htypeId;
+        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state, {
+          [htype]: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state[htype], {
+            [htypeId]: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state[htype][htypeId], {
+              order: newOrder
+            })
+          })
+        });
+      }
+      ;
+
+    case _actions_types__WEBPACK_IMPORTED_MODULE_2__["SET_SELECTED_COMPONENT"]:
+      {
+        const selectedId = action.payload.content.selectedComponentId;
+        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state, {
+          selectedComponentId: selectedId
+        });
+      }
+
+    default:
+      return state;
+  }
+});
+/*
+        case HEADLINE: {
+            const headline = action.payload.content.headline
+            const htype = action.payload.content.type
+            const routeId = action.payload.content.routeId
+            switch(dispatch){
+                case("ADD_HEADLINE"):{
+                //create the id because it has not been changed before
+                const headlineId = htype.toLowerCase().substring(0, 2) + "_" + nanoid(8)
+                //rebuilding the state object to add new data
+                return {
+                    ...state,
+                        data: {
+                            ...state.data,
+                                [htype.toLowerCase()]:{
+                                    ...state.data.route,
+                                    [routeId]:{
+                                        ...state.data.route[routeId]
+                                        order:[...state.data.route[routeId].order, headlineId]
+                                        components:{
+                                            ...state.data.route[routeId].components
+                                            [headlineId]:{
+                                                type:"HEADLINE"
+                                                headline:headline
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                //case where you want to change the headline but it already exists
+                case("UPDATE_HEADLINE"):{
+                    const headlineId = action.payload.content.headlineId
+                    return {
+                    ...state,
+                        data: {
+                            ...state.data,
+                                [htype.toLowerCase()]:{
+                                    ...state.data.route,
+                                    [routeId]:{
+                                        ...state.data.route[routeId]
+                                        components:{
+                                            ...state.data.route[routeId].components
+                                            []:{
+                                                type:"HEADLINE"
+                                                headline:headline
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+
+
+        */
+
+/***/ }),
+
+/***/ "./src/redux/reducers/index.ts":
+/*!*************************************!*\
+  !*** ./src/redux/reducers/index.ts ***!
+  \*************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "redux");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(redux__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _uiReducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./uiReducer */ "./src/redux/reducers/uiReducer.ts");
+/* harmony import */ var _dataReducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./dataReducer */ "./src/redux/reducers/dataReducer.ts");
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
+  ui: _uiReducer__WEBPACK_IMPORTED_MODULE_1__["default"],
+  data: _dataReducer__WEBPACK_IMPORTED_MODULE_2__["default"]
+}));
+
+/***/ }),
+
+/***/ "./src/redux/reducers/uiReducer.ts":
+/*!*****************************************!*\
+  !*** ./src/redux/reducers/uiReducer.ts ***!
+  \*****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/objectSpread */ "./node_modules/@babel/runtime-corejs2/helpers/esm/objectSpread.js");
+/* harmony import */ var _actions_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/types */ "./src/redux/actions/types.ts");
+
+
+const initialState = {
+  routes: {
+    "h12345": {
+      id: "h12345",
+      headline: "Christian's Norway Route",
+      subheadline: "Fjords you just have to explore",
+      stops: ["Bergen", "Stavanger", "Molde", "Ålesund"],
+      attractions: ["Hiking", "Swimming", "Nature"]
+    },
+    "h54321": {
+      id: "h54321",
+      headline: "Paul's South Tyrol Route",
+      subheadline: "Explore the Dolomites",
+      stops: ["Bolzano", "Trento"],
+      attractions: ["Hiking", "Swimming", "Nature", "Food"]
+    },
+    "h12354": {
+      id: "h12354",
+      headline: "Simon's Allgäu Route",
+      subheadline: "Experience Neuschweinstein and so much more!",
+      stops: ["Mammendorf", "Füssen"],
+      attractions: ["Hiking", "Swimming", "Nature", "Sking"]
+    }
+  },
+  stops: {
+    "s213141": {
+      id: "s213141",
+      headline: "Bergen",
+      subheadline: "Byen ombringet av fjell",
+      pois: ["restaurant", "accommodation", "activities"],
+      location: {
+        lat: 1.2222,
+        lng: 1445666
+      }
+    },
+    "s54321": {
+      id: "s54321",
+      headline: "Stavanger",
+      subheadline: "Oljehovedstaden",
+      pois: ["restaurant", "accommodation", "activities"],
+      location: {
+        lat: 1.5555,
+        lng: 1.214134
+      }
+    }
+  },
+  pois: {
+    "p1314134": {
+      id: "p1314134",
+      headline: "Bergen Fjordrestaurant",
+      subheadline: "Fantastisk fisk og sjømat!",
+      location: {
+        lat: 1.2222,
+        lng: 1445666
+      },
+      address: "Bryggen 15a",
+      website: "www.bergen-fjordrestaurant.no"
+    }
+  },
+  columns: {
+    "column-1": {
+      id: "column-1",
+      title: "Routes",
+      ids: ["h12345", "h54321", "h12354"]
+    },
+    "column-2": {
+      id: "column-2",
+      title: "Stops",
+      ids: ["s213141", "s54321"]
+    },
+    "column-3": {
+      id: "column-3",
+      title: "Pois",
+      ids: ["p1314134"]
+    }
+  },
+  columnOrder: ["column-1", "column-2", "column-3"],
+  title: "",
+  inputMenu: {
+    htype: "ROUTES",
+    //which component is shown in the menu
+    show: "MENU",
+    ROUTES: [{
+      name: "Headline",
+      id: "headlineInput",
+      dispatch: "HEADLINE_INPUT"
+    }, {
+      name: "Subheadline",
+      id: "subheadlineInput",
+      dispatch: "SUBHEADLINE_INPUT"
+    }, {
+      name: "Image Gallery",
+      id: "imageGalleryInput",
+      dispatch: "IMAGE_GALLERY_INPUT"
+    }],
+    STOPS: [{
+      name: "Headline",
+      id: "headlineInput",
+      dispatch: "HEADLINE_INPUT"
+    }, {
+      name: "Subheadline",
+      id: "subheadlineInput",
+      dispatch: "SUBHEADLINE_INPUT"
+    }, {
+      name: "Image Gallery",
+      id: "imageGalleryInput",
+      dispatch: "IMAGE_GALLERY_INPUT"
+    }],
+    POIS: [{
+      name: "Headline",
+      id: "headlineInput",
+      dispatch: "HEADLINE_INPUT"
+    }, {
+      name: "Subheadline",
+      id: "subheadlineInput",
+      dispatch: "SUBHEADLINE_INPUT"
+    }, {
+      name: "Image Gallery",
+      id: "imageGalleryInput",
+      dispatch: "IMAGE_GALLERY_INPUT"
+    }]
+  },
+  simulator: {
+    show: "ROUTES",
+    selected: "empty"
+  },
+  selector: {
+    lastManagerUiCode: "",
+    selectedROUTES: "",
+    selectedSTOPS: "",
+    selectedPOIS: "",
+    managerUiCode: "RO",
+    htype: ""
+  }
+};
+/*simulator states
+*/
+
+/* harmony default export */ __webpack_exports__["default"] = (function (state = initialState, action) {
+  switch (action.type) {
+    case _actions_types__WEBPACK_IMPORTED_MODULE_1__["UPDATE_SELECTOR_MANAGER_STATE"]:
+      {
+        const selectedId = action.payload.content.selectedId;
+        const htype = action.payload.content.htype;
+        let managerUiCode = "RO";
+        let selectedROUTES = "";
+        let selectedSTOPS = "";
+        let selectedPOIS = "";
+
+        if (htype == "ROUTES" && state.selector.selectedROUTES != selectedId) {
+          managerUiCode = "ROST";
+          selectedROUTES = selectedId;
+          selectedSTOPS = "";
+          selectedPOIS = "";
+        } else if (htype == "ROUTES" && state.selector.selectedROUTES == selectedId) {
+          managerUiCode = "RO";
+          selectedROUTES = "";
+          selectedSTOPS = "";
+          selectedPOIS = "";
+        } else if (htype == "STOPS" && state.selector.selectedSTOPS != selectedId) {
+          managerUiCode = "ROSTPO";
+          selectedROUTES = state.selector.selectedROUTES;
+          selectedSTOPS = selectedId;
+          selectedPOIS = "";
+        } else if (htype == "STOPS" && state.selector.selectedSTOPS == selectedId) {
+          managerUiCode = "ROST";
+          selectedROUTES = state.selector.selectedROUTES;
+          selectedSTOPS = "";
+          selectedPOIS = "";
+        } else if (htype == "POIS" && state.selector.selectedPOIS != selectedId) {
+          managerUiCode = "ROSTPO";
+          selectedROUTES = state.selector.selectedROUTES;
+          selectedSTOPS = state.selector.selectedSTOPS;
+          selectedPOIS = selectedId;
+        } else if (htype == "POIS" && state.selector.selectedPOIS == selectedId) {
+          managerUiCode = "ROSTPO";
+          selectedROUTES = state.selector.selectedROUTES;
+          selectedSTOPS = state.selector.selectedSTOPS;
+          selectedPOIS = "";
+        }
+
+        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
+          selector: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state.selector, {
+            selectedROUTES: selectedROUTES,
+            selectedSTOPS: selectedSTOPS,
+            selectedPOIS: selectedPOIS,
+            managerUiCode: managerUiCode
+          })
+        });
+      }
+
+    case _actions_types__WEBPACK_IMPORTED_MODULE_1__["STOP_AND_POI_MANAGER_CONTROLLER"]:
+      {
+        if (state.selector.managerUiCode != "MA") {
+          const htype = action.payload.content.htype;
+          return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
+            selector: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state.selector, {
+              lastManagerUiCode: state.selector.managerUiCode,
+              htype: htype,
+              managerUiCode: "MA"
+            })
+          });
+        } else {
+          return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
+            selector: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state.selector, {
+              managerUiCode: state.selector.lastManagerUiCode
+            })
+          });
+        }
+      }
+
+    case _actions_types__WEBPACK_IMPORTED_MODULE_1__["SET_TITLE"]:
+      {
+        const title = action.payload.content.title;
+        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
+          title: title
+        });
+      }
+
+    case _actions_types__WEBPACK_IMPORTED_MODULE_1__["INITIALIZE_INPUT_SCREEN_UI"]:
+      {
+        const selectedDispatch = action.payload.content.dispatch;
+        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
+          menu: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state.inputMenu, {
+            //menu for what kind of hierarchy type
+            htype: selectedDispatch,
+            //which component is shown in the menu //menu, headline input, image gallery etc.
+            show: "MENU"
+          })
+        });
+      }
+
+    case _actions_types__WEBPACK_IMPORTED_MODULE_1__["UPDATE_INPUT_SCREEN_UI"]:
+      {
+        const selectedDispatch = action.payload.content;
+        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
+          inputMenu: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state.inputMenu, {
+            //which component is shown in the menu //menu, headline input, image gallery etc.
+            show: selectedDispatch
+          })
+        });
+      }
+
+    case _actions_types__WEBPACK_IMPORTED_MODULE_1__["REMOVE_ROUTE"]:
+      {
+        const index = action.payload.content.removeIndex;
+        const columnId = action.payload.content.removeColumn;
+        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
+          ids: state.columns[columnId].ids.splice(index, 1)
+        });
+      }
+      ;
+
+    case _actions_types__WEBPACK_IMPORTED_MODULE_1__["UPDATE_ROUTE_STATE"]:
+      {
+        const newOrder = action.payload.content.newOrder;
+        const columnId = action.payload.content.columnId;
+        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
+          //   routeIds: newOrder,
+          columns: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state.columns, {
+            [columnId]: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state.columns[columnId], {
+              ids: newOrder
+            })
+          })
+        });
+      }
+      ;
+
+    case _actions_types__WEBPACK_IMPORTED_MODULE_1__["UPDATE_SIMULATOR_SELECTION"]:
+      {
+        const selectedComponentId = action.payload.content.selectedComponentId;
+        const input = action.payload.content.input;
+
+        if (input == "YES") {
+          return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
+            simulator: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state.simulator, {
+              selected: selectedComponentId
+            })
+          });
+        } else {
+          if (state.simulator.selected == selectedComponentId) {
+            return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
+              simulator: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state.simulator, {
+                selected: "empty"
+              })
+            });
+          } else {
+            return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
+              simulator: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state.simulator, {
+                selected: selectedComponentId
+              })
+            });
+          }
+        }
+      }
+
+    default:
+      return state;
+  }
+});
+
+/***/ }),
+
+/***/ "./src/redux/redux.jsx":
+/*!*****************************!*\
+  !*** ./src/redux/redux.jsx ***!
+  \*****************************/
+/*! exports provided: withRedux */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "withRedux", function() { return withRedux; });
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/objectSpread */ "./node_modules/@babel/runtime-corejs2/helpers/esm/objectSpread.js");
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/extends */ "./node_modules/@babel/runtime-corejs2/helpers/esm/extends.js");
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/objectWithoutProperties */ "./node_modules/@babel/runtime-corejs2/helpers/esm/objectWithoutProperties.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-redux */ "react-redux");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./store */ "./src/redux/store.js");
+/* harmony import */ var next_app__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! next/app */ "./node_modules/next/app.js");
+/* harmony import */ var next_app__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(next_app__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var redux_persist_integration_react__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! redux-persist/integration/react */ "redux-persist/integration/react");
+/* harmony import */ var redux_persist_integration_react__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(redux_persist_integration_react__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var redux_persist__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! redux-persist */ "redux-persist");
+/* harmony import */ var redux_persist__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(redux_persist__WEBPACK_IMPORTED_MODULE_8__);
+
+
+
+var _jsxFileName = "/home/christian/Development/fible-frontend-nextjs/src/redux/redux.jsx";
+var __jsx = react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement;
+
+
+
+
+
+
+const withRedux = (PageComponent, {
+  ssr = true
+} = {}) => {
+  const WithRedux = (_ref) => {
+    let {
+      initialReduxState
+    } = _ref,
+        props = Object(_babel_runtime_corejs2_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_2__["default"])(_ref, ["initialReduxState"]);
+
+    const store = getOrInitializeStore(initialReduxState);
+    return __jsx(react_redux__WEBPACK_IMPORTED_MODULE_4__["Provider"], {
+      store: store,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 15
+      },
+      __self: undefined
+    }, __jsx(PageComponent, Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_1__["default"])({}, props, {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 17
+      },
+      __self: undefined
+    })));
+  }; // Make sure people don't use this HOC on _app.js level
+
+
+  if (true) {
+    const isAppHoc = PageComponent === next_app__WEBPACK_IMPORTED_MODULE_6___default.a || PageComponent.prototype instanceof next_app__WEBPACK_IMPORTED_MODULE_6___default.a;
+
+    if (isAppHoc) {
+      throw new Error('The withRedux HOC only works with PageComponents');
+    }
+  } // Set the correct displayName in development
+
+
+  if (true) {
+    const displayName = PageComponent.displayName || PageComponent.name || 'Component';
+    WithRedux.displayName = `withRedux(${displayName})`;
+  }
+
+  if (ssr || PageComponent.getInitialProps) {
+    WithRedux.getInitialProps = async context => {
+      // Get or Create the store with `undefined` as initialState
+      // This allows you to set a custom default initialState
+      const reduxStore = getOrInitializeStore(); // Provide the store to getInitialProps of pages
+
+      context.reduxStore = reduxStore; // Run getInitialProps from HOCed PageComponent
+
+      const pageProps = typeof PageComponent.getInitialProps === 'function' ? await PageComponent.getInitialProps(context) : {}; // Pass props to PageComponent
+
+      return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, pageProps, {
+        initialReduxState: reduxStore.getState()
+      });
+    };
+  }
+
+  return WithRedux;
+};
+let reduxStore;
+
+const getOrInitializeStore = initialState => {
+  // Always make a new store if server, otherwise state is shared between requests
+  if (true) {
+    return Object(_store__WEBPACK_IMPORTED_MODULE_5__["initializeStore"])(initialState);
+  } // Create store if unavailable on the client and set it on the window object
+
+
+  if (!reduxStore) {
+    reduxStore = Object(_store__WEBPACK_IMPORTED_MODULE_5__["initializeStore"])(initialState);
+  }
+
+  return reduxStore;
+};
+
+/***/ }),
+
+/***/ "./src/redux/store.js":
+/*!****************************!*\
+  !*** ./src/redux/store.js ***!
+  \****************************/
+/*! exports provided: initializeStore */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "initializeStore", function() { return initializeStore; });
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "redux");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(redux__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var redux_thunk__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! redux-thunk */ "redux-thunk");
+/* harmony import */ var redux_thunk__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(redux_thunk__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _reducers_index__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./reducers/index */ "./src/redux/reducers/index.ts");
+/* harmony import */ var redux_devtools_extension__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! redux-devtools-extension */ "redux-devtools-extension");
+/* harmony import */ var redux_devtools_extension__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(redux_devtools_extension__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var redux_persist__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! redux-persist */ "redux-persist");
+/* harmony import */ var redux_persist__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(redux_persist__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var redux_persist_lib_storage__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! redux-persist/lib/storage */ "redux-persist/lib/storage");
+/* harmony import */ var redux_persist_lib_storage__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(redux_persist_lib_storage__WEBPACK_IMPORTED_MODULE_5__);
+
+
+
+ //export default createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
+//export default createStore(rootReducer, applyMiddleware(thunk));
+///import { createStore } from 'redux'
+
+
+ // defaults to localStorage for web
+//import rootReducer from './reducers'
+
+const initialState = {
+  data: {
+    user: {
+      name: "Christian",
+      ROUTES: [],
+      STOPS: [],
+      POIS: [],
+      email: ""
+    },
+    //the id of the hcomponent being worked on
+    selectedHtypeId: "",
+    selectedComponentId: "empty",
+    ROUTES: {},
+    STOPS: {},
+    POIS: {}
+  },
+  ui: {
+    routes: {
+      "h12345": {
+        id: "h12345",
+        headline: "Christian's Norway Route",
+        subheadline: "Fjords you just have to explore",
+        stops: ["Bergen", "Stavanger", "Molde", "Ålesund"],
+        attractions: ["Hiking", "Swimming", "Nature"]
+      },
+      "h54321": {
+        id: "h54321",
+        headline: "Paul's South Tyrol Route",
+        subheadline: "Explore the Dolomites",
+        stops: ["Bolzano", "Trento"],
+        attractions: ["Hiking", "Swimming", "Nature", "Food"]
+      },
+      "h12354": {
+        id: "h12354",
+        headline: "Simon's Allgäu Route",
+        subheadline: "Experience Neuschweinstein and so much more!",
+        stops: ["Mammendorf", "Füssen"],
+        attractions: ["Hiking", "Swimming", "Nature", "Sking"]
+      }
+    },
+    stops: {
+      "s213141": {
+        id: "s213141",
+        headline: "Bergen",
+        subheadline: "Byen ombringet av fjell",
+        pois: ["restaurant", "accommodation", "activities"],
+        location: {
+          lat: 1.2222,
+          lng: 1445666
+        }
+      },
+      "s54321": {
+        id: "s54321",
+        headline: "Stavanger",
+        subheadline: "Oljehovedstaden",
+        pois: ["restaurant", "accommodation", "activities"],
+        location: {
+          lat: 1.5555,
+          lng: 1.214134
+        }
+      }
+    },
+    pois: {
+      "p1314134": {
+        id: "p1314134",
+        headline: "Bergen Fjordrestaurant",
+        subheadline: "Fantastisk fisk og sjømat!",
+        location: {
+          lat: 1.2222,
+          lng: 1445666
+        },
+        address: "Bryggen 15a",
+        website: "www.bergen-fjordrestaurant.no"
+      }
+    },
+    columns: {
+      "column-1": {
+        id: "column-1",
+        title: "Routes",
+        ids: ["h12345", "h54321", "h12354"]
+      },
+      "column-2": {
+        id: "column-2",
+        title: "Stops",
+        ids: ["s213141", "s54321"]
+      },
+      "column-3": {
+        id: "column-3",
+        title: "Pois",
+        ids: ["p1314134"]
+      }
+    },
+    columnOrder: ["column-1", "column-2", "column-3"],
+    title: "Welcome Christian, here are your routes!",
+    inputMenu: {
+      htype: "ROUTES",
+      //which component is shown in the menu
+      show: "MENU",
+      ROUTES: [{
+        name: "Headline",
+        id: "headlineInput",
+        dispatch: "HEADLINE_INPUT"
+      }, {
+        name: "Subheadline",
+        id: "subheadlineInput",
+        dispatch: "SUBHEADLINE_INPUT"
+      }, {
+        name: "Image Gallery",
+        id: "imageGalleryInput",
+        dispatch: "IMAGE_GALLERY_INPUT"
+      }],
+      STOPS: [{
+        name: "Headline",
+        id: "headlineInput",
+        dispatch: "HEADLINE_INPUT"
+      }, {
+        name: "Subheadline",
+        id: "subheadlineInput",
+        dispatch: "SUBHEADLINE_INPUT"
+      }, {
+        name: "Image Gallery",
+        id: "imageGalleryInput",
+        dispatch: "IMAGE_GALLERY_INPUT"
+      }],
+      POIS: [{
+        name: "Headline",
+        id: "headlineInput",
+        dispatch: "HEADLINE_INPUT"
+      }, {
+        name: "Subheadline",
+        id: "subheadlineInput",
+        dispatch: "SUBHEADLINE_INPUT"
+      }, {
+        name: "Image Gallery",
+        id: "imageGalleryInput",
+        dispatch: "IMAGE_GALLERY_INPUT"
+      }]
+    },
+    simulator: {
+      show: "ROUTES",
+      selected: "empty"
+    },
+    selector: {
+      lastManagerUiCode: "",
+      selectedROUTES: "",
+      selectedSTOPS: "",
+      selectedPOIS: "",
+      managerUiCode: "RO",
+      htype: ""
+    }
+  }
+};
+const persistConfig = {
+  key: 'root',
+  storage: (redux_persist_lib_storage__WEBPACK_IMPORTED_MODULE_5___default())
+};
+const persistedReducer = Object(redux_persist__WEBPACK_IMPORTED_MODULE_4__["persistReducer"])(persistConfig, _reducers_index__WEBPACK_IMPORTED_MODULE_2__["default"]); //export const Store = createStore(persistedReducer, composeWithDevTools(applyMiddleware(thunk)));
+//export const persistor = persistStore(initialState);
+
+const initializeStore = (preloadedState = initialState) => {
+  return Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(persistedReducer, preloadedState, Object(redux_devtools_extension__WEBPACK_IMPORTED_MODULE_3__["composeWithDevTools"])(Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_1___default.a)));
+};
+/*
+
+export default () => {
+  let initializeStore = createStore(persistedReducer, composeWithDevTools(applyMiddleware(thunk)));
+  let persistor = persistStore(store)
+  return { initializeStore, persistor }
+} 
+
+*/
+
+/***/ }),
+
+/***/ 3:
 /*!***********************************!*\
   !*** multi ./src/pages/index.tsx ***!
   \***********************************/
@@ -1939,25 +3588,80 @@ module.exports = __webpack_require__(/*! /home/christian/Development/fible-front
 
 /***/ }),
 
-/***/ "@material/ripple":
+/***/ "@apollo/react-hooks":
+/*!**************************************!*\
+  !*** external "@apollo/react-hooks" ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("@apollo/react-hooks");
+
+/***/ }),
+
+/***/ "@apollo/react-ssr":
+/*!************************************!*\
+  !*** external "@apollo/react-ssr" ***!
+  \************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("@apollo/react-ssr");
+
+/***/ }),
+
+/***/ "apollo-cache-inmemory":
+/*!****************************************!*\
+  !*** external "apollo-cache-inmemory" ***!
+  \****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("apollo-cache-inmemory");
+
+/***/ }),
+
+/***/ "apollo-client":
+/*!********************************!*\
+  !*** external "apollo-client" ***!
+  \********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("apollo-client");
+
+/***/ }),
+
+/***/ "apollo-link-context":
+/*!**************************************!*\
+  !*** external "apollo-link-context" ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("apollo-link-context");
+
+/***/ }),
+
+/***/ "apollo-link-http":
 /*!***********************************!*\
-  !*** external "@material/ripple" ***!
+  !*** external "apollo-link-http" ***!
   \***********************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = require("@material/ripple");
+module.exports = require("apollo-link-http");
 
 /***/ }),
 
-/***/ "core-js/library/fn/map":
-/*!*****************************************!*\
-  !*** external "core-js/library/fn/map" ***!
-  \*****************************************/
+/***/ "cookie":
+/*!*************************!*\
+  !*** external "cookie" ***!
+  \*************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = require("core-js/library/fn/map");
+module.exports = require("cookie");
 
 /***/ }),
 
@@ -1994,6 +3698,17 @@ module.exports = require("core-js/library/fn/object/define-property");
 
 /***/ }),
 
+/***/ "core-js/library/fn/object/entries":
+/*!****************************************************!*\
+  !*** external "core-js/library/fn/object/entries" ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("core-js/library/fn/object/entries");
+
+/***/ }),
+
 /***/ "core-js/library/fn/object/get-own-property-descriptor":
 /*!************************************************************************!*\
   !*** external "core-js/library/fn/object/get-own-property-descriptor" ***!
@@ -2002,6 +3717,17 @@ module.exports = require("core-js/library/fn/object/define-property");
 /***/ (function(module, exports) {
 
 module.exports = require("core-js/library/fn/object/get-own-property-descriptor");
+
+/***/ }),
+
+/***/ "core-js/library/fn/object/get-own-property-symbols":
+/*!*********************************************************************!*\
+  !*** external "core-js/library/fn/object/get-own-property-symbols" ***!
+  \*********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("core-js/library/fn/object/get-own-property-symbols");
 
 /***/ }),
 
@@ -2027,6 +3753,72 @@ module.exports = require("core-js/library/fn/promise");
 
 /***/ }),
 
+/***/ "graphql-tag":
+/*!******************************!*\
+  !*** external "graphql-tag" ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("graphql-tag");
+
+/***/ }),
+
+/***/ "https-proxy-agent":
+/*!************************************!*\
+  !*** external "https-proxy-agent" ***!
+  \************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("https-proxy-agent");
+
+/***/ }),
+
+/***/ "isomorphic-unfetch":
+/*!*************************************!*\
+  !*** external "isomorphic-unfetch" ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("isomorphic-unfetch");
+
+/***/ }),
+
+/***/ "nanoid":
+/*!*************************!*\
+  !*** external "nanoid" ***!
+  \*************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("nanoid");
+
+/***/ }),
+
+/***/ "next/head":
+/*!****************************!*\
+  !*** external "next/head" ***!
+  \****************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("next/head");
+
+/***/ }),
+
+/***/ "next/router":
+/*!******************************!*\
+  !*** external "next/router" ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("next/router");
+
+/***/ }),
+
 /***/ "prop-types":
 /*!*****************************!*\
   !*** external "prop-types" ***!
@@ -2035,17 +3827,6 @@ module.exports = require("core-js/library/fn/promise");
 /***/ (function(module, exports) {
 
 module.exports = require("prop-types");
-
-/***/ }),
-
-/***/ "prop-types-exact":
-/*!***********************************!*\
-  !*** external "prop-types-exact" ***!
-  \***********************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("prop-types-exact");
 
 /***/ }),
 
@@ -2068,6 +3849,83 @@ module.exports = require("react");
 /***/ (function(module, exports) {
 
 module.exports = require("react-is");
+
+/***/ }),
+
+/***/ "react-redux":
+/*!******************************!*\
+  !*** external "react-redux" ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("react-redux");
+
+/***/ }),
+
+/***/ "redux":
+/*!************************!*\
+  !*** external "redux" ***!
+  \************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("redux");
+
+/***/ }),
+
+/***/ "redux-devtools-extension":
+/*!*******************************************!*\
+  !*** external "redux-devtools-extension" ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("redux-devtools-extension");
+
+/***/ }),
+
+/***/ "redux-persist":
+/*!********************************!*\
+  !*** external "redux-persist" ***!
+  \********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("redux-persist");
+
+/***/ }),
+
+/***/ "redux-persist/integration/react":
+/*!**************************************************!*\
+  !*** external "redux-persist/integration/react" ***!
+  \**************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("redux-persist/integration/react");
+
+/***/ }),
+
+/***/ "redux-persist/lib/storage":
+/*!********************************************!*\
+  !*** external "redux-persist/lib/storage" ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("redux-persist/lib/storage");
+
+/***/ }),
+
+/***/ "redux-thunk":
+/*!******************************!*\
+  !*** external "redux-thunk" ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("redux-thunk");
 
 /***/ }),
 

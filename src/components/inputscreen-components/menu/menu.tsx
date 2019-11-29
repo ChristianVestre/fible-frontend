@@ -18,7 +18,7 @@ class Menu extends React.Component<{uiState:any,deleteHtype:Function,dataState:a
             pathname: '/routemanagement',
           })
         const htypeid = this.props.dataState.selectedHtypeId
-        const htype = this.props.uiState.menu.htype
+        const htype = this.props.uiState.inputMenu.htype
         this.props.deleteHtype({htypeid,htype})
         
     }
@@ -28,9 +28,9 @@ class Menu extends React.Component<{uiState:any,deleteHtype:Function,dataState:a
         <Container>
                 <HeaderImage src="/logo_fible.png" alt="my image"></HeaderImage>
                 <BackImage src="/back.svg" onClick={this.backHandler}></BackImage>
-        <Headline>{this.props.uiState.menu.htype}</Headline>
+        <Headline>{this.props.uiState.inputMenu.htype}</Headline>
         <MenuWrapper>
-       {this.props.uiState.menu[this.props.uiState.menu.htype].map((elem) => {return <GridElement key={elem.id} name={elem.name} dispatch={elem.dispatch}/>})}
+       {this.props.uiState.inputMenu[this.props.uiState.inputMenu.htype].map((elem) => {return <GridElement key={elem.id} name={elem.name} dispatch={elem.dispatch}/>})}
 
         </MenuWrapper>
         </Container>

@@ -1,258 +1,30 @@
 {
-  "../components/route-management/selectorManager": [
-    {
-      "id": "./node_modules/@babel/runtime-corejs2/helpers/esm/assertThisInitialized.js",
-      "name": "./node_modules/@babel/runtime-corejs2/helpers/esm/assertThisInitialized.js",
-      "file": "static/chunks/2.js",
-      "publicPath": "static/chunks/2.js"
-    },
-    {
-      "id": "./node_modules/@babel/runtime-corejs2/helpers/esm/classCallCheck.js",
-      "name": "./node_modules/@babel/runtime-corejs2/helpers/esm/classCallCheck.js",
-      "file": "static/chunks/2.js",
-      "publicPath": "static/chunks/2.js"
-    },
-    {
-      "id": "./node_modules/@babel/runtime-corejs2/helpers/esm/createClass.js",
-      "name": "./node_modules/@babel/runtime-corejs2/helpers/esm/createClass.js",
-      "file": "static/chunks/2.js",
-      "publicPath": "static/chunks/2.js"
-    },
-    {
-      "id": "./node_modules/@babel/runtime-corejs2/helpers/esm/extends.js",
-      "name": "./node_modules/@babel/runtime-corejs2/helpers/esm/extends.js",
-      "file": "static/chunks/2.js",
-      "publicPath": "static/chunks/2.js"
-    },
-    {
-      "id": "./node_modules/@babel/runtime-corejs2/helpers/esm/getPrototypeOf.js",
-      "name": "./node_modules/@babel/runtime-corejs2/helpers/esm/getPrototypeOf.js",
-      "file": "static/chunks/2.js",
-      "publicPath": "static/chunks/2.js"
-    },
-    {
-      "id": "./node_modules/@babel/runtime-corejs2/helpers/esm/inherits.js",
-      "name": "./node_modules/@babel/runtime-corejs2/helpers/esm/inherits.js",
-      "file": "static/chunks/2.js",
-      "publicPath": "static/chunks/2.js"
-    },
-    {
-      "id": "./node_modules/@babel/runtime-corejs2/helpers/esm/possibleConstructorReturn.js",
-      "name": "./node_modules/@babel/runtime-corejs2/helpers/esm/possibleConstructorReturn.js",
-      "file": "static/chunks/2.js",
-      "publicPath": "static/chunks/2.js"
-    },
-    {
-      "id": "./node_modules/@babel/runtime-corejs2/helpers/esm/setPrototypeOf.js",
-      "name": "./node_modules/@babel/runtime-corejs2/helpers/esm/setPrototypeOf.js",
-      "file": "static/chunks/2.js",
-      "publicPath": "static/chunks/2.js"
-    },
-    {
-      "id": "./node_modules/@babel/runtime-corejs2/helpers/esm/typeof.js",
-      "name": "./node_modules/@babel/runtime-corejs2/helpers/esm/typeof.js",
-      "file": "static/chunks/2.js",
-      "publicPath": "static/chunks/2.js"
-    },
-    {
-      "id": "./node_modules/@fortawesome/fontawesome-svg-core/index.es.js",
-      "name": "./node_modules/@fortawesome/fontawesome-svg-core/index.es.js",
-      "file": "static/chunks/2.js",
-      "publicPath": "static/chunks/2.js"
-    },
-    {
-      "id": "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js",
-      "name": "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js",
-      "file": "static/chunks/2.js",
-      "publicPath": "static/chunks/2.js"
-    },
-    {
-      "id": "./node_modules/@fortawesome/react-fontawesome/index.es.js",
-      "name": "./node_modules/@fortawesome/react-fontawesome/index.es.js",
-      "file": "static/chunks/2.js",
-      "publicPath": "static/chunks/2.js"
-    },
-    {
-      "id": "./node_modules/core-js/library/fn/date/now.js",
-      "name": "./node_modules/core-js/library/fn/date/now.js",
-      "file": "static/chunks/2.js",
-      "publicPath": "static/chunks/2.js"
-    },
-    {
-      "id": "./node_modules/core-js/library/fn/number/is-integer.js",
-      "name": "./node_modules/core-js/library/fn/number/is-integer.js",
-      "file": "static/chunks/2.js",
-      "publicPath": "static/chunks/2.js"
-    },
-    {
-      "id": "./node_modules/core-js/library/fn/object/values.js",
-      "name": "./node_modules/core-js/library/fn/object/values.js",
-      "file": "static/chunks/2.js",
-      "publicPath": "static/chunks/2.js"
-    },
-    {
-      "id": "./node_modules/core-js/library/modules/_is-integer.js",
-      "name": "./node_modules/core-js/library/modules/_is-integer.js",
-      "file": "static/chunks/2.js",
-      "publicPath": "static/chunks/2.js"
-    },
-    {
-      "id": "./node_modules/core-js/library/modules/_object-to-array.js",
-      "name": "./node_modules/core-js/library/modules/_object-to-array.js",
-      "file": "static/chunks/2.js",
-      "publicPath": "static/chunks/2.js"
-    },
-    {
-      "id": "./node_modules/core-js/library/modules/es6.date.now.js",
-      "name": "./node_modules/core-js/library/modules/es6.date.now.js",
-      "file": "static/chunks/2.js",
-      "publicPath": "static/chunks/2.js"
-    },
-    {
-      "id": "./node_modules/core-js/library/modules/es6.number.is-integer.js",
-      "name": "./node_modules/core-js/library/modules/es6.number.is-integer.js",
-      "file": "static/chunks/2.js",
-      "publicPath": "static/chunks/2.js"
-    },
-    {
-      "id": "./node_modules/core-js/library/modules/es7.object.values.js",
-      "name": "./node_modules/core-js/library/modules/es7.object.values.js",
-      "file": "static/chunks/2.js",
-      "publicPath": "static/chunks/2.js"
-    },
-    {
-      "id": "./node_modules/css-box-model/dist/css-box-model.esm.js",
-      "name": "./node_modules/css-box-model/dist/css-box-model.esm.js",
-      "file": "static/chunks/2.js",
-      "publicPath": "static/chunks/2.js"
-    },
-    {
-      "id": "./node_modules/raf-schd/dist/raf-schd.esm.js",
-      "name": "./node_modules/raf-schd/dist/raf-schd.esm.js",
-      "file": "static/chunks/2.js",
-      "publicPath": "static/chunks/2.js"
-    },
-    {
-      "id": "./node_modules/react-beautiful-dnd/dist/react-beautiful-dnd.esm.js",
-      "name": "./node_modules/react-beautiful-dnd/dist/react-beautiful-dnd.esm.js",
-      "file": "static/chunks/2.js",
-      "publicPath": "static/chunks/2.js"
-    },
-    {
-      "id": "./node_modules/react-beautiful-dnd/node_modules/@babel/runtime-corejs2/core-js/date/now.js",
-      "name": "./node_modules/react-beautiful-dnd/node_modules/@babel/runtime-corejs2/core-js/date/now.js",
-      "file": "static/chunks/2.js",
-      "publicPath": "static/chunks/2.js"
-    },
-    {
-      "id": "./node_modules/react-beautiful-dnd/node_modules/@babel/runtime-corejs2/core-js/number/is-integer.js",
-      "name": "./node_modules/react-beautiful-dnd/node_modules/@babel/runtime-corejs2/core-js/number/is-integer.js",
-      "file": "static/chunks/2.js",
-      "publicPath": "static/chunks/2.js"
-    },
-    {
-      "id": "./node_modules/react-beautiful-dnd/node_modules/@babel/runtime-corejs2/core-js/object/assign.js",
-      "name": "./node_modules/react-beautiful-dnd/node_modules/@babel/runtime-corejs2/core-js/object/assign.js",
-      "file": "static/chunks/2.js",
-      "publicPath": "static/chunks/2.js"
-    },
-    {
-      "id": "./node_modules/react-beautiful-dnd/node_modules/@babel/runtime-corejs2/core-js/object/create.js",
-      "name": "./node_modules/react-beautiful-dnd/node_modules/@babel/runtime-corejs2/core-js/object/create.js",
-      "file": "static/chunks/2.js",
-      "publicPath": "static/chunks/2.js"
-    },
-    {
-      "id": "./node_modules/react-beautiful-dnd/node_modules/@babel/runtime-corejs2/core-js/object/keys.js",
-      "name": "./node_modules/react-beautiful-dnd/node_modules/@babel/runtime-corejs2/core-js/object/keys.js",
-      "file": "static/chunks/2.js",
-      "publicPath": "static/chunks/2.js"
-    },
-    {
-      "id": "./node_modules/react-beautiful-dnd/node_modules/@babel/runtime-corejs2/core-js/object/values.js",
-      "name": "./node_modules/react-beautiful-dnd/node_modules/@babel/runtime-corejs2/core-js/object/values.js",
-      "file": "static/chunks/2.js",
-      "publicPath": "static/chunks/2.js"
-    },
-    {
-      "id": "./node_modules/react-beautiful-dnd/node_modules/@babel/runtime-corejs2/helpers/esm/extends.js",
-      "name": "./node_modules/react-beautiful-dnd/node_modules/@babel/runtime-corejs2/helpers/esm/extends.js",
-      "file": "static/chunks/2.js",
-      "publicPath": "static/chunks/2.js"
-    },
-    {
-      "id": "./node_modules/react-beautiful-dnd/node_modules/@babel/runtime-corejs2/helpers/esm/inheritsLoose.js",
-      "name": "./node_modules/react-beautiful-dnd/node_modules/@babel/runtime-corejs2/helpers/esm/inheritsLoose.js",
-      "file": "static/chunks/2.js",
-      "publicPath": "static/chunks/2.js"
-    },
-    {
-      "id": "./node_modules/setimmediate/setImmediate.js",
-      "name": "./node_modules/setimmediate/setImmediate.js",
-      "file": "static/chunks/2.js",
-      "publicPath": "static/chunks/2.js"
-    },
-    {
-      "id": "./node_modules/timers-browserify/main.js",
-      "name": "./node_modules/timers-browserify/main.js",
-      "file": "static/chunks/2.js",
-      "publicPath": "static/chunks/2.js"
-    },
-    {
-      "id": "./node_modules/tiny-invariant/dist/tiny-invariant.esm.js",
-      "name": "./node_modules/tiny-invariant/dist/tiny-invariant.esm.js",
-      "file": "static/chunks/2.js",
-      "publicPath": "static/chunks/2.js"
-    },
-    {
-      "id": "./node_modules/use-memo-one/dist/use-memo-one.esm.js",
-      "name": "./node_modules/use-memo-one/dist/use-memo-one.esm.js",
-      "file": "static/chunks/2.js",
-      "publicPath": "static/chunks/2.js"
-    },
-    {
-      "id": "./src/components/route-management/column.tsx",
-      "name": "./src/components/route-management/column.tsx",
-      "file": "static/chunks/2.js",
-      "publicPath": "static/chunks/2.js"
-    },
-    {
-      "id": "./src/components/route-management/route.tsx",
-      "name": "./src/components/route-management/route.tsx",
-      "file": "static/chunks/2.js",
-      "publicPath": "static/chunks/2.js"
-    },
-    {
-      "id": "./src/components/route-management/selector.tsx",
-      "name": "./src/components/route-management/selector.tsx",
-      "file": "static/chunks/2.js",
-      "publicPath": "static/chunks/2.js"
-    },
-    {
-      "id": "./src/components/route-management/selectorManager.tsx",
-      "name": "./src/components/route-management/selectorManager.tsx",
-      "file": "static/chunks/2.js",
-      "publicPath": "static/chunks/2.js"
-    },
-    {
-      "id": "./src/redux/actions/dataActions.ts",
-      "name": "./src/redux/actions/dataActions.ts",
-      "file": "static/chunks/2.js",
-      "publicPath": "static/chunks/2.js"
-    },
-    {
-      "id": "./src/redux/actions/uiActions.ts",
-      "name": "./src/redux/actions/uiActions.ts",
-      "file": "static/chunks/2.js",
-      "publicPath": "static/chunks/2.js"
-    }
-  ],
   "./dev/noop": [
     {
       "id": "./node_modules/next/dist/client/dev/noop.js",
       "name": "./node_modules/next/dist/client/dev/noop.js",
       "file": "static/chunks/0.js",
       "publicPath": "static/chunks/0.js"
+    }
+  ],
+  "@apollo/react-ssr": [
+    {
+      "id": "./node_modules/@apollo/react-ssr/lib/react-ssr.esm.js",
+      "name": "./node_modules/@apollo/react-ssr/lib/react-ssr.esm.js",
+      "file": "static/chunks/1.js",
+      "publicPath": "static/chunks/1.js"
+    },
+    {
+      "id": "./node_modules/react-dom/cjs/react-dom-server.browser.development.js",
+      "name": "./node_modules/react-dom/cjs/react-dom-server.browser.development.js",
+      "file": "static/chunks/1.js",
+      "publicPath": "static/chunks/1.js"
+    },
+    {
+      "id": "./node_modules/react-dom/server.browser.js",
+      "name": "./node_modules/react-dom/server.browser.js",
+      "file": "static/chunks/1.js",
+      "publicPath": "static/chunks/1.js"
     }
   ]
 }

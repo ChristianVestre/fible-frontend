@@ -39,26 +39,6 @@ module.exports =
 /******/ 		return module.exports;
 /******/ 	}
 /******/
-/******/ 	// This file contains only the entry chunk.
-/******/ 	// The chunk loading function for additional chunks
-/******/ 	__webpack_require__.e = function requireEnsure(chunkId) {
-/******/ 		var promises = [];
-/******/
-/******/
-/******/ 		// require() chunk loading for javascript
-/******/
-/******/ 		// "0" is the signal for "already loaded"
-/******/ 		if(installedChunks[chunkId] !== 0) {
-/******/ 			var chunk = require("../../../" + ({}[chunkId]||chunkId) + ".js");
-/******/ 			var moreModules = chunk.modules, chunkIds = chunk.ids;
-/******/ 			for(var moduleId in moreModules) {
-/******/ 				modules[moduleId] = moreModules[moduleId];
-/******/ 			}
-/******/ 			for(var i = 0; i < chunkIds.length; i++)
-/******/ 				installedChunks[chunkIds[i]] = 0;
-/******/ 		}
-/******/ 		return Promise.all(promises);
-/******/ 	};
 /******/
 /******/ 	// expose the modules object (__webpack_modules__)
 /******/ 	__webpack_require__.m = modules;
@@ -121,10 +101,21 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 6);
+/******/ 	return __webpack_require__(__webpack_require__.s = 5);
 /******/ })
 /************************************************************************/
 /******/ ({
+
+/***/ "./node_modules/@babel/runtime-corejs2/core-js/array/from.js":
+/*!*******************************************************************!*\
+  !*** ./node_modules/@babel/runtime-corejs2/core-js/array/from.js ***!
+  \*******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(/*! core-js/library/fn/array/from */ "core-js/library/fn/array/from");
+
+/***/ }),
 
 /***/ "./node_modules/@babel/runtime-corejs2/core-js/map.js":
 /*!************************************************************!*\
@@ -167,6 +158,17 @@ module.exports = __webpack_require__(/*! core-js/library/fn/object/create */ "co
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(/*! core-js/library/fn/object/define-property */ "core-js/library/fn/object/define-property");
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime-corejs2/core-js/object/entries.js":
+/*!***********************************************************************!*\
+  !*** ./node_modules/@babel/runtime-corejs2/core-js/object/entries.js ***!
+  \***********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(/*! core-js/library/fn/object/entries */ "core-js/library/fn/object/entries");
 
 /***/ }),
 
@@ -214,6 +216,55 @@ module.exports = __webpack_require__(/*! core-js/library/fn/promise */ "core-js/
 
 /***/ }),
 
+/***/ "./node_modules/@babel/runtime-corejs2/helpers/asyncToGenerator.js":
+/*!*************************************************************************!*\
+  !*** ./node_modules/@babel/runtime-corejs2/helpers/asyncToGenerator.js ***!
+  \*************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var _Promise = __webpack_require__(/*! ../core-js/promise */ "./node_modules/@babel/runtime-corejs2/core-js/promise.js");
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
+  try {
+    var info = gen[key](arg);
+    var value = info.value;
+  } catch (error) {
+    reject(error);
+    return;
+  }
+
+  if (info.done) {
+    resolve(value);
+  } else {
+    _Promise.resolve(value).then(_next, _throw);
+  }
+}
+
+function _asyncToGenerator(fn) {
+  return function () {
+    var self = this,
+        args = arguments;
+    return new _Promise(function (resolve, reject) {
+      var gen = fn.apply(self, args);
+
+      function _next(value) {
+        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);
+      }
+
+      function _throw(err) {
+        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);
+      }
+
+      _next(undefined);
+    });
+  };
+}
+
+module.exports = _asyncToGenerator;
+
+/***/ }),
+
 /***/ "./node_modules/@babel/runtime-corejs2/helpers/esm/defineProperty.js":
 /*!***************************************************************************!*\
   !*** ./node_modules/@babel/runtime-corejs2/helpers/esm/defineProperty.js ***!
@@ -240,6 +291,39 @@ function _defineProperty(obj, key, value) {
   }
 
   return obj;
+}
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime-corejs2/helpers/esm/extends.js":
+/*!********************************************************************!*\
+  !*** ./node_modules/@babel/runtime-corejs2/helpers/esm/extends.js ***!
+  \********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _extends; });
+/* harmony import */ var _core_js_object_assign__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core-js/object/assign */ "./node_modules/@babel/runtime-corejs2/core-js/object/assign.js");
+/* harmony import */ var _core_js_object_assign__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_core_js_object_assign__WEBPACK_IMPORTED_MODULE_0__);
+
+function _extends() {
+  _extends = _core_js_object_assign__WEBPACK_IMPORTED_MODULE_0___default.a || function (target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+
+    return target;
+  };
+
+  return _extends.apply(this, arguments);
 }
 
 /***/ }),
@@ -280,6 +364,74 @@ function _objectSpread(target) {
     ownKeys.forEach(function (key) {
       Object(_defineProperty__WEBPACK_IMPORTED_MODULE_3__["default"])(target, key, source[key]);
     });
+  }
+
+  return target;
+}
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime-corejs2/helpers/esm/objectWithoutProperties.js":
+/*!************************************************************************************!*\
+  !*** ./node_modules/@babel/runtime-corejs2/helpers/esm/objectWithoutProperties.js ***!
+  \************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _objectWithoutProperties; });
+/* harmony import */ var _core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core-js/object/get-own-property-symbols */ "./node_modules/@babel/runtime-corejs2/core-js/object/get-own-property-symbols.js");
+/* harmony import */ var _core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./objectWithoutPropertiesLoose */ "./node_modules/@babel/runtime-corejs2/helpers/esm/objectWithoutPropertiesLoose.js");
+
+
+function _objectWithoutProperties(source, excluded) {
+  if (source == null) return {};
+  var target = Object(_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(source, excluded);
+  var key, i;
+
+  if (_core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_0___default.a) {
+    var sourceSymbolKeys = _core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_0___default()(source);
+
+    for (i = 0; i < sourceSymbolKeys.length; i++) {
+      key = sourceSymbolKeys[i];
+      if (excluded.indexOf(key) >= 0) continue;
+      if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
+      target[key] = source[key];
+    }
+  }
+
+  return target;
+}
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime-corejs2/helpers/esm/objectWithoutPropertiesLoose.js":
+/*!*****************************************************************************************!*\
+  !*** ./node_modules/@babel/runtime-corejs2/helpers/esm/objectWithoutPropertiesLoose.js ***!
+  \*****************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _objectWithoutPropertiesLoose; });
+/* harmony import */ var _core_js_object_keys__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core-js/object/keys */ "./node_modules/@babel/runtime-corejs2/core-js/object/keys.js");
+/* harmony import */ var _core_js_object_keys__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_core_js_object_keys__WEBPACK_IMPORTED_MODULE_0__);
+
+function _objectWithoutPropertiesLoose(source, excluded) {
+  if (source == null) return {};
+  var target = {};
+
+  var sourceKeys = _core_js_object_keys__WEBPACK_IMPORTED_MODULE_0___default()(source);
+
+  var key, i;
+
+  for (i = 0; i < sourceKeys.length; i++) {
+    key = sourceKeys[i];
+    if (excluded.indexOf(key) >= 0) continue;
+    target[key] = source[key];
   }
 
   return target;
@@ -372,6 +524,18 @@ function _interopRequireWildcard(obj) {
 }
 
 module.exports = _interopRequireWildcard;
+
+/***/ }),
+
+/***/ "./node_modules/next/app.js":
+/*!**********************************!*\
+  !*** ./node_modules/next/app.js ***!
+  \**********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(/*! ./dist/pages/_app */ "./node_modules/next/dist/pages/_app.js")
+
 
 /***/ }),
 
@@ -1886,6 +2050,164 @@ exports.SUPPORTS_PERFORMANCE_USER_TIMING = exports.SUPPORTS_PERFORMANCE && typeo
 
 /***/ }),
 
+/***/ "./node_modules/next/dist/pages/_app.js":
+/*!**********************************************!*\
+  !*** ./node_modules/next/dist/pages/_app.js ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime-corejs2/helpers/interopRequireDefault */ "./node_modules/@babel/runtime-corejs2/helpers/interopRequireDefault.js");
+
+exports.__esModule = true;
+exports.Container = Container;
+exports.createUrl = createUrl;
+exports.default = void 0;
+
+var _extends2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime-corejs2/helpers/extends */ "./node_modules/@babel/runtime-corejs2/helpers/extends.js"));
+
+var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime-corejs2/helpers/asyncToGenerator */ "./node_modules/@babel/runtime-corejs2/helpers/asyncToGenerator.js"));
+
+var _react = _interopRequireDefault(__webpack_require__(/*! react */ "react"));
+
+var _propTypes = _interopRequireDefault(__webpack_require__(/*! prop-types */ "prop-types"));
+
+var _utils = __webpack_require__(/*! ../next-server/lib/utils */ "./node_modules/next/dist/next-server/lib/utils.js");
+
+exports.AppInitialProps = _utils.AppInitialProps;
+
+var _router = __webpack_require__(/*! ../client/router */ "./node_modules/next/dist/client/router.js");
+/**
+* `App` component is used for initialize of pages. It allows for overwriting and full control of the `page` initialization.
+* This allows for keeping state between navigation, custom error handling, injecting additional data.
+*/
+
+
+function appGetInitialProps(_x) {
+  return _appGetInitialProps.apply(this, arguments);
+}
+
+function _appGetInitialProps() {
+  _appGetInitialProps = (0, _asyncToGenerator2.default)(function* (_ref) {
+    let {
+      Component,
+      ctx
+    } = _ref;
+    const pageProps = yield (0, _utils.loadGetInitialProps)(Component, ctx);
+    return {
+      pageProps
+    };
+  });
+  return _appGetInitialProps.apply(this, arguments);
+}
+
+class App extends _react.default.Component {
+  getChildContext() {
+    return {
+      router: (0, _router.makePublicRouterInstance)(this.props.router)
+    };
+  } // Kept here for backwards compatibility.
+  // When someone ended App they could call `super.componentDidCatch`.
+  // @deprecated This method is no longer needed. Errors are caught at the top level
+
+
+  componentDidCatch(error, _errorInfo) {
+    throw error;
+  }
+
+  render() {
+    const {
+      router,
+      Component,
+      pageProps
+    } = this.props;
+    const url = createUrl(router);
+    return _react.default.createElement(Component, (0, _extends2.default)({}, pageProps, {
+      url: url
+    }));
+  }
+
+}
+
+exports.default = App;
+App.childContextTypes = {
+  router: _propTypes.default.object
+};
+App.origGetInitialProps = appGetInitialProps;
+App.getInitialProps = appGetInitialProps;
+let warnContainer;
+let warnUrl;
+
+if (true) {
+  warnContainer = (0, _utils.execOnce)(() => {
+    console.warn("Warning: the `Container` in `_app` has been deprecated and should be removed. https://err.sh/zeit/next.js/app-container-deprecated");
+  });
+  warnUrl = (0, _utils.execOnce)(() => {
+    console.error("Warning: the 'url' property is deprecated. https://err.sh/zeit/next.js/url-deprecated");
+  });
+} // @deprecated noop for now until removal
+
+
+function Container(p) {
+  if (true) warnContainer();
+  return p.children;
+}
+
+function createUrl(router) {
+  // This is to make sure we don't references the router object at call time
+  const {
+    pathname,
+    asPath,
+    query
+  } = router;
+  return {
+    get query() {
+      if (true) warnUrl();
+      return query;
+    },
+
+    get pathname() {
+      if (true) warnUrl();
+      return pathname;
+    },
+
+    get asPath() {
+      if (true) warnUrl();
+      return asPath;
+    },
+
+    back: () => {
+      if (true) warnUrl();
+      router.back();
+    },
+    push: (url, as) => {
+      if (true) warnUrl();
+      return router.push(url, as);
+    },
+    pushTo: (href, as) => {
+      if (true) warnUrl();
+      const pushRoute = as ? href : '';
+      const pushUrl = as || href;
+      return router.push(pushRoute, pushUrl);
+    },
+    replace: (url, as) => {
+      if (true) warnUrl();
+      return router.replace(url, as);
+    },
+    replaceTo: (href, as) => {
+      if (true) warnUrl();
+      const replaceRoute = as ? href : '';
+      const replaceUrl = as || href;
+      return router.replace(replaceRoute, replaceUrl);
+    }
+  };
+}
+
+/***/ }),
+
 /***/ "./node_modules/next/link.js":
 /*!***********************************!*\
   !*** ./node_modules/next/link.js ***!
@@ -1898,6 +2220,1592 @@ module.exports = __webpack_require__(/*! ./dist/client/link */ "./node_modules/n
 
 /***/ }),
 
+/***/ "./src/components/route-management/column.tsx":
+/*!****************************************************!*\
+  !*** ./src/components/route-management/column.tsx ***!
+  \****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/extends */ "./node_modules/@babel/runtime-corejs2/helpers/esm/extends.js");
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/defineProperty */ "./node_modules/@babel/runtime-corejs2/helpers/esm/defineProperty.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! styled-components */ "styled-components");
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(styled_components__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _route__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./route */ "./src/components/route-management/route.tsx");
+/* harmony import */ var react_beautiful_dnd__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-beautiful-dnd */ "react-beautiful-dnd");
+/* harmony import */ var react_beautiful_dnd__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_beautiful_dnd__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @fortawesome/react-fontawesome */ "@fortawesome/react-fontawesome");
+/* harmony import */ var _fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "@fortawesome/free-solid-svg-icons");
+/* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! next/router */ "next/router");
+/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _redux_actions_uiActions__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../redux/actions/uiActions */ "./src/redux/actions/uiActions.ts");
+/* harmony import */ var _redux_actions_dataActions__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../redux/actions/dataActions */ "./src/redux/actions/dataActions.ts");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! react-redux */ "react-redux");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_11__);
+
+
+var _jsxFileName = "/home/christian/Development/fible-frontend-nextjs/src/components/route-management/column.tsx";
+var __jsx = react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement;
+
+
+
+
+
+
+
+
+
+
+const Container = styled_components__WEBPACK_IMPORTED_MODULE_3___default.a.div.withConfig({
+  displayName: "column__Container",
+  componentId: "yv32xa-0"
+})(["margin:1em;border:1px solid lightgray;border-radius:2em;width:100%;height:100%;position:relative;"]);
+const Title = styled_components__WEBPACK_IMPORTED_MODULE_3___default.a.h1.withConfig({
+  displayName: "column__Title",
+  componentId: "yv32xa-1"
+})(["padding:8px;"]);
+const RouteList = styled_components__WEBPACK_IMPORTED_MODULE_3___default.a.div.withConfig({
+  displayName: "column__RouteList",
+  componentId: "yv32xa-2"
+})(["padding:8px;"]);
+
+class Column extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Component {
+  constructor(...args) {
+    super(...args);
+
+    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_1__["default"])(this, "handleInputScreenButton", () => {
+      if (this.props.type == "ROUTES") {
+        next_router__WEBPACK_IMPORTED_MODULE_8___default.a.push({
+          pathname: '/inputScreen'
+        });
+        this.props.initializeHtype({
+          htype: this.props.type
+        });
+        this.props.initializeInputScreenUi({
+          dispatch: this.props.type
+        });
+      } else {
+        this.props.stopAndPoiManagerController({
+          htype: this.props.type
+        });
+        let firstLetter = this.props.type.substring(0, 1);
+        let rest = this.props.type.substring(1);
+        let title = firstLetter + rest.toLowerCase() + " manager";
+        this.props.setTitle({
+          title: title
+        });
+      }
+    });
+  }
+
+  render() {
+    return __jsx(Container, {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 54
+      },
+      __self: this
+    }, __jsx(Title, {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 55
+      },
+      __self: this
+    }, this.props.column.title), __jsx(react_beautiful_dnd__WEBPACK_IMPORTED_MODULE_5__["Droppable"], {
+      droppableId: this.props.column.id,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 56
+      },
+      __self: this
+    }, provided => __jsx(RouteList, Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
+      ref: provided.innerRef
+    }, provided.droppableProps, {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 58
+      },
+      __self: this
+    }), this.props.listItems.map((itemData, index) => __jsx(_route__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      key: itemData.id,
+      type: this.props.type,
+      itemData: itemData,
+      index: index,
+      columnId: this.props.column.id,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 62
+      },
+      __self: this
+    })), provided.placeholder)), __jsx(InputScreenButton, {
+      onClick: this.handleInputScreenButton,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 67
+      },
+      __self: this
+    }, __jsx(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_6__["FontAwesomeIcon"], {
+      icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_7__["faPlus"],
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 68
+      },
+      __self: this
+    })));
+  }
+
+}
+
+const mapStateToProps = state => {
+  return {
+    dataState: state.data,
+    initializeInputScreenState: state.initializeInputScreenState,
+    stopAndPoiManagerController: state.stopAndPoiManagerController,
+    setTitle: state.setTitle
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_11__["connect"])(mapStateToProps, {
+  initializeInputScreenUi: _redux_actions_uiActions__WEBPACK_IMPORTED_MODULE_9__["initializeInputScreenUi"],
+  initializeHtype: _redux_actions_dataActions__WEBPACK_IMPORTED_MODULE_10__["initializeHtype"],
+  stopAndPoiManagerController: _redux_actions_uiActions__WEBPACK_IMPORTED_MODULE_9__["stopAndPoiManagerController"],
+  setTitle: _redux_actions_uiActions__WEBPACK_IMPORTED_MODULE_9__["setTitle"]
+})(Column));
+const InputScreenButton = styled_components__WEBPACK_IMPORTED_MODULE_3___default.a.button.withConfig({
+  displayName: "column__InputScreenButton",
+  componentId: "yv32xa-3"
+})(["position:absolute;bottom:0;right:0;font-size:6vh;border:0;color:none;background-color:transparent;:focus{outline:none;}"]);
+
+/***/ }),
+
+/***/ "./src/components/route-management/route.tsx":
+/*!***************************************************!*\
+  !*** ./src/components/route-management/route.tsx ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/extends */ "./node_modules/@babel/runtime-corejs2/helpers/esm/extends.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! styled-components */ "styled-components");
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(styled_components__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react_beautiful_dnd__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-beautiful-dnd */ "react-beautiful-dnd");
+/* harmony import */ var react_beautiful_dnd__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_beautiful_dnd__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @fortawesome/react-fontawesome */ "@fortawesome/react-fontawesome");
+/* harmony import */ var _fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "@fortawesome/free-solid-svg-icons");
+/* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-redux */ "react-redux");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _redux_actions_uiActions__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../redux/actions/uiActions */ "./src/redux/actions/uiActions.ts");
+
+var _jsxFileName = "/home/christian/Development/fible-frontend-nextjs/src/components/route-management/route.tsx";
+var __jsx = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement;
+
+
+
+
+
+
+
+
+const SelectorItem = props => {
+  const handleRemoveRoutes = e => {
+    //prevent select state update aswell
+    e.stopPropagation();
+    var itemId = undefined.props.itemData.id; //for removing columns when deleting list items
+
+    var dispatch = undefined.props.type == "STOPS" ? "STOP_DESELECT" : dispatch = "ROUTE_DESELECT";
+    var removeIndex = undefined.props.index;
+    var removeColumn = undefined.props.columnId;
+    undefined.props.removeRoute({
+      removeIndex,
+      removeColumn
+    });
+    undefined.props.updateSelectorManagerState({
+      itemId,
+      dispatch
+    });
+  };
+
+  const handleSelectorManagerStateUpdate = () => {
+    const selectedId = undefined.props.itemData.id;
+    const htype = undefined.props.type;
+    undefined.props.updateSelectorManagerState({
+      selectedId,
+      htype
+    });
+  };
+
+  return __jsx(react_beautiful_dnd__WEBPACK_IMPORTED_MODULE_3__["Draggable"], {
+    draggableId: props.itemData.id,
+    index: props.index,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 39
+    },
+    __self: undefined
+  }, provided => __jsx(Container, Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, provided.draggableProps, provided.dragHandleProps, {
+    ref: provided.innerRef,
+    onClick: () => handleSelectorManagerStateUpdate(),
+    color: props.itemData.id == props.uiState.selector["selected" + props.type] ? "salmon" : "lightgray",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 41
+    },
+    __self: undefined
+  }), __jsx(Headline, {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 48
+    },
+    __self: undefined
+  }, props.itemData.name), __jsx(RemoveButton, {
+    onClick: e => handleRemoveRoutes(e),
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 49
+    },
+    __self: undefined
+  }, __jsx(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_4__["FontAwesomeIcon"], {
+    icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__["faEdit"],
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 50
+    },
+    __self: undefined
+  }))));
+};
+
+const mapStateToProps = state => {
+  return {
+    uiState: state.ui,
+    updateSelectorManagerState: state.updateSelectorManagerState
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_6__["connect"])(mapStateToProps, {
+  removeRoute: _redux_actions_uiActions__WEBPACK_IMPORTED_MODULE_7__["removeRoute"],
+  updateSelectorManagerState: _redux_actions_uiActions__WEBPACK_IMPORTED_MODULE_7__["updateSelectorManagerState"]
+})(SelectorItem));
+const Container = styled_components__WEBPACK_IMPORTED_MODULE_2___default.a.div.withConfig({
+  displayName: "route__Container",
+  componentId: "sc-12vgdg3-0"
+})(["border:1px solid;border-color:", ";border-radius:2em;height:8vh;padding:8px;margin-bottom:1em;background-color:white;:hover{border-color:rgba(250,128,114,0.3 );}"], props => props.color);
+const Headline = styled_components__WEBPACK_IMPORTED_MODULE_2___default.a.h3.withConfig({
+  displayName: "route__Headline",
+  componentId: "sc-12vgdg3-1"
+})(["font-size:2vh;font-weight:lighter;position:relative;user-select:none;top:10%;left:20%;margin:0;color:black;border:none;background:none;text-decoration:none;"]);
+const RemoveButton = styled_components__WEBPACK_IMPORTED_MODULE_2___default.a.button.withConfig({
+  displayName: "route__RemoveButton",
+  componentId: "sc-12vgdg3-2"
+})(["position:relative;bottom:2vh;left:95%;margin-right:3vw;font-size:2vh;border:0;color:none;background-color:transparent;:focus{outline:none;}"]);
+
+/***/ }),
+
+/***/ "./src/components/route-management/selector.tsx":
+/*!******************************************************!*\
+  !*** ./src/components/route-management/selector.tsx ***!
+  \******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_corejs2_core_js_array_from__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/array/from */ "./node_modules/@babel/runtime-corejs2/core-js/array/from.js");
+/* harmony import */ var _babel_runtime_corejs2_core_js_array_from__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_array_from__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_beautiful_dnd__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-beautiful-dnd */ "react-beautiful-dnd");
+/* harmony import */ var react_beautiful_dnd__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_beautiful_dnd__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _column__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./column */ "./src/components/route-management/column.tsx");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-redux */ "react-redux");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _redux_actions_uiActions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../redux/actions/uiActions */ "./src/redux/actions/uiActions.ts");
+/* harmony import */ var _redux_actions_dataActions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../redux/actions/dataActions */ "./src/redux/actions/dataActions.ts");
+/* harmony import */ var graphql_tag__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! graphql-tag */ "graphql-tag");
+/* harmony import */ var graphql_tag__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(graphql_tag__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _lib_apollo__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../lib/apollo */ "./src/lib/apollo.jsx");
+
+var _jsxFileName = "/home/christian/Development/fible-frontend-nextjs/src/components/route-management/selector.tsx";
+var __jsx = react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement;
+
+
+
+
+
+
+
+
+
+const Selector = props => {
+  const onDragEnd = result => {
+    const {
+      destination,
+      source,
+      draggableId
+    } = result;
+
+    if (!destination) {
+      return;
+    }
+
+    if (destination.droppableId == source.droppableId && destination.index == source.index) {
+      return;
+    }
+
+    const columnId = source.droppableId;
+    const column = props.uiState.columns[source.droppableId];
+
+    const newOrder = _babel_runtime_corejs2_core_js_array_from__WEBPACK_IMPORTED_MODULE_0___default()(column.ids);
+
+    newOrder.splice(source.index, 1);
+    newOrder.splice(destination.index, 0, draggableId); // this.props.updateOrder({ newOrder, columnId })
+  };
+
+  const selectorFunction = props => {
+    //fix reordering problem
+    switch (props.type) {
+      case "ROUTES":
+        {
+          const columnId = "column-1";
+          const column = props.uiState.columns[columnId];
+          return __jsx(_column__WEBPACK_IMPORTED_MODULE_3__["default"], {
+            key: "column-1",
+            column: column,
+            type: "ROUTES",
+            listItems: props.routes.data.getRoutes,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 41
+            },
+            __self: undefined
+          });
+        }
+
+      case "STOPS":
+        {
+          const columnId = "column-2";
+          const column = props.uiState.columns[columnId];
+          const stops = column.ids.map(stopId => props.uiState.stops[stopId]);
+          return __jsx(_column__WEBPACK_IMPORTED_MODULE_3__["default"], {
+            key: columnId,
+            column: column,
+            type: "STOPS",
+            listItems: stops,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 47
+            },
+            __self: undefined
+          });
+        }
+
+      case "POIS":
+        {
+          const columnId = "column-3";
+          const column = props.uiState.columns[columnId];
+          let pois = [];
+          column.ids.length > 0 ? pois = column.ids.map(poiId => props.uiState.pois[poiId]) : pois = [];
+          return __jsx(_column__WEBPACK_IMPORTED_MODULE_3__["default"], {
+            key: columnId,
+            column: column,
+            type: "POIS",
+            listItems: pois,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 56
+            },
+            __self: undefined
+          });
+        }
+
+      default:
+        return __jsx("p", {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 59
+          },
+          __self: undefined
+        }, "wrong");
+    }
+  };
+
+  return __jsx(react_beautiful_dnd__WEBPACK_IMPORTED_MODULE_1__["DragDropContext"], {
+    onDragEnd: result => onDragEnd(result),
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 63
+    },
+    __self: undefined
+  }, selectorFunction(props));
+};
+
+Selector.getInitialProps = async context => {
+  const routesQuery = graphql_tag__WEBPACK_IMPORTED_MODULE_7___default.a`query routes {getRoutes
+        {id,owner}
+    }`; //  console.log(context.reduxStore.getState())
+
+  return {
+    routes: await context.apolloClient.query({
+      query: routesQuery
+    })
+  };
+};
+
+const mapStateToProps = state => {
+  return {
+    selectorState: state.selector,
+    uiState: state.ui,
+    dataState: state.data,
+    updateOrder: state.updateOrder
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_4__["connect"])(mapStateToProps, {
+  updateOrder: _redux_actions_uiActions__WEBPACK_IMPORTED_MODULE_5__["updateOrder"],
+  updateSelectorManagerState: _redux_actions_uiActions__WEBPACK_IMPORTED_MODULE_5__["updateSelectorManagerState"],
+  cleanNonsavedHtypes: _redux_actions_dataActions__WEBPACK_IMPORTED_MODULE_6__["cleanNonsavedHtypes"]
+})(Object(_lib_apollo__WEBPACK_IMPORTED_MODULE_8__["withApollo"])(Selector)));
+
+/***/ }),
+
+/***/ "./src/components/route-management/selectorManager.tsx":
+/*!*************************************************************!*\
+  !*** ./src/components/route-management/selectorManager.tsx ***!
+  \*************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/defineProperty */ "./node_modules/@babel/runtime-corejs2/helpers/esm/defineProperty.js");
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! styled-components */ "styled-components");
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(styled_components__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-redux */ "react-redux");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _selector__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./selector */ "./src/components/route-management/selector.tsx");
+/* harmony import */ var _stops_poi_components_stop_poiManager__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./stops&poi-components/stop&poiManager */ "./src/components/route-management/stops&poi-components/stop&poiManager.tsx");
+
+var _jsxFileName = "/home/christian/Development/fible-frontend-nextjs/src/components/route-management/selectorManager.tsx";
+var __jsx = react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement;
+
+
+
+
+
+
+class SelectorManager extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Component {
+  constructor(...args) {
+    super(...args);
+
+    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(this, "SelectorChoice", () => {
+      switch (this.props.uiState.selector.managerUiCode) {
+        case "RO":
+          {
+            return __jsx(OneSelectorWrapper, {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 15
+              },
+              __self: this
+            }, __jsx(_selector__WEBPACK_IMPORTED_MODULE_4__["default"], {
+              type: "ROUTES",
+              routes: this.props.routes,
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 16
+              },
+              __self: this
+            }));
+          }
+
+        case "ROST":
+          {
+            return __jsx(TwoSelectorsWrapper, {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 20
+              },
+              __self: this
+            }, __jsx(_selector__WEBPACK_IMPORTED_MODULE_4__["default"], {
+              type: "ROUTES",
+              routes: this.props.routes,
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 21
+              },
+              __self: this
+            }), __jsx(_selector__WEBPACK_IMPORTED_MODULE_4__["default"], {
+              type: "STOPS",
+              stops: this.props.stops,
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 22
+              },
+              __self: this
+            }));
+          }
+
+        case "ROSTPO":
+          {
+            return __jsx(ThreeSelectorsWrapper, {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 26
+              },
+              __self: this
+            }, __jsx(_selector__WEBPACK_IMPORTED_MODULE_4__["default"], {
+              type: "ROUTES",
+              routes: this.props.routes,
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 27
+              },
+              __self: this
+            }), __jsx(_selector__WEBPACK_IMPORTED_MODULE_4__["default"], {
+              type: "STOPS",
+              stops: this.props.stops,
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 28
+              },
+              __self: this
+            }), __jsx(_selector__WEBPACK_IMPORTED_MODULE_4__["default"], {
+              type: "POIS",
+              pois: this.props.pois,
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 29
+              },
+              __self: this
+            }));
+          }
+
+        case "MA":
+          {
+            return __jsx(ManagerWrapper, {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 33
+              },
+              __self: this
+            }, __jsx(_stops_poi_components_stop_poiManager__WEBPACK_IMPORTED_MODULE_5__["default"], {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 34
+              },
+              __self: this
+            }));
+          }
+
+        default:
+          {
+            return __jsx(OneSelectorWrapper, {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 38
+              },
+              __self: this
+            }, __jsx(_selector__WEBPACK_IMPORTED_MODULE_4__["default"], {
+              type: "ROUTES",
+              routes: this.props.routes,
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 39
+              },
+              __self: this
+            }));
+          }
+      }
+    });
+  }
+
+  render() {
+    return __jsx(Container, {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 46
+      },
+      __self: this
+    }, this.SelectorChoice());
+  }
+
+}
+
+const mapStateToProps = state => {
+  return {
+    uiState: state.ui
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_3__["connect"])(mapStateToProps)(SelectorManager));
+const Container = styled_components__WEBPACK_IMPORTED_MODULE_1___default.a.div.withConfig({
+  displayName: "selectorManager__Container",
+  componentId: "sc-7ashg1-0"
+})(["width:100vw;height:80vh;position:absolute;bottom:3vh;"]);
+const OneSelectorWrapper = styled_components__WEBPACK_IMPORTED_MODULE_1___default.a.div.withConfig({
+  displayName: "selectorManager__OneSelectorWrapper",
+  componentId: "sc-7ashg1-1"
+})(["position:relative;width:30vw;left:35vw;height:100%;margin:0;padding:0;align-content:center;display:flex;flex-direction:row;bottom:5%;"]);
+const TwoSelectorsWrapper = styled_components__WEBPACK_IMPORTED_MODULE_1___default.a.div.withConfig({
+  displayName: "selectorManager__TwoSelectorsWrapper",
+  componentId: "sc-7ashg1-2"
+})(["position:relative;left:20vw;width:60vw;height:100%;margin:0;padding:0;align-content:center;display:flex;flex-direction:row;bottom:5%;"]);
+const ThreeSelectorsWrapper = styled_components__WEBPACK_IMPORTED_MODULE_1___default.a.div.withConfig({
+  displayName: "selectorManager__ThreeSelectorsWrapper",
+  componentId: "sc-7ashg1-3"
+})(["position:relative;margin:0;padding:0;width:90vw;height:100%;left:5vw;align-content:center;display:flex;flex-direction:row;bottom:5%;"]);
+const ManagerWrapper = styled_components__WEBPACK_IMPORTED_MODULE_1___default.a.div.withConfig({
+  displayName: "selectorManager__ManagerWrapper",
+  componentId: "sc-7ashg1-4"
+})(["position:relative;margin:0;padding:0;width:80vw;height:96%;left:10vw;align-content:center;justify-content:center;display:flex;flex-direction:row;bottom:5%;border:1px solid lightgray;border-radius:0.5vh;top:0;"]);
+
+/***/ }),
+
+/***/ "./src/components/route-management/stops&poi-components/listItem.tsx":
+/*!***************************************************************************!*\
+  !*** ./src/components/route-management/stops&poi-components/listItem.tsx ***!
+  \***************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! styled-components */ "styled-components");
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(styled_components__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_draggable__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-draggable */ "react-draggable");
+/* harmony import */ var react_draggable__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_draggable__WEBPACK_IMPORTED_MODULE_2__);
+var _jsxFileName = "/home/christian/Development/fible-frontend-nextjs/src/components/route-management/stops&poi-components/listItem.tsx";
+
+var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
+
+
+const ListEntry = props => __jsx(react_draggable__WEBPACK_IMPORTED_MODULE_2___default.a, {
+  axis: "y",
+  __source: {
+    fileName: _jsxFileName,
+    lineNumber: 8
+  },
+  __self: undefined
+}, __jsx(Wrapper, {
+  __source: {
+    fileName: _jsxFileName,
+    lineNumber: 9
+  },
+  __self: undefined
+}, __jsx(Headline, {
+  __source: {
+    fileName: _jsxFileName,
+    lineNumber: 10
+  },
+  __self: undefined
+}, props.headline)));
+
+/* harmony default export */ __webpack_exports__["default"] = (ListEntry);
+const Wrapper = styled_components__WEBPACK_IMPORTED_MODULE_1___default.a.div.withConfig({
+  displayName: "listItem__Wrapper",
+  componentId: "sc-1e057wj-0"
+})(["height:10%;border:solid;position:relative;left:1%;width:98%;border-radius:2em;margin-top:1em;border-width:0.1em;border-color:grey;"]);
+const Headline = styled_components__WEBPACK_IMPORTED_MODULE_1___default.a.h3.withConfig({
+  displayName: "listItem__Headline",
+  componentId: "sc-1e057wj-1"
+})(["font-size:1.2em;font-weight:lighter;position:relative;user-select:none;top:10%;left:20%;margin:0;color:black;border:none;background:none;text-decoration:none;"]);
+const StopsWrapper = styled_components__WEBPACK_IMPORTED_MODULE_1___default.a.ul.withConfig({
+  displayName: "listItem__StopsWrapper",
+  componentId: "sc-1e057wj-2"
+})(["display:flex;flex-direction:row;"]);
+const Stops = styled_components__WEBPACK_IMPORTED_MODULE_1___default.a.h4.withConfig({
+  displayName: "listItem__Stops",
+  componentId: "sc-1e057wj-3"
+})(["font-size:0.8em;font-weight:lighter;position:relative;user-select:none;top:48%;left:23%;margin:0;margin-left:0.2em;color:black;border:none;background:none;text-decoration:none;"]);
+
+/***/ }),
+
+/***/ "./src/components/route-management/stops&poi-components/s&pSelector.tsx":
+/*!******************************************************************************!*\
+  !*** ./src/components/route-management/stops&poi-components/s&pSelector.tsx ***!
+  \******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/extends */ "./node_modules/@babel/runtime-corejs2/helpers/esm/extends.js");
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/defineProperty */ "./node_modules/@babel/runtime-corejs2/helpers/esm/defineProperty.js");
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! styled-components */ "styled-components");
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(styled_components__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-redux */ "react-redux");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var react_beautiful_dnd__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-beautiful-dnd */ "react-beautiful-dnd");
+/* harmony import */ var react_beautiful_dnd__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_beautiful_dnd__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _listItem__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./listItem */ "./src/components/route-management/stops&poi-components/listItem.tsx");
+
+
+var _jsxFileName = "/home/christian/Development/fible-frontend-nextjs/src/components/route-management/stops&poi-components/s&pSelector.tsx";
+var __jsx = react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement;
+
+
+
+
+
+
+class SandpSelector extends react__WEBPACK_IMPORTED_MODULE_3___default.a.Component {
+  constructor(...args) {
+    super(...args);
+
+    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_1__["default"])(this, "titleHandler", () => {
+      const htypeParentLookup = {
+        STOPS: "route",
+        POIS: "stop"
+      };
+      let title = "";
+
+      if (this.props.type == "ALL") {
+        title = this.props.uiState.selector.htype.toLowerCase() + " library";
+      } else {
+        title = this.props.uiState.selector.htype.toLowerCase() + " in " + htypeParentLookup[this.props.uiState.selector.htype];
+      }
+
+      return title;
+    });
+  }
+
+  render() {
+    return __jsx(ContainerStyled, {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 27
+      },
+      __self: this
+    }, __jsx(TitleStyle, {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 28
+      },
+      __self: this
+    }, this.titleHandler()), __jsx(react_beautiful_dnd__WEBPACK_IMPORTED_MODULE_5__["Droppable"], {
+      droppableId: "simulator",
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 29
+      },
+      __self: this
+    }, provided => __jsx(SandpContainerStyled, Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
+      ref: provided.innerRef
+    }, provided.droppableProps, {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 31
+      },
+      __self: this
+    }), this.props.list.map((elem, index) => __jsx(_listItem__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      key: index,
+      headline: elem.id,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 35
+      },
+      __self: this
+    })), provided.placeholder)));
+  }
+
+}
+
+const mapStateToProps = state => {
+  return {
+    uiState: state.ui,
+    dataState: state.data
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_4__["connect"])(mapStateToProps)(SandpSelector));
+const ContainerStyled = styled_components__WEBPACK_IMPORTED_MODULE_2___default.a.div.withConfig({
+  displayName: "spSelector__ContainerStyled",
+  componentId: "sc-1xwekja-0"
+})(["width:30vw;height:88%;align-self:center;justify-self:flex-end;display:flex;align-content:center;justify-content:center;margin-left:5vw;margin-right:5vw;"]);
+const SandpContainerStyled = styled_components__WEBPACK_IMPORTED_MODULE_2___default.a.div.withConfig({
+  displayName: "spSelector__SandpContainerStyled",
+  componentId: "sc-1xwekja-1"
+})(["width:30vw;height:96%;align-self:center;justify-self:center;display:flex;align-content:center;justify-content:center;border-style:solid;border-radius:1.5em;border-color:lightgrey;border-width:0.05em;"]);
+const Image = styled_components__WEBPACK_IMPORTED_MODULE_2___default.a.img.withConfig({
+  displayName: "spSelector__Image",
+  componentId: "sc-1xwekja-2"
+})(["border-radius:1.5em;max-width:100%;max-height:30%;height:auto;width:auto;display:block;object-fit:cover;overflow:hidden;"]);
+const TitleStyle = styled_components__WEBPACK_IMPORTED_MODULE_2___default.a.h2.withConfig({
+  displayName: "spSelector__TitleStyle",
+  componentId: "sc-1xwekja-3"
+})(["position:absolute;top:5%;font-size:4vh;color:black;border:none;background:none;text-decoration:none;padding-left:1em;font-weight:lighter;text-align:center;margin:0;padding:0;"]);
+
+/***/ }),
+
+/***/ "./src/components/route-management/stops&poi-components/stop&poiManager.tsx":
+/*!**********************************************************************************!*\
+  !*** ./src/components/route-management/stops&poi-components/stop&poiManager.tsx ***!
+  \**********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/defineProperty */ "./node_modules/@babel/runtime-corejs2/helpers/esm/defineProperty.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! styled-components */ "styled-components");
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(styled_components__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @fortawesome/react-fontawesome */ "@fortawesome/react-fontawesome");
+/* harmony import */ var _fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "@fortawesome/free-solid-svg-icons");
+/* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _redux_actions_uiActions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../redux/actions/uiActions */ "./src/redux/actions/uiActions.ts");
+/* harmony import */ var _redux_actions_dataActions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../redux/actions/dataActions */ "./src/redux/actions/dataActions.ts");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-redux */ "react-redux");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var react_beautiful_dnd__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-beautiful-dnd */ "react-beautiful-dnd");
+/* harmony import */ var react_beautiful_dnd__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(react_beautiful_dnd__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _s_pSelector__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./s&pSelector */ "./src/components/route-management/stops&poi-components/s&pSelector.tsx");
+
+var _jsxFileName = "/home/christian/Development/fible-frontend-nextjs/src/components/route-management/stops&poi-components/stop&poiManager.tsx";
+var __jsx = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement;
+
+
+
+
+
+
+
+
+
+let allList = [];
+
+class StopsAndPois extends react__WEBPACK_IMPORTED_MODULE_1___default.a.Component {
+  constructor(...args) {
+    super(...args);
+
+    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(this, "handleInputScreenButton", () => {
+      console.log("hello");
+      this.props.stopAndPoiManagerController();
+    });
+
+    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(this, "onDragEnd", () => {//todo
+    });
+  }
+
+  render() {
+    return __jsx(react_beautiful_dnd__WEBPACK_IMPORTED_MODULE_8__["DragDropContext"], {
+      onDragEnd: this.onDragEnd,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 29
+      },
+      __self: this
+    }, __jsx(InputScreenButton, {
+      onClick: this.handleInputScreenButton,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 32
+      },
+      __self: this
+    }, __jsx(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_3__["FontAwesomeIcon"], {
+      icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_4__["faPlus"],
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 33
+      },
+      __self: this
+    })), allList = this.props.dataState.user[this.props.uiState.selector.htype].map(element => this.props.dataState[this.props.uiState.selector.htype][element.id]), __jsx(_s_pSelector__WEBPACK_IMPORTED_MODULE_9__["default"], {
+      type: "ALL",
+      list: allList,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 36
+      },
+      __self: this
+    }), __jsx(_s_pSelector__WEBPACK_IMPORTED_MODULE_9__["default"], {
+      type: "SELECTED",
+      list: allList,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 37
+      },
+      __self: this
+    }));
+  }
+
+}
+
+const mapStateToProps = state => {
+  return {
+    dataState: state.data,
+    uiState: state.ui,
+    initializeInputScreenState: state.initializeInputScreenState,
+    stopAndPoiManagerController: state.stopAndPoiManagerController
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_7__["connect"])(mapStateToProps, {
+  initializeInputScreenUi: _redux_actions_uiActions__WEBPACK_IMPORTED_MODULE_5__["initializeInputScreenUi"],
+  initializeHtype: _redux_actions_dataActions__WEBPACK_IMPORTED_MODULE_6__["initializeHtype"],
+  stopAndPoiManagerController: _redux_actions_uiActions__WEBPACK_IMPORTED_MODULE_5__["stopAndPoiManagerController"]
+})(StopsAndPois));
+const InputScreenButton = styled_components__WEBPACK_IMPORTED_MODULE_2___default.a.button.withConfig({
+  displayName: "stoppoiManager__InputScreenButton",
+  componentId: "sc-11kkk3p-0"
+})(["position:absolute;bottom:0;right:0;font-size:6vh;border:0;color:none;background-color:transparent;:focus{outline:none;}"]);
+
+/***/ }),
+
+/***/ "./src/components/route-management/title.tsx":
+/*!***************************************************!*\
+  !*** ./src/components/route-management/title.tsx ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "react-redux");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! styled-components */ "styled-components");
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(styled_components__WEBPACK_IMPORTED_MODULE_2__);
+var _jsxFileName = "/home/christian/Development/fible-frontend-nextjs/src/components/route-management/title.tsx";
+
+var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
+
+
+const Title = props => __jsx(TitleStyle, {
+  __source: {
+    fileName: _jsxFileName,
+    lineNumber: 8
+  },
+  __self: undefined
+}, "Welcome ", props.name, ", here are your routes!");
+
+const mapStateToProps = state => {
+  return {
+    ui: state.ui
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps)(Title));
+const TitleStyle = styled_components__WEBPACK_IMPORTED_MODULE_2___default.a.h2.withConfig({
+  displayName: "title__TitleStyle",
+  componentId: "sc-184qkc3-0"
+})(["position:absolute;top:3%;font-size:2.5em;color:black;border:none;background:none;text-decoration:none;padding-left:1em;font-weight:lighter;text-align:center;margin:0;padding:0;"]);
+
+/***/ }),
+
+/***/ "./src/components/shared-components/logoutButton.tsx":
+/*!***********************************************************!*\
+  !*** ./src/components/shared-components/logoutButton.tsx ***!
+  \***********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! styled-components */ "styled-components");
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(styled_components__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var graphql_tag__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! graphql-tag */ "graphql-tag");
+/* harmony import */ var graphql_tag__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(graphql_tag__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _apollo_react_hooks__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @apollo/react-hooks */ "@apollo/react-hooks");
+/* harmony import */ var _apollo_react_hooks__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_apollo_react_hooks__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _redux_actions_dataActions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./../../redux/actions/dataActions */ "./src/redux/actions/dataActions.ts");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-redux */ "react-redux");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "@fortawesome/free-solid-svg-icons");
+/* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @fortawesome/react-fontawesome */ "@fortawesome/react-fontawesome");
+/* harmony import */ var _fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _lib_redirect__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../lib/redirect */ "./src/lib/redirect.ts");
+/* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! js-cookie */ "js-cookie");
+/* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(js_cookie__WEBPACK_IMPORTED_MODULE_9__);
+var _jsxFileName = "/home/christian/Development/fible-frontend-nextjs/src/components/shared-components/logoutButton.tsx";
+var __jsx = react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement;
+
+
+
+
+
+
+
+
+
+
+
+const LogoutButton = props => {
+  const client = Object(_apollo_react_hooks__WEBPACK_IMPORTED_MODULE_3__["useApolloClient"])();
+  const LOGOUT = graphql_tag__WEBPACK_IMPORTED_MODULE_1___default.a`
+  mutation Logout {
+    logout
+  }`;
+
+  const onCompleted = () => {
+    client.cache.reset().then(() => {
+      Object(_lib_redirect__WEBPACK_IMPORTED_MODULE_8__["default"])({}, '/');
+    });
+    props.cleanUser();
+    document.cookie = "qid= ; expires = Thu, 01 Jan 1970 00:00:00 GMT";
+    js_cookie__WEBPACK_IMPORTED_MODULE_9___default.a.remove('qid');
+  };
+
+  const onError = error => {
+    // If you want to send error to external service?
+    console.error(error);
+  };
+
+  const [logout, {
+    error
+  }] = Object(_apollo_react_hooks__WEBPACK_IMPORTED_MODULE_3__["useMutation"])(LOGOUT, {
+    onCompleted,
+    onError
+  });
+  return __jsx(StyledWrapper, {
+    onClick: () => {
+      logout();
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 46
+    },
+    __self: undefined
+  }, __jsx(StyledText, {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 47
+    },
+    __self: undefined
+  }, "Logout"), __jsx(StyledFontAwesomeIcon, {
+    icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faDoorOpen"],
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 48
+    },
+    __self: undefined
+  }));
+};
+
+const mapStateToProps = state => {
+  return {
+    cleanUser: state.cleanUser
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_5__["connect"])(mapStateToProps, {
+  cleanUser: _redux_actions_dataActions__WEBPACK_IMPORTED_MODULE_4__["cleanUser"]
+})(LogoutButton));
+const StyledFontAwesomeIcon = styled_components__WEBPACK_IMPORTED_MODULE_0___default()(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_7__["FontAwesomeIcon"]).withConfig({
+  displayName: "logoutButton__StyledFontAwesomeIcon",
+  componentId: "pmozmx-0"
+})(["font-size:3vh;"]);
+const StyledWrapper = styled_components__WEBPACK_IMPORTED_MODULE_0___default.a.div.withConfig({
+  displayName: "logoutButton__StyledWrapper",
+  componentId: "pmozmx-1"
+})(["display:flex;flex-direction:row;width:5vw;height:5vh;position:absolute;right:10vw;top:3vh;"]);
+const StyledText = styled_components__WEBPACK_IMPORTED_MODULE_0___default.a.p.withConfig({
+  displayName: "logoutButton__StyledText",
+  componentId: "pmozmx-2"
+})(["font-size:3vh;padding:0;margin:0;margin-right:0.5vw;user-select:none;"]);
+
+/***/ }),
+
+/***/ "./src/lib/apollo.jsx":
+/*!****************************!*\
+  !*** ./src/lib/apollo.jsx ***!
+  \****************************/
+/*! exports provided: withApollo */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "withApollo", function() { return withApollo; });
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/objectSpread */ "./node_modules/@babel/runtime-corejs2/helpers/esm/objectSpread.js");
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/extends */ "./node_modules/@babel/runtime-corejs2/helpers/esm/extends.js");
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/objectWithoutProperties */ "./node_modules/@babel/runtime-corejs2/helpers/esm/objectWithoutProperties.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! prop-types */ "prop-types");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var cookie__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! cookie */ "cookie");
+/* harmony import */ var cookie__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(cookie__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var next_head__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! next/head */ "next/head");
+/* harmony import */ var next_head__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(next_head__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var apollo_client__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! apollo-client */ "apollo-client");
+/* harmony import */ var apollo_client__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(apollo_client__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var apollo_cache_inmemory__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! apollo-cache-inmemory */ "apollo-cache-inmemory");
+/* harmony import */ var apollo_cache_inmemory__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(apollo_cache_inmemory__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var apollo_link_http__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! apollo-link-http */ "apollo-link-http");
+/* harmony import */ var apollo_link_http__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(apollo_link_http__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var apollo_link_context__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! apollo-link-context */ "apollo-link-context");
+/* harmony import */ var apollo_link_context__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(apollo_link_context__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var _apollo_react_hooks__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @apollo/react-hooks */ "@apollo/react-hooks");
+/* harmony import */ var _apollo_react_hooks__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_apollo_react_hooks__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! isomorphic-unfetch */ "isomorphic-unfetch");
+/* harmony import */ var isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_12__);
+
+
+
+var _jsxFileName = "/home/christian/Development/fible-frontend-nextjs/src/lib/apollo.jsx";
+var __jsx = react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement;
+
+
+
+
+
+
+
+
+
+
+/**
+ * Creates and provides the apolloContext
+ * to a next.js PageTree. Use it by wrapping
+ * your PageComponent via HOC pattern.
+ * @param {Function|Class} PageComponent
+ * @param {Object} [config]
+ * @param {Boolean} [config.ssr=true]
+ */
+
+function withApollo(PageComponent, {
+  ssr = true
+} = {}) {
+  const WithApollo = (_ref) => {
+    let {
+      apolloClient,
+      apolloState
+    } = _ref,
+        pageProps = Object(_babel_runtime_corejs2_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_2__["default"])(_ref, ["apolloClient", "apolloState"]);
+
+    const client = apolloClient || initApolloClient(apolloState, {
+      getToken
+    });
+    return __jsx(_apollo_react_hooks__WEBPACK_IMPORTED_MODULE_11__["ApolloProvider"], {
+      client: client,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 25
+      },
+      __self: this
+    }, __jsx(PageComponent, Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_1__["default"])({}, pageProps, {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 26
+      },
+      __self: this
+    })));
+  };
+
+  if (true) {
+    // Find correct display name
+    const displayName = PageComponent.displayName || PageComponent.name || 'Component'; // Warn if old way of installing apollo is used
+
+    if (displayName === 'App') {
+      console.warn('This withApollo HOC only works with PageComponents.');
+    } // Set correct display name for devtools
+
+
+    WithApollo.displayName = `withApollo(${displayName})`; // Add some prop types
+
+    WithApollo.propTypes = {
+      // Used for getDataFromTree rendering
+      apolloClient: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.object,
+      // Used for client/server rendering
+      apolloState: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.object
+    };
+  }
+
+  if (ssr || PageComponent.getInitialProps) {
+    WithApollo.getInitialProps = async ctx => {
+      const {
+        AppTree
+      } = ctx; // Run all GraphQL queries in the component tree
+      // and extract the resulting data
+
+      const apolloClient = ctx.apolloClient = initApolloClient({}, {
+        getToken: () => getToken(ctx.req)
+      });
+      const pageProps = PageComponent.getInitialProps ? await PageComponent.getInitialProps(ctx) : {}; // Only on the server
+
+      if (true) {
+        // When redirecting, the response is finished.
+        // No point in continuing to render
+        if (ctx.res && ctx.res.finished) {
+          return {};
+        }
+
+        if (ssr) {
+          try {
+            // Run all GraphQL queries
+            const {
+              getDataFromTree
+            } = await Promise.resolve(/*! import() */).then(__webpack_require__.t.bind(null, /*! @apollo/react-ssr */ "@apollo/react-ssr", 7));
+            await getDataFromTree(__jsx(AppTree, {
+              pageProps: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, pageProps, {
+                apolloClient
+              }),
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 83
+              },
+              __self: this
+            }));
+          } catch (error) {
+            // Prevent Apollo Client GraphQL errors from crashing SSR.
+            // Handle them in components via the data.error prop:
+            // https://www.apollographql.com/docs/react/api/react-apollo.html#graphql-query-data-error
+            console.error('Error while running `getDataFromTree`', error);
+          }
+        } // getDataFromTree does not call componentWillUnmount
+        // head side effect therefore need to be cleared manually
+
+
+        next_head__WEBPACK_IMPORTED_MODULE_6___default.a.rewind();
+      } // Extract query data from the Apollo store
+
+
+      const apolloState = apolloClient.cache.extract();
+      return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, pageProps, {
+        apolloState
+      });
+    };
+  }
+
+  return WithApollo;
+}
+let apolloClient = null;
+/**
+ * Always creates a new apollo client on the server
+ * Creates or reuses apollo client in the browser.
+ */
+
+function initApolloClient(...args) {
+  // Make sure to create a new client for every server-side request so that data
+  // isn't shared between connections (which would be bad)
+  if (true) {
+    return createApolloClient(...args);
+  } // Reuse client on the client-side
+
+
+  if (!apolloClient) {
+    apolloClient = createApolloClient(...args);
+  }
+
+  return apolloClient;
+}
+/**
+ * Creates and configures the ApolloClient
+ * @param  {Object} [initialState={}]
+ * @param  {Object} config
+ */
+
+
+function createApolloClient(initialState = {}, {
+  getToken
+}) {
+  const fetchOptions = {
+    agent: ""
+  }; // If you are using a https_proxy, add fetchOptions with 'https-proxy-agent' agent instance
+  // 'https-proxy-agent' is required here because it's a sever-side only module
+
+  if (true) {
+    if (process.env.https_proxy) {
+      fetchOptions.agent = new (__webpack_require__(/*! https-proxy-agent */ "https-proxy-agent"))(process.env.https_proxy);
+    }
+  }
+
+  const httpLink = new apollo_link_http__WEBPACK_IMPORTED_MODULE_9__["HttpLink"]({
+    uri: 'http://localhost:8000/graphql',
+    // Server URL (must be absolute)
+    credentials: 'include',
+    fetch: (isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_12___default()),
+    fetchOptions
+  });
+  const authLink = Object(apollo_link_context__WEBPACK_IMPORTED_MODULE_10__["setContext"])((request, {
+    headers
+  }) => {
+    const token = getToken();
+    return {
+      headers: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, headers, {
+        cookie: token ? `qid=${token}` : ''
+      })
+    };
+  }); // Check out https://github.com/zeit/next.js/pull/4611 if you want to use the AWSAppSyncClient
+
+  return new apollo_client__WEBPACK_IMPORTED_MODULE_7__["ApolloClient"]({
+    ssrMode: true,
+    // Disables forceFetch on the server (so queries are only run once)
+    link: authLink.concat(httpLink),
+    cache: new apollo_cache_inmemory__WEBPACK_IMPORTED_MODULE_8__["InMemoryCache"]().restore(initialState)
+  });
+}
+/**
+ * Get the user token from cookie
+ * @param {Object} req
+ */
+
+
+function getToken(req) {
+  const cookies = cookie__WEBPACK_IMPORTED_MODULE_5___default.a.parse(req ? req.headers.cookie || '' : document.cookie);
+  return cookies.qid;
+}
+/*import React from 'react'
+import Head from 'next/head'
+import { ApolloProvider } from '@apollo/react-hooks'
+import { ApolloClient } from 'apollo-client'
+import { InMemoryCache } from 'apollo-cache-inmemory'
+import { HttpLink } from 'apollo-link-http'
+import fetch from 'isomorphic-unfetch'
+
+let apolloClient = null
+
+
+export function withApollo(PageComponent, { ssr = true } = {}) {
+  const WithApollo = ({ apolloClient, apolloState, ...pageProps }) => {
+    const client = apolloClient || initApolloClient(apolloState)
+    return (
+      <ApolloProvider client={client}>
+        <PageComponent {...pageProps} />
+      </ApolloProvider>
+    )
+  }
+
+  // Set the correct displayName in development
+  if (process.env.NODE_ENV !== 'production') {
+    const displayName =
+      PageComponent.displayName || PageComponent.name || 'Component'
+
+    if (displayName === 'App') {
+      console.warn('This withApollo HOC only works with PageComponents.')
+    }
+
+    WithApollo.displayName = `withApollo(${displayName})`
+  }
+
+  if (ssr || PageComponent.getInitialProps) {
+    WithApollo.getInitialProps = async ctx => {
+      const { AppTree } = ctx
+
+      // Initialize ApolloClient, add it to the ctx object so
+      // we can use it in `PageComponent.getInitialProp`.
+      const apolloClient = (ctx.apolloClient = initApolloClient({}))
+
+      // Run wrapped getInitialProps methods
+      let pageProps = {}
+      if (PageComponent.getInitialProps) {
+        pageProps = await PageComponent.getInitialProps(ctx)
+      }
+
+      // Only on the server:
+      if (typeof window === 'undefined') {
+        // When redirecting, the response is finished.
+        // No point in continuing to render
+        if (ctx.res && ctx.res.finished) {
+          return pageProps
+        }
+
+        // Only if ssr is enabled
+        if (ssr) {
+          try {
+            // Run all GraphQL queries
+            const { getDataFromTree } = await import('@apollo/react-ssr')
+            await getDataFromTree(
+              <AppTree
+                pageProps={{
+                  ...pageProps,
+                  apolloClient,
+                }}
+              />
+            )
+          } catch (error) {
+            // Prevent Apollo Client GraphQL errors from crashing SSR.
+            // Handle them in components via the data.error prop:
+            // https://www.apollographql.com/docs/react/api/react-apollo.html#graphql-query-data-error
+            console.error('Error while running `getDataFromTree`', error)
+          }
+
+          // getDataFromTree does not call componentWillUnmount
+          // head side effect therefore need to be cleared manually
+          Head.rewind()
+        }
+      }
+
+      // Extract query data from the Apollo store
+      const apolloState = apolloClient.cache.extract()
+
+      return {
+        ...pageProps,
+        apolloState,
+      }
+    }
+  }
+
+  return WithApollo
+}
+
+
+function initApolloClient(initialState) {
+  // Make sure to create a new client for every server-side request so that data
+  // isn't shared between connections (which would be bad)
+  if (typeof window === 'undefined') {
+    return createApolloClient(initialState)
+  }
+
+  // Reuse client on the client-side
+  if (!apolloClient) {
+    apolloClient = createApolloClient(initialState)
+  }
+
+  return apolloClient
+}
+
+
+function createApolloClient(initialState = {}) {
+  // Check out https://github.com/zeit/next.js/pull/4611 if you want to use the AWSAppSyncClient
+  return new ApolloClient({
+    ssrMode: typeof window === 'undefined', // Disables forceFetch on the server (so queries are only run once)
+    link: new HttpLink({
+      uri: 'http://localhost:8000/graphql', // Server URL (must be absolute)
+      credentials: 'include', // Additional fetch() options like `credentials` or `headers`
+      fetch,
+    }),
+    cache: new InMemoryCache().restore(initialState),
+  })
+}
+
+*/
+
+/***/ }),
+
+/***/ "./src/lib/auth.tsx":
+/*!**************************!*\
+  !*** ./src/lib/auth.tsx ***!
+  \**************************/
+/*! exports provided: withAuth */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "withAuth", function() { return withAuth; });
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/extends */ "./node_modules/@babel/runtime-corejs2/helpers/esm/extends.js");
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/objectSpread */ "./node_modules/@babel/runtime-corejs2/helpers/esm/objectSpread.js");
+/* harmony import */ var graphql_tag__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! graphql-tag */ "graphql-tag");
+/* harmony import */ var graphql_tag__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(graphql_tag__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _redirect__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./redirect */ "./src/lib/redirect.ts");
+/* harmony import */ var _redux_actions_dataActions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../redux/actions/dataActions */ "./src/redux/actions/dataActions.ts");
+
+
+var _jsxFileName = "/home/christian/Development/fible-frontend-nextjs/src/lib/auth.tsx";
+var __jsx = react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement;
+
+
+
+
+const ME = graphql_tag__WEBPACK_IMPORTED_MODULE_2___default.a`
+query me{
+    me {
+      id name ROUTES POIS STOPS email
+    }
+}`;
+const withAuth = C => {
+  class AuthComponent extends react__WEBPACK_IMPORTED_MODULE_3___default.a.Component {
+    static async getInitialProps(ctx) {
+      const response = await ctx.apolloClient.query({
+        query: ME
+      }); //console.log("@withAuth ", response);
+
+      if (!response || !response.data || !response.data.me) {
+        Object(_redirect__WEBPACK_IMPORTED_MODULE_4__["default"])(ctx, "/");
+        return {
+          me: null
+        };
+      }
+
+      ctx.reduxStore.dispatch(Object(_redux_actions_dataActions__WEBPACK_IMPORTED_MODULE_5__["loadUser"])({
+        user: response.data.me
+      }));
+      ctx.user = response.data.me;
+      let componentProps = {};
+
+      if (C.getInitialProps) {
+        componentProps = await C.getInitialProps(ctx);
+      }
+
+      const me = response.data.me;
+      return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({
+        me: response.data.me
+      }, componentProps);
+    }
+
+    render() {
+      // {console.log(this.props)}
+      return __jsx(C, Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, this.props, {
+        user: this.props,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 42
+        },
+        __self: this
+      }));
+    }
+
+  }
+
+  return AuthComponent;
+};
+
+/***/ }),
+
+/***/ "./src/lib/redirect.ts":
+/*!*****************************!*\
+  !*** ./src/lib/redirect.ts ***!
+  \*****************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! next/router */ "next/router");
+/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_0__);
+
+/* harmony default export */ __webpack_exports__["default"] = ((context, target) => {
+  if (context.res) {
+    // server
+    // 303: "See other"
+    context.res.writeHead(303, {
+      Location: target
+    });
+    context.res.end();
+  } else {
+    // In the browser, we just pretend like this never even happened ;)
+    next_router__WEBPACK_IMPORTED_MODULE_0___default.a.replace(target);
+  }
+});
+
+/***/ }),
+
 /***/ "./src/pages/routemanagement.tsx":
 /*!***************************************!*\
   !*** ./src/pages/routemanagement.tsx ***!
@@ -1907,131 +3815,236 @@ module.exports = __webpack_require__(/*! ./dist/client/link */ "./node_modules/n
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! next/link */ "./node_modules/next/link.js");
-/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! styled-components */ "styled-components");
-/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(styled_components__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var next_dynamic__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! next/dynamic */ "next/dynamic");
-/* harmony import */ var next_dynamic__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(next_dynamic__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! next/link */ "./node_modules/next/link.js");
+/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! styled-components */ "styled-components");
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(styled_components__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _components_route_management_title__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/route-management/title */ "./src/components/route-management/title.tsx");
+/* harmony import */ var _components_route_management_selectorManager__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/route-management/selectorManager */ "./src/components/route-management/selectorManager.tsx");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-redux */ "react-redux");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _redux_store__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../redux/store */ "./src/redux/store.js");
+/* harmony import */ var _components_shared_components_logoutButton__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./../components/shared-components/logoutButton */ "./src/components/shared-components/logoutButton.tsx");
+/* harmony import */ var _lib_apollo__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../lib/apollo */ "./src/lib/apollo.jsx");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _redux_redux__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../redux/redux */ "./src/redux/redux.jsx");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! redux */ "redux");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(redux__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _lib_auth__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../lib/auth */ "./src/lib/auth.tsx");
+/* harmony import */ var graphql_tag__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! graphql-tag */ "graphql-tag");
+/* harmony import */ var graphql_tag__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(graphql_tag__WEBPACK_IMPORTED_MODULE_11__);
 var _jsxFileName = "/home/christian/Development/fible-frontend-nextjs/src/pages/routemanagement.tsx";
-
-var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
-
-
-
- //import {store, persistor} from '../redux/store';
+var __jsx = react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement;
 
 
 
-const RouteManagement = props => __jsx(react_redux__WEBPACK_IMPORTED_MODULE_4__["Provider"], {
-  store: _redux_store__WEBPACK_IMPORTED_MODULE_5__["default"],
-  __source: {
-    fileName: _jsxFileName,
-    lineNumber: 10
-  },
-  __self: undefined
-}, __jsx(Container, {
-  __source: {
-    fileName: _jsxFileName,
-    lineNumber: 11
-  },
-  __self: undefined
-}, __jsx(Images, {
-  __source: {
-    fileName: _jsxFileName,
-    lineNumber: 12
-  },
-  __self: undefined
-}, __jsx(HeaderImage, {
-  src: "/logo_fible.png",
-  alt: "my image",
-  __source: {
-    fileName: _jsxFileName,
-    lineNumber: 13
-  },
-  __self: undefined
-}), __jsx(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
-  href: "/",
-  __source: {
-    fileName: _jsxFileName,
-    lineNumber: 14
-  },
-  __self: undefined
-}, __jsx(BackImage, {
-  src: "/back.svg",
-  __source: {
-    fileName: _jsxFileName,
-    lineNumber: 15
-  },
-  __self: undefined
-}))), __jsx(Title, {
-  __source: {
-    fileName: _jsxFileName,
-    lineNumber: 18
-  },
-  __self: undefined
-}, "Welcome Christian, here are your routes!"), __jsx(DynamicRouteSelector, {
-  __source: {
-    fileName: _jsxFileName,
-    lineNumber: 20
-  },
-  __self: undefined
-})));
+
+
+
+
+
+
+
+
+
+
+const RouteManagement = props => {
+  return __jsx(Container, {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 20
+    },
+    __self: undefined
+  }, __jsx(Images, {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 21
+    },
+    __self: undefined
+  }, __jsx(HeaderImage, {
+    src: "/logo_fible.png",
+    alt: "my image",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 22
+    },
+    __self: undefined
+  }), __jsx(next_link__WEBPACK_IMPORTED_MODULE_0___default.a, {
+    href: "/",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 23
+    },
+    __self: undefined
+  }, __jsx(BackImage, {
+    src: "/back.svg",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 24
+    },
+    __self: undefined
+  }))), __jsx(_components_route_management_title__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    name: props.me.name,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 27
+    },
+    __self: undefined
+  }), __jsx(_components_shared_components_logoutButton__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 28
+    },
+    __self: undefined
+  }), __jsx(_components_route_management_selectorManager__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    routes: props.routes,
+    stops: null,
+    pois: null,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 29
+    },
+    __self: undefined
+  }));
+};
+
+RouteManagement.getInitialProps = async context => {
+  const routesQuery = graphql_tag__WEBPACK_IMPORTED_MODULE_11___default.a`query routes {getRoutes
+        {id owner name}
+    }`; //  console.log(context.reduxStore.getState())
+
+  return {
+    routes: await context.apolloClient.query({
+      query: routesQuery
+    })
+  };
+};
+
+const mapStateToProps = state => {
+  return {
+    selectorState: state.selector,
+    uiState: state.ui,
+    dataState: state.data
+  };
+};
+
+const enhance = Object(redux__WEBPACK_IMPORTED_MODULE_9__["compose"])(_redux_redux__WEBPACK_IMPORTED_MODULE_8__["withRedux"], _lib_apollo__WEBPACK_IMPORTED_MODULE_6__["withApollo"], _lib_auth__WEBPACK_IMPORTED_MODULE_10__["withAuth"], Object(react_redux__WEBPACK_IMPORTED_MODULE_4__["connect"])(mapStateToProps, null));
+/* harmony default export */ __webpack_exports__["default"] = (enhance(RouteManagement));
 /*
-const RouteManagement = props => (
-    <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
-        <Container>
-            <Images>
-                <HeaderImage src="/logo_fible.png" alt="my image"></HeaderImage>
-                <Link href="/">
-                    <BackImage src="/back.svg"></BackImage>
-                </Link>
-            </Images>
-            <Title>Welcome Christian, here are your routes!</Title>
-
-            <DynamicRouteSelector></DynamicRouteSelector>
-        </Container>
-        </PersistGate>
-    </Provider>
-);
-
+const DynamicRouteSelector = dynamic(
+    () => import('../components/route-management/selectorManager'),
+    { ssr: false }
+)
 */
 
+const Images = styled_components__WEBPACK_IMPORTED_MODULE_1___default.a.div.withConfig({
+  displayName: "routemanagement__Images",
+  componentId: "geraa8-0"
+})(["height:8em;margin:0;padding-left:1em;position:absolute;top:1%;left:0%;"]);
+const HeaderImage = styled_components__WEBPACK_IMPORTED_MODULE_1___default.a.img.withConfig({
+  displayName: "routemanagement__HeaderImage",
+  componentId: "geraa8-1"
+})(["height:4em;width:7em;padding-left:2em;padding-top:1em;padding-bottom:2em;position:absolute;margin:0;z-index:1;"]);
+const BackImage = styled_components__WEBPACK_IMPORTED_MODULE_1___default.a.img.withConfig({
+  displayName: "routemanagement__BackImage",
+  componentId: "geraa8-2"
+})(["padding-top:0.5em;height:2em;width:2em;z-index:1;position:absolute;"]);
+const Container = styled_components__WEBPACK_IMPORTED_MODULE_1___default.a.div.withConfig({
+  displayName: "routemanagement__Container",
+  componentId: "geraa8-3"
+})(["width:100vw;height:100vh;margin:0;padding:0;background:white;display:flex;display:-webkit-box;display:-moz-box;display:-ms-flexbox;display:-webkit-flex;align-content:center;justify-content:center;"]);
 
-/* harmony default export */ __webpack_exports__["default"] = (RouteManagement);
-const DynamicRouteSelector = next_dynamic__WEBPACK_IMPORTED_MODULE_3___default()(() => __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ../components/route-management/selectorManager */ "./src/components/route-management/selectorManager.tsx")), {
-  ssr: false,
-  loadableGenerated: {
-    webpack: () => [/*require.resolve*/(/*! ../components/route-management/selectorManager */ "./src/components/route-management/selectorManager.tsx")],
-    modules: ['../components/route-management/selectorManager']
+/***/ }),
+
+/***/ "./src/redux/actions/dataActions.ts":
+/*!******************************************!*\
+  !*** ./src/redux/actions/dataActions.ts ***!
+  \******************************************/
+/*! exports provided: addOrUpdateHeadline, initializeHtype, deleteHtype, emptySelectedComponent, setSelectedComponent, updateComponentsOrder, cleanNonsavedHtypes, loadUser, cleanUser */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addOrUpdateHeadline", function() { return addOrUpdateHeadline; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "initializeHtype", function() { return initializeHtype; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteHtype", function() { return deleteHtype; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "emptySelectedComponent", function() { return emptySelectedComponent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setSelectedComponent", function() { return setSelectedComponent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateComponentsOrder", function() { return updateComponentsOrder; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "cleanNonsavedHtypes", function() { return cleanNonsavedHtypes; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "loadUser", function() { return loadUser; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "cleanUser", function() { return cleanUser; });
+/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./types */ "./src/redux/actions/types.ts");
+
+let addHeadlineId = 0;
+let initializeHtypeId = 0;
+let deleteHtypeId = 0;
+let emptySelectedComponentId = 0;
+let setSelectedComponentId = 0;
+let updateComponentsOrderId = 0;
+let cleanNonsavedHtypesId = 0;
+let loadUserId = 0;
+let cleanUserId = 0;
+const addOrUpdateHeadline = content => ({
+  type: _types__WEBPACK_IMPORTED_MODULE_0__["HEADLINE"],
+  payload: {
+    id: ++addHeadlineId,
+    content
   }
 });
-const Title = styled_components__WEBPACK_IMPORTED_MODULE_2___default.a.h2.withConfig({
-  displayName: "routemanagement__Title",
-  componentId: "geraa8-0"
-})(["position:absolute;top:3%;font-size:2.5em;color:black;border:none;background:none;text-decoration:none;padding-left:1em;font-weight:lighter;text-align:center;margin:0;padding:0;"]);
-const Images = styled_components__WEBPACK_IMPORTED_MODULE_2___default.a.div.withConfig({
-  displayName: "routemanagement__Images",
-  componentId: "geraa8-1"
-})(["height:8em;margin:0;padding-left:1em;position:absolute;top:1%;left:0%;"]);
-const HeaderImage = styled_components__WEBPACK_IMPORTED_MODULE_2___default.a.img.withConfig({
-  displayName: "routemanagement__HeaderImage",
-  componentId: "geraa8-2"
-})(["height:4em;width:7em;padding-left:2em;padding-top:1em;padding-bottom:2em;position:absolute;margin:0;z-index:1;"]);
-const BackImage = styled_components__WEBPACK_IMPORTED_MODULE_2___default.a.img.withConfig({
-  displayName: "routemanagement__BackImage",
-  componentId: "geraa8-3"
-})(["padding-top:0.5em;height:2em;width:2em;z-index:1;position:absolute;"]);
-const Container = styled_components__WEBPACK_IMPORTED_MODULE_2___default.a.div.withConfig({
-  displayName: "routemanagement__Container",
-  componentId: "geraa8-4"
-})(["width:100vw;height:100vh;margin:0;padding:0;background:white;display:flex;display:-webkit-box;display:-moz-box;display:-ms-flexbox;display:-webkit-flex;align-content:center;justify-content:center;"]);
+const initializeHtype = content => ({
+  type: _types__WEBPACK_IMPORTED_MODULE_0__["INITIALIZE_HTYPE"],
+  payload: {
+    id: ++initializeHtypeId,
+    content
+  }
+});
+const deleteHtype = content => ({
+  type: _types__WEBPACK_IMPORTED_MODULE_0__["DELETE_HTYPE"],
+  payload: {
+    id: ++deleteHtypeId,
+    content
+  }
+});
+const emptySelectedComponent = content => ({
+  type: _types__WEBPACK_IMPORTED_MODULE_0__["EMPTY_SELECTED_COMPONENT_ID"],
+  payload: {
+    id: ++emptySelectedComponentId
+  }
+});
+const setSelectedComponent = content => ({
+  type: _types__WEBPACK_IMPORTED_MODULE_0__["SET_SELECTED_COMPONENT"],
+  payload: {
+    id: ++setSelectedComponentId,
+    content
+  }
+});
+const updateComponentsOrder = content => ({
+  type: _types__WEBPACK_IMPORTED_MODULE_0__["UPDATE_COMPONENTS_ORDER"],
+  payload: {
+    id: ++updateComponentsOrderId,
+    content
+  }
+});
+const cleanNonsavedHtypes = () => ({
+  type: _types__WEBPACK_IMPORTED_MODULE_0__["CLEAN_NONSAVED_HTYPES"],
+  payload: {
+    id: ++cleanNonsavedHtypesId
+  }
+});
+const loadUser = content => ({
+  type: _types__WEBPACK_IMPORTED_MODULE_0__["LOAD_USER"],
+  payload: {
+    id: ++loadUserId,
+    content
+  }
+});
+const cleanUser = () => ({
+  type: _types__WEBPACK_IMPORTED_MODULE_0__["CLEAN_USER"],
+  payload: {
+    id: ++cleanUserId
+  }
+});
 
 /***/ }),
 
@@ -2039,7 +4052,7 @@ const Container = styled_components__WEBPACK_IMPORTED_MODULE_2___default.a.div.w
 /*!************************************!*\
   !*** ./src/redux/actions/types.ts ***!
   \************************************/
-/*! exports provided: REMOVE_ROUTE, UPDATE_ROUTE_STATE, UPDATE_SELECTOR_MANAGER_STATE, UPDATE_INPUT_SCREEN_UI, INITIALIZE_INPUT_SCREEN_UI, HEADLINE, INITIALIZE_HTYPE, DELETE_HTYPE, EMPTY_SELECTED_COMPONENT_ID, UPDATE_SIMULATOR_SELECTION, SET_SELECTED_COMPONENT, UPDATE_COMPONENTS_ORDER */
+/*! exports provided: REMOVE_ROUTE, UPDATE_ROUTE_STATE, UPDATE_SELECTOR_MANAGER_STATE, UPDATE_INPUT_SCREEN_UI, INITIALIZE_INPUT_SCREEN_UI, HEADLINE, INITIALIZE_HTYPE, DELETE_HTYPE, EMPTY_SELECTED_COMPONENT_ID, UPDATE_SIMULATOR_SELECTION, SET_SELECTED_COMPONENT, UPDATE_COMPONENTS_ORDER, CLEAN_NONSAVED_HTYPES, STOP_AND_POI_MANAGER_CONTROLLER, SET_TITLE, LOAD_USER, CLEAN_USER */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2056,6 +4069,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE_SIMULATOR_SELECTION", function() { return UPDATE_SIMULATOR_SELECTION; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_SELECTED_COMPONENT", function() { return SET_SELECTED_COMPONENT; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE_COMPONENTS_ORDER", function() { return UPDATE_COMPONENTS_ORDER; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CLEAN_NONSAVED_HTYPES", function() { return CLEAN_NONSAVED_HTYPES; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "STOP_AND_POI_MANAGER_CONTROLLER", function() { return STOP_AND_POI_MANAGER_CONTROLLER; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_TITLE", function() { return SET_TITLE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOAD_USER", function() { return LOAD_USER; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CLEAN_USER", function() { return CLEAN_USER; });
 const REMOVE_ROUTE = "REMOVE_ROUTE";
 const UPDATE_ROUTE_STATE = "UPDATE_ROUTE_STATE";
 const UPDATE_SELECTOR_MANAGER_STATE = "UPDATE_SELECTOR_MANAGER_STATE";
@@ -2068,6 +4086,98 @@ const EMPTY_SELECTED_COMPONENT_ID = "EMPTY_SELECTED_COMPONENT_ID";
 const UPDATE_SIMULATOR_SELECTION = "UPDATE_SIMULATOR_SELECTION";
 const SET_SELECTED_COMPONENT = "SET_SELECTED_COMPONENT";
 const UPDATE_COMPONENTS_ORDER = "UPDATE_COMPONENTS_ORDER";
+const CLEAN_NONSAVED_HTYPES = "CLEAN_NONSAVED_HTYPES";
+const STOP_AND_POI_MANAGER_CONTROLLER = "STOP_AND_POI_MANAGER_CONTROLLER";
+const SET_TITLE = "SET_TITLE";
+const LOAD_USER = "LOAD_USER";
+const CLEAN_USER = "CLEAN_USER";
+
+/***/ }),
+
+/***/ "./src/redux/actions/uiActions.ts":
+/*!****************************************!*\
+  !*** ./src/redux/actions/uiActions.ts ***!
+  \****************************************/
+/*! exports provided: removeRoute, updateOrder, updateSelectorManagerState, updateInputScreenUi, initializeInputScreenUi, updateSimulatorSelection, stopAndPoiManagerController, setTitle */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "removeRoute", function() { return removeRoute; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateOrder", function() { return updateOrder; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateSelectorManagerState", function() { return updateSelectorManagerState; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateInputScreenUi", function() { return updateInputScreenUi; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "initializeInputScreenUi", function() { return initializeInputScreenUi; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateSimulatorSelection", function() { return updateSimulatorSelection; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "stopAndPoiManagerController", function() { return stopAndPoiManagerController; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setTitle", function() { return setTitle; });
+/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./types */ "./src/redux/actions/types.ts");
+ //includes route management actions
+
+let routeId = 0;
+let updateId = 0;
+let updateManagerStateId = 0;
+let updateInputScreenUiId = 0;
+let initializeInputScreenUiId = 0;
+let updateSimulatorSelectionId = 0;
+let stopAndPoiManagerControllerId = 0;
+let setTitleId = 0;
+const removeRoute = content => ({
+  type: _types__WEBPACK_IMPORTED_MODULE_0__["REMOVE_ROUTE"],
+  payload: {
+    id: ++routeId,
+    content
+  }
+});
+const updateOrder = content => ({
+  type: _types__WEBPACK_IMPORTED_MODULE_0__["UPDATE_ROUTE_STATE"],
+  payload: {
+    id: ++updateId,
+    content
+  }
+});
+const updateSelectorManagerState = content => ({
+  type: _types__WEBPACK_IMPORTED_MODULE_0__["UPDATE_SELECTOR_MANAGER_STATE"],
+  payload: {
+    id: ++updateManagerStateId,
+    content
+  }
+});
+const updateInputScreenUi = content => ({
+  type: _types__WEBPACK_IMPORTED_MODULE_0__["UPDATE_INPUT_SCREEN_UI"],
+  payload: {
+    id: ++updateInputScreenUiId,
+    content
+  }
+});
+const initializeInputScreenUi = content => ({
+  type: _types__WEBPACK_IMPORTED_MODULE_0__["INITIALIZE_INPUT_SCREEN_UI"],
+  payload: {
+    id: ++initializeInputScreenUiId,
+    content
+  }
+});
+const updateSimulatorSelection = content => ({
+  type: _types__WEBPACK_IMPORTED_MODULE_0__["UPDATE_SIMULATOR_SELECTION"],
+  payload: {
+    id: ++updateSimulatorSelectionId,
+    content
+  }
+});
+const stopAndPoiManagerController = content => ({
+  type: _types__WEBPACK_IMPORTED_MODULE_0__["STOP_AND_POI_MANAGER_CONTROLLER"],
+  payload: {
+    id: ++stopAndPoiManagerControllerId,
+    content
+  }
+});
+const setTitle = content => ({
+  type: _types__WEBPACK_IMPORTED_MODULE_0__["SET_TITLE"],
+  payload: {
+    id: ++setTitleId,
+    content
+  }
+});
 
 /***/ }),
 
@@ -2080,10 +4190,13 @@ const UPDATE_COMPONENTS_ORDER = "UPDATE_COMPONENTS_ORDER";
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/objectSpread */ "./node_modules/@babel/runtime-corejs2/helpers/esm/objectSpread.js");
-/* harmony import */ var _actions_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/types */ "./src/redux/actions/types.ts");
-/* harmony import */ var nanoid__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! nanoid */ "nanoid");
-/* harmony import */ var nanoid__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(nanoid__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_entries__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/object/entries */ "./node_modules/@babel/runtime-corejs2/core-js/object/entries.js");
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_entries__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_object_entries__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/objectSpread */ "./node_modules/@babel/runtime-corejs2/helpers/esm/objectSpread.js");
+/* harmony import */ var _actions_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions/types */ "./src/redux/actions/types.ts");
+/* harmony import */ var nanoid__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! nanoid */ "nanoid");
+/* harmony import */ var nanoid__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(nanoid__WEBPACK_IMPORTED_MODULE_3__);
+
 
 
  //HTYPE is the hierarchy type, aka route, stop, etc
@@ -2103,23 +4216,64 @@ const initialState = {
   ROUTES: {},
   STOPS: {},
   POIS: {}
-};
+}; //make a reducer that cleans up the routes stops etc when you go to the route management screen.
+
 /* harmony default export */ __webpack_exports__["default"] = (function (state = initialState, action) {
   switch (action.type) {
-    case _actions_types__WEBPACK_IMPORTED_MODULE_1__["INITIALIZE_HTYPE"]:
+    case _actions_types__WEBPACK_IMPORTED_MODULE_2__["LOAD_USER"]:
+      {
+        const {
+          name,
+          email,
+          ROUTES,
+          STOPS,
+          POIS
+        } = action.payload.content;
+        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state, {
+          user: {
+            name: name,
+            ROUTES: [ROUTES],
+            STOPS: [POIS],
+            POIS: [STOPS],
+            email: email
+          }
+        });
+      }
+
+    case _actions_types__WEBPACK_IMPORTED_MODULE_2__["CLEAN_USER"]:
+      {
+        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state, {
+          user: {
+            name: '',
+            ROUTES: [],
+            STOPS: [],
+            POIS: [],
+            email: ''
+          },
+          //the id of the hcomponent being worked on
+          selectedHtypeId: '',
+          selectedComponentId: "empty",
+          ROUTES: {},
+          STOPS: {},
+          POIS: {}
+        });
+      }
+
+    case _actions_types__WEBPACK_IMPORTED_MODULE_2__["INITIALIZE_HTYPE"]:
       {
         //     const selectedDispatch = action.payload.content.dispatch;
         const htype = action.payload.content.htype;
-        const htypeid = htype.substring(0, 2) + "_" + nanoid__WEBPACK_IMPORTED_MODULE_2___default()(8);
-        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
-          user: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state.user, {
+        const htypeid = htype.substring(0, 2) + "_" + nanoid__WEBPACK_IMPORTED_MODULE_3___default()(8);
+        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state, {
+          user: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state.user, {
             [htype]: [...state.user[htype], htypeid]
           }),
           selectedHtypeId: htypeid,
-          [htype]: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state[htype], {
+          [htype]: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state[htype], {
             //taking the first two letters of the hierarchy type and combining it with a unique id of length 8
             [htypeid]: {
               //take the name of the account owner
+              saved: false,
               owner: state.user.name,
               //name to be filled out when the route is finished
               name: "",
@@ -2130,18 +4284,18 @@ const initialState = {
         });
       }
 
-    case _actions_types__WEBPACK_IMPORTED_MODULE_1__["EMPTY_SELECTED_COMPONENT_ID"]:
+    case _actions_types__WEBPACK_IMPORTED_MODULE_2__["EMPTY_SELECTED_COMPONENT_ID"]:
       {
-        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
+        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state, {
           selectedComponentId: "empty"
         });
       }
 
-    case _actions_types__WEBPACK_IMPORTED_MODULE_1__["DELETE_HTYPE"]:
+    case _actions_types__WEBPACK_IMPORTED_MODULE_2__["DELETE_HTYPE"]:
       {
         const htype = action.payload.content.htype;
         const htypeid = action.payload.content.htypeid;
-        delete state[htype.toLowerCase()][htypeid];
+        delete state[htype][htypeid];
         const index = state.user[htype].indexOf(htypeid);
         delete state.user[htype][index];
         return state;
@@ -2170,7 +4324,22 @@ const initialState = {
        },
     */
 
-    case _actions_types__WEBPACK_IMPORTED_MODULE_1__["HEADLINE"]:
+    case _actions_types__WEBPACK_IMPORTED_MODULE_2__["CLEAN_NONSAVED_HTYPES"]:
+      {
+        const htypes = ["ROUTES", "STOPS", "POIS"]; // const htype= action.payload.content.headline
+
+        for (var j in htypes) {
+          for (let [key] of _babel_runtime_corejs2_core_js_object_entries__WEBPACK_IMPORTED_MODULE_0___default()(state[htypes[j]])) {
+            if (state[htypes[j]][key].saved != true) {
+              delete state[htypes[j]][key];
+            }
+          }
+        }
+
+        return state;
+      }
+
+    case _actions_types__WEBPACK_IMPORTED_MODULE_2__["HEADLINE"]:
       {
         const headline = action.payload.content.headline;
         const htype = action.payload.content.type;
@@ -2181,15 +4350,15 @@ const initialState = {
           case "ADD_HEADLINE":
             {
               //create the id because it has not been changed before
-              const headlineId = "HL_" + nanoid__WEBPACK_IMPORTED_MODULE_2___default()(8); //rebuilding the state object to add new data
+              const headlineId = "HL_" + nanoid__WEBPACK_IMPORTED_MODULE_3___default()(8); //rebuilding the state object to add new data
 
               console.log(state);
-              return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
+              return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state, {
                 selectedComponentId: headlineId,
-                [htype]: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state[htype], {
-                  [htypeid]: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state[htype][htypeid], {
+                [htype]: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state[htype], {
+                  [htypeid]: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state[htype][htypeid], {
                     order: [...state[htype][htypeid].order, headlineId],
-                    components: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state[htype][htypeid].components, {
+                    components: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state[htype][htypeid].components, {
                       [headlineId]: {
                         id: headlineId,
                         type: "HEADLINE",
@@ -2205,10 +4374,10 @@ const initialState = {
           case "UPDATE_HEADLINE":
             {
               const headlineId = action.payload.content.selectedComponentId;
-              return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
-                [htype]: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state[htype], {
-                  [htypeid]: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state[htype][htypeid], {
-                    components: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state[htype][htypeid].components, {
+              return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state, {
+                [htype]: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state[htype], {
+                  [htypeid]: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state[htype][htypeid], {
+                    components: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state[htype][htypeid].components, {
                       [headlineId]: {
                         id: headlineId,
                         type: "HEADLINE",
@@ -2222,14 +4391,14 @@ const initialState = {
         }
       }
 
-    case _actions_types__WEBPACK_IMPORTED_MODULE_1__["UPDATE_COMPONENTS_ORDER"]:
+    case _actions_types__WEBPACK_IMPORTED_MODULE_2__["UPDATE_COMPONENTS_ORDER"]:
       {
         const newOrder = action.payload.content.newOrder;
         const htype = action.payload.content.htype;
         const htypeId = action.payload.content.htypeId;
-        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
-          [htype]: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state[htype], {
-            [htypeId]: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state[htype][htypeId], {
+        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state, {
+          [htype]: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state[htype], {
+            [htypeId]: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state[htype][htypeId], {
               order: newOrder
             })
           })
@@ -2237,10 +4406,10 @@ const initialState = {
       }
       ;
 
-    case _actions_types__WEBPACK_IMPORTED_MODULE_1__["SET_SELECTED_COMPONENT"]:
+    case _actions_types__WEBPACK_IMPORTED_MODULE_2__["SET_SELECTED_COMPONENT"]:
       {
         const selectedId = action.payload.content.selectedComponentId;
-        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
+        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state, {
           selectedComponentId: selectedId
         });
       }
@@ -2324,110 +4493,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "redux");
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(redux__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _uiReducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./uiReducer */ "./src/redux/reducers/uiReducer.ts");
-/* harmony import */ var _selectorReducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./selectorReducer */ "./src/redux/reducers/selectorReducer.ts");
-/* harmony import */ var _dataReducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./dataReducer */ "./src/redux/reducers/dataReducer.ts");
-
+/* harmony import */ var _dataReducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./dataReducer */ "./src/redux/reducers/dataReducer.ts");
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
   ui: _uiReducer__WEBPACK_IMPORTED_MODULE_1__["default"],
-  selector: _selectorReducer__WEBPACK_IMPORTED_MODULE_2__["default"],
-  data: _dataReducer__WEBPACK_IMPORTED_MODULE_3__["default"]
+  data: _dataReducer__WEBPACK_IMPORTED_MODULE_2__["default"]
 }));
-
-/***/ }),
-
-/***/ "./src/redux/reducers/selectorReducer.ts":
-/*!***********************************************!*\
-  !*** ./src/redux/reducers/selectorReducer.ts ***!
-  \***********************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/objectSpread */ "./node_modules/@babel/runtime-corejs2/helpers/esm/objectSpread.js");
-/* harmony import */ var _actions_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/types */ "./src/redux/actions/types.ts");
-
-
-const initialState = {
-  ROUTES: {
-    selected: false,
-    id: ""
-  },
-  STOPS: {
-    selected: false,
-    id: ""
-  },
-  POIS: {
-    selected: false,
-    id: ""
-  }
-};
-/* harmony default export */ __webpack_exports__["default"] = (function (state = initialState, action) {
-  switch (action.type) {
-    case _actions_types__WEBPACK_IMPORTED_MODULE_1__["UPDATE_SELECTOR_MANAGER_STATE"]:
-      {
-        const selectedId = action.payload.content.itemId;
-        const selectedDispatch = action.payload.content.dispatch;
-
-        switch (selectedDispatch) {
-          case "ROUTE_SELECT":
-            {
-              return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
-                ROUTES: {
-                  selected: true,
-                  id: selectedId
-                },
-                STOPS: {
-                  selected: false,
-                  id: ""
-                }
-              });
-            }
-
-          case "ROUTE_DESELECT":
-            {
-              return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
-                ROUTES: {
-                  selected: false,
-                  id: ""
-                },
-                STOPS: {
-                  selected: false,
-                  id: ""
-                }
-              });
-            }
-
-          case "STOP_SELECT":
-            {
-              return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
-                STOPS: {
-                  selected: true,
-                  id: selectedId
-                }
-              });
-            }
-
-          case "STOP_DESELECT":
-            {
-              return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
-                STOPS: {
-                  selected: false,
-                  id: ""
-                }
-              });
-            }
-        }
-      }
-      ;
-
-    default:
-      return state;
-  }
-});
 
 /***/ }),
 
@@ -2511,17 +4584,18 @@ const initialState = {
     },
     "column-2": {
       id: "column-2",
-      title: "Stop",
+      title: "Stops",
       ids: ["s213141", "s54321"]
     },
     "column-3": {
       id: "column-3",
-      title: "Poi",
+      title: "Pois",
       ids: ["p1314134"]
     }
   },
   columnOrder: ["column-1", "column-2", "column-3"],
-  menu: {
+  title: "",
+  inputMenu: {
     htype: "ROUTES",
     //which component is shown in the menu
     show: "MENU",
@@ -2568,6 +4642,14 @@ const initialState = {
   simulator: {
     show: "ROUTES",
     selected: "empty"
+  },
+  selector: {
+    lastManagerUiCode: "",
+    selectedROUTES: "",
+    selectedSTOPS: "",
+    selectedPOIS: "",
+    managerUiCode: "RO",
+    htype: ""
   }
 };
 /*simulator states
@@ -2575,11 +4657,90 @@ const initialState = {
 
 /* harmony default export */ __webpack_exports__["default"] = (function (state = initialState, action) {
   switch (action.type) {
+    case _actions_types__WEBPACK_IMPORTED_MODULE_1__["UPDATE_SELECTOR_MANAGER_STATE"]:
+      {
+        const selectedId = action.payload.content.selectedId;
+        const htype = action.payload.content.htype;
+        let managerUiCode = "RO";
+        let selectedROUTES = "";
+        let selectedSTOPS = "";
+        let selectedPOIS = "";
+
+        if (htype == "ROUTES" && state.selector.selectedROUTES != selectedId) {
+          managerUiCode = "ROST";
+          selectedROUTES = selectedId;
+          selectedSTOPS = "";
+          selectedPOIS = "";
+        } else if (htype == "ROUTES" && state.selector.selectedROUTES == selectedId) {
+          managerUiCode = "RO";
+          selectedROUTES = "";
+          selectedSTOPS = "";
+          selectedPOIS = "";
+        } else if (htype == "STOPS" && state.selector.selectedSTOPS != selectedId) {
+          managerUiCode = "ROSTPO";
+          selectedROUTES = state.selector.selectedROUTES;
+          selectedSTOPS = selectedId;
+          selectedPOIS = "";
+        } else if (htype == "STOPS" && state.selector.selectedSTOPS == selectedId) {
+          managerUiCode = "ROST";
+          selectedROUTES = state.selector.selectedROUTES;
+          selectedSTOPS = "";
+          selectedPOIS = "";
+        } else if (htype == "POIS" && state.selector.selectedPOIS != selectedId) {
+          managerUiCode = "ROSTPO";
+          selectedROUTES = state.selector.selectedROUTES;
+          selectedSTOPS = state.selector.selectedSTOPS;
+          selectedPOIS = selectedId;
+        } else if (htype == "POIS" && state.selector.selectedPOIS == selectedId) {
+          managerUiCode = "ROSTPO";
+          selectedROUTES = state.selector.selectedROUTES;
+          selectedSTOPS = state.selector.selectedSTOPS;
+          selectedPOIS = "";
+        }
+
+        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
+          selector: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state.selector, {
+            selectedROUTES: selectedROUTES,
+            selectedSTOPS: selectedSTOPS,
+            selectedPOIS: selectedPOIS,
+            managerUiCode: managerUiCode
+          })
+        });
+      }
+
+    case _actions_types__WEBPACK_IMPORTED_MODULE_1__["STOP_AND_POI_MANAGER_CONTROLLER"]:
+      {
+        if (state.selector.managerUiCode != "MA") {
+          const htype = action.payload.content.htype;
+          return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
+            selector: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state.selector, {
+              lastManagerUiCode: state.selector.managerUiCode,
+              htype: htype,
+              managerUiCode: "MA"
+            })
+          });
+        } else {
+          return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
+            selector: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state.selector, {
+              managerUiCode: state.selector.lastManagerUiCode
+            })
+          });
+        }
+      }
+
+    case _actions_types__WEBPACK_IMPORTED_MODULE_1__["SET_TITLE"]:
+      {
+        const title = action.payload.content.title;
+        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
+          title: title
+        });
+      }
+
     case _actions_types__WEBPACK_IMPORTED_MODULE_1__["INITIALIZE_INPUT_SCREEN_UI"]:
       {
         const selectedDispatch = action.payload.content.dispatch;
         return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
-          menu: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state.menu, {
+          menu: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state.inputMenu, {
             //menu for what kind of hierarchy type
             htype: selectedDispatch,
             //which component is shown in the menu //menu, headline input, image gallery etc.
@@ -2592,7 +4753,7 @@ const initialState = {
       {
         const selectedDispatch = action.payload.content;
         return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
-          menu: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state.menu, {
+          inputMenu: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state.inputMenu, {
             //which component is shown in the menu //menu, headline input, image gallery etc.
             show: selectedDispatch
           })
@@ -2659,15 +4820,128 @@ const initialState = {
 
 /***/ }),
 
-/***/ "./src/redux/store.js":
-/*!****************************!*\
-  !*** ./src/redux/store.js ***!
-  \****************************/
-/*! exports provided: default */
+/***/ "./src/redux/redux.jsx":
+/*!*****************************!*\
+  !*** ./src/redux/redux.jsx ***!
+  \*****************************/
+/*! exports provided: withRedux */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "withRedux", function() { return withRedux; });
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/objectSpread */ "./node_modules/@babel/runtime-corejs2/helpers/esm/objectSpread.js");
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/extends */ "./node_modules/@babel/runtime-corejs2/helpers/esm/extends.js");
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/objectWithoutProperties */ "./node_modules/@babel/runtime-corejs2/helpers/esm/objectWithoutProperties.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-redux */ "react-redux");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./store */ "./src/redux/store.js");
+/* harmony import */ var next_app__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! next/app */ "./node_modules/next/app.js");
+/* harmony import */ var next_app__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(next_app__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var redux_persist_integration_react__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! redux-persist/integration/react */ "redux-persist/integration/react");
+/* harmony import */ var redux_persist_integration_react__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(redux_persist_integration_react__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var redux_persist__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! redux-persist */ "redux-persist");
+/* harmony import */ var redux_persist__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(redux_persist__WEBPACK_IMPORTED_MODULE_8__);
+
+
+
+var _jsxFileName = "/home/christian/Development/fible-frontend-nextjs/src/redux/redux.jsx";
+var __jsx = react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement;
+
+
+
+
+
+
+const withRedux = (PageComponent, {
+  ssr = true
+} = {}) => {
+  const WithRedux = (_ref) => {
+    let {
+      initialReduxState
+    } = _ref,
+        props = Object(_babel_runtime_corejs2_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_2__["default"])(_ref, ["initialReduxState"]);
+
+    const store = getOrInitializeStore(initialReduxState);
+    return __jsx(react_redux__WEBPACK_IMPORTED_MODULE_4__["Provider"], {
+      store: store,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 15
+      },
+      __self: undefined
+    }, __jsx(PageComponent, Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_1__["default"])({}, props, {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 17
+      },
+      __self: undefined
+    })));
+  }; // Make sure people don't use this HOC on _app.js level
+
+
+  if (true) {
+    const isAppHoc = PageComponent === next_app__WEBPACK_IMPORTED_MODULE_6___default.a || PageComponent.prototype instanceof next_app__WEBPACK_IMPORTED_MODULE_6___default.a;
+
+    if (isAppHoc) {
+      throw new Error('The withRedux HOC only works with PageComponents');
+    }
+  } // Set the correct displayName in development
+
+
+  if (true) {
+    const displayName = PageComponent.displayName || PageComponent.name || 'Component';
+    WithRedux.displayName = `withRedux(${displayName})`;
+  }
+
+  if (ssr || PageComponent.getInitialProps) {
+    WithRedux.getInitialProps = async context => {
+      // Get or Create the store with `undefined` as initialState
+      // This allows you to set a custom default initialState
+      const reduxStore = getOrInitializeStore(); // Provide the store to getInitialProps of pages
+
+      context.reduxStore = reduxStore; // Run getInitialProps from HOCed PageComponent
+
+      const pageProps = typeof PageComponent.getInitialProps === 'function' ? await PageComponent.getInitialProps(context) : {}; // Pass props to PageComponent
+
+      return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, pageProps, {
+        initialReduxState: reduxStore.getState()
+      });
+    };
+  }
+
+  return WithRedux;
+};
+let reduxStore;
+
+const getOrInitializeStore = initialState => {
+  // Always make a new store if server, otherwise state is shared between requests
+  if (true) {
+    return Object(_store__WEBPACK_IMPORTED_MODULE_5__["initializeStore"])(initialState);
+  } // Create store if unavailable on the client and set it on the window object
+
+
+  if (!reduxStore) {
+    reduxStore = Object(_store__WEBPACK_IMPORTED_MODULE_5__["initializeStore"])(initialState);
+  }
+
+  return reduxStore;
+};
+
+/***/ }),
+
+/***/ "./src/redux/store.js":
+/*!****************************!*\
+  !*** ./src/redux/store.js ***!
+  \****************************/
+/*! exports provided: initializeStore */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "initializeStore", function() { return initializeStore; });
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "redux");
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(redux__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var redux_thunk__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! redux-thunk */ "redux-thunk");
@@ -2675,39 +4949,196 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _reducers_index__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./reducers/index */ "./src/redux/reducers/index.ts");
 /* harmony import */ var redux_devtools_extension__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! redux-devtools-extension */ "redux-devtools-extension");
 /* harmony import */ var redux_devtools_extension__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(redux_devtools_extension__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var redux_persist__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! redux-persist */ "redux-persist");
+/* harmony import */ var redux_persist__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(redux_persist__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var redux_persist_lib_storage__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! redux-persist/lib/storage */ "redux-persist/lib/storage");
+/* harmony import */ var redux_persist_lib_storage__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(redux_persist_lib_storage__WEBPACK_IMPORTED_MODULE_5__);
 
 
 
-
-/* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(_reducers_index__WEBPACK_IMPORTED_MODULE_2__["default"], Object(redux_devtools_extension__WEBPACK_IMPORTED_MODULE_3__["composeWithDevTools"])(Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_1___default.a)))); //export default createStore(rootReducer, applyMiddleware(thunk));
-
-/*
+ //export default createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
+//export default createStore(rootReducer, applyMiddleware(thunk));
 ///import { createStore } from 'redux'
-import { persistStore, persistReducer } from 'redux-persist'
-import storage from 'redux-persist/lib/storage' // defaults to localStorage for web
 
+
+ // defaults to localStorage for web
 //import rootReducer from './reducers'
 
+const initialState = {
+  data: {
+    user: {
+      name: "Christian",
+      ROUTES: [],
+      STOPS: [],
+      POIS: [],
+      email: ""
+    },
+    //the id of the hcomponent being worked on
+    selectedHtypeId: "",
+    selectedComponentId: "empty",
+    ROUTES: {},
+    STOPS: {},
+    POIS: {}
+  },
+  ui: {
+    routes: {
+      "h12345": {
+        id: "h12345",
+        headline: "Christian's Norway Route",
+        subheadline: "Fjords you just have to explore",
+        stops: ["Bergen", "Stavanger", "Molde", "Ålesund"],
+        attractions: ["Hiking", "Swimming", "Nature"]
+      },
+      "h54321": {
+        id: "h54321",
+        headline: "Paul's South Tyrol Route",
+        subheadline: "Explore the Dolomites",
+        stops: ["Bolzano", "Trento"],
+        attractions: ["Hiking", "Swimming", "Nature", "Food"]
+      },
+      "h12354": {
+        id: "h12354",
+        headline: "Simon's Allgäu Route",
+        subheadline: "Experience Neuschweinstein and so much more!",
+        stops: ["Mammendorf", "Füssen"],
+        attractions: ["Hiking", "Swimming", "Nature", "Sking"]
+      }
+    },
+    stops: {
+      "s213141": {
+        id: "s213141",
+        headline: "Bergen",
+        subheadline: "Byen ombringet av fjell",
+        pois: ["restaurant", "accommodation", "activities"],
+        location: {
+          lat: 1.2222,
+          lng: 1445666
+        }
+      },
+      "s54321": {
+        id: "s54321",
+        headline: "Stavanger",
+        subheadline: "Oljehovedstaden",
+        pois: ["restaurant", "accommodation", "activities"],
+        location: {
+          lat: 1.5555,
+          lng: 1.214134
+        }
+      }
+    },
+    pois: {
+      "p1314134": {
+        id: "p1314134",
+        headline: "Bergen Fjordrestaurant",
+        subheadline: "Fantastisk fisk og sjømat!",
+        location: {
+          lat: 1.2222,
+          lng: 1445666
+        },
+        address: "Bryggen 15a",
+        website: "www.bergen-fjordrestaurant.no"
+      }
+    },
+    columns: {
+      "column-1": {
+        id: "column-1",
+        title: "Routes",
+        ids: ["h12345", "h54321", "h12354"]
+      },
+      "column-2": {
+        id: "column-2",
+        title: "Stops",
+        ids: ["s213141", "s54321"]
+      },
+      "column-3": {
+        id: "column-3",
+        title: "Pois",
+        ids: ["p1314134"]
+      }
+    },
+    columnOrder: ["column-1", "column-2", "column-3"],
+    title: "Welcome Christian, here are your routes!",
+    inputMenu: {
+      htype: "ROUTES",
+      //which component is shown in the menu
+      show: "MENU",
+      ROUTES: [{
+        name: "Headline",
+        id: "headlineInput",
+        dispatch: "HEADLINE_INPUT"
+      }, {
+        name: "Subheadline",
+        id: "subheadlineInput",
+        dispatch: "SUBHEADLINE_INPUT"
+      }, {
+        name: "Image Gallery",
+        id: "imageGalleryInput",
+        dispatch: "IMAGE_GALLERY_INPUT"
+      }],
+      STOPS: [{
+        name: "Headline",
+        id: "headlineInput",
+        dispatch: "HEADLINE_INPUT"
+      }, {
+        name: "Subheadline",
+        id: "subheadlineInput",
+        dispatch: "SUBHEADLINE_INPUT"
+      }, {
+        name: "Image Gallery",
+        id: "imageGalleryInput",
+        dispatch: "IMAGE_GALLERY_INPUT"
+      }],
+      POIS: [{
+        name: "Headline",
+        id: "headlineInput",
+        dispatch: "HEADLINE_INPUT"
+      }, {
+        name: "Subheadline",
+        id: "subheadlineInput",
+        dispatch: "SUBHEADLINE_INPUT"
+      }, {
+        name: "Image Gallery",
+        id: "imageGalleryInput",
+        dispatch: "IMAGE_GALLERY_INPUT"
+      }]
+    },
+    simulator: {
+      show: "ROUTES",
+      selected: "empty"
+    },
+    selector: {
+      lastManagerUiCode: "",
+      selectedROUTES: "",
+      selectedSTOPS: "",
+      selectedPOIS: "",
+      managerUiCode: "RO",
+      htype: ""
+    }
+  }
+};
 const persistConfig = {
   key: 'root',
-  storage,
-}
+  storage: (redux_persist_lib_storage__WEBPACK_IMPORTED_MODULE_5___default())
+};
+const persistedReducer = Object(redux_persist__WEBPACK_IMPORTED_MODULE_4__["persistReducer"])(persistConfig, _reducers_index__WEBPACK_IMPORTED_MODULE_2__["default"]); //export const Store = createStore(persistedReducer, composeWithDevTools(applyMiddleware(thunk)));
+//export const persistor = persistStore(initialState);
 
-const persistedReducer = persistReducer(persistConfig, rootReducer)
-
-export const store = createStore(persistedReducer, composeWithDevTools(applyMiddleware(thunk)));
-export const persistor = persistStore(store);*/
-
+const initializeStore = (preloadedState = initialState) => {
+  return Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(persistedReducer, preloadedState, Object(redux_devtools_extension__WEBPACK_IMPORTED_MODULE_3__["composeWithDevTools"])(Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_1___default.a)));
+};
 /*
+
 export default () => {
-  let store = createStore(persistedReducer, composeWithDevTools(applyMiddleware(thunk)));
+  let initializeStore = createStore(persistedReducer, composeWithDevTools(applyMiddleware(thunk)));
   let persistor = persistStore(store)
-  return { store, persistor }
-} */
+  return { initializeStore, persistor }
+} 
+
+*/
 
 /***/ }),
 
-/***/ 6:
+/***/ 5:
 /*!*********************************************!*\
   !*** multi ./src/pages/routemanagement.tsx ***!
   \*********************************************/
@@ -2716,6 +5147,28 @@ export default () => {
 
 module.exports = __webpack_require__(/*! /home/christian/Development/fible-frontend-nextjs/src/pages/routemanagement.tsx */"./src/pages/routemanagement.tsx");
 
+
+/***/ }),
+
+/***/ "@apollo/react-hooks":
+/*!**************************************!*\
+  !*** external "@apollo/react-hooks" ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("@apollo/react-hooks");
+
+/***/ }),
+
+/***/ "@apollo/react-ssr":
+/*!************************************!*\
+  !*** external "@apollo/react-ssr" ***!
+  \************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("@apollo/react-ssr");
 
 /***/ }),
 
@@ -2738,6 +5191,61 @@ module.exports = require("@fortawesome/free-solid-svg-icons");
 /***/ (function(module, exports) {
 
 module.exports = require("@fortawesome/react-fontawesome");
+
+/***/ }),
+
+/***/ "apollo-cache-inmemory":
+/*!****************************************!*\
+  !*** external "apollo-cache-inmemory" ***!
+  \****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("apollo-cache-inmemory");
+
+/***/ }),
+
+/***/ "apollo-client":
+/*!********************************!*\
+  !*** external "apollo-client" ***!
+  \********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("apollo-client");
+
+/***/ }),
+
+/***/ "apollo-link-context":
+/*!**************************************!*\
+  !*** external "apollo-link-context" ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("apollo-link-context");
+
+/***/ }),
+
+/***/ "apollo-link-http":
+/*!***********************************!*\
+  !*** external "apollo-link-http" ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("apollo-link-http");
+
+/***/ }),
+
+/***/ "cookie":
+/*!*************************!*\
+  !*** external "cookie" ***!
+  \*************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("cookie");
 
 /***/ }),
 
@@ -2796,6 +5304,17 @@ module.exports = require("core-js/library/fn/object/define-property");
 
 /***/ }),
 
+/***/ "core-js/library/fn/object/entries":
+/*!****************************************************!*\
+  !*** external "core-js/library/fn/object/entries" ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("core-js/library/fn/object/entries");
+
+/***/ }),
+
 /***/ "core-js/library/fn/object/get-own-property-descriptor":
 /*!************************************************************************!*\
   !*** external "core-js/library/fn/object/get-own-property-descriptor" ***!
@@ -2840,6 +5359,50 @@ module.exports = require("core-js/library/fn/promise");
 
 /***/ }),
 
+/***/ "graphql-tag":
+/*!******************************!*\
+  !*** external "graphql-tag" ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("graphql-tag");
+
+/***/ }),
+
+/***/ "https-proxy-agent":
+/*!************************************!*\
+  !*** external "https-proxy-agent" ***!
+  \************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("https-proxy-agent");
+
+/***/ }),
+
+/***/ "isomorphic-unfetch":
+/*!*************************************!*\
+  !*** external "isomorphic-unfetch" ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("isomorphic-unfetch");
+
+/***/ }),
+
+/***/ "js-cookie":
+/*!****************************!*\
+  !*** external "js-cookie" ***!
+  \****************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("js-cookie");
+
+/***/ }),
+
 /***/ "nanoid":
 /*!*************************!*\
   !*** external "nanoid" ***!
@@ -2851,14 +5414,14 @@ module.exports = require("nanoid");
 
 /***/ }),
 
-/***/ "next/dynamic":
-/*!*******************************!*\
-  !*** external "next/dynamic" ***!
-  \*******************************/
+/***/ "next/head":
+/*!****************************!*\
+  !*** external "next/head" ***!
+  \****************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = require("next/dynamic");
+module.exports = require("next/head");
 
 /***/ }),
 
@@ -2917,6 +5480,17 @@ module.exports = require("react-beautiful-dnd");
 
 /***/ }),
 
+/***/ "react-draggable":
+/*!**********************************!*\
+  !*** external "react-draggable" ***!
+  \**********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("react-draggable");
+
+/***/ }),
+
 /***/ "react-is":
 /*!***************************!*\
   !*** external "react-is" ***!
@@ -2958,6 +5532,39 @@ module.exports = require("redux");
 /***/ (function(module, exports) {
 
 module.exports = require("redux-devtools-extension");
+
+/***/ }),
+
+/***/ "redux-persist":
+/*!********************************!*\
+  !*** external "redux-persist" ***!
+  \********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("redux-persist");
+
+/***/ }),
+
+/***/ "redux-persist/integration/react":
+/*!**************************************************!*\
+  !*** external "redux-persist/integration/react" ***!
+  \**************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("redux-persist/integration/react");
+
+/***/ }),
+
+/***/ "redux-persist/lib/storage":
+/*!********************************************!*\
+  !*** external "redux-persist/lib/storage" ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("redux-persist/lib/storage");
 
 /***/ }),
 

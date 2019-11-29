@@ -3,6 +3,7 @@ import React from 'react'
 import { ThemeProvider } from 'styled-components'
 import GlobalStyle from '../themes/globalsyles';
 
+
 const theme = {
   colors: {
     primary: '#0070f3'
@@ -22,3 +23,4 @@ export default class MyApp extends App {
     )
   }
 }
+//      <PersistGate loading={null} persistor={persistor}>

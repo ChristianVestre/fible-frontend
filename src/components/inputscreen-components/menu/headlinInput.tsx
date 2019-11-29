@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { addOrUpdateHeadline, emptySelectedComponent } from '../../../redux/actions/dataActions'
 import { updateInputScreenUi, updateSimulatorSelection } from '../../../redux/actions/uiActions'
 import { connect } from 'react-redux';
-
+import TextareaAutosize from 'react-autosize-textarea';
 
 
 class HeadlineInput extends React.Component<{ updateInputScreenUi: Function, dataState: any, uiState: any, addOrUpdateHeadline: Function, emptySelectedComponent: Function, updateSimulatorSelection:Function }> {
@@ -18,7 +18,7 @@ class HeadlineInput extends React.Component<{ updateInputScreenUi: Function, dat
     };
 
     handleHeadline = (e) => {
-        const type = this.props.uiState.menu.htype
+        const type = this.props.uiState.inputMenu.htype
         const headline = e.target.value
         const selectedHtypeId = this.props.dataState.selectedHtypeId
         let dispatch = ""
@@ -37,9 +37,9 @@ class HeadlineInput extends React.Component<{ updateInputScreenUi: Function, dat
     }
     showText = () => {
         let showText;
-        return this.props.dataState[this.props.uiState.menu.htype][this.props.dataState.selectedHtypeId] != undefined &&
-            this.props.dataState[this.props.uiState.menu.htype][this.props.dataState.selectedHtypeId].components[this.props.dataState.selectedComponentId] != undefined ?
-            showText = this.props.dataState[this.props.uiState.menu.htype][this.props.dataState.selectedHtypeId].components[this.props.dataState.selectedComponentId].headline :
+        return this.props.dataState[this.props.uiState.inputMenu.htype][this.props.dataState.selectedHtypeId] != undefined &&
+            this.props.dataState[this.props.uiState.inputMenu.htype][this.props.dataState.selectedHtypeId].components[this.props.dataState.selectedComponentId] != undefined ?
+            showText = this.props.dataState[this.props.uiState.inputMenu.htype][this.props.dataState.selectedHtypeId].components[this.props.dataState.selectedComponentId].headline :
             showText = ""
 
     }
@@ -51,15 +51,15 @@ class HeadlineInput extends React.Component<{ updateInputScreenUi: Function, dat
                 <BackImage src="/back.svg" onClick={this.handleInputMenuUpdate}></BackImage>
                 <Headline>Headline Input</Headline>
                 <InputWrapper>
-                    <StyledTextArea onChange={(e) => this.handleHeadline(e)} value={this.props.dataState[this.props.uiState.menu.htype][this.props.dataState.selectedHtypeId] != undefined &&
-                        this.props.dataState[this.props.uiState.menu.htype][this.props.dataState.selectedHtypeId].components[this.props.dataState.selectedComponentId] != undefined ?
-                        this.props.dataState[this.props.uiState.menu.htype][this.props.dataState.selectedHtypeId].components[this.props.dataState.selectedComponentId].headline :
+                    <StyledTextArea maxRows={10} onChange={(e) => this.handleHeadline(e)} value={this.props.dataState[this.props.uiState.inputMenu.htype][this.props.dataState.selectedHtypeId] != undefined &&
+                        this.props.dataState[this.props.uiState.inputMenu.htype][this.props.dataState.selectedHtypeId].components[this.props.dataState.selectedComponentId] != undefined ?
+                        this.props.dataState[this.props.uiState.inputMenu.htype][this.props.dataState.selectedHtypeId].components[this.props.dataState.selectedComponentId].headline :
                         ""} />
                 </InputWrapper>
                 <FontSizeDiv>
-                    <FontSizeText>
-                        Font Size
-                </FontSizeText>
+                        <FontSizeText>
+                            Font Size
+                        </FontSizeText>
                     <FontSizeInput type="number" min="0" step="1" />
                 </FontSizeDiv>
             </Container>
@@ -83,6 +83,7 @@ const Container = styled.div`
     width:100%;
     height:100vh;
     display:flex;
+    flex-direction:column;
 
 `
 
@@ -115,8 +116,8 @@ const Headline = styled.h1`
     transform: translate(-50%, 0); 
 
 `
-const StyledTextArea = styled.textarea`
-    height: 94%;
+const StyledTextArea = styled(TextareaAutosize)`
+    height: auto;
     width: 97%;
     -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
     -moz-box-sizing: border-box;    /* Firefox, other Gecko */
@@ -133,10 +134,10 @@ const StyledTextArea = styled.textarea`
 `
 
 const InputWrapper = styled.div`
-    position:absolute;
+    position:relative;
     width: 44vw;
-    top:20%;
-    height: 11vh;
+    top:10%;
+    height: auto;
     border-radius: 2vh;
     margin:2vw;
     padding:1vw;
@@ -146,12 +147,13 @@ const InputWrapper = styled.div`
 `
 
 const FontSizeDiv = styled.div`
-    position:absolute;
+    position: relative;
+    top:10%;
+    left:10%;
+    bottom:0%;
+    width:15vw;
     display:flex;
     flex-direction:row;
-    top:40vh;
-    left:5%;
-    width:10vw;
 `
 
 const FontSizeText = styled.p`
