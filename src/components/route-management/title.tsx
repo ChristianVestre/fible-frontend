@@ -8,13 +8,13 @@ const Title = props => (
         <TitleStyle>Welcome {props.name}, here are your routes!</TitleStyle>
       )
 
-const mapStateToProps = state => {
-  return {ui:state.ui};
-};
+//const mapStateToProps = state => {
+ // return {ui:state.ui};
+//};
+export default Title
 
 
-
-export default connect(mapStateToProps)(Title);
+//export default connect(mapStateToProps)(Title);
 
 const TitleStyle = styled.h2`
     position:absolute;

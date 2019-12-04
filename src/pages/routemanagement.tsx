@@ -2,20 +2,31 @@ import Link from 'next/link';
 import styled from 'styled-components';
 import dynamic from 'next/dynamic';
 import Title from '../components/route-management/title'
-import SelectorManager from '../components/route-management/stateManager';
+import RouteManagementStateManager from '../components/route-management/stateManager';
 import { connect } from 'react-redux';
 import LogoutButton from './../components/shared-components/logoutButton'
 import { withApollo } from '../lib/apollo';
-import React from 'react';
+import React, { useState } from 'react';
 import { withRedux } from '../redux/redux';
 import { compose } from 'redux';
 import  {withAuth} from '../lib/auth';
 import gql from 'graphql-tag';
+import { loadUser, loadHtypeData } from '../redux/actions/dataActions';
+
 
 
 
 
 const RouteManagement = (props) => {
+    
+    //() => loadHtypeData(props.routes)
+    const [state, setState] = useState(props)
+    console.log(props)
+    props.loadUser(props.me)
+    props.loadHtypeData(props.htypes)
+    
+    
+ //   console.log(setState)
     return(
         <Container>
             <Images>
@@ -24,22 +35,63 @@ const RouteManagement = (props) => {
                     <BackImage src="/back.svg"></BackImage>
                 </Link>
             </Images>
-            <Title name={props.me.name}/>
+            <Title name={state.user.me.name}/>
             <LogoutButton/>
-            <SelectorManager routes={props.routes} stops={null} pois={null}></SelectorManager>
+            <RouteManagementStateManager state={state} setState={setState}></RouteManagementStateManager>
         </Container>
     )
 };
 
-RouteManagement.getInitialProps = async (context) => {
+RouteManagement.getInitialProps = async ({apolloClient, me}) => {
 
-    const routesQuery = gql`query routes {getRoutes
-        {id owner name}
+    const routesQuery = gql`query getHtypes 
+    {   getRoutes{id ownerid components}
+        getPois{id ownerid components}
+        getStops{id ownerid components}
     }`
+    let htypes = await apolloClient.query({query:routesQuery})
+/*    htypes = htypes.data
+    let content = {}
+    for(let item of Object.keys(htypes)) {
+        let key = item.substring(3,).toLowerCase()
+        content[key] = htypes[item].reduce((result, attri, index) => { 
+            if(attri){
+            result[attri.id] = attri;
+            } //a, b, c
+        return result;
+        }, {}) 
+    }
+    //console.log(me)
+    const user =  {
+            me:{
+                ...me,
+                routes:htypes.getRoutes[0] === null ? []:htypes.getRoutes ,
+                stops:htypes.getStops[0] === null ? []:htypes.getStops ,
+                pois:htypes.getPois[0] === null ? []:htypes.getPois 
+            },
+            routes:{
+                ...content["routes"]
+            },
+            stops:{
+                ...content["stops"]
+            },
+            pois:{
+                ...content["pois"]
+            }
+        }
+    const ui = { 
+        lastManagerUiCode:"",
+        selectedROUTES:"",
+        selectedSTOPS:"",
+        selectedPOIS:"",
+        managerUiCode:"RO",
+        htype:"",
+    } */
+  //  reduxStore.dispatch(loadHtypeData(htypes))
+    //reduxStore.dispatch(loadUser({user}))
+  //  console.log(user)
   //  console.log(context.reduxStore.getState())
-
-   return {routes:await context.apolloClient.query({query:routesQuery})}
-
+    return {htypes:htypes, user:me}
   }
   
 
@@ -47,11 +99,12 @@ RouteManagement.getInitialProps = async (context) => {
 const mapStateToProps = state => {
     return { selectorState: state.selector, uiState:state.ui,dataState:state.data };
 };
+
 const enhance = compose(
-    withRedux,
     withApollo,
     withAuth,
-    connect(mapStateToProps, null),
+    withRedux,
+    connect(mapStateToProps,{loadUser, loadHtypeData})
   )
 export default enhance(RouteManagement);
 

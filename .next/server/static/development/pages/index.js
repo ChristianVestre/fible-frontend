@@ -101,7 +101,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 5);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -2096,10 +2096,12 @@ function createApolloClient(initialState = {}, {
     const token = getToken();
     return {
       headers: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, headers, {
-        cookie: token ? `qid=${token}` : ''
+        cookie: token ? `qid=${token.qid} ` : '',
+        cookie_2: token ? `hid=${token.hid} ` : ''
       })
     };
-  }); // Check out https://github.com/zeit/next.js/pull/4611 if you want to use the AWSAppSyncClient
+  }); //hid=${token.hid}
+  // Check out https://github.com/zeit/next.js/pull/4611 if you want to use the AWSAppSyncClient
 
   return new apollo_client__WEBPACK_IMPORTED_MODULE_7__["ApolloClient"]({
     ssrMode: true,
@@ -2115,8 +2117,9 @@ function createApolloClient(initialState = {}, {
 
 
 function getToken(req) {
-  const cookies = cookie__WEBPACK_IMPORTED_MODULE_5___default.a.parse(req ? req.headers.cookie || '' : document.cookie);
-  return cookies.qid;
+  const cookies = cookie__WEBPACK_IMPORTED_MODULE_5___default.a.parse(req ? req.headers.cookie || '' : document.cookie); //  console.log(cookies)
+
+  return cookies;
 }
 /*import React from 'react'
 import Head from 'next/head'
@@ -2299,7 +2302,7 @@ const Home = props => {
   const SIGN_IN = graphql_tag__WEBPACK_IMPORTED_MODULE_2___default.a`
   mutation Signin($email: String!, $password: String!) {
     login(email: $email, password: $password ) {
-      user{id name ROUTES POIS STOPS email}
+      user{id name routes pois stops email}
     }
   }`;
 
@@ -2430,7 +2433,7 @@ const StyledText = styled_components__WEBPACK_IMPORTED_MODULE_0___default.a.h3.w
 const StyledInput = styled_components__WEBPACK_IMPORTED_MODULE_0___default.a.input.withConfig({
   displayName: "pages__StyledInput",
   componentId: "arfuc1-4"
-})(["display:flex;width:60%;padding:0.5vh;font-size:1.5vh;border:1px solid;border-color:lightgray;border-radius:1vh;position:absolute;width:16vw;right:10vw;"]);
+})(["display:flex;width:60%;padding:0.5vh;font-size:1.5vh;border:1px solid;border-color:lightgray;border-radius:1vh;position:absolute;width:16vw;right:10vw;:focus{outline:none;caret-color:salmon;}"]);
 const StyledButton = styled_components__WEBPACK_IMPORTED_MODULE_0___default.a.button.withConfig({
   displayName: "pages__StyledButton",
   componentId: "arfuc1-5"
@@ -2485,7 +2488,7 @@ render() {
 /*!******************************************!*\
   !*** ./src/redux/actions/dataActions.ts ***!
   \******************************************/
-/*! exports provided: addOrUpdateHeadline, initializeHtype, deleteHtype, emptySelectedComponent, setSelectedComponent, updateComponentsOrder, cleanNonsavedHtypes, loadUser, cleanUser */
+/*! exports provided: addOrUpdateHeadline, initializeHtype, deleteHtype, emptySelectedComponent, setSelectedComponent, updateComponentsOrder, cleanNonsavedHtypes, loadUser, loadHtypeData, cleanUser */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2498,6 +2501,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateComponentsOrder", function() { return updateComponentsOrder; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "cleanNonsavedHtypes", function() { return cleanNonsavedHtypes; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "loadUser", function() { return loadUser; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "loadHtypeData", function() { return loadHtypeData; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "cleanUser", function() { return cleanUser; });
 /* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./types */ "./src/redux/actions/types.ts");
 
@@ -2510,6 +2514,7 @@ let updateComponentsOrderId = 0;
 let cleanNonsavedHtypesId = 0;
 let loadUserId = 0;
 let cleanUserId = 0;
+let loadHtypeDataId = 0;
 const addOrUpdateHeadline = content => ({
   type: _types__WEBPACK_IMPORTED_MODULE_0__["HEADLINE"],
   payload: {
@@ -2564,6 +2569,13 @@ const loadUser = content => ({
     content
   }
 });
+const loadHtypeData = content => ({
+  type: _types__WEBPACK_IMPORTED_MODULE_0__["LOAD_HTYPE_DATA"],
+  payload: {
+    id: ++loadHtypeDataId,
+    content
+  }
+});
 const cleanUser = () => ({
   type: _types__WEBPACK_IMPORTED_MODULE_0__["CLEAN_USER"],
   payload: {
@@ -2577,7 +2589,7 @@ const cleanUser = () => ({
 /*!************************************!*\
   !*** ./src/redux/actions/types.ts ***!
   \************************************/
-/*! exports provided: REMOVE_ROUTE, UPDATE_ROUTE_STATE, UPDATE_SELECTOR_MANAGER_STATE, UPDATE_INPUT_SCREEN_UI, INITIALIZE_INPUT_SCREEN_UI, HEADLINE, INITIALIZE_HTYPE, DELETE_HTYPE, EMPTY_SELECTED_COMPONENT_ID, UPDATE_SIMULATOR_SELECTION, SET_SELECTED_COMPONENT, UPDATE_COMPONENTS_ORDER, CLEAN_NONSAVED_HTYPES, STOP_AND_POI_MANAGER_CONTROLLER, SET_TITLE, LOAD_USER, CLEAN_USER */
+/*! exports provided: REMOVE_ROUTE, UPDATE_ROUTE_STATE, UPDATE_SELECTOR_MANAGER_STATE, UPDATE_INPUT_SCREEN_UI, INITIALIZE_INPUT_SCREEN_UI, HEADLINE, INITIALIZE_HTYPE, DELETE_HTYPE, EMPTY_SELECTED_COMPONENT_ID, UPDATE_SIMULATOR_SELECTION, SET_SELECTED_COMPONENT, UPDATE_COMPONENTS_ORDER, CLEAN_NONSAVED_HTYPES, STOP_AND_POI_MANAGER_CONTROLLER, SET_TITLE, LOAD_USER, CLEAN_USER, LOAD_HTYPE_DATA */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2599,6 +2611,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_TITLE", function() { return SET_TITLE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOAD_USER", function() { return LOAD_USER; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CLEAN_USER", function() { return CLEAN_USER; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOAD_HTYPE_DATA", function() { return LOAD_HTYPE_DATA; });
 const REMOVE_ROUTE = "REMOVE_ROUTE";
 const UPDATE_ROUTE_STATE = "UPDATE_ROUTE_STATE";
 const UPDATE_SELECTOR_MANAGER_STATE = "UPDATE_SELECTOR_MANAGER_STATE";
@@ -2616,6 +2629,7 @@ const STOP_AND_POI_MANAGER_CONTROLLER = "STOP_AND_POI_MANAGER_CONTROLLER";
 const SET_TITLE = "SET_TITLE";
 const LOAD_USER = "LOAD_USER";
 const CLEAN_USER = "CLEAN_USER";
+const LOAD_HTYPE_DATA = "LOAD_HTYPE_DATA";
 
 /***/ }),
 
@@ -2631,9 +2645,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_corejs2_core_js_object_entries__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/object/entries */ "./node_modules/@babel/runtime-corejs2/core-js/object/entries.js");
 /* harmony import */ var _babel_runtime_corejs2_core_js_object_entries__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_object_entries__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/objectSpread */ "./node_modules/@babel/runtime-corejs2/helpers/esm/objectSpread.js");
-/* harmony import */ var _actions_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions/types */ "./src/redux/actions/types.ts");
-/* harmony import */ var nanoid__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! nanoid */ "nanoid");
-/* harmony import */ var nanoid__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(nanoid__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/object/keys */ "./node_modules/@babel/runtime-corejs2/core-js/object/keys.js");
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _actions_types__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../actions/types */ "./src/redux/actions/types.ts");
+/* harmony import */ var nanoid__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! nanoid */ "nanoid");
+/* harmony import */ var nanoid__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(nanoid__WEBPACK_IMPORTED_MODULE_4__);
+
 
 
 
@@ -2642,50 +2659,79 @@ __webpack_require__.r(__webpack_exports__);
 
 const initialState = {
   user: {
-    name: "Christian",
-    ROUTES: [],
-    STOPS: [],
-    POIS: [],
+    name: "",
+    routes: [],
+    stops: [],
+    pois: [],
     email: ""
   },
   //the id of the hcomponent being worked on
   selectedHtypeId: "",
   selectedComponentId: "empty",
-  ROUTES: {},
-  STOPS: {},
-  POIS: {}
+  routes: {},
+  stops: {},
+  pois: {}
 }; //make a reducer that cleans up the routes stops etc when you go to the route management screen.
 
 /* harmony default export */ __webpack_exports__["default"] = (function (state = initialState, action) {
   switch (action.type) {
-    case _actions_types__WEBPACK_IMPORTED_MODULE_2__["LOAD_USER"]:
+    case _actions_types__WEBPACK_IMPORTED_MODULE_3__["LOAD_HTYPE_DATA"]:
+      {
+        const content = {};
+        console.log(action.payload.content.data);
+
+        for (let item of _babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_2___default()(action.payload.content.data)) {
+          let key = item.substring(3).toLowerCase();
+          content[key] = action.payload.content.data[item].reduce((result, attri, index) => {
+            if (attri) {
+              result[attri.id] = attri;
+            } //a, b, c
+
+
+            return result;
+          }, {});
+        }
+
+        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state, {
+          user: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state.user, {
+            routes: action.payload.content.data.getRoutes[0] === null ? [] : action.payload.content.data.getRoutes,
+            stops: action.payload.content.data.getStops[0] === null ? [] : action.payload.content.data.getStops,
+            pois: action.payload.content.data.getPois[0] === null ? [] : action.payload.content.data.getPois
+          }),
+          routes: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, content["routes"]),
+          stops: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, content["stops"]),
+          pois: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, content["pois"])
+        });
+      }
+
+    case _actions_types__WEBPACK_IMPORTED_MODULE_3__["LOAD_USER"]:
       {
         const {
           name,
           email,
-          ROUTES,
-          STOPS,
-          POIS
+          routes,
+          stops,
+          pois
         } = action.payload.content;
         return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state, {
           user: {
             name: name,
-            ROUTES: [ROUTES],
-            STOPS: [POIS],
-            POIS: [STOPS],
+            routes: [routes],
+            stops: [stops],
+            pois: [pois],
             email: email
           }
         });
       }
 
-    case _actions_types__WEBPACK_IMPORTED_MODULE_2__["CLEAN_USER"]:
+    case _actions_types__WEBPACK_IMPORTED_MODULE_3__["CLEAN_USER"]:
       {
         return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state, {
           user: {
             name: '',
-            ROUTES: [],
-            STOPS: [],
-            POIS: [],
+            routes: [],
+            stops: [],
+            pois: [],
             email: ''
           },
           //the id of the hcomponent being worked on
@@ -2697,11 +2743,11 @@ const initialState = {
         });
       }
 
-    case _actions_types__WEBPACK_IMPORTED_MODULE_2__["INITIALIZE_HTYPE"]:
+    case _actions_types__WEBPACK_IMPORTED_MODULE_3__["INITIALIZE_HTYPE"]:
       {
         //     const selectedDispatch = action.payload.content.dispatch;
         const htype = action.payload.content.htype;
-        const htypeid = htype.substring(0, 2) + "_" + nanoid__WEBPACK_IMPORTED_MODULE_3___default()(8);
+        const htypeid = htype.substring(0, 2) + "_" + nanoid__WEBPACK_IMPORTED_MODULE_4___default()(8);
         return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state, {
           user: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state.user, {
             [htype]: [...state.user[htype], htypeid]
@@ -2722,14 +2768,14 @@ const initialState = {
         });
       }
 
-    case _actions_types__WEBPACK_IMPORTED_MODULE_2__["EMPTY_SELECTED_COMPONENT_ID"]:
+    case _actions_types__WEBPACK_IMPORTED_MODULE_3__["EMPTY_SELECTED_COMPONENT_ID"]:
       {
         return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state, {
           selectedComponentId: "empty"
         });
       }
 
-    case _actions_types__WEBPACK_IMPORTED_MODULE_2__["DELETE_HTYPE"]:
+    case _actions_types__WEBPACK_IMPORTED_MODULE_3__["DELETE_HTYPE"]:
       {
         const htype = action.payload.content.htype;
         const htypeid = action.payload.content.htypeid;
@@ -2762,7 +2808,7 @@ const initialState = {
        },
     */
 
-    case _actions_types__WEBPACK_IMPORTED_MODULE_2__["CLEAN_NONSAVED_HTYPES"]:
+    case _actions_types__WEBPACK_IMPORTED_MODULE_3__["CLEAN_NONSAVED_HTYPES"]:
       {
         const htypes = ["ROUTES", "STOPS", "POIS"]; // const htype= action.payload.content.headline
 
@@ -2777,18 +2823,19 @@ const initialState = {
         return state;
       }
 
-    case _actions_types__WEBPACK_IMPORTED_MODULE_2__["HEADLINE"]:
+    case _actions_types__WEBPACK_IMPORTED_MODULE_3__["HEADLINE"]:
       {
         const headline = action.payload.content.headline;
         const htype = action.payload.content.type;
         const htypeid = action.payload.content.selectedHtypeId;
         const dispatch = action.payload.content.dispatch;
+        console.log(headline);
 
         switch (dispatch) {
           case "ADD_HEADLINE":
             {
               //create the id because it has not been changed before
-              const headlineId = "HL_" + nanoid__WEBPACK_IMPORTED_MODULE_3___default()(8); //rebuilding the state object to add new data
+              const headlineId = "HL_" + nanoid__WEBPACK_IMPORTED_MODULE_4___default()(8); //rebuilding the state object to add new data
 
               console.log(state);
               return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state, {
@@ -2829,7 +2876,7 @@ const initialState = {
         }
       }
 
-    case _actions_types__WEBPACK_IMPORTED_MODULE_2__["UPDATE_COMPONENTS_ORDER"]:
+    case _actions_types__WEBPACK_IMPORTED_MODULE_3__["UPDATE_COMPONENTS_ORDER"]:
       {
         const newOrder = action.payload.content.newOrder;
         const htype = action.payload.content.htype;
@@ -2844,7 +2891,7 @@ const initialState = {
       }
       ;
 
-    case _actions_types__WEBPACK_IMPORTED_MODULE_2__["SET_SELECTED_COMPONENT"]:
+    case _actions_types__WEBPACK_IMPORTED_MODULE_3__["SET_SELECTED_COMPONENT"]:
       {
         const selectedId = action.payload.content.selectedComponentId;
         return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state, {
@@ -3278,17 +3325,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./store */ "./src/redux/store.js");
 /* harmony import */ var next_app__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! next/app */ "./node_modules/next/app.js");
 /* harmony import */ var next_app__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(next_app__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var redux_persist_integration_react__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! redux-persist/integration/react */ "redux-persist/integration/react");
-/* harmony import */ var redux_persist_integration_react__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(redux_persist_integration_react__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var redux_persist__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! redux-persist */ "redux-persist");
-/* harmony import */ var redux_persist__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(redux_persist__WEBPACK_IMPORTED_MODULE_8__);
 
 
 
 var _jsxFileName = "/home/christian/Development/fible-frontend-nextjs/src/redux/redux.jsx";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement;
-
-
 
 
 
@@ -3307,13 +3348,13 @@ const withRedux = (PageComponent, {
       store: store,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 15
+        lineNumber: 13
       },
       __self: undefined
     }, __jsx(PageComponent, Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_1__["default"])({}, props, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 17
+        lineNumber: 14
       },
       __self: undefined
     })));
@@ -3387,115 +3428,49 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _reducers_index__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./reducers/index */ "./src/redux/reducers/index.ts");
 /* harmony import */ var redux_devtools_extension__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! redux-devtools-extension */ "redux-devtools-extension");
 /* harmony import */ var redux_devtools_extension__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(redux_devtools_extension__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var redux_persist__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! redux-persist */ "redux-persist");
-/* harmony import */ var redux_persist__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(redux_persist__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var redux_persist_lib_storage__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! redux-persist/lib/storage */ "redux-persist/lib/storage");
-/* harmony import */ var redux_persist_lib_storage__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(redux_persist_lib_storage__WEBPACK_IMPORTED_MODULE_5__);
 
 
 
  //export default createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
 //export default createStore(rootReducer, applyMiddleware(thunk));
-///import { createStore } from 'redux'
-
-
- // defaults to localStorage for web
 //import rootReducer from './reducers'
 
 const initialState = {
   data: {
     user: {
       name: "Christian",
-      ROUTES: [],
-      STOPS: [],
-      POIS: [],
+      routes: [],
+      stops: [],
+      pois: [],
       email: ""
     },
     //the id of the hcomponent being worked on
     selectedHtypeId: "",
     selectedComponentId: "empty",
-    ROUTES: {},
-    STOPS: {},
-    POIS: {}
+    routes: {},
+    stops: {},
+    pois: {}
   },
   ui: {
-    routes: {
-      "h12345": {
-        id: "h12345",
-        headline: "Christian's Norway Route",
-        subheadline: "Fjords you just have to explore",
-        stops: ["Bergen", "Stavanger", "Molde", "Ålesund"],
-        attractions: ["Hiking", "Swimming", "Nature"]
-      },
-      "h54321": {
-        id: "h54321",
-        headline: "Paul's South Tyrol Route",
-        subheadline: "Explore the Dolomites",
-        stops: ["Bolzano", "Trento"],
-        attractions: ["Hiking", "Swimming", "Nature", "Food"]
-      },
-      "h12354": {
-        id: "h12354",
-        headline: "Simon's Allgäu Route",
-        subheadline: "Experience Neuschweinstein and so much more!",
-        stops: ["Mammendorf", "Füssen"],
-        attractions: ["Hiking", "Swimming", "Nature", "Sking"]
-      }
-    },
-    stops: {
-      "s213141": {
-        id: "s213141",
-        headline: "Bergen",
-        subheadline: "Byen ombringet av fjell",
-        pois: ["restaurant", "accommodation", "activities"],
-        location: {
-          lat: 1.2222,
-          lng: 1445666
-        }
-      },
-      "s54321": {
-        id: "s54321",
-        headline: "Stavanger",
-        subheadline: "Oljehovedstaden",
-        pois: ["restaurant", "accommodation", "activities"],
-        location: {
-          lat: 1.5555,
-          lng: 1.214134
-        }
-      }
-    },
-    pois: {
-      "p1314134": {
-        id: "p1314134",
-        headline: "Bergen Fjordrestaurant",
-        subheadline: "Fantastisk fisk og sjømat!",
-        location: {
-          lat: 1.2222,
-          lng: 1445666
-        },
-        address: "Bryggen 15a",
-        website: "www.bergen-fjordrestaurant.no"
-      }
-    },
     columns: {
-      "column-1": {
-        id: "column-1",
+      "routes": {
+        id: "routes",
         title: "Routes",
         ids: ["h12345", "h54321", "h12354"]
       },
-      "column-2": {
-        id: "column-2",
+      "stops": {
+        id: "stops",
         title: "Stops",
         ids: ["s213141", "s54321"]
       },
-      "column-3": {
-        id: "column-3",
+      "pois": {
+        id: "pois",
         title: "Pois",
         ids: ["p1314134"]
       }
     },
-    columnOrder: ["column-1", "column-2", "column-3"],
-    title: "Welcome Christian, here are your routes!",
+    columnOrder: ["routes", "stops", "pois"],
+    title: "test",
     inputMenu: {
       htype: "ROUTES",
       //which component is shown in the menu
@@ -3545,6 +3520,7 @@ const initialState = {
       selected: "empty"
     },
     selector: {
+      //to keep ui state on refresh
       lastManagerUiCode: "",
       selectedROUTES: "",
       selectedSTOPS: "",
@@ -3553,16 +3529,21 @@ const initialState = {
       htype: ""
     }
   }
-};
-const persistConfig = {
-  key: 'root',
-  storage: (redux_persist_lib_storage__WEBPACK_IMPORTED_MODULE_5___default())
-};
-const persistedReducer = Object(redux_persist__WEBPACK_IMPORTED_MODULE_4__["persistReducer"])(persistConfig, _reducers_index__WEBPACK_IMPORTED_MODULE_2__["default"]); //export const Store = createStore(persistedReducer, composeWithDevTools(applyMiddleware(thunk)));
-//export const persistor = persistStore(initialState);
+}; //const persistedReducer = persistReducer(persistConfig, rootReducer)
 
 const initializeStore = (preloadedState = initialState) => {
-  return Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(persistedReducer, preloadedState, Object(redux_devtools_extension__WEBPACK_IMPORTED_MODULE_3__["composeWithDevTools"])(Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_1___default.a)));
+  let store;
+  const isClient = false;
+
+  if (isClient) {
+    store = Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(_reducers_index__WEBPACK_IMPORTED_MODULE_2__["default"], preloadedState, Object(redux_devtools_extension__WEBPACK_IMPORTED_MODULE_3__["composeWithDevTools"])(Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_1___default.a))); //store.__PERSISTOR = persistStore(store);
+  } else {
+    store = Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(_reducers_index__WEBPACK_IMPORTED_MODULE_2__["default"], preloadedState, Object(redux_devtools_extension__WEBPACK_IMPORTED_MODULE_3__["composeWithDevTools"])(Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_1___default.a)));
+  } //export const Store = createStore(persistedReducer, composeWithDevTools(applyMiddleware(thunk)));
+  //export const persistor = persistStore(initialState);
+
+
+  return store;
 };
 /*
 
@@ -3576,7 +3557,7 @@ export default () => {
 
 /***/ }),
 
-/***/ 3:
+/***/ 5:
 /*!***********************************!*\
   !*** multi ./src/pages/index.tsx ***!
   \***********************************/
@@ -3882,39 +3863,6 @@ module.exports = require("redux");
 /***/ (function(module, exports) {
 
 module.exports = require("redux-devtools-extension");
-
-/***/ }),
-
-/***/ "redux-persist":
-/*!********************************!*\
-  !*** external "redux-persist" ***!
-  \********************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("redux-persist");
-
-/***/ }),
-
-/***/ "redux-persist/integration/react":
-/*!**************************************************!*\
-  !*** external "redux-persist/integration/react" ***!
-  \**************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("redux-persist/integration/react");
-
-/***/ }),
-
-/***/ "redux-persist/lib/storage":
-/*!********************************************!*\
-  !*** external "redux-persist/lib/storage" ***!
-  \********************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("redux-persist/lib/storage");
 
 /***/ }),
 

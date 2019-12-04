@@ -1,59 +1,67 @@
 import styled from 'styled-components';
 import React from 'react';
 import { connect } from 'react-redux';
-import Selector from './selector';
-import StopsAndPois from './stops&poi-components/stop&poiManager'
+import Selector from './selectorManager';
+import StopsAndPois from './stopsandpoi-components/sandpManager'
 
 
 
 
-class RouteManagementStateManager extends React.Component<{uiState:any, routes:any, stops:any, pois:any}> {
-    
-    SelectorChoice = () => {
-            switch(this.props.uiState.selector.managerUiCode){
+const RouteManagementStateManager = props => {
+
+    const SelectorChoice = (props) => {
+        console.log(props.state)
+     //   console.log(props.state.htypes.getRoutes)
+            switch(props.state.ui.managerUiCode){
                 case("RO"):{
                     return <OneSelectorWrapper>
-                    <Selector type="ROUTES" routes={this.props.routes}/>
+                    <Selector type="routes" data={props.state.user}/>
                     </OneSelectorWrapper>
                 }
                 case("ROST"):{
                     return<TwoSelectorsWrapper>
-                    <Selector type="ROUTES" routes={this.props.routes}/>
-                    <Selector type="STOPS" stops={this.props.stops} />
+                    <Selector type="routes" data={props.state.user}/>
+                    <Selector type="stops" data={props.state.user} />
                     </TwoSelectorsWrapper>
                 }
                 case("ROSTPO"):{
                     return<ThreeSelectorsWrapper>
-                    <Selector type="ROUTES" routes={this.props.routes} />
-                    <Selector type="STOPS" stops={this.props.stops} />
-                    <Selector type="POIS" pois={this.props.pois} /> 
+                    <Selector type="routes" data={props.state.user} />
+                    <Selector type="stops" data={props.state.user} />
+                    <Selector type="pois" data={props.state.user}/> 
                     </ThreeSelectorsWrapper>   
                 }
-                case("MA"):{
+                case("MAST"):{
                     return <ManagerWrapper>
-                    <StopsAndPois/>
+                    <StopsAndPois type="stops" data={props.state.user}/>
+                    </ManagerWrapper>
+                }
+                case("MAPO"):{
+                    return <ManagerWrapper>
+                    <StopsAndPois type="pois" data={props.state.user}/>
                     </ManagerWrapper>
                 }
                 default:{
                     return <OneSelectorWrapper>
-                    <Selector type="ROUTES" routes={this.props.routes}/>
+                    <Selector type="routes" data={props.state.user}/>
                     </OneSelectorWrapper>
                 }
             }
     }
 
-    render(){
-        return<Container>
-            {this.SelectorChoice()}
+    return(
+        <Container>
+            {SelectorChoice(props)}
         </Container>
+    )
     }
-}
 
-const mapStateToProps = state => {
-    return {uiState:state.ui};
-  };
+//const mapStateToProps = state => {
+//    return {uiState:state.ui, dataState:state.data};
+//  };
 
-export default connect(mapStateToProps)(RouteManagementStateManager);
+export default RouteManagementStateManager
+//export default connect(mapStateToProps)(RouteManagementStateManager);
 
 const Container = styled.div`
     width:100vw;

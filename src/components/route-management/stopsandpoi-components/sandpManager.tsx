@@ -6,40 +6,38 @@ import {initializeInputScreenUi,stopAndPoiManagerController} from '../../../redu
 import {initializeHtype} from '../../../redux/actions/dataActions';
 import {connect} from 'react-redux';
 import {DragDropContext} from 'react-beautiful-dnd';
-import SandpSelector from './s&pSelector';
+import SandpSelector from './sandpSelector';
 
 
 
 let allList = []
 
 
-class StopsAndPois extends React.Component<{initializeInputScreenUi:Function, initializeHtype:Function, stopAndPoiManagerController:Function, dataState:any, uiState:any}> {
-
-    handleInputScreenButton= () =>{
+const StopsAndPois = props => {
+    const handleInputScreenButton= () =>{
         console.log("hello")
         this.props.stopAndPoiManagerController()
     }
 
-    onDragEnd= () => {
+    const onDragEnd= (result) => {
         //todo
     }
 
-    render() {
+    
        return( 
-        <DragDropContext onDragEnd={this.onDragEnd}>  
+        <DragDropContext onDragEnd={(result) => onDragEnd(result)}>  
 
 
-        <InputScreenButton onClick={this.handleInputScreenButton} >
+        <InputScreenButton onClick={handleInputScreenButton} >
             <FontAwesomeIcon icon={faPlus}/>
         </InputScreenButton>
-        {allList = this.props.dataState.user[this.props.uiState.selector.htype].map((element) => this.props.dataState[this.props.uiState.selector.htype][element.id])}
+        {allList = props.dataState.user[props.uiState.selector.htype].map((element) => props.dataState[props.uiState.selector.htype][element.id])}
         <SandpSelector type="ALL" list={allList}></SandpSelector>
         <SandpSelector type="SELECTED" list = {allList}></SandpSelector>
         </DragDropContext>
 
         
-       )}
-
+       )
 }
 
 const mapStateToProps = state => {

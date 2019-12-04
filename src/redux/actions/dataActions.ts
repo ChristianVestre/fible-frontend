@@ -7,6 +7,7 @@ import { HEADLINE,
   CLEAN_NONSAVED_HTYPES,
   LOAD_USER,
   CLEAN_USER,
+  LOAD_HTYPE_DATA,
 
 } from "./types";
 
@@ -20,6 +21,8 @@ let updateComponentsOrderId = 0;
 let cleanNonsavedHtypesId = 0;
 let loadUserId = 0;
 let cleanUserId = 0;
+let loadHtypeDataId = 0;
+
 
 
 
@@ -81,6 +84,14 @@ export const loadUser = content => ({
   type: LOAD_USER,
   payload:{
     id:++loadUserId,
+    content,
+  }
+})
+
+export const loadHtypeData = content => ({
+  type: LOAD_HTYPE_DATA,
+  payload:{
+    id:++loadHtypeDataId,
     content,
   }
 })

@@ -1,7 +1,7 @@
 import { UPDATE_INPUT_SCREEN_UI, UPDATE_COMPONENTS_ORDER ,
      HEADLINE, INITIALIZE_HTYPE, DELETE_HTYPE, 
      EMPTY_SELECTED_COMPONENT_ID, SET_SELECTED_COMPONENT, 
-     CLEAN_NONSAVED_HTYPES, LOAD_USER, CLEAN_USER } from "../actions/types";
+     CLEAN_NONSAVED_HTYPES, LOAD_USER, CLEAN_USER, LOAD_HTYPE_DATA } from "../actions/types";
 import nanoid from "nanoid";
 
 //HTYPE is the hierarchy type, aka route, stop, etc
@@ -10,18 +10,18 @@ const initialState = {
 
 
     user: {
-        name: "Christian",
-        ROUTES: [],
-        STOPS: [],
-        POIS: [],
+        name: "",
+        routes: [],
+        stops: [],
+        pois: [],
         email: "",
     },
     //the id of the hcomponent being worked on
     selectedHtypeId: "",
     selectedComponentId: "empty",
-    ROUTES: {},
-    STOPS: {},
-    POIS: {},
+    routes: {},
+    stops: {},
+    pois: {},
 
 }
 
@@ -30,16 +30,48 @@ const initialState = {
 export default function (state = initialState, action) {
 
     switch (action.type) {
-        case LOAD_USER:{
-            const { name, email, ROUTES, STOPS, POIS } = action.payload.content;
+        case LOAD_HTYPE_DATA:{
+            const content = {}
 
+            console.log(action.payload.content.data)
+            for(let item of Object.keys(action.payload.content.data)) {
+            let key = item.substring(3,).toLowerCase()
+            content[key] = action.payload.content.data[item].reduce((result, attri, index) => { 
+                if(attri){
+                result[attri.id] = attri;
+                } //a, b, c
+            return result;
+            }, {}) 
+            }
+            return {
+                ...state,
+                user:{
+                    ...state.user,
+                    routes:action.payload.content.data.getRoutes[0] === null ? []:action.payload.content.data.getRoutes ,
+                    stops:action.payload.content.data.getStops[0] === null ? []:action.payload.content.data.getStops ,
+                    pois:action.payload.content.data.getPois[0] === null ? []:action.payload.content.data.getPois 
+                },
+                routes:{
+                    ...content["routes"]
+                },
+                stops:{
+                    ...content["stops"]
+                },
+                pois:{
+                    ...content["pois"]
+                }
+            }
+        }
+
+        case LOAD_USER:{
+            const { name, email, routes, stops, pois } = action.payload.content;
             return {
                 ...state,
                 user: {
                     name: name,
-                    ROUTES: [ROUTES],
-                    STOPS: [POIS],
-                    POIS: [STOPS],
+                    routes: [routes],
+                    stops: [stops],
+                    pois: [pois],
                     email: email,
                 }
             }
@@ -49,9 +81,9 @@ export default function (state = initialState, action) {
             ...state,
            user: {
                 name: '',
-                ROUTES: [],
-                STOPS: [],
-                POIS: [],
+                routes: [],
+                stops: [],
+                pois: [],
                 email: '',
             },
             //the id of the hcomponent being worked on
@@ -147,6 +179,7 @@ export default function (state = initialState, action) {
             const htype = action.payload.content.type
             const htypeid = action.payload.content.selectedHtypeId
             const dispatch = action.payload.content.dispatch
+            console.log(headline)
             switch (dispatch) {
                 case ("ADD_HEADLINE"): {
                     //create the id because it has not been changed before

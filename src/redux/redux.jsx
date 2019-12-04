@@ -2,8 +2,6 @@ import React from 'react'
 import { Provider } from 'react-redux'
 import { initializeStore } from './store'
 import App from 'next/app'
-import { PersistGate } from 'redux-persist/integration/react'
-import { persistStore } from 'redux-persist'
 
 
 
@@ -13,7 +11,6 @@ export const withRedux = (PageComponent, { ssr = true } = {}) => {
 
     return (
       <Provider store={store}>
-        
         <PageComponent {...props} />
       </Provider>
     )

@@ -1,14 +1,12 @@
 import gql from "graphql-tag";
 import React from 'react'
 import redirect from "./redirect";
-import { loadUser } from "../redux/actions/dataActions";
+import { loadUser, loadHtypeData } from "../redux/actions/dataActions";
 
 
 const ME = gql`
 query me{
-    me {
-      id name ROUTES POIS STOPS email
-    }
+    me {id name routes pois stops email}
 }`
 
 export const withAuth = C => {
@@ -24,8 +22,10 @@ export const withAuth = C => {
           me: null
         };
       }
-      ctx.reduxStore.dispatch(loadUser({user:response.data.me}))
-      ctx.user = response.data.me
+
+      ctx.me = response.data.me
+      //ctx.reduxStore.dispatch(loadUser(response.data.me))
+
       let componentProps = {}
       if (C.getInitialProps) {
         componentProps = await C.getInitialProps(ctx);

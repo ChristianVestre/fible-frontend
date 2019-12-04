@@ -1,74 +1,95 @@
-import styled from 'styled-components';
-import { DragDropContext } from 'react-beautiful-dnd'
 import React from 'react';
-import Column from './column';
+import styled from 'styled-components';
+import FibleRoute from './selectorItem';
+import { Droppable } from 'react-beautiful-dnd';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimes, faPlus } from '@fortawesome/free-solid-svg-icons'
+import Router from 'next/router'
+import { initializeInputScreenUi, stopAndPoiManagerController, setTitle } from '../../redux/actions/uiActions';
+import { initializeHtype } from '../../redux/actions/dataActions';
 import { connect } from 'react-redux';
-import { updateOrder, updateSelectorManagerState } from '../../redux/actions/uiActions'
-import {cleanNonsavedHtypes} from '../../redux/actions/dataActions';
-import gql from 'graphql-tag';
-import { withApollo } from '../../lib/apollo';
 
 
 
-const Selector = props => {    
-    const onDragEnd = result => {
-        const { destination, source, draggableId } = result;
-        if (!destination) {
-            return;
-        }
 
-        if (destination.droppableId == source.droppableId &&
-            destination.index == source.index) {
-            return;
-        }
-        const columnId = source.droppableId;
-        const column = props.uiState.columns[source.droppableId]
-        const newOrder = Array.from(column.ids);
+const Container = styled.div`
+    margin:1em;
+    border: 1px solid lightgray;
+    border-radius:2em;
+    width:100%;
+    height:100%;
+    position: relative;
 
-        newOrder.splice(source.index, 1);
-        newOrder.splice(destination.index, 0, draggableId);
-
-       // this.props.updateOrder({ newOrder, columnId })
-    }
+`
+const Title = styled.h1`
+    padding:8px;
+`
+const RouteList = styled.div`
+    padding:8px;
+`
 
 
-    const selectorFunction = props => {
-        //fix reordering problem
-        switch (props.type) {
-            case ("ROUTES"): {
-                const columnId = "column-1";
-                const column = props.uiState.columns[columnId];
-                return <Column key='column-1' column={column} type="ROUTES" listItems={props.routes.data.getRoutes} />;
-            }
-            case ("STOPS"):{
-                const columnId = "column-2";
-                const column = props.uiState.columns[columnId];
-                const stops = column.ids.map((stopId) => props.uiState.stops[stopId])
-                return <Column key={columnId} column={column} type="STOPS" listItems={stops} />;
-            }
-            case ("POIS"): {
-                const columnId = "column-3";
-                const column = props.uiState.columns[columnId];
-                let pois = []
-                column.ids.length>0 ?
-                pois = column.ids.map((poiId) => props.uiState.pois[poiId]) :
-                pois = [];
-                return <Column key={columnId} column={column} type="POIS" listItems={pois} />;
-            }
-            default:
-                return <p>wrong</p>
+const Selector = props => {
+
+    const handleInputScreenButton = () => {
+        if (props.type == "routes") {
+            Router.push({
+                pathname: '/inputscreen',
+            })
+            props.initializeHtype({ htype: props.type })
+            props.initializeInputScreenUi({ dispatch: props.type })
+        } else {
+            props.stopAndPoiManagerController({ htype: props.type })
+            let firstLetter = props.type.substring(0, 1)
+            let rest = props.type.substring(1)
+            let title = firstLetter + rest.toLowerCase() + " manager"
+            props.setTitle({ title: title })
+
         }
     }
 
-        return( <DragDropContext onDragEnd={(result) => onDragEnd(result)}>
-            {selectorFunction(props)}
-        </DragDropContext>)
+    return (
+        <Container>
+            <Title>{props.type.substring(0,1).toUpperCase + props.type.substring(1,)}</Title>
+            <Droppable droppableId={props.type}>
+                {provided => (
+                    <RouteList
+                        ref={provided.innerRef}
+                        {...provided.droppableProps}
+                    >
+                        {console.log(props.listItems)}
+                        {props.listItems.map((itemData, index) => <FibleRoute key={itemData.id} type={props.type} itemData={itemData} index={index} />)}
+                        {provided.placeholder}
+                    </RouteList>
+                )}
+            </Droppable>
+            <InputScreenButton onClick={() => handleInputScreenButton()} >
+                <FontAwesomeIcon icon={faPlus} />
+            </InputScreenButton>
+        </Container>
+    )
+}
+
+//const mapStateToProps = state => {
+//    return { dataState: state.data, initializeInputScreenState: state.initializeInputScreenState, stopAndPoiManagerController: state.stopAndPoiManagerController, setTitle: state.setTitle };
+//};
+
+export default Selector
+
+//export default connect(mapStateToProps, { initializeInputScreenUi, initializeHtype, stopAndPoiManagerController, setTitle })(Selector);
+
+
+
+const InputScreenButton = styled.button`
+    position:absolute;
+    bottom:0;
+    right:0;
+    font-size:6vh;
+    border:0;
+    color:none;
+    background-color:transparent;
+
+    :focus {
+        outline:none;
     }
-
-
-const mapStateToProps = state => {
-    return { selectorState: state.selector, uiState:state.ui,dataState:state.data , updateOrder: state.updateOrder };
-};
-
-export default connect(mapStateToProps, { updateOrder, updateSelectorManagerState, cleanNonsavedHtypes })(withApollo(Selector));
-
+    `

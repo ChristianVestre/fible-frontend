@@ -1,40 +1,41 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { Draggable } from 'react-beautiful-dnd'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import { faTimes, faEdit } from '@fortawesome/free-solid-svg-icons'
 import { connect } from "react-redux";
 import {removeRoute, updateSelectorManagerState } from '../../redux/actions/uiActions';
-
-
-
+import Router from 'next/router'
+import Cookie from 'js-cookie';
 
 
 const SelectorItem = props =>{
-      
-    
-      const handleRemoveRoutes = (e) => {
-        //prevent select state update aswell
+        console.log(props)
+
+      const handleEditRoutes = (e) => {
+
         e.stopPropagation()
-        var itemId = this.props.itemData.id
-        //for removing columns when deleting list items
-        var dispatch = this.props.type == "STOPS" ? "STOP_DESELECT" : dispatch = "ROUTE_DESELECT"
-        var removeIndex = this.props.index;
-        var removeColumn = this.props.columnId;
-        this.props.removeRoute({removeIndex,removeColumn});
-        this.props.updateSelectorManagerState({itemId,dispatch})
+        e.nativeEvent.stopImmediatePropagation();
+        Cookie.set("hid", props.itemData.id)
+       // Cookie.
+        const selectedId = props.itemData.id
+        const htype = props.type
+        props.updateSelectorManagerState({selectedId,htype})
+            Router.push({
+                pathname: '/inputscreen',
+            })
       };
 
-      const handleSelectorManagerStateUpdate = () => {
-        const selectedId = this.props.itemData.id
-        const htype = this.props.type
-        this.props.updateSelectorManagerState({selectedId,htype})
+      const handleSelectorManagerStateUpdate = (e) => {
+        if(this === e.target) {
+
+        const selectedId = props.itemData.id
+        const htype = props.type
+        props.updateSelectorManagerState({selectedId,htype})
+        }
+          
         
       }
-
-      
-
-
         return(
         <Draggable draggableId={props.itemData.id} index={props.index}>
             {provided =>( 
@@ -42,11 +43,11 @@ const SelectorItem = props =>{
                 {...provided.draggableProps}
                 {...provided.dragHandleProps}
                 ref={provided.innerRef}
-                onClick={() => handleSelectorManagerStateUpdate()}
+                onClick={(e) => handleSelectorManagerStateUpdate(e)}
                 color={props.itemData.id == props.uiState.selector["selected" + props.type] ? "salmon":"lightgray" }
                 >
                 <Headline>{props.itemData.name}</Headline>
-                <RemoveButton onClick={(e) => handleRemoveRoutes(e)} >
+                <RemoveButton onClick={(e) => handleEditRoutes(e)} >
                     <FontAwesomeIcon icon={faEdit}/>
                 </RemoveButton>
             </Container>
@@ -54,16 +55,15 @@ const SelectorItem = props =>{
             }
         </Draggable>
         )
-    
 }
 
-const mapStateToProps = state => {
-    return {uiState:state.ui,updateSelectorManagerState:state.updateSelectorManagerState};
-  };
+//const mapStateToProps = state => {
+//    return {uiState:state.ui,updateSelectorManagerState:state.updateSelectorManagerState};
+//  };
 
+export default SelectorItem
 
-
-export default connect(mapStateToProps,{ removeRoute, updateSelectorManagerState })(SelectorItem);
+//export default connect(mapStateToProps,{ removeRoute, updateSelectorManagerState })(SelectorItem);
 
 const Container = styled.div`
     border: 1px solid;
@@ -103,10 +103,23 @@ const RemoveButton = styled.button`
     border:0;
     color:none;
     background-color:transparent;
-
+    cursor: pointer;
     :focus {
         outline:none;
     }
 
     
 `
+/*
+handleremovedroutes
+        //prevent select state update aswell
+        e.stopPropagation()
+        var itemId = props.itemData.id
+        //for removing columns when deleting list items
+        var dispatch = props.type == "STOPS" ? "STOP_DESELECT" : dispatch = "ROUTE_DESELECT"
+        var removeIndex = props.index;
+        var removeColumn = props.columnId;
+        props.removeRoute({removeIndex,removeColumn});
+        props.updateSelectorManagerState({itemId,dispatch})
+
+        */

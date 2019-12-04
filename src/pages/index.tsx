@@ -24,7 +24,7 @@ const Home = (props) => {
   const SIGN_IN = gql`
   mutation Signin($email: String!, $password: String!) {
     login(email: $email, password: $password ) {
-      user{id name ROUTES POIS STOPS email}
+      user{id name routes pois stops email}
     }
   }`
   const onCompleted = data => {
@@ -133,6 +133,10 @@ const StyledInput = styled.input`
   position:absolute;
   width:16vw;
   right:10vw;
+  :focus {
+        outline:none;
+        caret-color:salmon;
+    }
 
 `
 const StyledButton = styled.button`

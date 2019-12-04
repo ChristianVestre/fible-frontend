@@ -51,11 +51,11 @@ const LogoutButton = (props) => {
   )
 }
 
-const mapStateToProps = state => {
-    return { cleanUser: state.cleanUser };
-  };
-  
-  export default connect(mapStateToProps,{cleanUser})(LogoutButton);
+//const mapStateToProps = state => {
+//    return { cleanUser: state.cleanUser };
+//  };
+export default LogoutButton
+//  export default connect(mapStateToProps,{cleanUser})(LogoutButton);
   
   const StyledFontAwesomeIcon = styled(FontAwesomeIcon)`
   font-size:3vh;
