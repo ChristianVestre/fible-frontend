@@ -50,7 +50,7 @@ const Selector = props => {
 
     return (
         <Container>
-            <Title>{props.type.substring(0,1).toUpperCase + props.type.substring(1,)}</Title>
+            <Title>{props.type.substring(0,1).toUpperCase() + props.type.substring(1,)}</Title>
             <Droppable droppableId={props.type}>
                 {provided => (
                     <RouteList

@@ -30,24 +30,24 @@ const SelectorManager = props => {
     const selectorFunction = props => {
         switch (props.type) {
             case ("routes"): {
-                const selector = props.data.user.me.routes;
-            //    console.log(selector)
+                const selector = props.dataState.user.routes;
+                console.log(props.dataState.user)
                 let listItems
-                listItems = selector ? selector.map((route) => props.data.user.routes[route.id]):[]
+                listItems = selector ? selector.map((route) => props.dataState.routes[route]):[]
            //    console.log(listItems)
                 return <Selector key='routes' selector={selector} type="routes" listItems={listItems} />;
             }
             case ("stops"):{
-                const selector =  props.data.user.me.stops;
+                const selector =  props.dataState.user.stops;
                 let listItems
-                listItems = selector ? listItems = selector.map((stop) => props.data.user.stops[stop.id]) : []
+                listItems = selector ? listItems = selector.map((stop) => props.dataState.stops[stop]) : []
                 return <Selector key='stops' selector={selector} type="stops" listItems={listItems} />;
             }
             case ("pois"): {
-                const selector = props.data.user.me.stops;
+                const selector = props.dataState.user.stops;
                 let listItems
-                listItems = selector ? selector.map((poi) => props.data.user.stops[poi.id]): []
-                return <Selector key='pois' selec={selector} type="pois" listItems={listItems} />;
+                listItems = selector ? selector.map((poi) => props.dataState.pois[poi]): []
+                return <Selector key='pois' selector={selector} type="pois" listItems={listItems} />;
             }
             default:
                 return <p>wrong</p>
@@ -57,9 +57,9 @@ const SelectorManager = props => {
             {selectorFunction(props)}
         </DragDropContext>)
     }
-//const mapStateToProps = state => {
-//    return { selectorState: state.selector, uiState:state.ui,dataState:state.data , updateOrder: state.updateOrder };
-//};
-export default SelectorManager
-//export default connect(mapStateToProps, { updateOrder, updateSelectorManagerState, cleanNonsavedHtypes })(SelectorManager);
+const mapStateToProps = state => {
+   return { selectorState: state.selector, uiState:state.ui,dataState:state.data , updateOrder: state.updateOrder };
+};
+
+export default connect(mapStateToProps, { updateOrder, updateSelectorManagerState, cleanNonsavedHtypes })(SelectorManager);
 

@@ -49182,7 +49182,7 @@ var Selector = function Selector(props) {
       lineNumber: 53
     },
     __self: this
-  }, props.type.substring(0, 1).toUpperCase + props.type.substring(1)), __jsx(react_beautiful_dnd__WEBPACK_IMPORTED_MODULE_4__["Droppable"], {
+  }, props.type.substring(0, 1).toUpperCase() + props.type.substring(1)), __jsx(react_beautiful_dnd__WEBPACK_IMPORTED_MODULE_4__["Droppable"], {
     droppableId: props.type,
     __source: {
       fileName: _jsxFileName,
@@ -49258,16 +49258,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_beautiful_dnd__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-beautiful-dnd */ "./node_modules/react-beautiful-dnd/dist/react-beautiful-dnd.esm.js");
 /* harmony import */ var _fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
 /* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
-/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! next/router */ "./node_modules/next/dist/client/router.js");
-/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! js-cookie */ "./node_modules/js-cookie/src/js.cookie.js");
-/* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(js_cookie__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _redux_actions_uiActions__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../redux/actions/uiActions */ "./src/redux/actions/uiActions.ts");
+/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! next/router */ "./node_modules/next/dist/client/router.js");
+/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! js-cookie */ "./node_modules/js-cookie/src/js.cookie.js");
+/* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(js_cookie__WEBPACK_IMPORTED_MODULE_9__);
 
-
-var _this = undefined,
-    _jsxFileName = "/home/christian/Development/fible-frontend-nextjs/src/components/route-management/selectorItem.tsx";
-
+var _jsxFileName = "/home/christian/Development/fible-frontend-nextjs/src/components/route-management/selectorItem.tsx";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement;
+
+
 
 
 
@@ -49282,7 +49283,7 @@ var SelectorItem = function SelectorItem(props) {
   var handleEditRoutes = function handleEditRoutes(e) {
     e.stopPropagation();
     e.nativeEvent.stopImmediatePropagation();
-    js_cookie__WEBPACK_IMPORTED_MODULE_7___default.a.set("hid", props.itemData.id); // Cookie.
+    js_cookie__WEBPACK_IMPORTED_MODULE_9___default.a.set("hid", props.itemData.id); // Cookie.
 
     var selectedId = props.itemData.id;
     var htype = props.type;
@@ -49290,20 +49291,18 @@ var SelectorItem = function SelectorItem(props) {
       selectedId: selectedId,
       htype: htype
     });
-    next_router__WEBPACK_IMPORTED_MODULE_6___default.a.push({
+    next_router__WEBPACK_IMPORTED_MODULE_8___default.a.push({
       pathname: '/inputscreen'
     });
   };
 
   var handleSelectorManagerStateUpdate = function handleSelectorManagerStateUpdate(e) {
-    if (_this === e.target) {
-      var selectedId = props.itemData.id;
-      var htype = props.type;
-      props.updateSelectorManagerState({
-        selectedId: selectedId,
-        htype: htype
-      });
-    }
+    var selectedId = props.itemData.id;
+    var htype = props.type;
+    props.updateSelectorManagerState({
+      selectedId: selectedId,
+      htype: htype
+    });
   };
 
   return __jsx(react_beautiful_dnd__WEBPACK_IMPORTED_MODULE_3__["Draggable"], {
@@ -49350,13 +49349,20 @@ var SelectorItem = function SelectorItem(props) {
       __self: this
     })));
   });
-}; //const mapStateToProps = state => {
-//    return {uiState:state.ui,updateSelectorManagerState:state.updateSelectorManagerState};
-//  };
+};
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    uiState: state.ui,
+    updateSelectorManagerState: state.updateSelectorManagerState
+  };
+}; //export default SelectorItem
 
 
-/* harmony default export */ __webpack_exports__["default"] = (SelectorItem); //export default connect(mapStateToProps,{ removeRoute, updateSelectorManagerState })(SelectorItem);
-
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_6__["connect"])(mapStateToProps, {
+  removeRoute: _redux_actions_uiActions__WEBPACK_IMPORTED_MODULE_7__["removeRoute"],
+  updateSelectorManagerState: _redux_actions_uiActions__WEBPACK_IMPORTED_MODULE_7__["updateSelectorManagerState"]
+})(SelectorItem));
 var Container = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].div.withConfig({
   displayName: "selectorItem__Container",
   componentId: "sc-1qe6ivb-0"
@@ -49402,9 +49408,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _selector__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./selector */ "./src/components/route-management/selector.tsx");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _redux_actions_uiActions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../redux/actions/uiActions */ "./src/redux/actions/uiActions.ts");
+/* harmony import */ var _redux_actions_dataActions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../redux/actions/dataActions */ "./src/redux/actions/dataActions.ts");
 
 var _jsxFileName = "/home/christian/Development/fible-frontend-nextjs/src/components/route-management/selectorManager.tsx";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement;
+
+
+
 
 
 
@@ -49436,11 +49448,11 @@ var SelectorManager = function SelectorManager(props) {
     switch (props.type) {
       case "routes":
         {
-          var selector = props.data.user.me.routes; //    console.log(selector)
-
+          var selector = props.dataState.user.routes;
+          console.log(props.dataState.user);
           var listItems;
           listItems = selector ? selector.map(function (route) {
-            return props.data.user.routes[route.id];
+            return props.dataState.routes[route];
           }) : []; //    console.log(listItems)
 
           return __jsx(_selector__WEBPACK_IMPORTED_MODULE_3__["default"], {
@@ -49458,12 +49470,12 @@ var SelectorManager = function SelectorManager(props) {
 
       case "stops":
         {
-          var _selector = props.data.user.me.stops;
+          var _selector = props.dataState.user.stops;
 
           var _listItems;
 
           _listItems = _selector ? _listItems = _selector.map(function (stop) {
-            return props.data.user.stops[stop.id];
+            return props.dataState.stops[stop];
           }) : [];
           return __jsx(_selector__WEBPACK_IMPORTED_MODULE_3__["default"], {
             key: "stops",
@@ -49480,16 +49492,16 @@ var SelectorManager = function SelectorManager(props) {
 
       case "pois":
         {
-          var _selector2 = props.data.user.me.stops;
+          var _selector2 = props.dataState.user.stops;
 
           var _listItems2;
 
           _listItems2 = _selector2 ? _selector2.map(function (poi) {
-            return props.data.user.stops[poi.id];
+            return props.dataState.pois[poi];
           }) : [];
           return __jsx(_selector__WEBPACK_IMPORTED_MODULE_3__["default"], {
             key: "pois",
-            selec: _selector2,
+            selector: _selector2,
             type: "pois",
             listItems: _listItems2,
             __source: {
@@ -49521,12 +49533,22 @@ var SelectorManager = function SelectorManager(props) {
     },
     __self: this
   }, selectorFunction(props));
-}; //const mapStateToProps = state => {
-//    return { selectorState: state.selector, uiState:state.ui,dataState:state.data , updateOrder: state.updateOrder };
-//};
+};
 
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    selectorState: state.selector,
+    uiState: state.ui,
+    dataState: state.data,
+    updateOrder: state.updateOrder
+  };
+};
 
-/* harmony default export */ __webpack_exports__["default"] = (SelectorManager); //export default connect(mapStateToProps, { updateOrder, updateSelectorManagerState, cleanNonsavedHtypes })(SelectorManager);
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_4__["connect"])(mapStateToProps, {
+  updateOrder: _redux_actions_uiActions__WEBPACK_IMPORTED_MODULE_5__["updateOrder"],
+  updateSelectorManagerState: _redux_actions_uiActions__WEBPACK_IMPORTED_MODULE_5__["updateSelectorManagerState"],
+  cleanNonsavedHtypes: _redux_actions_dataActions__WEBPACK_IMPORTED_MODULE_6__["cleanNonsavedHtypes"]
+})(SelectorManager));
 
 /***/ }),
 
@@ -49542,8 +49564,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _selectorManager__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./selectorManager */ "./src/components/route-management/selectorManager.tsx");
-/* harmony import */ var _stopsandpoi_components_sandpManager__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./stopsandpoi-components/sandpManager */ "./src/components/route-management/stopsandpoi-components/sandpManager.tsx");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _selectorManager__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./selectorManager */ "./src/components/route-management/selectorManager.tsx");
+/* harmony import */ var _stopsandpoi_components_sandpManager__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./stopsandpoi-components/sandpManager */ "./src/components/route-management/stopsandpoi-components/sandpManager.tsx");
 var _jsxFileName = "/home/christian/Development/fible-frontend-nextjs/src/components/route-management/stateManager.tsx";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement;
 
@@ -49551,25 +49574,24 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement;
 
 
 
+
 var RouteManagementStateManager = function RouteManagementStateManager(props) {
   var SelectorChoice = function SelectorChoice(props) {
-    console.log(props.state); //   console.log(props.state.htypes.getRoutes)
-
-    switch (props.state.ui.managerUiCode) {
+    //   console.log(props.state.htypes.getRoutes)
+    switch (props.uiState.selector.managerUiCode) {
       case "RO":
         {
           return __jsx(OneSelectorWrapper, {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 17
+              lineNumber: 16
             },
             __self: this
-          }, __jsx(_selectorManager__WEBPACK_IMPORTED_MODULE_2__["default"], {
+          }, __jsx(_selectorManager__WEBPACK_IMPORTED_MODULE_3__["default"], {
             type: "routes",
-            data: props.state.user,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 18
+              lineNumber: 17
             },
             __self: this
           }));
@@ -49580,23 +49602,21 @@ var RouteManagementStateManager = function RouteManagementStateManager(props) {
           return __jsx(TwoSelectorsWrapper, {
             __source: {
               fileName: _jsxFileName,
+              lineNumber: 21
+            },
+            __self: this
+          }, __jsx(_selectorManager__WEBPACK_IMPORTED_MODULE_3__["default"], {
+            type: "routes",
+            __source: {
+              fileName: _jsxFileName,
               lineNumber: 22
             },
             __self: this
-          }, __jsx(_selectorManager__WEBPACK_IMPORTED_MODULE_2__["default"], {
-            type: "routes",
-            data: props.state.user,
+          }), __jsx(_selectorManager__WEBPACK_IMPORTED_MODULE_3__["default"], {
+            type: "stops",
             __source: {
               fileName: _jsxFileName,
               lineNumber: 23
-            },
-            __self: this
-          }), __jsx(_selectorManager__WEBPACK_IMPORTED_MODULE_2__["default"], {
-            type: "stops",
-            data: props.state.user,
-            __source: {
-              fileName: _jsxFileName,
-              lineNumber: 24
             },
             __self: this
           }));
@@ -49607,31 +49627,28 @@ var RouteManagementStateManager = function RouteManagementStateManager(props) {
           return __jsx(ThreeSelectorsWrapper, {
             __source: {
               fileName: _jsxFileName,
+              lineNumber: 27
+            },
+            __self: this
+          }, __jsx(_selectorManager__WEBPACK_IMPORTED_MODULE_3__["default"], {
+            type: "routes",
+            __source: {
+              fileName: _jsxFileName,
               lineNumber: 28
             },
             __self: this
-          }, __jsx(_selectorManager__WEBPACK_IMPORTED_MODULE_2__["default"], {
-            type: "routes",
-            data: props.state.user,
+          }), __jsx(_selectorManager__WEBPACK_IMPORTED_MODULE_3__["default"], {
+            type: "stops",
             __source: {
               fileName: _jsxFileName,
               lineNumber: 29
             },
             __self: this
-          }), __jsx(_selectorManager__WEBPACK_IMPORTED_MODULE_2__["default"], {
-            type: "stops",
-            data: props.state.user,
+          }), __jsx(_selectorManager__WEBPACK_IMPORTED_MODULE_3__["default"], {
+            type: "pois",
             __source: {
               fileName: _jsxFileName,
               lineNumber: 30
-            },
-            __self: this
-          }), __jsx(_selectorManager__WEBPACK_IMPORTED_MODULE_2__["default"], {
-            type: "pois",
-            data: props.state.user,
-            __source: {
-              fileName: _jsxFileName,
-              lineNumber: 31
             },
             __self: this
           }));
@@ -49642,15 +49659,14 @@ var RouteManagementStateManager = function RouteManagementStateManager(props) {
           return __jsx(ManagerWrapper, {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 35
+              lineNumber: 34
             },
             __self: this
-          }, __jsx(_stopsandpoi_components_sandpManager__WEBPACK_IMPORTED_MODULE_3__["default"], {
+          }, __jsx(_stopsandpoi_components_sandpManager__WEBPACK_IMPORTED_MODULE_4__["default"], {
             type: "stops",
-            data: props.state.user,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 36
+              lineNumber: 35
             },
             __self: this
           }));
@@ -49661,15 +49677,14 @@ var RouteManagementStateManager = function RouteManagementStateManager(props) {
           return __jsx(ManagerWrapper, {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 40
+              lineNumber: 39
             },
             __self: this
-          }, __jsx(_stopsandpoi_components_sandpManager__WEBPACK_IMPORTED_MODULE_3__["default"], {
+          }, __jsx(_stopsandpoi_components_sandpManager__WEBPACK_IMPORTED_MODULE_4__["default"], {
             type: "pois",
-            data: props.state.user,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 41
+              lineNumber: 40
             },
             __self: this
           }));
@@ -49680,15 +49695,14 @@ var RouteManagementStateManager = function RouteManagementStateManager(props) {
           return __jsx(OneSelectorWrapper, {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 45
+              lineNumber: 44
             },
             __self: this
-          }, __jsx(_selectorManager__WEBPACK_IMPORTED_MODULE_2__["default"], {
+          }, __jsx(_selectorManager__WEBPACK_IMPORTED_MODULE_3__["default"], {
             type: "routes",
-            data: props.state.user,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 46
+              lineNumber: 45
             },
             __self: this
           }));
@@ -49699,17 +49713,21 @@ var RouteManagementStateManager = function RouteManagementStateManager(props) {
   return __jsx(Container, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 53
+      lineNumber: 52
     },
     __self: this
   }, SelectorChoice(props));
-}; //const mapStateToProps = state => {
-//    return {uiState:state.ui, dataState:state.data};
-//  };
+};
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    uiState: state.ui,
+    dataState: state.data
+  };
+}; //export default RouteManagementStateManager
 
 
-/* harmony default export */ __webpack_exports__["default"] = (RouteManagementStateManager); //export default connect(mapStateToProps)(RouteManagementStateManager);
-
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps)(RouteManagementStateManager));
 var Container = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div.withConfig({
   displayName: "stateManager__Container",
   componentId: "sc-12qph2w-0"
@@ -50882,25 +50900,16 @@ function _templateObject() {
 
 
 var RouteManagement = function RouteManagement(props) {
-  //() => loadHtypeData(props.routes)
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_10__["useState"])(props),
-      state = _useState[0],
-      setState = _useState[1];
-
-  console.log(props);
-  props.loadUser(props.me);
-  props.loadHtypeData(props.htypes); //   console.log(setState)
-
   return __jsx(Container, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 31
+      lineNumber: 23
     },
     __self: this
   }, __jsx(Images, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 32
+      lineNumber: 24
     },
     __self: this
   }, __jsx(HeaderImage, {
@@ -50908,46 +50917,45 @@ var RouteManagement = function RouteManagement(props) {
     alt: "my image",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 33
+      lineNumber: 25
     },
     __self: this
   }), __jsx(next_link__WEBPACK_IMPORTED_MODULE_3___default.a, {
     href: "/",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 34
+      lineNumber: 26
     },
     __self: this
   }, __jsx(BackImage, {
     src: "/back.svg",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 35
+      lineNumber: 27
     },
     __self: this
   }))), __jsx(_components_route_management_title__WEBPACK_IMPORTED_MODULE_5__["default"], {
-    name: state.user.me.name,
+    name: props.dataState.user.name,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 38
+      lineNumber: 30
     },
     __self: this
   }), __jsx(_components_shared_components_logoutButton__WEBPACK_IMPORTED_MODULE_8__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 39
+      lineNumber: 31
     },
     __self: this
   }), __jsx(_components_route_management_stateManager__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    state: state,
-    setState: setState,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 40
+      lineNumber: 32
     },
     __self: this
   }));
-};
+}; //            
+
 
 RouteManagement.getInitialProps =
 /*#__PURE__*/
@@ -50955,12 +50963,12 @@ function () {
   var _ref2 = Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2__["default"])(
   /*#__PURE__*/
   _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(_ref) {
-    var apolloClient, me, routesQuery, htypes;
+    var apolloClient, me, reduxStore, routesQuery, htypes;
     return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            apolloClient = _ref.apolloClient, me = _ref.me;
+            apolloClient = _ref.apolloClient, me = _ref.me, reduxStore = _ref.reduxStore;
             routesQuery = graphql_tag__WEBPACK_IMPORTED_MODULE_14___default()(_templateObject());
             _context.next = 4;
             return apolloClient.query({
@@ -50969,12 +50977,10 @@ function () {
 
           case 4:
             htypes = _context.sent;
-            return _context.abrupt("return", {
-              htypes: htypes,
-              user: me
-            });
+            reduxStore.dispatch(Object(_redux_actions_dataActions__WEBPACK_IMPORTED_MODULE_15__["loadUser"])(me));
+            reduxStore.dispatch(Object(_redux_actions_dataActions__WEBPACK_IMPORTED_MODULE_15__["loadHtypeData"])(htypes));
 
-          case 6:
+          case 7:
           case "end":
             return _context.stop();
         }
@@ -51356,23 +51362,28 @@ var initialState = {
 
         for (var _i = 0, _Object$keys = _babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_4___default()(action.payload.content.data); _i < _Object$keys.length; _i++) {
           var item = _Object$keys[_i];
-          var key = item.substring(3).toLowerCase();
-          content[key] = action.payload.content.data[item].reduce(function (result, attri, index) {
-            if (attri) {
-              result[attri.id] = attri;
-            } //a, b, c
+
+          //to not create a component object in the user state
+          if (item.indexOf('get') != -1) {
+            var key = item.substring(3).toLowerCase();
+            content[key] = action.payload.content.data[item].reduce(function (result, attri, index) {
+              if (attri) {
+                result[attri.id] = attri;
+              } //a, b, c
 
 
-            return result;
-          }, {});
+              return result;
+            }, {});
+          }
         }
 
         return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_5__["default"])({}, state, {
-          user: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_5__["default"])({}, state.user, {
-            routes: action.payload.content.data.getRoutes[0] === null ? [] : action.payload.content.data.getRoutes,
-            stops: action.payload.content.data.getStops[0] === null ? [] : action.payload.content.data.getStops,
-            pois: action.payload.content.data.getPois[0] === null ? [] : action.payload.content.data.getPois
-          }),
+          /*   user:{
+                 ...state.user,
+                 routes:action.payload.content.data.getRoutes[0] === null ? []:action.payload.content.data.getRoutes ,
+                 stops:action.payload.content.data.getStops[0] === null ? []:action.payload.content.data.getStops ,
+                 pois:action.payload.content.data.getPois[0] === null ? []:action.payload.content.data.getPois 
+             },*/
           routes: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_5__["default"])({}, content["routes"]),
           stops: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_5__["default"])({}, content["stops"]),
           pois: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_5__["default"])({}, content["pois"])
@@ -51390,9 +51401,9 @@ var initialState = {
         return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_5__["default"])({}, state, {
           user: {
             name: name,
-            routes: [routes],
-            stops: [stops],
-            pois: [pois],
+            routes: routes ? routes : [],
+            stops: stops ? stops : [],
+            pois: pois ? pois : [],
             email: email
           }
         });
@@ -51813,32 +51824,32 @@ var initialState = {
         var selectedSTOPS = "";
         var selectedPOIS = "";
 
-        if (htype == "ROUTES" && state.selector.selectedROUTES != selectedId) {
+        if (htype == "routes" && state.selector.selectedROUTES != selectedId) {
           managerUiCode = "ROST";
           selectedROUTES = selectedId;
           selectedSTOPS = "";
           selectedPOIS = "";
-        } else if (htype == "ROUTES" && state.selector.selectedROUTES == selectedId) {
+        } else if (htype == "routes" && state.selector.selectedROUTES == selectedId) {
           managerUiCode = "RO";
           selectedROUTES = "";
           selectedSTOPS = "";
           selectedPOIS = "";
-        } else if (htype == "STOPS" && state.selector.selectedSTOPS != selectedId) {
+        } else if (htype == "stops" && state.selector.selectedSTOPS != selectedId) {
           managerUiCode = "ROSTPO";
           selectedROUTES = state.selector.selectedROUTES;
           selectedSTOPS = selectedId;
           selectedPOIS = "";
-        } else if (htype == "STOPS" && state.selector.selectedSTOPS == selectedId) {
+        } else if (htype == "stops" && state.selector.selectedSTOPS == selectedId) {
           managerUiCode = "ROST";
           selectedROUTES = state.selector.selectedROUTES;
           selectedSTOPS = "";
           selectedPOIS = "";
-        } else if (htype == "POIS" && state.selector.selectedPOIS != selectedId) {
+        } else if (htype == "pois" && state.selector.selectedPOIS != selectedId) {
           managerUiCode = "ROSTPO";
           selectedROUTES = state.selector.selectedROUTES;
           selectedSTOPS = state.selector.selectedSTOPS;
           selectedPOIS = selectedId;
-        } else if (htype == "POIS" && state.selector.selectedPOIS == selectedId) {
+        } else if (htype == "pois" && state.selector.selectedPOIS == selectedId) {
           managerUiCode = "ROSTPO";
           selectedROUTES = state.selector.selectedROUTES;
           selectedSTOPS = state.selector.selectedSTOPS;
@@ -52256,7 +52267,7 @@ export default () => {
 
 /***/ }),
 
-/***/ 0:
+/***/ 1:
 /*!*****************************************************************************************************************************************************************************!*\
   !*** multi next-client-pages-loader?page=%2Froutemanagement&absolutePagePath=%2Fhome%2Fchristian%2FDevelopment%2Ffible-frontend-nextjs%2Fsrc%2Fpages%2Froutemanagement.tsx ***!
   \*****************************************************************************************************************************************************************************/
@@ -52279,5 +52290,5 @@ module.exports = dll_13346faca0e924a89b24;
 
 /***/ })
 
-},[[0,"static/runtime/webpack.js"]]]);
+},[[1,"static/runtime/webpack.js"]]]);
 //# sourceMappingURL=routemanagement.js.map

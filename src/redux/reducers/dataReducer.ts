@@ -35,6 +35,8 @@ export default function (state = initialState, action) {
 
             console.log(action.payload.content.data)
             for(let item of Object.keys(action.payload.content.data)) {
+            //to not create a component object in the user state
+            if(item.indexOf('get') != -1){
             let key = item.substring(3,).toLowerCase()
             content[key] = action.payload.content.data[item].reduce((result, attri, index) => { 
                 if(attri){
@@ -43,14 +45,15 @@ export default function (state = initialState, action) {
             return result;
             }, {}) 
             }
+            }
             return {
                 ...state,
-                user:{
+             /*   user:{
                     ...state.user,
                     routes:action.payload.content.data.getRoutes[0] === null ? []:action.payload.content.data.getRoutes ,
                     stops:action.payload.content.data.getStops[0] === null ? []:action.payload.content.data.getStops ,
                     pois:action.payload.content.data.getPois[0] === null ? []:action.payload.content.data.getPois 
-                },
+                },*/
                 routes:{
                     ...content["routes"]
                 },
@@ -69,9 +72,9 @@ export default function (state = initialState, action) {
                 ...state,
                 user: {
                     name: name,
-                    routes: [routes],
-                    stops: [stops],
-                    pois: [pois],
+                    routes: routes ? routes : [],
+                    stops: stops ? stops : [],
+                    pois: pois ? pois : [],
                     email: email,
                 }
             }

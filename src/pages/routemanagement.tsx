@@ -19,14 +19,6 @@ import { loadUser, loadHtypeData } from '../redux/actions/dataActions';
 
 const RouteManagement = (props) => {
     
-    //() => loadHtypeData(props.routes)
-    const [state, setState] = useState(props)
-    console.log(props)
-    props.loadUser(props.me)
-    props.loadHtypeData(props.htypes)
-    
-    
- //   console.log(setState)
     return(
         <Container>
             <Images>
@@ -35,14 +27,14 @@ const RouteManagement = (props) => {
                     <BackImage src="/back.svg"></BackImage>
                 </Link>
             </Images>
-            <Title name={state.user.me.name}/>
+            <Title name={props.dataState.user.name}/>
             <LogoutButton/>
-            <RouteManagementStateManager state={state} setState={setState}></RouteManagementStateManager>
+            <RouteManagementStateManager/>
         </Container>
     )
 };
-
-RouteManagement.getInitialProps = async ({apolloClient, me}) => {
+//            
+RouteManagement.getInitialProps = async ({apolloClient, me, reduxStore}) => {
 
     const routesQuery = gql`query getHtypes 
     {   getRoutes{id ownerid components}
@@ -50,48 +42,9 @@ RouteManagement.getInitialProps = async ({apolloClient, me}) => {
         getStops{id ownerid components}
     }`
     let htypes = await apolloClient.query({query:routesQuery})
-/*    htypes = htypes.data
-    let content = {}
-    for(let item of Object.keys(htypes)) {
-        let key = item.substring(3,).toLowerCase()
-        content[key] = htypes[item].reduce((result, attri, index) => { 
-            if(attri){
-            result[attri.id] = attri;
-            } //a, b, c
-        return result;
-        }, {}) 
-    }
-    //console.log(me)
-    const user =  {
-            me:{
-                ...me,
-                routes:htypes.getRoutes[0] === null ? []:htypes.getRoutes ,
-                stops:htypes.getStops[0] === null ? []:htypes.getStops ,
-                pois:htypes.getPois[0] === null ? []:htypes.getPois 
-            },
-            routes:{
-                ...content["routes"]
-            },
-            stops:{
-                ...content["stops"]
-            },
-            pois:{
-                ...content["pois"]
-            }
-        }
-    const ui = { 
-        lastManagerUiCode:"",
-        selectedROUTES:"",
-        selectedSTOPS:"",
-        selectedPOIS:"",
-        managerUiCode:"RO",
-        htype:"",
-    } */
-  //  reduxStore.dispatch(loadHtypeData(htypes))
-    //reduxStore.dispatch(loadUser({user}))
-  //  console.log(user)
-  //  console.log(context.reduxStore.getState())
-    return {htypes:htypes, user:me}
+    reduxStore.dispatch(loadUser(me))
+    reduxStore.dispatch(loadHtypeData(htypes))
+    
   }
   
 

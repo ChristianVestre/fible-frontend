@@ -14,26 +14,31 @@ import { withRedux } from '../redux/redux';
 import { withAuth } from '../lib/auth';
 import gql from 'graphql-tag';
 import Cookies from 'js-cookie'
+import { loadUser, loadHtypeData } from '../redux/actions/dataActions';
 
 
-const Inputscreen = (props) => (
-        <Container>
-            {console.log(props)}
-            <MenuManager/>
-            <Simulator/>
-        </Container>
-);
+const Inputscreen = (props) => {
+    console.log(props)
+    return(  <Container>
 
-Inputscreen.getInitialProps = async (context) => {
-    console.log(Cookies.get('hid'))
-    const inputScreenQuery = gql`query getRouteWithComponents{getRouteWithComponents{
-        route{id name ownerid components}
-    }
+        </Container>)
+};
+//            <MenuManager/><Simulator/>
+//
+Inputscreen.getInitialProps = async ({reduxStore, me, apolloClient}) => {
+
+    const routesQuery = gql`query getHtypes 
+    {   
+        getRouteWithComponents{route{id name ownerid components}}
     }`
-    const routes = await context.apolloClient.query({query:inputScreenQuery})
-    const reduxtest = await context.reduxStore.getState()
+    let data = await apolloClient.query({query:routesQuery})
+    reduxStore.dispatch(loadUser(me))
+
+   // reduxStore.dispatch(loadComponent({route, components}))
+  
+    //const routes = await context.apolloClient.query({query:inputScreenQuery})
     //return {routes:reduxtest.state.ROUTES}
-console.log(routes)
+
 }
 /*
  const InputScreen = props => (
@@ -52,9 +57,9 @@ const mapStateToProps = state => {
     return { selectorState: state.selector, uiState:state.ui,dataState:state.data };
 };
 const enhance = compose(
-    withRedux,
     withApollo,
     withAuth,
+    withRedux,
     connect(mapStateToProps, null),
   )
 export default enhance(Inputscreen);

@@ -27,12 +27,12 @@ const SelectorItem = props =>{
       };
 
       const handleSelectorManagerStateUpdate = (e) => {
-        if(this === e.target) {
+        
 
         const selectedId = props.itemData.id
         const htype = props.type
         props.updateSelectorManagerState({selectedId,htype})
-        }
+        
           
         
       }
@@ -57,13 +57,13 @@ const SelectorItem = props =>{
         )
 }
 
-//const mapStateToProps = state => {
-//    return {uiState:state.ui,updateSelectorManagerState:state.updateSelectorManagerState};
-//  };
+const mapStateToProps = state => {
+    return {uiState:state.ui,updateSelectorManagerState:state.updateSelectorManagerState};
+  };
 
-export default SelectorItem
+//export default SelectorItem
 
-//export default connect(mapStateToProps,{ removeRoute, updateSelectorManagerState })(SelectorItem);
+export default connect(mapStateToProps,{ removeRoute, updateSelectorManagerState })(SelectorItem);
 
 const Container = styled.div`
     border: 1px solid;

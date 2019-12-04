@@ -10,40 +10,39 @@ import StopsAndPois from './stopsandpoi-components/sandpManager'
 const RouteManagementStateManager = props => {
 
     const SelectorChoice = (props) => {
-        console.log(props.state)
      //   console.log(props.state.htypes.getRoutes)
-            switch(props.state.ui.managerUiCode){
+            switch(props.uiState.selector.managerUiCode){
                 case("RO"):{
                     return <OneSelectorWrapper>
-                    <Selector type="routes" data={props.state.user}/>
+                    <Selector type="routes"/>
                     </OneSelectorWrapper>
                 }
                 case("ROST"):{
                     return<TwoSelectorsWrapper>
-                    <Selector type="routes" data={props.state.user}/>
-                    <Selector type="stops" data={props.state.user} />
+                    <Selector type="routes" />
+                    <Selector type="stops" />
                     </TwoSelectorsWrapper>
                 }
                 case("ROSTPO"):{
                     return<ThreeSelectorsWrapper>
-                    <Selector type="routes" data={props.state.user} />
-                    <Selector type="stops" data={props.state.user} />
-                    <Selector type="pois" data={props.state.user}/> 
+                    <Selector type="routes" />
+                    <Selector type="stops" />
+                    <Selector type="pois" /> 
                     </ThreeSelectorsWrapper>   
                 }
                 case("MAST"):{
                     return <ManagerWrapper>
-                    <StopsAndPois type="stops" data={props.state.user}/>
+                    <StopsAndPois type="stops" />
                     </ManagerWrapper>
                 }
                 case("MAPO"):{
                     return <ManagerWrapper>
-                    <StopsAndPois type="pois" data={props.state.user}/>
+                    <StopsAndPois type="pois" />
                     </ManagerWrapper>
                 }
                 default:{
                     return <OneSelectorWrapper>
-                    <Selector type="routes" data={props.state.user}/>
+                    <Selector type="routes"/>
                     </OneSelectorWrapper>
                 }
             }
@@ -56,12 +55,12 @@ const RouteManagementStateManager = props => {
     )
     }
 
-//const mapStateToProps = state => {
-//    return {uiState:state.ui, dataState:state.data};
-//  };
+const mapStateToProps = state => {
+    return {uiState:state.ui, dataState:state.data};
+  };
 
-export default RouteManagementStateManager
-//export default connect(mapStateToProps)(RouteManagementStateManager);
+//export default RouteManagementStateManager
+export default connect(mapStateToProps)(RouteManagementStateManager);
 
 const Container = styled.div`
     width:100vw;

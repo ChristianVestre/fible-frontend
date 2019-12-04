@@ -142,32 +142,32 @@ export default function (state = initialState, action) {
             let selectedROUTES = ""
             let selectedSTOPS = ""
             let selectedPOIS = ""
-            if(htype == "ROUTES" && state.selector.selectedROUTES != selectedId){
+            if(htype == "routes" && state.selector.selectedROUTES != selectedId){
                 managerUiCode = "ROST"
                 selectedROUTES = selectedId
                 selectedSTOPS = ""
                 selectedPOIS = ""
-            } else if (htype == "ROUTES" && state.selector.selectedROUTES == selectedId){
+            } else if (htype == "routes" && state.selector.selectedROUTES == selectedId){
                 managerUiCode = "RO"
                 selectedROUTES = ""
                 selectedSTOPS = ""
                 selectedPOIS = ""
-            }else if (htype == "STOPS" && state.selector.selectedSTOPS != selectedId){
+            }else if (htype == "stops" && state.selector.selectedSTOPS != selectedId){
                 managerUiCode = "ROSTPO"
                 selectedROUTES = state.selector.selectedROUTES
                 selectedSTOPS = selectedId
                 selectedPOIS = ""
-            }else if (htype == "STOPS" && state.selector.selectedSTOPS == selectedId){
+            }else if (htype == "stops" && state.selector.selectedSTOPS == selectedId){
                 managerUiCode = "ROST"
                 selectedROUTES = state.selector.selectedROUTES
                 selectedSTOPS = ""
                 selectedPOIS = ""
-            }else if (htype == "POIS" && state.selector.selectedPOIS != selectedId){
+            }else if (htype == "pois" && state.selector.selectedPOIS != selectedId){
                 managerUiCode = "ROSTPO"
                 selectedROUTES = state.selector.selectedROUTES
                 selectedSTOPS = state.selector.selectedSTOPS
                 selectedPOIS = selectedId
-            }else if (htype == "POIS" && state.selector.selectedPOIS == selectedId){
+            }else if (htype == "pois" && state.selector.selectedPOIS == selectedId){
                 managerUiCode = "ROSTPO"
                 selectedROUTES = state.selector.selectedROUTES
                 selectedSTOPS = state.selector.selectedSTOPS
