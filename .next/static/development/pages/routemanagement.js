@@ -49122,9 +49122,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
 /* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! next/router */ "./node_modules/next/dist/client/router.js");
 /* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _redux_actions_uiActions__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../redux/actions/uiActions */ "./src/redux/actions/uiActions.ts");
+/* harmony import */ var _redux_actions_dataActions__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../redux/actions/dataActions */ "./src/redux/actions/dataActions.ts");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 
 var _jsxFileName = "/home/christian/Development/fible-frontend-nextjs/src/components/route-management/selector.tsx";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement;
+
+
+
 
 
 
@@ -49228,13 +49234,24 @@ var Selector = function Selector(props) {
     },
     __self: this
   })));
-}; //const mapStateToProps = state => {
-//    return { dataState: state.data, initializeInputScreenState: state.initializeInputScreenState, stopAndPoiManagerController: state.stopAndPoiManagerController, setTitle: state.setTitle };
-//};
+};
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    dataState: state.data,
+    initializeInputScreenState: state.initializeInputScreenState,
+    stopAndPoiManagerController: state.stopAndPoiManagerController,
+    setTitle: state.setTitle
+  };
+}; //export default Selector
 
 
-/* harmony default export */ __webpack_exports__["default"] = (Selector); //export default connect(mapStateToProps, { initializeInputScreenUi, initializeHtype, stopAndPoiManagerController, setTitle })(Selector);
-
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_10__["connect"])(mapStateToProps, {
+  initializeInputScreenUi: _redux_actions_uiActions__WEBPACK_IMPORTED_MODULE_8__["initializeInputScreenUi"],
+  initializeHtype: _redux_actions_dataActions__WEBPACK_IMPORTED_MODULE_9__["initializeHtype"],
+  stopAndPoiManagerController: _redux_actions_uiActions__WEBPACK_IMPORTED_MODULE_8__["stopAndPoiManagerController"],
+  setTitle: _redux_actions_uiActions__WEBPACK_IMPORTED_MODULE_8__["setTitle"]
+})(Selector));
 var InputScreenButton = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].button.withConfig({
   displayName: "selector__InputScreenButton",
   componentId: "sc-1ihwjbd-3"
@@ -49331,7 +49348,7 @@ var SelectorItem = function SelectorItem(props) {
         lineNumber: 49
       },
       __self: this
-    }, props.itemData.name), __jsx(RemoveButton, {
+    }, props.itemData.name), __jsx(EditButton, {
       onClick: function onClick(e) {
         return handleEditRoutes(e);
       },
@@ -49373,8 +49390,8 @@ var Headline = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].h3.with
   displayName: "selectorItem__Headline",
   componentId: "sc-1qe6ivb-1"
 })(["font-size:2vh;font-weight:lighter;position:relative;user-select:none;top:10%;left:20%;margin:0;color:black;border:none;background:none;text-decoration:none;"]);
-var RemoveButton = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].button.withConfig({
-  displayName: "selectorItem__RemoveButton",
+var EditButton = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].button.withConfig({
+  displayName: "selectorItem__EditButton",
   componentId: "sc-1qe6ivb-2"
 })(["position:relative;bottom:2vh;left:95%;margin-right:3vw;font-size:2vh;border:0;color:none;background-color:transparent;cursor:pointer;:focus{outline:none;}"]);
 /*
@@ -50876,7 +50893,7 @@ var _jsxFileName = "/home/christian/Development/fible-frontend-nextjs/src/pages/
 var __jsx = react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement;
 
 function _templateObject() {
-  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_1__["default"])(["query getHtypes \n    {   getRoutes{id ownerid components}\n        getPois{id ownerid components}\n        getStops{id ownerid components}\n    }"]);
+  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_1__["default"])(["query getHtypes \n    {   getRoutes{id ownerid name components}\n        getPois{id ownerid name components}\n        getStops{id ownerid name components}\n    }"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -51036,7 +51053,7 @@ var Container = styled_components__WEBPACK_IMPORTED_MODULE_4__["default"].div.wi
 /*!******************************************!*\
   !*** ./src/redux/actions/dataActions.ts ***!
   \******************************************/
-/*! exports provided: addOrUpdateHeadline, initializeHtype, deleteHtype, emptySelectedComponent, setSelectedComponent, updateComponentsOrder, cleanNonsavedHtypes, loadUser, loadHtypeData, cleanUser */
+/*! exports provided: addOrUpdateHeadline, initializeHtype, deleteHtype, emptySelectedComponent, setSelectedComponent, updateComponentsOrder, cleanNonsavedHtypes, loadUser, loadHtypeData, loadComponents, cleanUser, initializeInputScreen */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -51050,7 +51067,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "cleanNonsavedHtypes", function() { return cleanNonsavedHtypes; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "loadUser", function() { return loadUser; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "loadHtypeData", function() { return loadHtypeData; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "loadComponents", function() { return loadComponents; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "cleanUser", function() { return cleanUser; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "initializeInputScreen", function() { return initializeInputScreen; });
 /* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./types */ "./src/redux/actions/types.ts");
 
 var addHeadlineId = 0;
@@ -51063,6 +51082,7 @@ var cleanNonsavedHtypesId = 0;
 var loadUserId = 0;
 var cleanUserId = 0;
 var loadHtypeDataId = 0;
+var initializeInputscreenId = 0;
 var addOrUpdateHeadline = function addOrUpdateHeadline(content) {
   return {
     type: _types__WEBPACK_IMPORTED_MODULE_0__["HEADLINE"],
@@ -51142,11 +51162,23 @@ var loadHtypeData = function loadHtypeData(content) {
     }
   };
 };
+var loadComponents = function loadComponents(content) {
+  return {};
+};
 var cleanUser = function cleanUser() {
   return {
     type: _types__WEBPACK_IMPORTED_MODULE_0__["CLEAN_USER"],
     payload: {
       id: ++cleanUserId
+    }
+  };
+};
+var initializeInputScreen = function initializeInputScreen(content) {
+  return {
+    type: _types__WEBPACK_IMPORTED_MODULE_0__["INITIALIZE_INPUTSCREEN"],
+    payload: {
+      id: ++initializeInputscreenId,
+      content: content
     }
   };
 };
@@ -51157,7 +51189,7 @@ var cleanUser = function cleanUser() {
 /*!************************************!*\
   !*** ./src/redux/actions/types.ts ***!
   \************************************/
-/*! exports provided: REMOVE_ROUTE, UPDATE_ROUTE_STATE, UPDATE_SELECTOR_MANAGER_STATE, UPDATE_INPUT_SCREEN_UI, INITIALIZE_INPUT_SCREEN_UI, HEADLINE, INITIALIZE_HTYPE, DELETE_HTYPE, EMPTY_SELECTED_COMPONENT_ID, UPDATE_SIMULATOR_SELECTION, SET_SELECTED_COMPONENT, UPDATE_COMPONENTS_ORDER, CLEAN_NONSAVED_HTYPES, STOP_AND_POI_MANAGER_CONTROLLER, SET_TITLE, LOAD_USER, CLEAN_USER, LOAD_HTYPE_DATA */
+/*! exports provided: REMOVE_ROUTE, UPDATE_ROUTE_STATE, UPDATE_SELECTOR_MANAGER_STATE, UPDATE_INPUT_SCREEN_UI, INITIALIZE_INPUT_SCREEN_UI, HEADLINE, INITIALIZE_HTYPE, DELETE_HTYPE, EMPTY_SELECTED_COMPONENT_ID, UPDATE_SIMULATOR_SELECTION, SET_SELECTED_COMPONENT, UPDATE_COMPONENTS_ORDER, CLEAN_NONSAVED_HTYPES, STOP_AND_POI_MANAGER_CONTROLLER, SET_TITLE, LOAD_USER, CLEAN_USER, LOAD_HTYPE_DATA, INITIALIZE_INPUTSCREEN */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -51180,6 +51212,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOAD_USER", function() { return LOAD_USER; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CLEAN_USER", function() { return CLEAN_USER; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOAD_HTYPE_DATA", function() { return LOAD_HTYPE_DATA; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "INITIALIZE_INPUTSCREEN", function() { return INITIALIZE_INPUTSCREEN; });
 var REMOVE_ROUTE = "REMOVE_ROUTE";
 var UPDATE_ROUTE_STATE = "UPDATE_ROUTE_STATE";
 var UPDATE_SELECTOR_MANAGER_STATE = "UPDATE_SELECTOR_MANAGER_STATE";
@@ -51198,6 +51231,7 @@ var SET_TITLE = "SET_TITLE";
 var LOAD_USER = "LOAD_USER";
 var CLEAN_USER = "CLEAN_USER";
 var LOAD_HTYPE_DATA = "LOAD_HTYPE_DATA";
+var INITIALIZE_INPUTSCREEN = "INITIALIZE_INPUTSCREEN";
 
 /***/ }),
 
@@ -51347,7 +51381,8 @@ var initialState = {
   selectedComponentId: "empty",
   routes: {},
   stops: {},
-  pois: {}
+  pois: {},
+  components: {}
 }; //make a reducer that cleans up the routes stops etc when you go to the route management screen.
 
 /* harmony default export */ __webpack_exports__["default"] = (function () {
@@ -51358,23 +51393,21 @@ var initialState = {
     case _actions_types__WEBPACK_IMPORTED_MODULE_6__["LOAD_HTYPE_DATA"]:
       {
         var content = {};
-        console.log(action.payload.content.data);
+        console.log(action.payload.content);
 
         for (var _i = 0, _Object$keys = _babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_4___default()(action.payload.content.data); _i < _Object$keys.length; _i++) {
           var item = _Object$keys[_i];
-
           //to not create a component object in the user state
-          if (item.indexOf('get') != -1) {
-            var key = item.substring(3).toLowerCase();
-            content[key] = action.payload.content.data[item].reduce(function (result, attri, index) {
-              if (attri) {
-                result[attri.id] = attri;
-              } //a, b, c
+          var key = item.substring(3).toLowerCase();
+          console.log(key);
+          content[key] = action.payload.content.data[item].reduce(function (result, attri, index) {
+            if (attri) {
+              result[attri.id] = attri;
+            } //a, b, c
 
 
-              return result;
-            }, {});
-          }
+            return result;
+          }, {});
         }
 
         return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_5__["default"])({}, state, {
@@ -51422,9 +51455,9 @@ var initialState = {
           //the id of the hcomponent being worked on
           selectedHtypeId: '',
           selectedComponentId: "empty",
-          ROUTES: {},
-          STOPS: {},
-          POIS: {}
+          routes: {},
+          stops: {},
+          pois: {}
         });
       }
 
@@ -51565,6 +51598,26 @@ var initialState = {
         var selectedId = action.payload.content.selectedComponentId;
         return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_5__["default"])({}, state, {
           selectedComponentId: selectedId
+        });
+      }
+
+    case _actions_types__WEBPACK_IMPORTED_MODULE_6__["INITIALIZE_INPUTSCREEN"]:
+      {
+        console.log(action.payload.content);
+        var id = action.payload.content.htype.id;
+        var components = action.payload.content.components;
+        var _content = {};
+        _content = components.reduce(function (result, attri, index) {
+          if (attri != "") {
+            result[attri.id] = attri;
+          } //a, b, c
+
+
+          return result;
+        }, {});
+        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_5__["default"])({}, state, {
+          selectedHtypeId: id,
+          components: _content
         });
       }
 
@@ -51751,10 +51804,10 @@ var initialState = {
   columnOrder: ["column-1", "column-2", "column-3"],
   title: "",
   inputMenu: {
-    htype: "ROUTES",
+    htype: "routes",
     //which component is shown in the menu
     show: "MENU",
-    ROUTES: [{
+    routes: [{
       name: "Headline",
       id: "headlineInput",
       dispatch: "HEADLINE_INPUT"
@@ -51767,7 +51820,7 @@ var initialState = {
       id: "imageGalleryInput",
       dispatch: "IMAGE_GALLERY_INPUT"
     }],
-    STOPS: [{
+    stops: [{
       name: "Headline",
       id: "headlineInput",
       dispatch: "HEADLINE_INPUT"
@@ -51780,7 +51833,7 @@ var initialState = {
       id: "imageGalleryInput",
       dispatch: "IMAGE_GALLERY_INPUT"
     }],
-    POIS: [{
+    pois: [{
       name: "Headline",
       id: "headlineInput",
       dispatch: "HEADLINE_INPUT"
@@ -51795,7 +51848,7 @@ var initialState = {
     }]
   },
   simulator: {
-    show: "ROUTES",
+    show: "routes",
     selected: "empty"
   },
   selector: {
@@ -52181,10 +52234,10 @@ var initialState = {
     columnOrder: ["routes", "stops", "pois"],
     title: "test",
     inputMenu: {
-      htype: "ROUTES",
+      htype: "routes",
       //which component is shown in the menu
       show: "MENU",
-      ROUTES: [{
+      routes: [{
         name: "Headline",
         id: "headlineInput",
         dispatch: "HEADLINE_INPUT"
@@ -52197,7 +52250,7 @@ var initialState = {
         id: "imageGalleryInput",
         dispatch: "IMAGE_GALLERY_INPUT"
       }],
-      STOPS: [{
+      stops: [{
         name: "Headline",
         id: "headlineInput",
         dispatch: "HEADLINE_INPUT"
@@ -52210,7 +52263,7 @@ var initialState = {
         id: "imageGalleryInput",
         dispatch: "IMAGE_GALLERY_INPUT"
       }],
-      POIS: [{
+      pois: [{
         name: "Headline",
         id: "headlineInput",
         dispatch: "HEADLINE_INPUT"
@@ -52225,7 +52278,7 @@ var initialState = {
       }]
     },
     simulator: {
-      show: "ROUTES",
+      show: "routes",
       selected: "empty"
     },
     selector: {

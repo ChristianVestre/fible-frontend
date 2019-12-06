@@ -47,9 +47,9 @@ const SelectorItem = props =>{
                 color={props.itemData.id == props.uiState.selector["selected" + props.type] ? "salmon":"lightgray" }
                 >
                 <Headline>{props.itemData.name}</Headline>
-                <RemoveButton onClick={(e) => handleEditRoutes(e)} >
+                <EditButton onClick={(e) => handleEditRoutes(e)} >
                     <FontAwesomeIcon icon={faEdit}/>
-                </RemoveButton>
+                </EditButton>
             </Container>
             )
             }
@@ -94,7 +94,7 @@ const Headline = styled.h3`
     text-decoration: none;   
 `
 
-const RemoveButton = styled.button`
+const EditButton = styled.button`
     position:relative;
     bottom:2vh;
     left:95%;

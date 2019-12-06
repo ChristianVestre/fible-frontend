@@ -2243,9 +2243,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! next/router */ "next/router");
 /* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _redux_actions_uiActions__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../redux/actions/uiActions */ "./src/redux/actions/uiActions.ts");
+/* harmony import */ var _redux_actions_dataActions__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../redux/actions/dataActions */ "./src/redux/actions/dataActions.ts");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react-redux */ "react-redux");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_10__);
 
 var _jsxFileName = "/home/christian/Development/fible-frontend-nextjs/src/components/route-management/selector.tsx";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement;
+
+
+
 
 
 
@@ -2343,13 +2350,24 @@ const Selector = props => {
     },
     __self: undefined
   })));
-}; //const mapStateToProps = state => {
-//    return { dataState: state.data, initializeInputScreenState: state.initializeInputScreenState, stopAndPoiManagerController: state.stopAndPoiManagerController, setTitle: state.setTitle };
-//};
+};
+
+const mapStateToProps = state => {
+  return {
+    dataState: state.data,
+    initializeInputScreenState: state.initializeInputScreenState,
+    stopAndPoiManagerController: state.stopAndPoiManagerController,
+    setTitle: state.setTitle
+  };
+}; //export default Selector
 
 
-/* harmony default export */ __webpack_exports__["default"] = (Selector); //export default connect(mapStateToProps, { initializeInputScreenUi, initializeHtype, stopAndPoiManagerController, setTitle })(Selector);
-
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_10__["connect"])(mapStateToProps, {
+  initializeInputScreenUi: _redux_actions_uiActions__WEBPACK_IMPORTED_MODULE_8__["initializeInputScreenUi"],
+  initializeHtype: _redux_actions_dataActions__WEBPACK_IMPORTED_MODULE_9__["initializeHtype"],
+  stopAndPoiManagerController: _redux_actions_uiActions__WEBPACK_IMPORTED_MODULE_8__["stopAndPoiManagerController"],
+  setTitle: _redux_actions_uiActions__WEBPACK_IMPORTED_MODULE_8__["setTitle"]
+})(Selector));
 const InputScreenButton = styled_components__WEBPACK_IMPORTED_MODULE_2___default.a.button.withConfig({
   displayName: "selector__InputScreenButton",
   componentId: "sc-1ihwjbd-3"
@@ -2448,7 +2466,7 @@ const SelectorItem = props => {
       lineNumber: 49
     },
     __self: undefined
-  }, props.itemData.name), __jsx(RemoveButton, {
+  }, props.itemData.name), __jsx(EditButton, {
     onClick: e => handleEditRoutes(e),
     __source: {
       fileName: _jsxFileName,
@@ -2485,8 +2503,8 @@ const Headline = styled_components__WEBPACK_IMPORTED_MODULE_2___default.a.h3.wit
   displayName: "selectorItem__Headline",
   componentId: "sc-1qe6ivb-1"
 })(["font-size:2vh;font-weight:lighter;position:relative;user-select:none;top:10%;left:20%;margin:0;color:black;border:none;background:none;text-decoration:none;"]);
-const RemoveButton = styled_components__WEBPACK_IMPORTED_MODULE_2___default.a.button.withConfig({
-  displayName: "selectorItem__RemoveButton",
+const EditButton = styled_components__WEBPACK_IMPORTED_MODULE_2___default.a.button.withConfig({
+  displayName: "selectorItem__EditButton",
   componentId: "sc-1qe6ivb-2"
 })(["position:relative;bottom:2vh;left:95%;margin-right:3vw;font-size:2vh;border:0;color:none;background-color:transparent;cursor:pointer;:focus{outline:none;}"]);
 /*
@@ -3871,9 +3889,9 @@ RouteManagement.getInitialProps = async ({
   reduxStore
 }) => {
   const routesQuery = graphql_tag__WEBPACK_IMPORTED_MODULE_11___default.a`query getHtypes 
-    {   getRoutes{id ownerid components}
-        getPois{id ownerid components}
-        getStops{id ownerid components}
+    {   getRoutes{id ownerid name components}
+        getPois{id ownerid name components}
+        getStops{id ownerid name components}
     }`;
   let htypes = await apolloClient.query({
     query: routesQuery
@@ -3925,7 +3943,7 @@ const Container = styled_components__WEBPACK_IMPORTED_MODULE_1___default.a.div.w
 /*!******************************************!*\
   !*** ./src/redux/actions/dataActions.ts ***!
   \******************************************/
-/*! exports provided: addOrUpdateHeadline, initializeHtype, deleteHtype, emptySelectedComponent, setSelectedComponent, updateComponentsOrder, cleanNonsavedHtypes, loadUser, loadHtypeData, cleanUser */
+/*! exports provided: addOrUpdateHeadline, initializeHtype, deleteHtype, emptySelectedComponent, setSelectedComponent, updateComponentsOrder, cleanNonsavedHtypes, loadUser, loadHtypeData, loadComponents, cleanUser, initializeInputScreen */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3939,7 +3957,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "cleanNonsavedHtypes", function() { return cleanNonsavedHtypes; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "loadUser", function() { return loadUser; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "loadHtypeData", function() { return loadHtypeData; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "loadComponents", function() { return loadComponents; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "cleanUser", function() { return cleanUser; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "initializeInputScreen", function() { return initializeInputScreen; });
 /* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./types */ "./src/redux/actions/types.ts");
 
 let addHeadlineId = 0;
@@ -3952,6 +3972,7 @@ let cleanNonsavedHtypesId = 0;
 let loadUserId = 0;
 let cleanUserId = 0;
 let loadHtypeDataId = 0;
+let initializeInputscreenId = 0;
 const addOrUpdateHeadline = content => ({
   type: _types__WEBPACK_IMPORTED_MODULE_0__["HEADLINE"],
   payload: {
@@ -4013,10 +4034,18 @@ const loadHtypeData = content => ({
     content
   }
 });
+const loadComponents = content => ({});
 const cleanUser = () => ({
   type: _types__WEBPACK_IMPORTED_MODULE_0__["CLEAN_USER"],
   payload: {
     id: ++cleanUserId
+  }
+});
+const initializeInputScreen = content => ({
+  type: _types__WEBPACK_IMPORTED_MODULE_0__["INITIALIZE_INPUTSCREEN"],
+  payload: {
+    id: ++initializeInputscreenId,
+    content
   }
 });
 
@@ -4026,7 +4055,7 @@ const cleanUser = () => ({
 /*!************************************!*\
   !*** ./src/redux/actions/types.ts ***!
   \************************************/
-/*! exports provided: REMOVE_ROUTE, UPDATE_ROUTE_STATE, UPDATE_SELECTOR_MANAGER_STATE, UPDATE_INPUT_SCREEN_UI, INITIALIZE_INPUT_SCREEN_UI, HEADLINE, INITIALIZE_HTYPE, DELETE_HTYPE, EMPTY_SELECTED_COMPONENT_ID, UPDATE_SIMULATOR_SELECTION, SET_SELECTED_COMPONENT, UPDATE_COMPONENTS_ORDER, CLEAN_NONSAVED_HTYPES, STOP_AND_POI_MANAGER_CONTROLLER, SET_TITLE, LOAD_USER, CLEAN_USER, LOAD_HTYPE_DATA */
+/*! exports provided: REMOVE_ROUTE, UPDATE_ROUTE_STATE, UPDATE_SELECTOR_MANAGER_STATE, UPDATE_INPUT_SCREEN_UI, INITIALIZE_INPUT_SCREEN_UI, HEADLINE, INITIALIZE_HTYPE, DELETE_HTYPE, EMPTY_SELECTED_COMPONENT_ID, UPDATE_SIMULATOR_SELECTION, SET_SELECTED_COMPONENT, UPDATE_COMPONENTS_ORDER, CLEAN_NONSAVED_HTYPES, STOP_AND_POI_MANAGER_CONTROLLER, SET_TITLE, LOAD_USER, CLEAN_USER, LOAD_HTYPE_DATA, INITIALIZE_INPUTSCREEN */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4049,6 +4078,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOAD_USER", function() { return LOAD_USER; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CLEAN_USER", function() { return CLEAN_USER; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOAD_HTYPE_DATA", function() { return LOAD_HTYPE_DATA; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "INITIALIZE_INPUTSCREEN", function() { return INITIALIZE_INPUTSCREEN; });
 const REMOVE_ROUTE = "REMOVE_ROUTE";
 const UPDATE_ROUTE_STATE = "UPDATE_ROUTE_STATE";
 const UPDATE_SELECTOR_MANAGER_STATE = "UPDATE_SELECTOR_MANAGER_STATE";
@@ -4067,6 +4097,7 @@ const SET_TITLE = "SET_TITLE";
 const LOAD_USER = "LOAD_USER";
 const CLEAN_USER = "CLEAN_USER";
 const LOAD_HTYPE_DATA = "LOAD_HTYPE_DATA";
+const INITIALIZE_INPUTSCREEN = "INITIALIZE_INPUTSCREEN";
 
 /***/ }),
 
@@ -4194,7 +4225,8 @@ const initialState = {
   selectedComponentId: "empty",
   routes: {},
   stops: {},
-  pois: {}
+  pois: {},
+  components: {}
 }; //make a reducer that cleans up the routes stops etc when you go to the route management screen.
 
 /* harmony default export */ __webpack_exports__["default"] = (function (state = initialState, action) {
@@ -4202,21 +4234,20 @@ const initialState = {
     case _actions_types__WEBPACK_IMPORTED_MODULE_3__["LOAD_HTYPE_DATA"]:
       {
         const content = {};
-        console.log(action.payload.content.data);
+        console.log(action.payload.content);
 
         for (let item of _babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_2___default()(action.payload.content.data)) {
           //to not create a component object in the user state
-          if (item.indexOf('get') != -1) {
-            let key = item.substring(3).toLowerCase();
-            content[key] = action.payload.content.data[item].reduce((result, attri, index) => {
-              if (attri) {
-                result[attri.id] = attri;
-              } //a, b, c
+          let key = item.substring(3).toLowerCase();
+          console.log(key);
+          content[key] = action.payload.content.data[item].reduce((result, attri, index) => {
+            if (attri) {
+              result[attri.id] = attri;
+            } //a, b, c
 
 
-              return result;
-            }, {});
-          }
+            return result;
+          }, {});
         }
 
         return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state, {
@@ -4265,9 +4296,9 @@ const initialState = {
           //the id of the hcomponent being worked on
           selectedHtypeId: '',
           selectedComponentId: "empty",
-          ROUTES: {},
-          STOPS: {},
-          POIS: {}
+          routes: {},
+          stops: {},
+          pois: {}
         });
       }
 
@@ -4424,6 +4455,30 @@ const initialState = {
         const selectedId = action.payload.content.selectedComponentId;
         return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state, {
           selectedComponentId: selectedId
+        });
+      }
+
+    case _actions_types__WEBPACK_IMPORTED_MODULE_3__["INITIALIZE_INPUTSCREEN"]:
+      {
+        console.log(action.payload.content);
+        const {
+          id
+        } = action.payload.content.htype;
+        const {
+          components
+        } = action.payload.content;
+        let content = {};
+        content = components.reduce((result, attri, index) => {
+          if (attri != "") {
+            result[attri.id] = attri;
+          } //a, b, c
+
+
+          return result;
+        }, {});
+        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state, {
+          selectedHtypeId: id,
+          components: content
         });
       }
 
@@ -4609,10 +4664,10 @@ const initialState = {
   columnOrder: ["column-1", "column-2", "column-3"],
   title: "",
   inputMenu: {
-    htype: "ROUTES",
+    htype: "routes",
     //which component is shown in the menu
     show: "MENU",
-    ROUTES: [{
+    routes: [{
       name: "Headline",
       id: "headlineInput",
       dispatch: "HEADLINE_INPUT"
@@ -4625,7 +4680,7 @@ const initialState = {
       id: "imageGalleryInput",
       dispatch: "IMAGE_GALLERY_INPUT"
     }],
-    STOPS: [{
+    stops: [{
       name: "Headline",
       id: "headlineInput",
       dispatch: "HEADLINE_INPUT"
@@ -4638,7 +4693,7 @@ const initialState = {
       id: "imageGalleryInput",
       dispatch: "IMAGE_GALLERY_INPUT"
     }],
-    POIS: [{
+    pois: [{
       name: "Headline",
       id: "headlineInput",
       dispatch: "HEADLINE_INPUT"
@@ -4653,7 +4708,7 @@ const initialState = {
     }]
   },
   simulator: {
-    show: "ROUTES",
+    show: "routes",
     selected: "empty"
   },
   selector: {
@@ -5000,10 +5055,10 @@ const initialState = {
     columnOrder: ["routes", "stops", "pois"],
     title: "test",
     inputMenu: {
-      htype: "ROUTES",
+      htype: "routes",
       //which component is shown in the menu
       show: "MENU",
-      ROUTES: [{
+      routes: [{
         name: "Headline",
         id: "headlineInput",
         dispatch: "HEADLINE_INPUT"
@@ -5016,7 +5071,7 @@ const initialState = {
         id: "imageGalleryInput",
         dispatch: "IMAGE_GALLERY_INPUT"
       }],
-      STOPS: [{
+      stops: [{
         name: "Headline",
         id: "headlineInput",
         dispatch: "HEADLINE_INPUT"
@@ -5029,7 +5084,7 @@ const initialState = {
         id: "imageGalleryInput",
         dispatch: "IMAGE_GALLERY_INPUT"
       }],
-      POIS: [{
+      pois: [{
         name: "Headline",
         id: "headlineInput",
         dispatch: "HEADLINE_INPUT"
@@ -5044,7 +5099,7 @@ const initialState = {
       }]
     },
     simulator: {
-      show: "ROUTES",
+      show: "routes",
       selected: "empty"
     },
     selector: {

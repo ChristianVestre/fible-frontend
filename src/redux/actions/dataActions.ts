@@ -8,6 +8,7 @@ import { HEADLINE,
   LOAD_USER,
   CLEAN_USER,
   LOAD_HTYPE_DATA,
+  INITIALIZE_INPUTSCREEN
 
 } from "./types";
 
@@ -22,6 +23,7 @@ let cleanNonsavedHtypesId = 0;
 let loadUserId = 0;
 let cleanUserId = 0;
 let loadHtypeDataId = 0;
+let initializeInputscreenId = 0;
 
 
 
@@ -96,9 +98,21 @@ export const loadHtypeData = content => ({
   }
 })
 
+export const loadComponents = content => ({
+
+})
+
 export const cleanUser = () => ({
   type: CLEAN_USER,
   payload:{
     id:++cleanUserId
+  }
+})
+
+export const initializeInputScreen = content => ({
+  type: INITIALIZE_INPUTSCREEN,
+  payload:{
+    id:++initializeInputscreenId,
+    content
   }
 })

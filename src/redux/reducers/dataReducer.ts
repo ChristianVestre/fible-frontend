@@ -1,7 +1,8 @@
 import { UPDATE_INPUT_SCREEN_UI, UPDATE_COMPONENTS_ORDER ,
      HEADLINE, INITIALIZE_HTYPE, DELETE_HTYPE, 
      EMPTY_SELECTED_COMPONENT_ID, SET_SELECTED_COMPONENT, 
-     CLEAN_NONSAVED_HTYPES, LOAD_USER, CLEAN_USER, LOAD_HTYPE_DATA } from "../actions/types";
+     CLEAN_NONSAVED_HTYPES, LOAD_USER, CLEAN_USER, LOAD_HTYPE_DATA,
+     INITIALIZE_INPUTSCREEN } from "../actions/types";
 import nanoid from "nanoid";
 
 //HTYPE is the hierarchy type, aka route, stop, etc
@@ -22,6 +23,7 @@ const initialState = {
     routes: {},
     stops: {},
     pois: {},
+    components: {},
 
 }
 
@@ -33,11 +35,12 @@ export default function (state = initialState, action) {
         case LOAD_HTYPE_DATA:{
             const content = {}
 
-            console.log(action.payload.content.data)
+            console.log(action.payload.content)
+            
             for(let item of Object.keys(action.payload.content.data)) {
             //to not create a component object in the user state
-            if(item.indexOf('get') != -1){
             let key = item.substring(3,).toLowerCase()
+            console.log(key)
             content[key] = action.payload.content.data[item].reduce((result, attri, index) => { 
                 if(attri){
                 result[attri.id] = attri;
@@ -45,7 +48,7 @@ export default function (state = initialState, action) {
             return result;
             }, {}) 
             }
-            }
+            
             return {
                 ...state,
              /*   user:{
@@ -92,9 +95,9 @@ export default function (state = initialState, action) {
             //the id of the hcomponent being worked on
             selectedHtypeId: '',
             selectedComponentId: "empty",
-            ROUTES: {},
-            STOPS: {},
-            POIS: {},}
+            routes: {},
+            stops: {},
+            pois: {},}
         }
         case INITIALIZE_HTYPE: {
             //     const selectedDispatch = action.payload.content.dispatch;
@@ -173,9 +176,6 @@ export default function (state = initialState, action) {
                     }
                 }
             return state;
-            
-
-
         }
         case HEADLINE: {
             const headline = action.payload.content.headline
@@ -255,6 +255,25 @@ export default function (state = initialState, action) {
                 ...state,
                 selectedComponentId: selectedId,
             }
+        }
+        case (INITIALIZE_INPUTSCREEN):{
+            console.log(action.payload.content)
+           const  {id} = action.payload.content.htype
+           const {components } = action.payload.content
+           let content = {}
+           content = components.reduce((result, attri, index) => { 
+            if(attri != ""){
+            result[attri.id] = attri;
+            } //a, b, c
+             return result;
+            }, {}) 
+            
+           return {
+               ...state,
+               selectedHtypeId:id,
+               components:content
+           }
+
         }
         default:
             return state;

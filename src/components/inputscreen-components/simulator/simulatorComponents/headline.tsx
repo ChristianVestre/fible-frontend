@@ -36,10 +36,8 @@ class Headline extends React.Component<{component:any, index:any,uiState:any,dat
         const headline = e.target.value
         const selectedHtypeId = this.props.dataState.selectedHtypeId
         const selectedComponentId = this.props.dataState.selectedComponentId
-        const  dispatch = "UPDATE_HEADLINE"
+        const dispatch = "UPDATE_HEADLINE"
         this.props.addOrUpdateHeadline({ type, headline, selectedHtypeId, dispatch, selectedComponentId })
-
-
     }
 
     render() {
@@ -54,7 +52,7 @@ class Headline extends React.Component<{component:any, index:any,uiState:any,dat
             datatype={this.props.component.id == this.props.uiState.simulator.selected ? "-0.2vh":"0" }
             property={this.props.component.id == this.props.uiState.simulator.selected ? "dashed":"none" }
             >
-            <HeadlineText>{this.props.component.headline}</HeadlineText>
+            <HeadlineText>{JSON.parse(this.props.component.content).headline}</HeadlineText>
         </Container>
         )
         }

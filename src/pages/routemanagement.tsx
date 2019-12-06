@@ -37,9 +37,9 @@ const RouteManagement = (props) => {
 RouteManagement.getInitialProps = async ({apolloClient, me, reduxStore}) => {
 
     const routesQuery = gql`query getHtypes 
-    {   getRoutes{id ownerid components}
-        getPois{id ownerid components}
-        getStops{id ownerid components}
+    {   getRoutes{id ownerid name components}
+        getPois{id ownerid name components}
+        getStops{id ownerid name components}
     }`
     let htypes = await apolloClient.query({query:routesQuery})
     reduxStore.dispatch(loadUser(me))

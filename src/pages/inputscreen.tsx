@@ -14,26 +14,52 @@ import { withRedux } from '../redux/redux';
 import { withAuth } from '../lib/auth';
 import gql from 'graphql-tag';
 import Cookies from 'js-cookie'
-import { loadUser, loadHtypeData } from '../redux/actions/dataActions';
+import { loadUser, loadHtypeData, initializeInputScreen } from '../redux/actions/dataActions';
+import { initializeInputScreenUi } from '../redux/actions/uiActions';
 
 
 const Inputscreen = (props) => {
     console.log(props)
-    return(  <Container>
-
+    return(  
+        <Container>
+              <MenuManager/>
+              <Simulator/>
         </Container>)
 };
-//            <MenuManager/><Simulator/>
+//          
 //
 Inputscreen.getInitialProps = async ({reduxStore, me, apolloClient}) => {
+    
 
     const routesQuery = gql`query getHtypes 
-    {   
-        getRouteWithComponents{route{id name ownerid components}}
+    {   getRoutes{id ownerid components}
+        getPois{id ownerid components}
+        getStops{id ownerid components}
+        getHtypeWithComponents{
+            htype{
+                route{id name ownerid components}
+                stop{id name ownerid components}
+                poi{id name ownerid components}
+            } 
+            components{id content type}}
     }`
     let data = await apolloClient.query({query:routesQuery})
+    let htype
+    for(let item of Object.keys(data.data.getHtypeWithComponents.htype)){
+        let itemValue = data.data.getHtypeWithComponents.htype[item]
+        if(itemValue != null && item != "__typename"){htype=item} 
+    }
+    //console.log(htype)
+    const htypes = {getRoutes:data.data.getRoutes,
+                    getStops:data.data.getStops,
+                    getPois:data.data.getPois}
+    //console.log(htypes)
     reduxStore.dispatch(loadUser(me))
-
+    reduxStore.dispatch(loadHtypeData({data:htypes}))
+    reduxStore.dispatch(initializeInputScreenUi({htype:htype}))
+    //console.log(data.data.getHtypeWithComponents.htype[htype])
+    reduxStore.dispatch(initializeInputScreen({htype:data.data.getHtypeWithComponents.htype[htype],components:data.data.getHtypeWithComponents.components}))
+  //  reduxStore.dispatch(s)
    // reduxStore.dispatch(loadComponent({route, components}))
   
     //const routes = await context.apolloClient.query({query:inputScreenQuery})
@@ -56,6 +82,7 @@ Inputscreen.getInitialProps = async ({reduxStore, me, apolloClient}) => {
 const mapStateToProps = state => {
     return { selectorState: state.selector, uiState:state.ui,dataState:state.data };
 };
+
 const enhance = compose(
     withApollo,
     withAuth,

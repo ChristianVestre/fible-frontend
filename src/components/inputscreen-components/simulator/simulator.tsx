@@ -7,12 +7,16 @@ import {updateComponentsOrder} from '../../../redux/actions/dataActions'
 
 
 
-class Simulator extends React.Component<{dataState:any,uiState:any, updateComponentsOrder:any}> {
-
-    componentCreator = () => {
-        return this.props.dataState[this.props.uiState.simulator.show][this.props.dataState.selectedHtypeId] != undefined?
-        this.props.dataState[this.props.uiState.simulator.show][this.props.dataState.selectedHtypeId].order.map((id,index) =>{
-             let component =  this.props.dataState[this.props.uiState.simulator.show][this.props.dataState.selectedHtypeId].components[id];
+const Simulator = props => {
+    const componentCreator = () => {
+        console.log(props.uiState.simulator)
+        return props.dataState[props.uiState.simulator.show][props.dataState.selectedHtypeId] != undefined?
+        props.dataState[props.uiState.simulator.show][props.dataState.selectedHtypeId].components.map((id,index) =>{
+             if(id != ""){ 
+             //console.log(id)
+             //console.log(props.dataState.components)
+             let component =  props.dataState.components[id];
+             console.log(component)
              switch (component.type) {
                 case ("HEADLINE"): {
                     return <HeadlineText key={component.id} component={component} index={index}></HeadlineText>
@@ -20,13 +24,13 @@ class Simulator extends React.Component<{dataState:any,uiState:any, updateCompon
                 default:
                     return<div></div>
             }
-
+        }
 
         }): [1].map((index) => <div key={index}></div>)
         
     }
 
-    onDragEnd = result =>{
+    const onDragEnd = result =>{
         const { destination, source, draggableId } = result;
         if (!destination) {
             return;
@@ -36,28 +40,28 @@ class Simulator extends React.Component<{dataState:any,uiState:any, updateCompon
             destination.index == source.index) {
             return;
         }
-        const newOrder = Array.from(this.props.dataState[this.props.uiState.simulator.show][this.props.dataState.selectedHtypeId].order)
-        const htype = this.props.uiState.simulator.show
-        const htypeId = this.props.dataState.selectedHtypeId
+        const newOrder = Array.from(props.dataState[props.uiState.simulator.show][props.dataState.selectedHtypeId].components)
+        const htype = props.uiState.simulator.show
+        const htypeId = props.dataState.selectedHtypeId
        // const columnId = source.droppableId;
-        //const column = this.props.uiState.columns[source.droppableId]
+        //const column = props.uiState.columns[source.droppableId]
         //const newOrder = Array.from(column.ids);
 
         newOrder.splice(source.index, 1);
         newOrder.splice(destination.index, 0, draggableId);
         console.log(newOrder)
-        this.props.updateComponentsOrder({ newOrder,htype,htypeId  })
+        props.updateComponentsOrder({ newOrder,htype,htypeId  })
     }
 
-    render() {
-        return <BackgroundWrapper>
-                <DragDropContext onDragEnd={this.onDragEnd}>
+    
+        return (<BackgroundWrapper>
+                <DragDropContext onDragEnd={onDragEnd}>
                 <Droppable droppableId="simulator">
                 {provided => (
                 <FilledSimulator
                         ref={provided.innerRef}
                         {...provided.droppableProps}
-                >{this.componentCreator()}
+                >{componentCreator()}
                     {provided.placeholder}
                 </FilledSimulator>
 
@@ -66,7 +70,7 @@ class Simulator extends React.Component<{dataState:any,uiState:any, updateCompon
                  </DragDropContext>
             
         </BackgroundWrapper>
-    }
+        )
 }
 
 const mapStateToProps = state => {

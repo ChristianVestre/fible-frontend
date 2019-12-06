@@ -47,24 +47,24 @@ columns: {
 columnOrder: ["routes", "stops", "pois"],
 title:"test",
 inputMenu: {
-    htype: "ROUTES",
+    htype: "routes",
     //which component is shown in the menu
     show: "MENU",
-    ROUTES: [{ name: "Headline", id: "headlineInput", dispatch: "HEADLINE_INPUT" },
+    routes: [{ name: "Headline", id: "headlineInput", dispatch: "HEADLINE_INPUT" },
     { name: "Subheadline", id: "subheadlineInput", dispatch: "SUBHEADLINE_INPUT" },
     { name: "Image Gallery", id: "imageGalleryInput", dispatch: "IMAGE_GALLERY_INPUT" },
     ],
-    STOPS: [{ name: "Headline", id: "headlineInput", dispatch: "HEADLINE_INPUT" },
+    stops: [{ name: "Headline", id: "headlineInput", dispatch: "HEADLINE_INPUT" },
     { name: "Subheadline", id: "subheadlineInput", dispatch: "SUBHEADLINE_INPUT" },
     { name: "Image Gallery", id: "imageGalleryInput", dispatch: "IMAGE_GALLERY_INPUT" },
     ],
-    POIS: [{ name: "Headline", id: "headlineInput", dispatch: "HEADLINE_INPUT" },
+    pois: [{ name: "Headline", id: "headlineInput", dispatch: "HEADLINE_INPUT" },
     { name: "Subheadline", id: "subheadlineInput", dispatch: "SUBHEADLINE_INPUT" },
     { name: "Image Gallery", id: "imageGalleryInput", dispatch: "IMAGE_GALLERY_INPUT" },
     ]
 },
 simulator: {
-    show: "ROUTES",
+    show: "routes",
     selected: "empty"
 },
 selector:{
