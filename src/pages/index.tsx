@@ -9,9 +9,9 @@ import Router from 'next/router'
 import {useMutation } from '@apollo/react-hooks';
 import redirect from '../lib/redirect';
 import checkLoggedIn from './../lib/check-login'
-import { loadUser } from '../redux/actions/dataActions';
+import { loadUser } from '../lib/redux/actions/dataActions';
 import { connect } from 'react-redux';
-import { withRedux } from '../redux/redux';
+import { withRedux } from '../lib/redux/redux';
 import { compose } from 'redux';
 
 

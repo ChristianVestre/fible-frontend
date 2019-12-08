@@ -3,8 +3,8 @@ import { DragDropContext } from 'react-beautiful-dnd'
 import React from 'react';
 import Selector from './selector';
 import { connect } from 'react-redux';
-import { updateOrder, updateSelectorManagerState } from '../../redux/actions/uiActions'
-import {cleanNonsavedHtypes} from '../../redux/actions/dataActions';
+import { updateOrder, updateSelectorManagerState } from '../../lib/redux/actions/uiActions'
+import {cleanNonsavedHtypes} from '../../lib/redux/actions/dataActions';
 import gql from 'graphql-tag';
 import { withApollo } from '../../lib/apollo';
 

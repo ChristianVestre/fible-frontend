@@ -1,7 +1,7 @@
 import gql from "graphql-tag";
 import React from 'react'
 import redirect from "./redirect";
-import { loadUser, loadHtypeData } from "../redux/actions/dataActions";
+import { loadUser, loadHtypeData } from "./redux/actions/dataActions";
 
 
 const ME = gql`

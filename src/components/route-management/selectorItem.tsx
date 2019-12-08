@@ -4,7 +4,7 @@ import { Draggable } from 'react-beautiful-dnd'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import { faTimes, faEdit } from '@fortawesome/free-solid-svg-icons'
 import { connect } from "react-redux";
-import {removeRoute, updateSelectorManagerState } from '../../redux/actions/uiActions';
+import {removeRoute, updateSelectorManagerState } from '../../lib/redux/actions/uiActions';
 import Router from 'next/router'
 import Cookie from 'js-cookie';
 
@@ -27,8 +27,6 @@ const SelectorItem = props =>{
       };
 
       const handleSelectorManagerStateUpdate = (e) => {
-        
-
         const selectedId = props.itemData.id
         const htype = props.type
         props.updateSelectorManagerState({selectedId,htype})

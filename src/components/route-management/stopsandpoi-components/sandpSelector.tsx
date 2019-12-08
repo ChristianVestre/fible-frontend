@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import React from 'react';
 import { connect } from 'react-redux';
 import { Droppable, Draggable } from 'react-beautiful-dnd'
-import { updateComponentsOrder } from '../../../redux/actions/dataActions'
+import { updateComponentsOrder } from '../../../lib/redux/actions/dataActions'
 import ListItem from './listItem';
 
 

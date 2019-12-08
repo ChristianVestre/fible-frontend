@@ -10,12 +10,12 @@ import { PersistGate } from 'redux-persist/integration/react'
 import  dynamic  from 'next/dynamic';
 import { withApollo } from '../lib/apollo';
 import { compose } from 'redux';
-import { withRedux } from '../redux/redux';
+import { withRedux } from '../lib/redux/redux';
 import { withAuth } from '../lib/auth';
 import gql from 'graphql-tag';
 import Cookies from 'js-cookie'
-import { loadUser, loadHtypeData, initializeInputScreen } from '../redux/actions/dataActions';
-import { initializeInputScreenUi } from '../redux/actions/uiActions';
+import { loadUser, loadHtypeData, initializeInputScreen } from '../lib/redux/actions/dataActions';
+import { initializeInputScreenUi } from '../lib/redux/actions/uiActions';
 
 
 const Inputscreen = (props) => {

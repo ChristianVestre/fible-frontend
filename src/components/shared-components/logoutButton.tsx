@@ -7,7 +7,7 @@ import Router from 'next/router'
 import { useMutation, useApolloClient } from '@apollo/react-hooks';
 
 
-import { cleanUser } from './../../redux/actions/dataActions';
+import { cleanUser } from '../../lib/redux/actions/dataActions';
 import { connect } from 'react-redux';
 import { faDoorOpen } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';

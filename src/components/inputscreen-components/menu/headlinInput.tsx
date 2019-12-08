@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { addOrUpdateHeadline, emptySelectedComponent } from '../../../redux/actions/dataActions'
-import { updateInputScreenUi, updateSimulatorSelection } from '../../../redux/actions/uiActions'
+import { addOrUpdateHeadline, emptySelectedComponent } from '../../../lib/redux/actions/dataActions'
+import { updateInputScreenUi, updateSimulatorSelection } from '../../../lib/redux/actions/uiActions'
 import { connect } from 'react-redux';
 import TextareaAutosize from 'react-autosize-textarea';
 

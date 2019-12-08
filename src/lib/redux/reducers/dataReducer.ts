@@ -100,7 +100,7 @@ export default function (state = initialState, action) {
             pois: {},}
         }
         case INITIALIZE_HTYPE: {
-            //     const selectedDispatch = action.payload.content.dispatch;
+            //const selectedDispatch = action.payload.content.dispatch;
             const htype = action.payload.content.htype;
             const htypeid = htype.substring(0, 2) + "_" + nanoid(8);
             return {

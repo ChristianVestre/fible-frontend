@@ -7,7 +7,7 @@ import Router from 'next/router'
 import {connect} from 'react-redux';
 import Link from 'next';
 import GridElement from './gridElement'
-import {deleteHtype} from '../../../redux/actions/dataActions'
+import {deleteHtype} from '../../../lib/redux/actions/dataActions'
 
 
 class Menu extends React.Component<{uiState:any,deleteHtype:Function,dataState:any}> {

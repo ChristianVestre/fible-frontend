@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import React from 'react'
-import { updateInputScreenUi} from '../../../redux/actions/uiActions'
+import { updateInputScreenUi} from '../../../lib/redux/actions/uiActions'
 import {connect} from 'react-redux';
 
 

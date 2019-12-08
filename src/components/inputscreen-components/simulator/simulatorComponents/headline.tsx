@@ -2,9 +2,9 @@ import styled from 'styled-components';
 import React from 'react';
 import { connect } from 'react-redux';
 import { Draggable } from 'react-beautiful-dnd'
-import { updateSimulatorSelection, updateInputScreenUi} from '../../../../redux/actions/uiActions'
-import { setSelectedComponent } from '../../../../redux/actions/dataActions'
-import { addOrUpdateHeadline, emptySelectedComponent } from '../../../../redux/actions/dataActions'
+import { updateSimulatorSelection, updateInputScreenUi} from '../../../../lib/redux/actions/uiActions'
+import { setSelectedComponent } from '../../../../lib/redux/actions/dataActions'
+import { addOrUpdateHeadline, emptySelectedComponent } from '../../../../lib/redux/actions/dataActions'
 import TextareaAutosize from 'react-autosize-textarea';
 
 

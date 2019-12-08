@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import {setTitle} from '../../redux/actions/uiActions';
+import {setTitle} from '../../lib/redux/actions/uiActions';
 import styled from 'styled-components';
 
 

@@ -3,7 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 import HeadlineText from './simulatorComponents/headline'
-import {updateComponentsOrder} from '../../../redux/actions/dataActions'
+import {updateComponentsOrder} from '../../../lib/redux/actions/dataActions'
 
 
 

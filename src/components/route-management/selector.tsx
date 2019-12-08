@@ -5,8 +5,8 @@ import { Droppable } from 'react-beautiful-dnd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes, faPlus } from '@fortawesome/free-solid-svg-icons'
 import Router from 'next/router'
-import { initializeInputScreenUi, stopAndPoiManagerController, setTitle } from '../../redux/actions/uiActions';
-import { initializeHtype } from '../../redux/actions/dataActions';
+import { initializeInputScreenUi, stopAndPoiManagerController, setTitle } from '../../lib/redux/actions/uiActions';
+import { initializeHtype } from '../../lib/redux/actions/dataActions';
 import { connect } from 'react-redux';
 
 

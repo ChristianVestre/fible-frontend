@@ -2,8 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import { faTimes, faPlus } from '@fortawesome/free-solid-svg-icons'
-import {initializeInputScreenUi,stopAndPoiManagerController} from '../../../redux/actions/uiActions';
-import {initializeHtype} from '../../../redux/actions/dataActions';
+import {initializeInputScreenUi,stopAndPoiManagerController} from '../../../lib/redux/actions/uiActions';
+import {initializeHtype} from '../../../lib/redux/actions/dataActions';
 import {connect} from 'react-redux';
 import {DragDropContext} from 'react-beautiful-dnd';
 import SandpSelector from './sandpSelector';

@@ -7,11 +7,11 @@ import { connect } from 'react-redux';
 import LogoutButton from './../components/shared-components/logoutButton'
 import { withApollo } from '../lib/apollo';
 import React, { useState } from 'react';
-import { withRedux } from '../redux/redux';
+import { withRedux } from '../lib/redux/redux';
 import { compose } from 'redux';
 import  {withAuth} from '../lib/auth';
 import gql from 'graphql-tag';
-import { loadUser, loadHtypeData } from '../redux/actions/dataActions';
+import { loadUser, loadHtypeData } from '../lib/redux/actions/dataActions';
 
 
 
