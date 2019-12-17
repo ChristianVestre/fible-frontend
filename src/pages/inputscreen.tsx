@@ -14,28 +14,27 @@ import { withRedux } from '../lib/redux/redux';
 import { withAuth } from '../lib/auth';
 import gql from 'graphql-tag';
 import Cookies from 'js-cookie'
-import { loadUser, loadHtypeData, initializeInputScreen } from '../lib/redux/actions/dataActions';
+import { loadUser, loadHtypeData, loadInputScreenData } from '../lib/redux/actions/dataActions';
 import { initializeInputScreenUi } from '../lib/redux/actions/uiActions';
 
 
-const Inputscreen = (props) => {
+const Inputscreen = props => {
     console.log(props)
     return(  
-        <Container>
-              <MenuManager/>
-              <Simulator/>
+        <Container key={props.routeid}>
+            <MenuManager/>
+            <Simulator/>
         </Container>)
 };
 //          
 //
-Inputscreen.getInitialProps = async ({reduxStore, me, apolloClient}) => {
+Inputscreen.getInitialProps = async ({reduxStore, me, apolloClient, query}) => {
     
-
-    const routesQuery = gql`query getHtypes 
-    {   getRoutes{id ownerid components}
-        getPois{id ownerid components}
-        getStops{id ownerid components}
-        getHtypeWithComponents{
+    const { id } = query;
+    console.log(id)
+    const routesQuery = gql`
+    query getHtypes 
+    {   getHtypeWithComponents{
             htype{
                 route{id name ownerid components}
                 stop{id name ownerid components}
@@ -49,38 +48,16 @@ Inputscreen.getInitialProps = async ({reduxStore, me, apolloClient}) => {
         let itemValue = data.data.getHtypeWithComponents.htype[item]
         if(itemValue != null && item != "__typename"){htype=item} 
     }
-    //console.log(htype)
-    const htypes = {getRoutes:data.data.getRoutes,
-                    getStops:data.data.getStops,
-                    getPois:data.data.getPois}
+    const key = data.data.getHtypeWithComponents.htype[htype].id
+    console.log(key)
+    console.log(htype)
     //console.log(htypes)
-    reduxStore.dispatch(loadUser(me))
-    reduxStore.dispatch(loadHtypeData({data:htypes}))
-    reduxStore.dispatch(initializeInputScreenUi({htype:htype}))
-    //console.log(data.data.getHtypeWithComponents.htype[htype])
-    reduxStore.dispatch(initializeInputScreen({htype:data.data.getHtypeWithComponents.htype[htype],components:data.data.getHtypeWithComponents.components}))
-  //  reduxStore.dispatch(s)
-   // reduxStore.dispatch(loadComponent({route, components}))
-  
-    //const routes = await context.apolloClient.query({query:inputScreenQuery})
-    //return {routes:reduxtest.state.ROUTES}
-
+    reduxStore.dispatch(loadInputScreenData({htypeData:data.data.getHtypeWithComponents.htype, user:me, htype:htype, componentsArray:data.data.getHtypeWithComponents.components}))
+    return {"routeid":key}
 }
-/*
- const InputScreen = props => (
-    <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
-        <Container>
-            <MenuManager/>
-            <Simulator/>
-        </Container>
-        </PersistGate>
-        </Provider>
-);
 
-*/
 const mapStateToProps = state => {
-    return { selectorState: state.selector, uiState:state.ui,dataState:state.data };
+    return { uiState:state.ui,dataState:state.data };
 };
 
 const enhance = compose(
@@ -88,7 +65,7 @@ const enhance = compose(
     withAuth,
     withRedux,
     connect(mapStateToProps, null),
-  )
+)
 export default enhance(Inputscreen);
 
 const Container = styled.div`

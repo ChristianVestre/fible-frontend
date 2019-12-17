@@ -1061,7 +1061,7 @@ module.exports = function (NAME, wrapper, methods, common, IS_MAP, IS_WEAK) {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-var core = module.exports = { version: '2.6.10' };
+var core = module.exports = { version: '2.6.11' };
 if (typeof __e == 'number') __e = core; // eslint-disable-line no-undef
 
 
@@ -3348,7 +3348,12 @@ function unique() {
       if (keys.has(h.key)) return false;
       keys.add(h.key);
       return true;
-    }
+    } // If custom meta tag has been added the key will be prepended with `.$`, we can
+    // check for this and dedupe in favor of the custom one, so the default
+    // is not rendered as well
+
+
+    if (keys.has(".$".concat(h.key))) return false; // eslint-disable-next-line default-case
 
     switch (h.type) {
       case 'title':
@@ -3660,23 +3665,23 @@ var styles = {
 
 /***/ "./node_modules/react/index.js":
 /*!*******************************************************************************************!*\
-  !*** delegated ./node_modules/react/index.js from dll-reference dll_13346faca0e924a89b24 ***!
+  !*** delegated ./node_modules/react/index.js from dll-reference dll_ef0ff7c60362f24a921f ***!
   \*******************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = (__webpack_require__(/*! dll-reference dll_13346faca0e924a89b24 */ "dll-reference dll_13346faca0e924a89b24"))("./node_modules/react/index.js");
+module.exports = (__webpack_require__(/*! dll-reference dll_ef0ff7c60362f24a921f */ "dll-reference dll_ef0ff7c60362f24a921f"))("./node_modules/react/index.js");
 
 /***/ }),
 
-/***/ "dll-reference dll_13346faca0e924a89b24":
+/***/ "dll-reference dll_ef0ff7c60362f24a921f":
 /*!*******************************************!*\
-  !*** external "dll_13346faca0e924a89b24" ***!
+  !*** external "dll_ef0ff7c60362f24a921f" ***!
   \*******************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = dll_13346faca0e924a89b24;
+module.exports = dll_ef0ff7c60362f24a921f;
 
 /***/ })
 

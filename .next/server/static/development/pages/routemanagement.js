@@ -101,7 +101,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 4);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -150,6 +150,17 @@ module.exports = __webpack_require__(/*! core-js/library/fn/object/create */ "co
 
 /***/ }),
 
+/***/ "./node_modules/@babel/runtime-corejs2/core-js/object/define-properties.js":
+/*!*********************************************************************************!*\
+  !*** ./node_modules/@babel/runtime-corejs2/core-js/object/define-properties.js ***!
+  \*********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(/*! core-js/library/fn/object/define-properties */ "core-js/library/fn/object/define-properties");
+
+/***/ }),
+
 /***/ "./node_modules/@babel/runtime-corejs2/core-js/object/define-property.js":
 /*!*******************************************************************************!*\
   !*** ./node_modules/@babel/runtime-corejs2/core-js/object/define-property.js ***!
@@ -161,17 +172,6 @@ module.exports = __webpack_require__(/*! core-js/library/fn/object/define-proper
 
 /***/ }),
 
-/***/ "./node_modules/@babel/runtime-corejs2/core-js/object/entries.js":
-/*!***********************************************************************!*\
-  !*** ./node_modules/@babel/runtime-corejs2/core-js/object/entries.js ***!
-  \***********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(/*! core-js/library/fn/object/entries */ "core-js/library/fn/object/entries");
-
-/***/ }),
-
 /***/ "./node_modules/@babel/runtime-corejs2/core-js/object/get-own-property-descriptor.js":
 /*!*******************************************************************************************!*\
   !*** ./node_modules/@babel/runtime-corejs2/core-js/object/get-own-property-descriptor.js ***!
@@ -180,6 +180,17 @@ module.exports = __webpack_require__(/*! core-js/library/fn/object/entries */ "c
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(/*! core-js/library/fn/object/get-own-property-descriptor */ "core-js/library/fn/object/get-own-property-descriptor");
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime-corejs2/core-js/object/get-own-property-descriptors.js":
+/*!********************************************************************************************!*\
+  !*** ./node_modules/@babel/runtime-corejs2/core-js/object/get-own-property-descriptors.js ***!
+  \********************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(/*! core-js/library/fn/object/get-own-property-descriptors */ "core-js/library/fn/object/get-own-property-descriptors");
 
 /***/ }),
 
@@ -213,6 +224,17 @@ module.exports = __webpack_require__(/*! core-js/library/fn/object/keys */ "core
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(/*! core-js/library/fn/promise */ "core-js/library/fn/promise");
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime-corejs2/core-js/weak-map.js":
+/*!*****************************************************************!*\
+  !*** ./node_modules/@babel/runtime-corejs2/core-js/weak-map.js ***!
+  \*****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(/*! core-js/library/fn/weak-map */ "core-js/library/fn/weak-map");
 
 /***/ }),
 
@@ -324,49 +346,6 @@ function _extends() {
   };
 
   return _extends.apply(this, arguments);
-}
-
-/***/ }),
-
-/***/ "./node_modules/@babel/runtime-corejs2/helpers/esm/objectSpread.js":
-/*!*************************************************************************!*\
-  !*** ./node_modules/@babel/runtime-corejs2/helpers/esm/objectSpread.js ***!
-  \*************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _objectSpread; });
-/* harmony import */ var _core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core-js/object/get-own-property-descriptor */ "./node_modules/@babel/runtime-corejs2/core-js/object/get-own-property-descriptor.js");
-/* harmony import */ var _core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../core-js/object/get-own-property-symbols */ "./node_modules/@babel/runtime-corejs2/core-js/object/get-own-property-symbols.js");
-/* harmony import */ var _core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _core_js_object_keys__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../core-js/object/keys */ "./node_modules/@babel/runtime-corejs2/core-js/object/keys.js");
-/* harmony import */ var _core_js_object_keys__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_core_js_object_keys__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _defineProperty__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./defineProperty */ "./node_modules/@babel/runtime-corejs2/helpers/esm/defineProperty.js");
-
-
-
-
-function _objectSpread(target) {
-  for (var i = 1; i < arguments.length; i++) {
-    var source = arguments[i] != null ? arguments[i] : {};
-
-    var ownKeys = _core_js_object_keys__WEBPACK_IMPORTED_MODULE_2___default()(source);
-
-    if (typeof _core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_1___default.a === 'function') {
-      ownKeys = ownKeys.concat(_core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_1___default()(source).filter(function (sym) {
-        return _core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default()(source, sym).enumerable;
-      }));
-    }
-
-    ownKeys.forEach(function (key) {
-      Object(_defineProperty__WEBPACK_IMPORTED_MODULE_3__["default"])(target, key, source[key]);
-    });
-  }
-
-  return target;
 }
 
 /***/ }),
@@ -498,29 +477,55 @@ var _Object$getOwnPropertyDescriptor = __webpack_require__(/*! ../core-js/object
 
 var _Object$defineProperty = __webpack_require__(/*! ../core-js/object/define-property */ "./node_modules/@babel/runtime-corejs2/core-js/object/define-property.js");
 
+var _WeakMap = __webpack_require__(/*! ../core-js/weak-map */ "./node_modules/@babel/runtime-corejs2/core-js/weak-map.js");
+
+function _getRequireWildcardCache() {
+  if (typeof _WeakMap !== "function") return null;
+  var cache = new _WeakMap();
+
+  _getRequireWildcardCache = function _getRequireWildcardCache() {
+    return cache;
+  };
+
+  return cache;
+}
+
 function _interopRequireWildcard(obj) {
   if (obj && obj.__esModule) {
     return obj;
-  } else {
-    var newObj = {};
+  }
 
-    if (obj != null) {
-      for (var key in obj) {
-        if (Object.prototype.hasOwnProperty.call(obj, key)) {
-          var desc = _Object$defineProperty && _Object$getOwnPropertyDescriptor ? _Object$getOwnPropertyDescriptor(obj, key) : {};
+  var cache = _getRequireWildcardCache();
 
-          if (desc.get || desc.set) {
-            _Object$defineProperty(newObj, key, desc);
-          } else {
-            newObj[key] = obj[key];
-          }
+  if (cache && cache.has(obj)) {
+    return cache.get(obj);
+  }
+
+  var newObj = {};
+
+  if (obj != null) {
+    var hasPropertyDescriptor = _Object$defineProperty && _Object$getOwnPropertyDescriptor;
+
+    for (var key in obj) {
+      if (Object.prototype.hasOwnProperty.call(obj, key)) {
+        var desc = hasPropertyDescriptor ? _Object$getOwnPropertyDescriptor(obj, key) : null;
+
+        if (desc && (desc.get || desc.set)) {
+          _Object$defineProperty(newObj, key, desc);
+        } else {
+          newObj[key] = obj[key];
         }
       }
     }
-
-    newObj["default"] = obj;
-    return newObj;
   }
+
+  newObj["default"] = obj;
+
+  if (cache) {
+    cache.set(obj, newObj);
+  }
+
+  return newObj;
 }
 
 module.exports = _interopRequireWildcard;
@@ -569,25 +574,23 @@ var _router = _interopRequireDefault(__webpack_require__(/*! ./router */ "./node
 var _rewriteUrlForExport = __webpack_require__(/*! ../next-server/lib/router/rewrite-url-for-export */ "./node_modules/next/dist/next-server/lib/router/rewrite-url-for-export.js");
 
 var _utils = __webpack_require__(/*! ../next-server/lib/utils */ "./node_modules/next/dist/next-server/lib/utils.js");
-/* global __NEXT_DATA__ */
-
 
 function isLocal(href) {
-  const url = (0, _url.parse)(href, false, true);
-  const origin = (0, _url.parse)((0, _utils.getLocationOrigin)(), false, true);
+  var url = (0, _url.parse)(href, false, true);
+  var origin = (0, _url.parse)((0, _utils.getLocationOrigin)(), false, true);
   return !url.host || url.protocol === origin.protocol && url.host === origin.host;
 }
 
 function memoizedFormatUrl(formatFunc) {
-  let lastHref = null;
-  let lastAs = null;
-  let lastResult = null;
+  var lastHref = null;
+  var lastAs = null;
+  var lastResult = null;
   return (href, as) => {
     if (lastResult && href === lastHref && as === lastAs) {
       return lastResult;
     }
 
-    const result = formatFunc(href, as);
+    var result = formatFunc(href, as);
     lastHref = href;
     lastAs = as;
     lastResult = result;
@@ -599,9 +602,9 @@ function formatUrl(url) {
   return url && typeof url === 'object' ? (0, _utils.formatWithValidation)(url) : url;
 }
 
-let observer;
-const listeners = new _map.default();
-const IntersectionObserver = false ? undefined : null;
+var observer;
+var listeners = new _map.default();
+var IntersectionObserver = false ? undefined : null;
 
 function getObserver() {
   // Return shared instance of IntersectionObserver if already created
@@ -620,7 +623,7 @@ function getObserver() {
         return;
       }
 
-      const cb = listeners.get(entry.target);
+      var cb = listeners.get(entry.target);
 
       if (entry.isIntersecting || entry.intersectionRatio > 0) {
         observer.unobserve(entry.target);
@@ -633,8 +636,8 @@ function getObserver() {
   });
 }
 
-const listenToIntersections = (el, cb) => {
-  const observer = getObserver();
+var listenToIntersections = (el, cb) => {
+  var observer = getObserver();
 
   if (!observer) {
     return () => {};
@@ -669,7 +672,7 @@ class Link extends _react.Component {
 
     this.linkClicked = e => {
       // @ts-ignore target exists on currentTarget
-      const {
+      var {
         nodeName,
         target
       } = e.currentTarget;
@@ -679,7 +682,7 @@ class Link extends _react.Component {
         return;
       }
 
-      let {
+      var {
         href,
         as
       } = this.formatUrls(this.props.href, this.props.as);
@@ -689,14 +692,14 @@ class Link extends _react.Component {
         return;
       }
 
-      const {
+      var {
         pathname
       } = window.location;
       href = (0, _url.resolve)(pathname, href);
       as = as ? (0, _url.resolve)(pathname, as) : href;
       e.preventDefault(); //  avoid scroll for urls with anchor refs
 
-      let {
+      var {
         scroll
       } = this.props;
 
@@ -744,22 +747,22 @@ class Link extends _react.Component {
   prefetch() {
     if (!this.p || true) return; // Prefetch the JSON page if asked (only in the client)
 
-    const {
+    var {
       pathname
     } = window.location;
-    const {
+    var {
       href: parsedHref
     } = this.formatUrls(this.props.href, this.props.as);
-    const href = (0, _url.resolve)(pathname, parsedHref);
+    var href = (0, _url.resolve)(pathname, parsedHref);
 
     _router.default.prefetch(href);
   }
 
   render() {
-    let {
+    var {
       children
     } = this.props;
-    const {
+    var {
       href,
       as
     } = this.formatUrls(this.props.href, this.props.as); // Deprecated. Warning shown by propType check. If the children provided is a string (<Link>example</Link>) we wrap it in an <a> tag
@@ -769,9 +772,9 @@ class Link extends _react.Component {
     } // This will return the first child, if multiple are provided it will throw an error
 
 
-    const child = _react.Children.only(children);
+    var child = _react.Children.only(children);
 
-    const props = {
+    var props = {
       ref: el => {
         this.handleRef(el);
 
@@ -796,10 +799,9 @@ class Link extends _react.Component {
         if (!e.defaultPrevented) {
           this.linkClicked(e);
         }
-      } // If child is an <a> tag and doesn't have a href attribute, or if the 'passHref' property is
-      // defined, we specify the current 'href', so that repetition is not needed by the user
-
-    };
+      }
+    }; // If child is an <a> tag and doesn't have a href attribute, or if the 'passHref' property is
+    // defined, we specify the current 'href', so that repetition is not needed by the user
 
     if (this.props.passHref || child.type === 'a' && !('href' in child.props)) {
       props.href = as || href;
@@ -817,9 +819,9 @@ class Link extends _react.Component {
 Link.propTypes = void 0;
 
 if (true) {
-  const warn = (0, _utils.execOnce)(console.error); // This module gets removed by webpack.IgnorePlugin
+  var warn = (0, _utils.execOnce)(console.error); // This module gets removed by webpack.IgnorePlugin
 
-  const exact = __webpack_require__(/*! prop-types-exact */ "prop-types-exact");
+  var exact = __webpack_require__(/*! prop-types-exact */ "prop-types-exact");
 
   Link.propTypes = exact({
     href: _propTypes.default.oneOfType([_propTypes.default.string, _propTypes.default.object]).isRequired,
@@ -830,7 +832,7 @@ if (true) {
     passHref: _propTypes.default.bool,
     scroll: _propTypes.default.bool,
     children: _propTypes.default.oneOfType([_propTypes.default.element, (props, propName) => {
-      const value = props[propName];
+      var value = props[propName];
 
       if (typeof value === 'string') {
         warn("Warning: You're using a string directly inside <Link>. This usage has been deprecated. Please add an <a> tag as child of <Link>");
@@ -883,7 +885,7 @@ var _withRouter = _interopRequireDefault(__webpack_require__(/*! ./with-router *
 exports.withRouter = _withRouter.default;
 /* global window */
 
-const singletonRouter = {
+var singletonRouter = {
   router: null,
   // holds the actual router instance
   readyCallbacks: [],
@@ -896,9 +898,9 @@ const singletonRouter = {
 
 }; // Create public properties and methods of the router in the singletonRouter
 
-const urlPropertyFields = ['pathname', 'route', 'query', 'asPath', 'components'];
-const routerEvents = ['routeChangeStart', 'beforeHistoryChange', 'routeChangeComplete', 'routeChangeError', 'hashChangeStart', 'hashChangeComplete'];
-const coreMethodFields = ['push', 'replace', 'reload', 'back', 'prefetch', 'beforePopState']; // Events is a static property on the router, the router doesn't have to be initialized to use it
+var urlPropertyFields = ['pathname', 'route', 'query', 'asPath', 'components'];
+var routerEvents = ['routeChangeStart', 'beforeHistoryChange', 'routeChangeComplete', 'routeChangeError', 'hashChangeStart', 'hashChangeComplete'];
+var coreMethodFields = ['push', 'replace', 'reload', 'back', 'prefetch', 'beforePopState']; // Events is a static property on the router, the router doesn't have to be initialized to use it
 
 (0, _defineProperty.default)(singletonRouter, 'events', {
   get() {
@@ -913,7 +915,7 @@ urlPropertyFields.forEach(field => {
   // proper way to access it
   (0, _defineProperty.default)(singletonRouter, field, {
     get() {
-      const router = getRouter();
+      var router = getRouter();
       return router[field];
     }
 
@@ -924,15 +926,15 @@ coreMethodFields.forEach(field => {
   ;
 
   singletonRouter[field] = function () {
-    const router = getRouter();
+    var router = getRouter();
     return router[field](...arguments);
   };
 });
 routerEvents.forEach(event => {
   singletonRouter.ready(() => {
     _router2.default.events.on(event, function () {
-      const eventField = "on" + event.charAt(0).toUpperCase() + event.substring(1);
-      const _singletonRouter = singletonRouter;
+      var eventField = "on" + event.charAt(0).toUpperCase() + event.substring(1);
+      var _singletonRouter = singletonRouter;
 
       if (_singletonRouter[eventField]) {
         try {
@@ -950,7 +952,7 @@ routerEvents.forEach(event => {
 
 function getRouter() {
   if (!singletonRouter.router) {
-    const message = 'No router instance found.\n' + 'You should only use "next/router" inside the client side of your app.\n';
+    var message = 'No router instance found.\n' + 'You should only use "next/router" inside the client side of your app.\n';
     throw new Error(message);
   }
 
@@ -972,7 +974,7 @@ function useRouter() {
 // This should **not** use inside the server.
 
 
-const createRouter = function createRouter() {
+var createRouter = function createRouter() {
   for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
     args[_key] = arguments[_key];
   }
@@ -987,10 +989,10 @@ const createRouter = function createRouter() {
 exports.createRouter = createRouter;
 
 function makePublicRouterInstance(router) {
-  const _router = router;
-  const instance = {};
+  var _router = router;
+  var instance = {};
 
-  for (const property of urlPropertyFields) {
+  for (var property of urlPropertyFields) {
     if (typeof _router[property] === 'object') {
       instance[property] = (0, _extends2.default)({}, _router[property]); // makes sure query is not stateful
 
@@ -1031,38 +1033,25 @@ var _extends2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime-co
 
 var _react = _interopRequireDefault(__webpack_require__(/*! react */ "react"));
 
-var _propTypes = _interopRequireDefault(__webpack_require__(/*! prop-types */ "prop-types"));
+var _router = __webpack_require__(/*! ./router */ "./node_modules/next/dist/client/router.js");
 
 function withRouter(ComposedComponent) {
-  class WithRouteWrapper extends _react.default.Component {
-    constructor() {
-      super(...arguments);
-      this.context = void 0;
-    }
-
-    render() {
-      return _react.default.createElement(ComposedComponent, (0, _extends2.default)({
-        router: this.context.router
-      }, this.props));
-    }
-
+  function WithRouterWrapper(props) {
+    return _react.default.createElement(ComposedComponent, (0, _extends2.default)({
+      router: (0, _router.useRouter)()
+    }, props));
   }
 
-  WithRouteWrapper.displayName = void 0;
-  WithRouteWrapper.getInitialProps = void 0;
-  WithRouteWrapper.contextTypes = {
-    router: _propTypes.default.object
-  };
-  WithRouteWrapper.getInitialProps = ComposedComponent.getInitialProps // This is needed to allow checking for custom getInitialProps in _app
+  WithRouterWrapper.getInitialProps = ComposedComponent.getInitialProps // This is needed to allow checking for custom getInitialProps in _app
   ;
-  WithRouteWrapper.origGetInitialProps = ComposedComponent.origGetInitialProps;
+  WithRouterWrapper.origGetInitialProps = ComposedComponent.origGetInitialProps;
 
   if (true) {
-    const name = ComposedComponent.displayName || ComposedComponent.name || 'Unknown';
-    WithRouteWrapper.displayName = "withRouter(" + name + ")";
+    var name = ComposedComponent.displayName || ComposedComponent.name || 'Unknown';
+    WithRouterWrapper.displayName = "withRouter(" + name + ")";
   }
 
-  return WithRouteWrapper;
+  return WithRouterWrapper;
 }
 
 /***/ }),
@@ -1113,6 +1102,7 @@ function mitt() {
     },
 
     emit(type, ...evts) {
+      // eslint-disable-next-line array-callback-return
       ;
       (all[type] || []).slice().map(handler => {
         handler(...evts);
@@ -1222,11 +1212,11 @@ const utils_1 = __webpack_require__(/*! ../utils */ "./node_modules/next/dist/ne
 
 const rewrite_url_for_export_1 = __webpack_require__(/*! ./rewrite-url-for-export */ "./node_modules/next/dist/next-server/lib/router/rewrite-url-for-export.js");
 
+const is_dynamic_1 = __webpack_require__(/*! ./utils/is-dynamic */ "./node_modules/next/dist/next-server/lib/router/utils/is-dynamic.js");
+
 const route_matcher_1 = __webpack_require__(/*! ./utils/route-matcher */ "./node_modules/next/dist/next-server/lib/router/utils/route-matcher.js");
 
 const route_regex_1 = __webpack_require__(/*! ./utils/route-regex */ "./node_modules/next/dist/next-server/lib/router/utils/route-regex.js");
-
-const is_dynamic_1 = __webpack_require__(/*! ./utils/is-dynamic */ "./node_modules/next/dist/next-server/lib/router/utils/is-dynamic.js");
 
 function toRoute(path) {
   return path.replace(/\/$/, '') || '/';
@@ -1266,7 +1256,7 @@ class Router {
       // can be caused by navigating back from an external site
 
 
-      if (e.state.options && e.state.options.fromExternal) {
+      if (e.state && this.isSsr && e.state.url === this.pathname && e.state.as === this.asPath) {
         return;
       } // If the downstream application returns falsy, return.
       // They will then be responsible for handling the event.
@@ -1319,10 +1309,13 @@ class Router {
     // until after mount to prevent hydration mismatch
 
     this.asPath = // @ts-ignore this is temporarily global (attached to window)
-    is_dynamic_1.isDynamicRoute(pathname) && __NEXT_DATA__.nextExport ? pathname : as;
+    is_dynamic_1.isDynamicRoute(pathname) && __NEXT_DATA__.autoExport ? pathname : as;
     this.sub = subscription;
     this.clc = null;
-    this._wrapApp = wrapApp;
+    this._wrapApp = wrapApp; // make sure to ignore extra popState in safari on navigating
+    // back from external site
+
+    this.isSsr = true;
 
     if (false) {}
   } // @deprecated backwards compatibility even though it's a private method.
@@ -1392,7 +1385,11 @@ class Router {
 
   change(method, _url, _as, options) {
     return new _Promise((resolve, reject) => {
-      // marking route changes as a navigation start entry
+      if (!options._h) {
+        this.isSsr = false;
+      } // marking route changes as a navigation start entry
+
+
       if (utils_1.SUPPORTS_PERFORMANCE_USER_TIMING) {
         performance.mark('routeChange');
       } // If url and as provided as an object representation,
@@ -1457,7 +1454,12 @@ class Router {
         const routeMatch = route_matcher_1.getRouteMatcher(rr)(asPathname);
 
         if (!routeMatch) {
-          console.error('The provided `as` value is incompatible with the `href` value. This is invalid. https://err.sh/zeit/next.js/incompatible-href-as');
+          const error = 'The provided `as` value is incompatible with the `href` value. This is invalid. https://err.sh/zeit/next.js/incompatible-href-as';
+
+          if (true) {
+            throw new Error(error);
+          } else {}
+
           return resolve(false);
         } // Merge params into `query`, overwriting any specified in search
 
@@ -1550,7 +1552,7 @@ class Router {
       if (true) {
         const {
           isValidElementType
-        } = __webpack_require__(/*! react-is */ "react-is");
+        } = __webpack_require__(/*! react-is */ "./node_modules/next/node_modules/react-is/index.js");
 
         if (!isValidElementType(Component)) {
           throw new Error(`The default export is not a React Component in page: "${pathname}"`);
@@ -1751,13 +1753,15 @@ class Router {
     } = this.components['/_app'];
     let props;
 
-    if ( // @ts-ignore workaround for dead-code elimination
-    (self.__HAS_SPR || "development" !== 'production') && Component.__NEXT_SPR) {
-      let status;
-      const {
+    if (Component.__NEXT_SPR) {
+      let status; // pathname should have leading slash
+
+      let {
         pathname
       } = url_1.parse(ctx.asPath || ctx.pathname);
-      props = await fetch(`/_next/data${pathname}.json`).then(res => {
+      pathname = !pathname || pathname === '/' ? '/index' : pathname;
+      props = await fetch( // @ts-ignore __NEXT_DATA__
+      `/_next/data/${__NEXT_DATA__.buildId}${pathname}.json`).then(res => {
         if (!res.ok) {
           status = res.status;
           throw new Error('failed to load prerender data');
@@ -1832,7 +1836,7 @@ _Object$defineProperty(exports, "__esModule", {
 }); // Identify /[param]/ in route string
 
 
-const TEST_ROUTE = /\/\[[^\/]+?\](?=\/|$)/;
+const TEST_ROUTE = /\/\[[^/]+?\](?=\/|$)/;
 
 function isDynamicRoute(route) {
   return TEST_ROUTE.test(route);
@@ -1878,7 +1882,7 @@ function getRouteMatcher(routeRegex) {
       const m = routeMatch[groups[slugName]];
 
       if (m !== undefined) {
-        params[slugName] = decodeURIComponent(m);
+        params[slugName] = m.indexOf('/') !== -1 ? m.split('/').map(entry => decodeURIComponent(entry)) : decodeURIComponent(m);
       }
     });
 
@@ -1911,8 +1915,9 @@ function getRouteRegex(normalizedRoute) {
   const escapedRoute = (normalizedRoute.replace(/\/$/, '') || '/').replace(/[|\\{}()[\]^$+*?.-]/g, '\\$&');
   const groups = {};
   let groupIndex = 1;
-  const parameterizedRoute = escapedRoute.replace(/\/\\\[([^\/]+?)\\\](?=\/|$)/g, (_, $1) => (groups[$1 // Un-escape key
-  .replace(/\\([|\\{}()[\]^$+*?.-])/g, '$1')] = groupIndex++, '/([^/]+?)'));
+  const parameterizedRoute = escapedRoute.replace(/\/\\\[([^/]+?)\\\](?=\/|$)/g, (_, $1) => (groups[$1 // Un-escape key
+  .replace(/\\([|\\{}()[\]^$+*?.-])/g, '$1').replace(/^\.{3}/, '') // eslint-disable-next-line no-sequences
+  ] = groupIndex++, $1.indexOf('\\.\\.\\.') === 0 ? '/(.+?)' : '/([^/]+?)'));
   return {
     re: new RegExp('^' + parameterizedRoute + '(?:/)?$', 'i'),
     groups
@@ -1949,11 +1954,14 @@ const url_1 = __webpack_require__(/*! url */ "url");
 
 function execOnce(fn) {
   let used = false;
+  let result = null;
   return (...args) => {
     if (!used) {
       used = true;
-      fn.apply(this, args);
+      result = fn.apply(this, args);
     }
+
+    return result;
   };
 }
 
@@ -1992,10 +2000,10 @@ function isResSent(res) {
 
 exports.isResSent = isResSent;
 
-async function loadGetInitialProps(Component, ctx) {
+async function loadGetInitialProps(App, ctx) {
   if (true) {
-    if (Component.prototype && Component.prototype.getInitialProps) {
-      const message = `"${getDisplayName(Component)}.getInitialProps()" is defined as an instance method - visit https://err.sh/zeit/next.js/get-initial-props-as-an-instance-method for more information.`;
+    if (App.prototype && App.prototype.getInitialProps) {
+      const message = `"${getDisplayName(App)}.getInitialProps()" is defined as an instance method - visit https://err.sh/zeit/next.js/get-initial-props-as-an-instance-method for more information.`;
       throw new Error(message);
     }
   } // when called from _app `ctx` is nested in `ctx`
@@ -2003,24 +2011,31 @@ async function loadGetInitialProps(Component, ctx) {
 
   const res = ctx.res || ctx.ctx && ctx.ctx.res;
 
-  if (!Component.getInitialProps) {
+  if (!App.getInitialProps) {
+    if (ctx.ctx && ctx.Component) {
+      // @ts-ignore pageProps default
+      return {
+        pageProps: await loadGetInitialProps(ctx.Component, ctx.ctx)
+      };
+    }
+
     return {};
   }
 
-  const props = await Component.getInitialProps(ctx);
+  const props = await App.getInitialProps(ctx);
 
   if (res && isResSent(res)) {
     return props;
   }
 
   if (!props) {
-    const message = `"${getDisplayName(Component)}.getInitialProps()" should resolve to an object. But found "${props}" instead.`;
+    const message = `"${getDisplayName(App)}.getInitialProps()" should resolve to an object. But found "${props}" instead.`;
     throw new Error(message);
   }
 
   if (true) {
     if (_Object$keys(props).length === 0 && !ctx.ctx) {
-      console.warn(`${getDisplayName(Component)} returned an empty object from \`getInitialProps\`. This de-optimizes and prevents automatic static optimization. https://err.sh/zeit/next.js/empty-object-getInitialProps`);
+      console.warn(`${getDisplayName(App)} returned an empty object from \`getInitialProps\`. This de-optimizes and prevents automatic static optimization. https://err.sh/zeit/next.js/empty-object-getInitialProps`);
     }
   }
 
@@ -2073,18 +2088,13 @@ var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/r
 
 var _react = _interopRequireDefault(__webpack_require__(/*! react */ "react"));
 
-var _propTypes = _interopRequireDefault(__webpack_require__(/*! prop-types */ "prop-types"));
-
 var _utils = __webpack_require__(/*! ../next-server/lib/utils */ "./node_modules/next/dist/next-server/lib/utils.js");
 
 exports.AppInitialProps = _utils.AppInitialProps;
-
-var _router = __webpack_require__(/*! ../client/router */ "./node_modules/next/dist/client/router.js");
 /**
 * `App` component is used for initialize of pages. It allows for overwriting and full control of the `page` initialization.
 * This allows for keeping state between navigation, custom error handling, injecting additional data.
 */
-
 
 function appGetInitialProps(_x) {
   return _appGetInitialProps.apply(this, arguments);
@@ -2092,11 +2102,11 @@ function appGetInitialProps(_x) {
 
 function _appGetInitialProps() {
   _appGetInitialProps = (0, _asyncToGenerator2.default)(function* (_ref) {
-    let {
+    var {
       Component,
       ctx
     } = _ref;
-    const pageProps = yield (0, _utils.loadGetInitialProps)(Component, ctx);
+    var pageProps = yield (0, _utils.loadGetInitialProps)(Component, ctx);
     return {
       pageProps
     };
@@ -2105,26 +2115,20 @@ function _appGetInitialProps() {
 }
 
 class App extends _react.default.Component {
-  getChildContext() {
-    return {
-      router: (0, _router.makePublicRouterInstance)(this.props.router)
-    };
-  } // Kept here for backwards compatibility.
+  // Kept here for backwards compatibility.
   // When someone ended App they could call `super.componentDidCatch`.
   // @deprecated This method is no longer needed. Errors are caught at the top level
-
-
   componentDidCatch(error, _errorInfo) {
     throw error;
   }
 
   render() {
-    const {
+    var {
       router,
       Component,
       pageProps
     } = this.props;
-    const url = createUrl(router);
+    var url = createUrl(router);
     return _react.default.createElement(Component, (0, _extends2.default)({}, pageProps, {
       url: url
     }));
@@ -2133,13 +2137,10 @@ class App extends _react.default.Component {
 }
 
 exports.default = App;
-App.childContextTypes = {
-  router: _propTypes.default.object
-};
 App.origGetInitialProps = appGetInitialProps;
 App.getInitialProps = appGetInitialProps;
-let warnContainer;
-let warnUrl;
+var warnContainer;
+var warnUrl;
 
 if (true) {
   warnContainer = (0, _utils.execOnce)(() => {
@@ -2158,7 +2159,7 @@ function Container(p) {
 
 function createUrl(router) {
   // This is to make sure we don't references the router object at call time
-  const {
+  var {
     pathname,
     asPath,
     query
@@ -2189,8 +2190,8 @@ function createUrl(router) {
     },
     pushTo: (href, as) => {
       if (true) warnUrl();
-      const pushRoute = as ? href : '';
-      const pushUrl = as || href;
+      var pushRoute = as ? href : '';
+      var pushUrl = as || href;
       return router.push(pushRoute, pushUrl);
     },
     replace: (url, as) => {
@@ -2199,8 +2200,8 @@ function createUrl(router) {
     },
     replaceTo: (href, as) => {
       if (true) warnUrl();
-      const replaceRoute = as ? href : '';
-      const replaceUrl = as || href;
+      var replaceRoute = as ? href : '';
+      var replaceUrl = as || href;
       return router.replace(replaceRoute, replaceUrl);
     }
   };
@@ -2216,6 +2217,262 @@ function createUrl(router) {
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(/*! ./dist/client/link */ "./node_modules/next/dist/client/link.js")
+
+
+/***/ }),
+
+/***/ "./node_modules/next/node_modules/react-is/cjs/react-is.development.js":
+/*!*****************************************************************************!*\
+  !*** ./node_modules/next/node_modules/react-is/cjs/react-is.development.js ***!
+  \*****************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/** @license React v16.8.6
+ * react-is.development.js
+ *
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+
+
+
+
+if (true) {
+  (function() {
+'use strict';
+
+Object.defineProperty(exports, '__esModule', { value: true });
+
+// The Symbol used to tag the ReactElement-like types. If there is no native Symbol
+// nor polyfill, then a plain number is used for performance.
+var hasSymbol = typeof Symbol === 'function' && Symbol.for;
+
+var REACT_ELEMENT_TYPE = hasSymbol ? Symbol.for('react.element') : 0xeac7;
+var REACT_PORTAL_TYPE = hasSymbol ? Symbol.for('react.portal') : 0xeaca;
+var REACT_FRAGMENT_TYPE = hasSymbol ? Symbol.for('react.fragment') : 0xeacb;
+var REACT_STRICT_MODE_TYPE = hasSymbol ? Symbol.for('react.strict_mode') : 0xeacc;
+var REACT_PROFILER_TYPE = hasSymbol ? Symbol.for('react.profiler') : 0xead2;
+var REACT_PROVIDER_TYPE = hasSymbol ? Symbol.for('react.provider') : 0xeacd;
+var REACT_CONTEXT_TYPE = hasSymbol ? Symbol.for('react.context') : 0xeace;
+var REACT_ASYNC_MODE_TYPE = hasSymbol ? Symbol.for('react.async_mode') : 0xeacf;
+var REACT_CONCURRENT_MODE_TYPE = hasSymbol ? Symbol.for('react.concurrent_mode') : 0xeacf;
+var REACT_FORWARD_REF_TYPE = hasSymbol ? Symbol.for('react.forward_ref') : 0xead0;
+var REACT_SUSPENSE_TYPE = hasSymbol ? Symbol.for('react.suspense') : 0xead1;
+var REACT_MEMO_TYPE = hasSymbol ? Symbol.for('react.memo') : 0xead3;
+var REACT_LAZY_TYPE = hasSymbol ? Symbol.for('react.lazy') : 0xead4;
+
+function isValidElementType(type) {
+  return typeof type === 'string' || typeof type === 'function' ||
+  // Note: its typeof might be other than 'symbol' or 'number' if it's a polyfill.
+  type === REACT_FRAGMENT_TYPE || type === REACT_CONCURRENT_MODE_TYPE || type === REACT_PROFILER_TYPE || type === REACT_STRICT_MODE_TYPE || type === REACT_SUSPENSE_TYPE || typeof type === 'object' && type !== null && (type.$$typeof === REACT_LAZY_TYPE || type.$$typeof === REACT_MEMO_TYPE || type.$$typeof === REACT_PROVIDER_TYPE || type.$$typeof === REACT_CONTEXT_TYPE || type.$$typeof === REACT_FORWARD_REF_TYPE);
+}
+
+/**
+ * Forked from fbjs/warning:
+ * https://github.com/facebook/fbjs/blob/e66ba20ad5be433eb54423f2b097d829324d9de6/packages/fbjs/src/__forks__/warning.js
+ *
+ * Only change is we use console.warn instead of console.error,
+ * and do nothing when 'console' is not supported.
+ * This really simplifies the code.
+ * ---
+ * Similar to invariant but only logs a warning if the condition is not met.
+ * This can be used to log issues in development environments in critical
+ * paths. Removing the logging code for production environments will keep the
+ * same logic and follow the same code paths.
+ */
+
+var lowPriorityWarning = function () {};
+
+{
+  var printWarning = function (format) {
+    for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+      args[_key - 1] = arguments[_key];
+    }
+
+    var argIndex = 0;
+    var message = 'Warning: ' + format.replace(/%s/g, function () {
+      return args[argIndex++];
+    });
+    if (typeof console !== 'undefined') {
+      console.warn(message);
+    }
+    try {
+      // --- Welcome to debugging React ---
+      // This error was thrown as a convenience so that you can use this stack
+      // to find the callsite that caused this warning to fire.
+      throw new Error(message);
+    } catch (x) {}
+  };
+
+  lowPriorityWarning = function (condition, format) {
+    if (format === undefined) {
+      throw new Error('`lowPriorityWarning(condition, format, ...args)` requires a warning ' + 'message argument');
+    }
+    if (!condition) {
+      for (var _len2 = arguments.length, args = Array(_len2 > 2 ? _len2 - 2 : 0), _key2 = 2; _key2 < _len2; _key2++) {
+        args[_key2 - 2] = arguments[_key2];
+      }
+
+      printWarning.apply(undefined, [format].concat(args));
+    }
+  };
+}
+
+var lowPriorityWarning$1 = lowPriorityWarning;
+
+function typeOf(object) {
+  if (typeof object === 'object' && object !== null) {
+    var $$typeof = object.$$typeof;
+    switch ($$typeof) {
+      case REACT_ELEMENT_TYPE:
+        var type = object.type;
+
+        switch (type) {
+          case REACT_ASYNC_MODE_TYPE:
+          case REACT_CONCURRENT_MODE_TYPE:
+          case REACT_FRAGMENT_TYPE:
+          case REACT_PROFILER_TYPE:
+          case REACT_STRICT_MODE_TYPE:
+          case REACT_SUSPENSE_TYPE:
+            return type;
+          default:
+            var $$typeofType = type && type.$$typeof;
+
+            switch ($$typeofType) {
+              case REACT_CONTEXT_TYPE:
+              case REACT_FORWARD_REF_TYPE:
+              case REACT_PROVIDER_TYPE:
+                return $$typeofType;
+              default:
+                return $$typeof;
+            }
+        }
+      case REACT_LAZY_TYPE:
+      case REACT_MEMO_TYPE:
+      case REACT_PORTAL_TYPE:
+        return $$typeof;
+    }
+  }
+
+  return undefined;
+}
+
+// AsyncMode is deprecated along with isAsyncMode
+var AsyncMode = REACT_ASYNC_MODE_TYPE;
+var ConcurrentMode = REACT_CONCURRENT_MODE_TYPE;
+var ContextConsumer = REACT_CONTEXT_TYPE;
+var ContextProvider = REACT_PROVIDER_TYPE;
+var Element = REACT_ELEMENT_TYPE;
+var ForwardRef = REACT_FORWARD_REF_TYPE;
+var Fragment = REACT_FRAGMENT_TYPE;
+var Lazy = REACT_LAZY_TYPE;
+var Memo = REACT_MEMO_TYPE;
+var Portal = REACT_PORTAL_TYPE;
+var Profiler = REACT_PROFILER_TYPE;
+var StrictMode = REACT_STRICT_MODE_TYPE;
+var Suspense = REACT_SUSPENSE_TYPE;
+
+var hasWarnedAboutDeprecatedIsAsyncMode = false;
+
+// AsyncMode should be deprecated
+function isAsyncMode(object) {
+  {
+    if (!hasWarnedAboutDeprecatedIsAsyncMode) {
+      hasWarnedAboutDeprecatedIsAsyncMode = true;
+      lowPriorityWarning$1(false, 'The ReactIs.isAsyncMode() alias has been deprecated, ' + 'and will be removed in React 17+. Update your code to use ' + 'ReactIs.isConcurrentMode() instead. It has the exact same API.');
+    }
+  }
+  return isConcurrentMode(object) || typeOf(object) === REACT_ASYNC_MODE_TYPE;
+}
+function isConcurrentMode(object) {
+  return typeOf(object) === REACT_CONCURRENT_MODE_TYPE;
+}
+function isContextConsumer(object) {
+  return typeOf(object) === REACT_CONTEXT_TYPE;
+}
+function isContextProvider(object) {
+  return typeOf(object) === REACT_PROVIDER_TYPE;
+}
+function isElement(object) {
+  return typeof object === 'object' && object !== null && object.$$typeof === REACT_ELEMENT_TYPE;
+}
+function isForwardRef(object) {
+  return typeOf(object) === REACT_FORWARD_REF_TYPE;
+}
+function isFragment(object) {
+  return typeOf(object) === REACT_FRAGMENT_TYPE;
+}
+function isLazy(object) {
+  return typeOf(object) === REACT_LAZY_TYPE;
+}
+function isMemo(object) {
+  return typeOf(object) === REACT_MEMO_TYPE;
+}
+function isPortal(object) {
+  return typeOf(object) === REACT_PORTAL_TYPE;
+}
+function isProfiler(object) {
+  return typeOf(object) === REACT_PROFILER_TYPE;
+}
+function isStrictMode(object) {
+  return typeOf(object) === REACT_STRICT_MODE_TYPE;
+}
+function isSuspense(object) {
+  return typeOf(object) === REACT_SUSPENSE_TYPE;
+}
+
+exports.typeOf = typeOf;
+exports.AsyncMode = AsyncMode;
+exports.ConcurrentMode = ConcurrentMode;
+exports.ContextConsumer = ContextConsumer;
+exports.ContextProvider = ContextProvider;
+exports.Element = Element;
+exports.ForwardRef = ForwardRef;
+exports.Fragment = Fragment;
+exports.Lazy = Lazy;
+exports.Memo = Memo;
+exports.Portal = Portal;
+exports.Profiler = Profiler;
+exports.StrictMode = StrictMode;
+exports.Suspense = Suspense;
+exports.isValidElementType = isValidElementType;
+exports.isAsyncMode = isAsyncMode;
+exports.isConcurrentMode = isConcurrentMode;
+exports.isContextConsumer = isContextConsumer;
+exports.isContextProvider = isContextProvider;
+exports.isElement = isElement;
+exports.isForwardRef = isForwardRef;
+exports.isFragment = isFragment;
+exports.isLazy = isLazy;
+exports.isMemo = isMemo;
+exports.isPortal = isPortal;
+exports.isProfiler = isProfiler;
+exports.isStrictMode = isStrictMode;
+exports.isSuspense = isSuspense;
+  })();
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/next/node_modules/react-is/index.js":
+/*!**********************************************************!*\
+  !*** ./node_modules/next/node_modules/react-is/index.js ***!
+  \**********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+if (false) {} else {
+  module.exports = __webpack_require__(/*! ./cjs/react-is.development.js */ "./node_modules/next/node_modules/react-is/cjs/react-is.development.js");
+}
 
 
 /***/ }),
@@ -2243,13 +2500,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! next/router */ "next/router");
 /* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _redux_actions_uiActions__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../redux/actions/uiActions */ "./src/redux/actions/uiActions.ts");
-/* harmony import */ var _redux_actions_dataActions__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../redux/actions/dataActions */ "./src/redux/actions/dataActions.ts");
+/* harmony import */ var _lib_redux_actions_uiActions__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../lib/redux/actions/uiActions */ "./src/lib/redux/actions/uiActions.ts");
+/* harmony import */ var _lib_redux_actions_dataActions__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../lib/redux/actions/dataActions */ "./src/lib/redux/actions/dataActions.ts");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react-redux */ "react-redux");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! js-cookie */ "js-cookie");
+/* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(js_cookie__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var _apollo_react_hooks__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @apollo/react-hooks */ "@apollo/react-hooks");
+/* harmony import */ var _apollo_react_hooks__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(_apollo_react_hooks__WEBPACK_IMPORTED_MODULE_12__);
+/* harmony import */ var graphql_tag__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! graphql-tag */ "graphql-tag");
+/* harmony import */ var graphql_tag__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(graphql_tag__WEBPACK_IMPORTED_MODULE_13__);
 
-var _jsxFileName = "/home/christian/Development/fible-frontend-nextjs/src/components/route-management/selector.tsx";
+var _jsxFileName = "/home/christian/Development/fible-frontend/src/components/route-management/selector.tsx";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement;
+
+
+
 
 
 
@@ -2274,19 +2540,35 @@ const RouteList = styled_components__WEBPACK_IMPORTED_MODULE_2___default.a.div.w
 })(["padding:8px;"]);
 
 const Selector = props => {
-  const handleInputScreenButton = () => {
+  const [addRoute, {
+    data
+  }] = Object(_apollo_react_hooks__WEBPACK_IMPORTED_MODULE_12__["useMutation"])(graphql_tag__WEBPACK_IMPORTED_MODULE_13___default.a`
+    mutation setRoute{setRoute{
+        id
+    }
+    }
+    `);
+
+  const handleInputScreenButton = async props => {
+    console.log(props.type);
+
     if (props.type == "routes") {
-      next_router__WEBPACK_IMPORTED_MODULE_7___default.a.push({
-        pathname: '/inputscreen'
-      });
-      props.initializeHtype({
-        htype: props.type
+      props.initializeInputScreenData({
+        htype: props.type,
+        user: props.dataState.routeMgmt.user
       });
       props.initializeInputScreenUi({
         dispatch: props.type
       });
+      const route = await addRoute();
+      console.log(data);
+      console.log(route.data.setRoute.id);
+      js_cookie__WEBPACK_IMPORTED_MODULE_11___default.a.set("hid", route.data.setRoute.id);
+      next_router__WEBPACK_IMPORTED_MODULE_7___default.a.push({
+        pathname: '/inputscreen'
+      });
     } else {
-      props.stopAndPoiManagerController({
+      props.loadStopAndPoiManagerState({
         htype: props.type
       });
       let firstLetter = props.type.substring(0, 1);
@@ -2301,20 +2583,20 @@ const Selector = props => {
   return __jsx(Container, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 52
+      lineNumber: 69
     },
     __self: undefined
   }, __jsx(Title, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 53
+      lineNumber: 70
     },
     __self: undefined
   }, props.type.substring(0, 1).toUpperCase() + props.type.substring(1)), __jsx(react_beautiful_dnd__WEBPACK_IMPORTED_MODULE_4__["Droppable"], {
     droppableId: props.type,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 54
+      lineNumber: 71
     },
     __self: undefined
   }, provided => __jsx(RouteList, Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
@@ -2322,51 +2604,51 @@ const Selector = props => {
   }, provided.droppableProps, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 56
+      lineNumber: 73
     },
     __self: undefined
-  }), console.log(props.listItems), props.listItems.map((itemData, index) => __jsx(_selectorItem__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  }), props.listItems.map((itemData, index) => __jsx(_selectorItem__WEBPACK_IMPORTED_MODULE_3__["default"], {
     key: itemData.id,
     type: props.type,
     itemData: itemData,
     index: index,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 61
+      lineNumber: 77
     },
     __self: undefined
   })), provided.placeholder)), __jsx(InputScreenButton, {
-    onClick: () => handleInputScreenButton(),
+    onClick: () => handleInputScreenButton(props),
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 66
+      lineNumber: 82
     },
     __self: undefined
   }, __jsx(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_5__["FontAwesomeIcon"], {
     icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faPlus"],
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 67
+      lineNumber: 83
     },
     __self: undefined
   })));
 };
 
 const mapStateToProps = state => {
+  // console.log(state)
   return {
     dataState: state.data,
-    initializeInputScreenState: state.initializeInputScreenState,
-    stopAndPoiManagerController: state.stopAndPoiManagerController,
-    setTitle: state.setTitle
+    uiState: state.ui,
+    loadStopAndPoiManagerState: state.loadStopAndPoiManagerState
   };
 }; //export default Selector
 
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_10__["connect"])(mapStateToProps, {
-  initializeInputScreenUi: _redux_actions_uiActions__WEBPACK_IMPORTED_MODULE_8__["initializeInputScreenUi"],
-  initializeHtype: _redux_actions_dataActions__WEBPACK_IMPORTED_MODULE_9__["initializeHtype"],
-  stopAndPoiManagerController: _redux_actions_uiActions__WEBPACK_IMPORTED_MODULE_8__["stopAndPoiManagerController"],
-  setTitle: _redux_actions_uiActions__WEBPACK_IMPORTED_MODULE_8__["setTitle"]
+  initializeInputScreenUi: _lib_redux_actions_uiActions__WEBPACK_IMPORTED_MODULE_8__["initializeInputScreenUi"],
+  initializeInputScreenData: _lib_redux_actions_dataActions__WEBPACK_IMPORTED_MODULE_9__["initializeInputScreenData"],
+  loadStopAndPoiManagerState: _lib_redux_actions_uiActions__WEBPACK_IMPORTED_MODULE_8__["loadStopAndPoiManagerState"],
+  setTitle: _lib_redux_actions_uiActions__WEBPACK_IMPORTED_MODULE_8__["setTitle"]
 })(Selector));
 const InputScreenButton = styled_components__WEBPACK_IMPORTED_MODULE_2___default.a.button.withConfig({
   displayName: "selector__InputScreenButton",
@@ -2397,13 +2679,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-redux */ "react-redux");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _redux_actions_uiActions__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../redux/actions/uiActions */ "./src/redux/actions/uiActions.ts");
+/* harmony import */ var _lib_redux_actions_uiActions__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../lib/redux/actions/uiActions */ "./src/lib/redux/actions/uiActions.ts");
 /* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! next/router */ "next/router");
 /* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_8__);
 /* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! js-cookie */ "js-cookie");
 /* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(js_cookie__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _apollo_react_hooks__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @apollo/react-hooks */ "@apollo/react-hooks");
+/* harmony import */ var _apollo_react_hooks__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_apollo_react_hooks__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var graphql_tag__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! graphql-tag */ "graphql-tag");
+/* harmony import */ var graphql_tag__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(graphql_tag__WEBPACK_IMPORTED_MODULE_11__);
 
-var _jsxFileName = "/home/christian/Development/fible-frontend-nextjs/src/components/route-management/selectorItem.tsx";
+var _jsxFileName = "/home/christian/Development/fible-frontend/src/components/route-management/selectorItem.tsx";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement;
 
 
@@ -2415,29 +2701,44 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement;
 
 
 
-const SelectorItem = props => {
-  console.log(props);
 
-  const handleEditRoutes = e => {
+
+const SelectorItem = props => {
+  const [getHtypeWithComponents, {
+    loading,
+    data
+  }] = Object(_apollo_react_hooks__WEBPACK_IMPORTED_MODULE_10__["useLazyQuery"])(graphql_tag__WEBPACK_IMPORTED_MODULE_11___default.a`query getHtypeWithComponents 
+    {   getHtypeWithComponents{
+            htype{
+                route{id name ownerid components}
+                stop{id name ownerid components}
+                poi{id name ownerid components}
+            } 
+            components{id content type}}
+    }`);
+
+  const handleEditRoutes = async e => {
     e.stopPropagation();
     e.nativeEvent.stopImmediatePropagation();
     js_cookie__WEBPACK_IMPORTED_MODULE_9___default.a.set("hid", props.itemData.id); // Cookie.
+    //  const resp = await getHtypeWithComponents()
 
     const selectedId = props.itemData.id;
-    const htype = props.type;
-    props.updateSelectorManagerState({
-      selectedId,
-      htype
-    });
+    const htype = props.type; //props.updateSelectorManagerState({selectedId,htype})
+
     next_router__WEBPACK_IMPORTED_MODULE_8___default.a.push({
-      pathname: '/inputscreen'
-    });
+      pathname: '/inputscreen',
+      query: {
+        id: props.itemData.id
+      }
+    } //'inputscreen'
+    ); //  Router.replace('/routemanagement','/inputscreen')
   };
 
   const handleSelectorManagerStateUpdate = e => {
     const selectedId = props.itemData.id;
     const htype = props.type;
-    props.updateSelectorManagerState({
+    props.updateRoutemgmtState({
       selectedId,
       htype
     });
@@ -2448,36 +2749,37 @@ const SelectorItem = props => {
     index: props.index,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 40
+      lineNumber: 52
     },
     __self: undefined
   }, provided => __jsx(Container, Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, provided.draggableProps, provided.dragHandleProps, {
     ref: provided.innerRef,
-    onClick: e => handleSelectorManagerStateUpdate(e),
-    color: props.itemData.id == props.uiState.selector["selected" + props.type] ? "salmon" : "lightgray",
+    onClick: e => handleSelectorManagerStateUpdate(e) //todo fix state
+    ,
+    color: props.itemData.id == props.uiState.routeMgmt.selector["selected" + props.type] ? "salmon" : "lightgray",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 42
+      lineNumber: 54
     },
     __self: undefined
   }), __jsx(Headline, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 49
+      lineNumber: 62
     },
     __self: undefined
   }, props.itemData.name), __jsx(EditButton, {
     onClick: e => handleEditRoutes(e),
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 50
+      lineNumber: 63
     },
     __self: undefined
   }, __jsx(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_4__["FontAwesomeIcon"], {
     icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__["faEdit"],
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 51
+      lineNumber: 64
     },
     __self: undefined
   }))));
@@ -2486,14 +2788,14 @@ const SelectorItem = props => {
 const mapStateToProps = state => {
   return {
     uiState: state.ui,
-    updateSelectorManagerState: state.updateSelectorManagerState
+    updateRoutemgmtState: state.updateSelectorManagerState
   };
 }; //export default SelectorItem
 
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_6__["connect"])(mapStateToProps, {
-  removeRoute: _redux_actions_uiActions__WEBPACK_IMPORTED_MODULE_7__["removeRoute"],
-  updateSelectorManagerState: _redux_actions_uiActions__WEBPACK_IMPORTED_MODULE_7__["updateSelectorManagerState"]
+  removeRoute: _lib_redux_actions_uiActions__WEBPACK_IMPORTED_MODULE_7__["removeRoute"],
+  updateRoutemgmtState: _lib_redux_actions_uiActions__WEBPACK_IMPORTED_MODULE_7__["updateRoutemgmtState"]
 })(SelectorItem));
 const Container = styled_components__WEBPACK_IMPORTED_MODULE_2___default.a.div.withConfig({
   displayName: "selectorItem__Container",
@@ -2541,10 +2843,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _selector__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./selector */ "./src/components/route-management/selector.tsx");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-redux */ "react-redux");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _redux_actions_uiActions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../redux/actions/uiActions */ "./src/redux/actions/uiActions.ts");
-/* harmony import */ var _redux_actions_dataActions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../redux/actions/dataActions */ "./src/redux/actions/dataActions.ts");
+/* harmony import */ var _lib_redux_actions_uiActions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../lib/redux/actions/uiActions */ "./src/lib/redux/actions/uiActions.ts");
 
-var _jsxFileName = "/home/christian/Development/fible-frontend-nextjs/src/components/route-management/selectorManager.tsx";
+var _jsxFileName = "/home/christian/Development/fible-frontend/src/components/route-management/selectorManager.tsx";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement;
 
 
@@ -2552,8 +2853,8 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement;
 
 
 
-
 const SelectorManager = props => {
+  //console.log(props)
   const onDragEnd = result => {
     const {
       destination,
@@ -2582,11 +2883,10 @@ const SelectorManager = props => {
     switch (props.type) {
       case "routes":
         {
-          const selector = props.dataState.user.routes;
-          console.log(props.dataState.user);
+          //console.log(props.dataState.routeMgmt.user.routes)
+          const selector = props.dataState.routeMgmt.user.routes;
           let listItems;
-          listItems = selector ? selector.map(route => props.dataState.routes[route]) : []; //    console.log(listItems)
-
+          listItems = selector ? selector.map(route => props.dataState.routeMgmt.routes[route.id]) : [];
           return __jsx(_selector__WEBPACK_IMPORTED_MODULE_3__["default"], {
             key: "routes",
             selector: selector,
@@ -2594,7 +2894,7 @@ const SelectorManager = props => {
             listItems: listItems,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 38
+              lineNumber: 33
             },
             __self: undefined
           });
@@ -2602,9 +2902,9 @@ const SelectorManager = props => {
 
       case "stops":
         {
-          const selector = props.dataState.user.stops;
+          const selector = props.dataState.routeMgmt.user.stops;
           let listItems;
-          listItems = selector ? listItems = selector.map(stop => props.dataState.stops[stop]) : [];
+          listItems = selector ? listItems = selector.map(stop => props.dataState.routeMgmt.stops[stop.id]) : [];
           return __jsx(_selector__WEBPACK_IMPORTED_MODULE_3__["default"], {
             key: "stops",
             selector: selector,
@@ -2612,7 +2912,7 @@ const SelectorManager = props => {
             listItems: listItems,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 44
+              lineNumber: 39
             },
             __self: undefined
           });
@@ -2620,9 +2920,9 @@ const SelectorManager = props => {
 
       case "pois":
         {
-          const selector = props.dataState.user.stops;
+          const selector = props.dataState.routeMgmt.user.stops;
           let listItems;
-          listItems = selector ? selector.map(poi => props.dataState.pois[poi]) : [];
+          listItems = selector ? selector.map(poi => props.dataState.routeMgmt.pois[poi.id]) : [];
           return __jsx(_selector__WEBPACK_IMPORTED_MODULE_3__["default"], {
             key: "pois",
             selector: selector,
@@ -2630,7 +2930,7 @@ const SelectorManager = props => {
             listItems: listItems,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 50
+              lineNumber: 45
             },
             __self: undefined
           });
@@ -2640,7 +2940,7 @@ const SelectorManager = props => {
         return __jsx("p", {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 53
+            lineNumber: 48
           },
           __self: undefined
         }, "wrong");
@@ -2651,7 +2951,7 @@ const SelectorManager = props => {
     onDragEnd: result => onDragEnd(result),
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 56
+      lineNumber: 51
     },
     __self: undefined
   }, selectorFunction(props));
@@ -2667,9 +2967,8 @@ const mapStateToProps = state => {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_4__["connect"])(mapStateToProps, {
-  updateOrder: _redux_actions_uiActions__WEBPACK_IMPORTED_MODULE_5__["updateOrder"],
-  updateSelectorManagerState: _redux_actions_uiActions__WEBPACK_IMPORTED_MODULE_5__["updateSelectorManagerState"],
-  cleanNonsavedHtypes: _redux_actions_dataActions__WEBPACK_IMPORTED_MODULE_6__["cleanNonsavedHtypes"]
+  updateOrder: _lib_redux_actions_uiActions__WEBPACK_IMPORTED_MODULE_5__["updateOrder"],
+  updateRoutemgmtState: _lib_redux_actions_uiActions__WEBPACK_IMPORTED_MODULE_5__["updateRoutemgmtState"]
 })(SelectorManager));
 
 /***/ }),
@@ -2691,7 +2990,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _selectorManager__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./selectorManager */ "./src/components/route-management/selectorManager.tsx");
 /* harmony import */ var _stopsandpoi_components_sandpManager__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./stopsandpoi-components/sandpManager */ "./src/components/route-management/stopsandpoi-components/sandpManager.tsx");
-var _jsxFileName = "/home/christian/Development/fible-frontend-nextjs/src/components/route-management/stateManager.tsx";
+var _jsxFileName = "/home/christian/Development/fible-frontend/src/components/route-management/stateManager.tsx";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement;
 
 
@@ -2702,7 +3001,7 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement;
 const RouteManagementStateManager = props => {
   const SelectorChoice = props => {
     //   console.log(props.state.htypes.getRoutes)
-    switch (props.uiState.selector.managerUiCode) {
+    switch (props.uiState.routeMgmt.selector.managerUiCode) {
       case "RO":
         {
           return __jsx(OneSelectorWrapper, {
@@ -2890,7 +3189,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(styled_components__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_draggable__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-draggable */ "react-draggable");
 /* harmony import */ var react_draggable__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_draggable__WEBPACK_IMPORTED_MODULE_2__);
-var _jsxFileName = "/home/christian/Development/fible-frontend-nextjs/src/components/route-management/stopsandpoi-components/listItem.tsx";
+var _jsxFileName = "/home/christian/Development/fible-frontend/src/components/route-management/stopsandpoi-components/listItem.tsx";
 
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
@@ -2954,14 +3253,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "@fortawesome/free-solid-svg-icons");
 /* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _redux_actions_uiActions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../redux/actions/uiActions */ "./src/redux/actions/uiActions.ts");
-/* harmony import */ var _redux_actions_dataActions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../redux/actions/dataActions */ "./src/redux/actions/dataActions.ts");
+/* harmony import */ var _lib_redux_actions_uiActions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../lib/redux/actions/uiActions */ "./src/lib/redux/actions/uiActions.ts");
+/* harmony import */ var _lib_redux_actions_dataActions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../lib/redux/actions/dataActions */ "./src/lib/redux/actions/dataActions.ts");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-redux */ "react-redux");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var react_beautiful_dnd__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-beautiful-dnd */ "react-beautiful-dnd");
 /* harmony import */ var react_beautiful_dnd__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(react_beautiful_dnd__WEBPACK_IMPORTED_MODULE_7__);
 /* harmony import */ var _sandpSelector__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./sandpSelector */ "./src/components/route-management/stopsandpoi-components/sandpSelector.tsx");
-var _jsxFileName = "/home/christian/Development/fible-frontend-nextjs/src/components/route-management/stopsandpoi-components/sandpManager.tsx";
+var _jsxFileName = "/home/christian/Development/fible-frontend/src/components/route-management/stopsandpoi-components/sandpManager.tsx";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
@@ -3033,9 +3332,9 @@ const mapStateToProps = state => {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_6__["connect"])(mapStateToProps, {
-  initializeInputScreenUi: _redux_actions_uiActions__WEBPACK_IMPORTED_MODULE_4__["initializeInputScreenUi"],
-  initializeHtype: _redux_actions_dataActions__WEBPACK_IMPORTED_MODULE_5__["initializeHtype"],
-  stopAndPoiManagerController: _redux_actions_uiActions__WEBPACK_IMPORTED_MODULE_4__["stopAndPoiManagerController"]
+  initializeInputScreenUi: _lib_redux_actions_uiActions__WEBPACK_IMPORTED_MODULE_4__["initializeInputScreenUi"],
+  initializeHtype: _lib_redux_actions_dataActions__WEBPACK_IMPORTED_MODULE_5__["initializeHtype"],
+  stopAndPoiManagerController: _lib_redux_actions_uiActions__WEBPACK_IMPORTED_MODULE_4__["stopAndPoiManagerController"]
 })(StopsAndPois));
 const InputScreenButton = styled_components__WEBPACK_IMPORTED_MODULE_1___default.a.button.withConfig({
   displayName: "sandpManager__InputScreenButton",
@@ -3066,7 +3365,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _listItem__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./listItem */ "./src/components/route-management/stopsandpoi-components/listItem.tsx");
 
 
-var _jsxFileName = "/home/christian/Development/fible-frontend-nextjs/src/components/route-management/stopsandpoi-components/sandpSelector.tsx";
+var _jsxFileName = "/home/christian/Development/fible-frontend/src/components/route-management/stopsandpoi-components/sandpSelector.tsx";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement;
 
 
@@ -3176,7 +3475,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! styled-components */ "styled-components");
 /* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(styled_components__WEBPACK_IMPORTED_MODULE_1__);
-var _jsxFileName = "/home/christian/Development/fible-frontend-nextjs/src/components/route-management/title.tsx";
+var _jsxFileName = "/home/christian/Development/fible-frontend/src/components/route-management/title.tsx";
 
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
@@ -3225,7 +3524,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _lib_redirect__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../lib/redirect */ "./src/lib/redirect.ts");
 /* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! js-cookie */ "js-cookie");
 /* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(js_cookie__WEBPACK_IMPORTED_MODULE_7__);
-var _jsxFileName = "/home/christian/Development/fible-frontend-nextjs/src/components/shared-components/logoutButton.tsx";
+var _jsxFileName = "/home/christian/Development/fible-frontend/src/components/shared-components/logoutButton.tsx";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement;
 
 
@@ -3318,34 +3617,57 @@ const StyledText = styled_components__WEBPACK_IMPORTED_MODULE_0___default.a.p.wi
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "withApollo", function() { return withApollo; });
-/* harmony import */ var _babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/objectSpread */ "./node_modules/@babel/runtime-corejs2/helpers/esm/objectSpread.js");
-/* harmony import */ var _babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/extends */ "./node_modules/@babel/runtime-corejs2/helpers/esm/extends.js");
-/* harmony import */ var _babel_runtime_corejs2_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/objectWithoutProperties */ "./node_modules/@babel/runtime-corejs2/helpers/esm/objectWithoutProperties.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! prop-types */ "prop-types");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var cookie__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! cookie */ "cookie");
-/* harmony import */ var cookie__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(cookie__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var next_head__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! next/head */ "next/head");
-/* harmony import */ var next_head__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(next_head__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var apollo_client__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! apollo-client */ "apollo-client");
-/* harmony import */ var apollo_client__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(apollo_client__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var apollo_cache_inmemory__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! apollo-cache-inmemory */ "apollo-cache-inmemory");
-/* harmony import */ var apollo_cache_inmemory__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(apollo_cache_inmemory__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var apollo_link_http__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! apollo-link-http */ "apollo-link-http");
-/* harmony import */ var apollo_link_http__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(apollo_link_http__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var apollo_link_context__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! apollo-link-context */ "apollo-link-context");
-/* harmony import */ var apollo_link_context__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(apollo_link_context__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var _apollo_react_hooks__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @apollo/react-hooks */ "@apollo/react-hooks");
-/* harmony import */ var _apollo_react_hooks__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_apollo_react_hooks__WEBPACK_IMPORTED_MODULE_11__);
-/* harmony import */ var isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! isomorphic-unfetch */ "isomorphic-unfetch");
-/* harmony import */ var isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_12__);
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_define_property__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/object/define-property */ "./node_modules/@babel/runtime-corejs2/core-js/object/define-property.js");
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_define_property__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_object_define_property__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_define_properties__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/object/define-properties */ "./node_modules/@babel/runtime-corejs2/core-js/object/define-properties.js");
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_define_properties__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_object_define_properties__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/object/get-own-property-descriptors */ "./node_modules/@babel/runtime-corejs2/core-js/object/get-own-property-descriptors.js");
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/object/get-own-property-descriptor */ "./node_modules/@babel/runtime-corejs2/core-js/object/get-own-property-descriptor.js");
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/object/get-own-property-symbols */ "./node_modules/@babel/runtime-corejs2/core-js/object/get-own-property-symbols.js");
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/object/keys */ "./node_modules/@babel/runtime-corejs2/core-js/object/keys.js");
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/defineProperty */ "./node_modules/@babel/runtime-corejs2/helpers/esm/defineProperty.js");
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/extends */ "./node_modules/@babel/runtime-corejs2/helpers/esm/extends.js");
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/objectWithoutProperties */ "./node_modules/@babel/runtime-corejs2/helpers/esm/objectWithoutProperties.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! prop-types */ "prop-types");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var cookie__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! cookie */ "cookie");
+/* harmony import */ var cookie__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(cookie__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var next_head__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! next/head */ "next/head");
+/* harmony import */ var next_head__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(next_head__WEBPACK_IMPORTED_MODULE_12__);
+/* harmony import */ var apollo_client__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! apollo-client */ "apollo-client");
+/* harmony import */ var apollo_client__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(apollo_client__WEBPACK_IMPORTED_MODULE_13__);
+/* harmony import */ var apollo_cache_inmemory__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! apollo-cache-inmemory */ "apollo-cache-inmemory");
+/* harmony import */ var apollo_cache_inmemory__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(apollo_cache_inmemory__WEBPACK_IMPORTED_MODULE_14__);
+/* harmony import */ var apollo_link_http__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! apollo-link-http */ "apollo-link-http");
+/* harmony import */ var apollo_link_http__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(apollo_link_http__WEBPACK_IMPORTED_MODULE_15__);
+/* harmony import */ var apollo_link_context__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! apollo-link-context */ "apollo-link-context");
+/* harmony import */ var apollo_link_context__WEBPACK_IMPORTED_MODULE_16___default = /*#__PURE__*/__webpack_require__.n(apollo_link_context__WEBPACK_IMPORTED_MODULE_16__);
+/* harmony import */ var _apollo_react_hooks__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @apollo/react-hooks */ "@apollo/react-hooks");
+/* harmony import */ var _apollo_react_hooks__WEBPACK_IMPORTED_MODULE_17___default = /*#__PURE__*/__webpack_require__.n(_apollo_react_hooks__WEBPACK_IMPORTED_MODULE_17__);
+/* harmony import */ var isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! isomorphic-unfetch */ "isomorphic-unfetch");
+/* harmony import */ var isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_18___default = /*#__PURE__*/__webpack_require__.n(isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_18__);
 
 
 
-var _jsxFileName = "/home/christian/Development/fible-frontend-nextjs/src/lib/apollo.jsx";
-var __jsx = react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement;
+
+
+
+
+
+
+var _jsxFileName = "/home/christian/Development/fible-frontend/src/lib/apollo.jsx";
+var __jsx = react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement;
+
+function ownKeys(object, enumerableOnly) { var keys = _babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_5___default()(object); if (_babel_runtime_corejs2_core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_4___default.a) { var symbols = _babel_runtime_corejs2_core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_4___default()(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return _babel_runtime_corejs2_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_3___default()(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_6__["default"])(target, key, source[key]); }); } else if (_babel_runtime_corejs2_core_js_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_2___default.a) { _babel_runtime_corejs2_core_js_object_define_properties__WEBPACK_IMPORTED_MODULE_1___default()(target, _babel_runtime_corejs2_core_js_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_2___default()(source)); } else { ownKeys(Object(source)).forEach(function (key) { _babel_runtime_corejs2_core_js_object_define_property__WEBPACK_IMPORTED_MODULE_0___default()(target, key, _babel_runtime_corejs2_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_3___default()(source, key)); }); } } return target; }
+
 
 
 
@@ -3373,19 +3695,19 @@ function withApollo(PageComponent, {
       apolloClient,
       apolloState
     } = _ref,
-        pageProps = Object(_babel_runtime_corejs2_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_2__["default"])(_ref, ["apolloClient", "apolloState"]);
+        pageProps = Object(_babel_runtime_corejs2_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_8__["default"])(_ref, ["apolloClient", "apolloState"]);
 
     const client = apolloClient || initApolloClient(apolloState, {
       getToken
     });
-    return __jsx(_apollo_react_hooks__WEBPACK_IMPORTED_MODULE_11__["ApolloProvider"], {
+    return __jsx(_apollo_react_hooks__WEBPACK_IMPORTED_MODULE_17__["ApolloProvider"], {
       client: client,
       __source: {
         fileName: _jsxFileName,
         lineNumber: 25
       },
       __self: this
-    }, __jsx(PageComponent, Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_1__["default"])({}, pageProps, {
+    }, __jsx(PageComponent, Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_7__["default"])({}, pageProps, {
       __source: {
         fileName: _jsxFileName,
         lineNumber: 26
@@ -3407,9 +3729,9 @@ function withApollo(PageComponent, {
 
     WithApollo.propTypes = {
       // Used for getDataFromTree rendering
-      apolloClient: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.object,
+      apolloClient: prop_types__WEBPACK_IMPORTED_MODULE_10___default.a.object,
       // Used for client/server rendering
-      apolloState: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.object
+      apolloState: prop_types__WEBPACK_IMPORTED_MODULE_10___default.a.object
     };
   }
 
@@ -3439,7 +3761,7 @@ function withApollo(PageComponent, {
               getDataFromTree
             } = await Promise.resolve(/*! import() */).then(__webpack_require__.t.bind(null, /*! @apollo/react-ssr */ "@apollo/react-ssr", 7));
             await getDataFromTree(__jsx(AppTree, {
-              pageProps: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, pageProps, {
+              pageProps: _objectSpread({}, pageProps, {
                 apolloClient
               }),
               __source: {
@@ -3458,12 +3780,12 @@ function withApollo(PageComponent, {
         // head side effect therefore need to be cleared manually
 
 
-        next_head__WEBPACK_IMPORTED_MODULE_6___default.a.rewind();
+        next_head__WEBPACK_IMPORTED_MODULE_12___default.a.rewind();
       } // Extract query data from the Apollo store
 
 
       const apolloState = apolloClient.cache.extract();
-      return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, pageProps, {
+      return _objectSpread({}, pageProps, {
         apolloState
       });
     };
@@ -3512,19 +3834,19 @@ function createApolloClient(initialState = {}, {
     }
   }
 
-  const httpLink = new apollo_link_http__WEBPACK_IMPORTED_MODULE_9__["HttpLink"]({
+  const httpLink = new apollo_link_http__WEBPACK_IMPORTED_MODULE_15__["HttpLink"]({
     uri: 'http://localhost:8000/graphql',
     // Server URL (must be absolute)
     credentials: 'include',
-    fetch: (isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_12___default()),
+    fetch: (isomorphic_unfetch__WEBPACK_IMPORTED_MODULE_18___default()),
     fetchOptions
   });
-  const authLink = Object(apollo_link_context__WEBPACK_IMPORTED_MODULE_10__["setContext"])((request, {
+  const authLink = Object(apollo_link_context__WEBPACK_IMPORTED_MODULE_16__["setContext"])((request, {
     headers
   }) => {
     const token = getToken();
     return {
-      headers: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, headers, {
+      headers: _objectSpread({}, headers, {
         cookie: token ? `qid=${token.qid} ` : '',
         cookie_2: token ? `hid=${token.hid} ` : ''
       })
@@ -3532,11 +3854,11 @@ function createApolloClient(initialState = {}, {
   }); //hid=${token.hid}
   // Check out https://github.com/zeit/next.js/pull/4611 if you want to use the AWSAppSyncClient
 
-  return new apollo_client__WEBPACK_IMPORTED_MODULE_7__["ApolloClient"]({
+  return new apollo_client__WEBPACK_IMPORTED_MODULE_13__["ApolloClient"]({
     ssrMode: true,
     // Disables forceFetch on the server (so queries are only run once)
     link: authLink.concat(httpLink),
-    cache: new apollo_cache_inmemory__WEBPACK_IMPORTED_MODULE_8__["InMemoryCache"]().restore(initialState)
+    cache: new apollo_cache_inmemory__WEBPACK_IMPORTED_MODULE_14__["InMemoryCache"]().restore(initialState)
   });
 }
 /**
@@ -3546,7 +3868,7 @@ function createApolloClient(initialState = {}, {
 
 
 function getToken(req) {
-  const cookies = cookie__WEBPACK_IMPORTED_MODULE_5___default.a.parse(req ? req.headers.cookie || '' : document.cookie); //  console.log(cookies)
+  const cookies = cookie__WEBPACK_IMPORTED_MODULE_11___default.a.parse(req ? req.headers.cookie || '' : document.cookie); //  console.log(cookies)
 
   return cookies;
 }
@@ -3688,33 +4010,56 @@ function createApolloClient(initialState = {}) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "withAuth", function() { return withAuth; });
-/* harmony import */ var _babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/extends */ "./node_modules/@babel/runtime-corejs2/helpers/esm/extends.js");
-/* harmony import */ var _babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/objectSpread */ "./node_modules/@babel/runtime-corejs2/helpers/esm/objectSpread.js");
-/* harmony import */ var graphql_tag__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! graphql-tag */ "graphql-tag");
-/* harmony import */ var graphql_tag__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(graphql_tag__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _redirect__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./redirect */ "./src/lib/redirect.ts");
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_define_property__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/object/define-property */ "./node_modules/@babel/runtime-corejs2/core-js/object/define-property.js");
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_define_property__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_object_define_property__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_define_properties__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/object/define-properties */ "./node_modules/@babel/runtime-corejs2/core-js/object/define-properties.js");
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_define_properties__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_object_define_properties__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/object/get-own-property-descriptors */ "./node_modules/@babel/runtime-corejs2/core-js/object/get-own-property-descriptors.js");
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/object/get-own-property-descriptor */ "./node_modules/@babel/runtime-corejs2/core-js/object/get-own-property-descriptor.js");
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/object/get-own-property-symbols */ "./node_modules/@babel/runtime-corejs2/core-js/object/get-own-property-symbols.js");
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/object/keys */ "./node_modules/@babel/runtime-corejs2/core-js/object/keys.js");
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/extends */ "./node_modules/@babel/runtime-corejs2/helpers/esm/extends.js");
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/defineProperty */ "./node_modules/@babel/runtime-corejs2/helpers/esm/defineProperty.js");
+/* harmony import */ var graphql_tag__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! graphql-tag */ "graphql-tag");
+/* harmony import */ var graphql_tag__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(graphql_tag__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _redirect__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./redirect */ "./src/lib/redirect.ts");
 
 
-var _jsxFileName = "/home/christian/Development/fible-frontend-nextjs/src/lib/auth.tsx";
-var __jsx = react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement;
 
 
 
-const ME = graphql_tag__WEBPACK_IMPORTED_MODULE_2___default.a`
+
+
+
+var _jsxFileName = "/home/christian/Development/fible-frontend/src/lib/auth.tsx";
+var __jsx = react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement;
+
+function ownKeys(object, enumerableOnly) { var keys = _babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_5___default()(object); if (_babel_runtime_corejs2_core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_4___default.a) { var symbols = _babel_runtime_corejs2_core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_4___default()(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return _babel_runtime_corejs2_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_3___default()(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_7__["default"])(target, key, source[key]); }); } else if (_babel_runtime_corejs2_core_js_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_2___default.a) { _babel_runtime_corejs2_core_js_object_define_properties__WEBPACK_IMPORTED_MODULE_1___default()(target, _babel_runtime_corejs2_core_js_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_2___default()(source)); } else { ownKeys(Object(source)).forEach(function (key) { _babel_runtime_corejs2_core_js_object_define_property__WEBPACK_IMPORTED_MODULE_0___default()(target, key, _babel_runtime_corejs2_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_3___default()(source, key)); }); } } return target; }
+
+
+
+
+const ME = graphql_tag__WEBPACK_IMPORTED_MODULE_8___default.a`
 query me{
     me {id name routes pois stops email}
 }`;
 const withAuth = C => {
-  class AuthComponent extends react__WEBPACK_IMPORTED_MODULE_3___default.a.Component {
+  class AuthComponent extends react__WEBPACK_IMPORTED_MODULE_9___default.a.Component {
     static async getInitialProps(ctx) {
       const response = await ctx.apolloClient.query({
         query: ME
       }); //console.log("@withAuth ", response);
 
       if (!response || !response.data || !response.data.me) {
-        Object(_redirect__WEBPACK_IMPORTED_MODULE_4__["default"])(ctx, "/");
+        Object(_redirect__WEBPACK_IMPORTED_MODULE_10__["default"])(ctx, "/");
         return {
           me: null
         };
@@ -3729,14 +4074,14 @@ const withAuth = C => {
       }
 
       const me = response.data.me;
-      return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({
+      return _objectSpread({
         me: response.data.me
       }, componentProps);
     }
 
     render() {
       // {console.log(this.props)}
-      return __jsx(C, Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, this.props, {
+      return __jsx(C, Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_6__["default"])({}, this.props, {
         user: this.props,
         __source: {
           fileName: _jsxFileName,
@@ -3781,174 +4126,15 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./src/pages/routemanagement.tsx":
-/*!***************************************!*\
-  !*** ./src/pages/routemanagement.tsx ***!
-  \***************************************/
-/*! exports provided: default */
+/***/ "./src/lib/redux/actions/dataActions.ts":
+/*!**********************************************!*\
+  !*** ./src/lib/redux/actions/dataActions.ts ***!
+  \**********************************************/
+/*! exports provided: initializeHtype, deleteHtype, emptySelectedComponent, setSelectedComponent, updateComponentsOrder, cleanNonsavedHtypes, loadUser, loadHtypeData, loadComponents, cleanUser, initializeInputScreen, initializeInputScreenData, loadRouteMgmtData, loadInputScreenData, updateStopAndPoiData, addOrUpdateHeadline, dataUpdateComponent, dataAddNewComponent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! next/link */ "./node_modules/next/link.js");
-/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! styled-components */ "styled-components");
-/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(styled_components__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _components_route_management_title__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/route-management/title */ "./src/components/route-management/title.tsx");
-/* harmony import */ var _components_route_management_stateManager__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/route-management/stateManager */ "./src/components/route-management/stateManager.tsx");
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-redux */ "react-redux");
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _components_shared_components_logoutButton__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./../components/shared-components/logoutButton */ "./src/components/shared-components/logoutButton.tsx");
-/* harmony import */ var _lib_apollo__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../lib/apollo */ "./src/lib/apollo.jsx");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _redux_redux__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../redux/redux */ "./src/redux/redux.jsx");
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! redux */ "redux");
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(redux__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var _lib_auth__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../lib/auth */ "./src/lib/auth.tsx");
-/* harmony import */ var graphql_tag__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! graphql-tag */ "graphql-tag");
-/* harmony import */ var graphql_tag__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(graphql_tag__WEBPACK_IMPORTED_MODULE_11__);
-/* harmony import */ var _redux_actions_dataActions__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../redux/actions/dataActions */ "./src/redux/actions/dataActions.ts");
-var _jsxFileName = "/home/christian/Development/fible-frontend-nextjs/src/pages/routemanagement.tsx";
-var __jsx = react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-const RouteManagement = props => {
-  return __jsx(Container, {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 23
-    },
-    __self: undefined
-  }, __jsx(Images, {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 24
-    },
-    __self: undefined
-  }, __jsx(HeaderImage, {
-    src: "/logo_fible.png",
-    alt: "my image",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 25
-    },
-    __self: undefined
-  }), __jsx(next_link__WEBPACK_IMPORTED_MODULE_0___default.a, {
-    href: "/",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 26
-    },
-    __self: undefined
-  }, __jsx(BackImage, {
-    src: "/back.svg",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 27
-    },
-    __self: undefined
-  }))), __jsx(_components_route_management_title__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    name: props.dataState.user.name,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 30
-    },
-    __self: undefined
-  }), __jsx(_components_shared_components_logoutButton__WEBPACK_IMPORTED_MODULE_5__["default"], {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 31
-    },
-    __self: undefined
-  }), __jsx(_components_route_management_stateManager__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 32
-    },
-    __self: undefined
-  }));
-}; //            
-
-
-RouteManagement.getInitialProps = async ({
-  apolloClient,
-  me,
-  reduxStore
-}) => {
-  const routesQuery = graphql_tag__WEBPACK_IMPORTED_MODULE_11___default.a`query getHtypes 
-    {   getRoutes{id ownerid name components}
-        getPois{id ownerid name components}
-        getStops{id ownerid name components}
-    }`;
-  let htypes = await apolloClient.query({
-    query: routesQuery
-  });
-  reduxStore.dispatch(Object(_redux_actions_dataActions__WEBPACK_IMPORTED_MODULE_12__["loadUser"])(me));
-  reduxStore.dispatch(Object(_redux_actions_dataActions__WEBPACK_IMPORTED_MODULE_12__["loadHtypeData"])(htypes));
-};
-
-const mapStateToProps = state => {
-  return {
-    selectorState: state.selector,
-    uiState: state.ui,
-    dataState: state.data
-  };
-};
-
-const enhance = Object(redux__WEBPACK_IMPORTED_MODULE_9__["compose"])(_lib_apollo__WEBPACK_IMPORTED_MODULE_6__["withApollo"], _lib_auth__WEBPACK_IMPORTED_MODULE_10__["withAuth"], _redux_redux__WEBPACK_IMPORTED_MODULE_8__["withRedux"], Object(react_redux__WEBPACK_IMPORTED_MODULE_4__["connect"])(mapStateToProps, {
-  loadUser: _redux_actions_dataActions__WEBPACK_IMPORTED_MODULE_12__["loadUser"],
-  loadHtypeData: _redux_actions_dataActions__WEBPACK_IMPORTED_MODULE_12__["loadHtypeData"]
-}));
-/* harmony default export */ __webpack_exports__["default"] = (enhance(RouteManagement));
-/*
-const DynamicRouteSelector = dynamic(
-    () => import('../components/route-management/selectorManager'),
-    { ssr: false }
-)
-*/
-
-const Images = styled_components__WEBPACK_IMPORTED_MODULE_1___default.a.div.withConfig({
-  displayName: "routemanagement__Images",
-  componentId: "geraa8-0"
-})(["height:8em;margin:0;padding-left:1em;position:absolute;top:1%;left:0%;"]);
-const HeaderImage = styled_components__WEBPACK_IMPORTED_MODULE_1___default.a.img.withConfig({
-  displayName: "routemanagement__HeaderImage",
-  componentId: "geraa8-1"
-})(["height:4em;width:7em;padding-left:2em;padding-top:1em;padding-bottom:2em;position:absolute;margin:0;z-index:1;"]);
-const BackImage = styled_components__WEBPACK_IMPORTED_MODULE_1___default.a.img.withConfig({
-  displayName: "routemanagement__BackImage",
-  componentId: "geraa8-2"
-})(["padding-top:0.5em;height:2em;width:2em;z-index:1;position:absolute;"]);
-const Container = styled_components__WEBPACK_IMPORTED_MODULE_1___default.a.div.withConfig({
-  displayName: "routemanagement__Container",
-  componentId: "geraa8-3"
-})(["width:100vw;height:100vh;margin:0;padding:0;background:white;display:flex;display:-webkit-box;display:-moz-box;display:-ms-flexbox;display:-webkit-flex;align-content:center;justify-content:center;"]);
-
-/***/ }),
-
-/***/ "./src/redux/actions/dataActions.ts":
-/*!******************************************!*\
-  !*** ./src/redux/actions/dataActions.ts ***!
-  \******************************************/
-/*! exports provided: addOrUpdateHeadline, initializeHtype, deleteHtype, emptySelectedComponent, setSelectedComponent, updateComponentsOrder, cleanNonsavedHtypes, loadUser, loadHtypeData, loadComponents, cleanUser, initializeInputScreen */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addOrUpdateHeadline", function() { return addOrUpdateHeadline; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "initializeHtype", function() { return initializeHtype; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteHtype", function() { return deleteHtype; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "emptySelectedComponent", function() { return emptySelectedComponent; });
@@ -3960,9 +4146,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "loadComponents", function() { return loadComponents; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "cleanUser", function() { return cleanUser; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "initializeInputScreen", function() { return initializeInputScreen; });
-/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./types */ "./src/redux/actions/types.ts");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "initializeInputScreenData", function() { return initializeInputScreenData; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "loadRouteMgmtData", function() { return loadRouteMgmtData; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "loadInputScreenData", function() { return loadInputScreenData; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateStopAndPoiData", function() { return updateStopAndPoiData; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addOrUpdateHeadline", function() { return addOrUpdateHeadline; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "dataUpdateComponent", function() { return dataUpdateComponent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "dataAddNewComponent", function() { return dataAddNewComponent; });
+/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./types */ "./src/lib/redux/actions/types.ts");
 
-let addHeadlineId = 0;
+let headlineId = 0;
 let initializeHtypeId = 0;
 let deleteHtypeId = 0;
 let emptySelectedComponentId = 0;
@@ -3972,14 +4165,14 @@ let cleanNonsavedHtypesId = 0;
 let loadUserId = 0;
 let cleanUserId = 0;
 let loadHtypeDataId = 0;
-let initializeInputscreenId = 0;
-const addOrUpdateHeadline = content => ({
-  type: _types__WEBPACK_IMPORTED_MODULE_0__["HEADLINE"],
-  payload: {
-    id: ++addHeadlineId,
-    content
-  }
-});
+let initializeInputscreenId = 0; //----
+
+let initializeInputScreenDataId = 0;
+let loadRouteMgmtDataId = 0;
+let loadInputScreenDataId = 0;
+let updateStopAndPoiDataId = 0;
+let dataUpdateComponentId = 0;
+let dataAddNewComponentId = 0;
 const initializeHtype = content => ({
   type: _types__WEBPACK_IMPORTED_MODULE_0__["INITIALIZE_HTYPE"],
   payload: {
@@ -4047,15 +4240,65 @@ const initializeInputScreen = content => ({
     id: ++initializeInputscreenId,
     content
   }
+}); //.....
+
+const initializeInputScreenData = content => ({
+  type: _types__WEBPACK_IMPORTED_MODULE_0__["INITIALIZE_INPUTSCREEN_DATA"],
+  payload: {
+    id: ++initializeInputScreenDataId,
+    content
+  }
+});
+const loadRouteMgmtData = content => ({
+  type: _types__WEBPACK_IMPORTED_MODULE_0__["LOAD_ROUTEMGMT_DATA"],
+  payload: {
+    id: ++loadRouteMgmtDataId,
+    content
+  }
+});
+const loadInputScreenData = content => ({
+  type: _types__WEBPACK_IMPORTED_MODULE_0__["LOAD_INPUTSCREEN_DATA"],
+  payload: {
+    id: ++loadInputScreenDataId,
+    content
+  }
+});
+const updateStopAndPoiData = content => ({
+  type: _types__WEBPACK_IMPORTED_MODULE_0__["UPDATE_STOP_AND_POI_DATA"],
+  payload: {
+    id: ++updateStopAndPoiDataId,
+    content
+  }
+});
+const addOrUpdateHeadline = content => ({
+  type: _types__WEBPACK_IMPORTED_MODULE_0__["HEADLINE"],
+  payload: {
+    id: ++headlineId,
+    content
+  }
+});
+const dataUpdateComponent = content => ({
+  type: _types__WEBPACK_IMPORTED_MODULE_0__["DATA_UPDATE_COMPONENT"],
+  payload: {
+    id: ++dataUpdateComponentId,
+    content
+  }
+});
+const dataAddNewComponent = content => ({
+  type: _types__WEBPACK_IMPORTED_MODULE_0__["DATA_ADD_NEW_COMPONENT"],
+  payload: {
+    id: ++dataAddNewComponentId,
+    content
+  }
 });
 
 /***/ }),
 
-/***/ "./src/redux/actions/types.ts":
-/*!************************************!*\
-  !*** ./src/redux/actions/types.ts ***!
-  \************************************/
-/*! exports provided: REMOVE_ROUTE, UPDATE_ROUTE_STATE, UPDATE_SELECTOR_MANAGER_STATE, UPDATE_INPUT_SCREEN_UI, INITIALIZE_INPUT_SCREEN_UI, HEADLINE, INITIALIZE_HTYPE, DELETE_HTYPE, EMPTY_SELECTED_COMPONENT_ID, UPDATE_SIMULATOR_SELECTION, SET_SELECTED_COMPONENT, UPDATE_COMPONENTS_ORDER, CLEAN_NONSAVED_HTYPES, STOP_AND_POI_MANAGER_CONTROLLER, SET_TITLE, LOAD_USER, CLEAN_USER, LOAD_HTYPE_DATA, INITIALIZE_INPUTSCREEN */
+/***/ "./src/lib/redux/actions/types.ts":
+/*!****************************************!*\
+  !*** ./src/lib/redux/actions/types.ts ***!
+  \****************************************/
+/*! exports provided: REMOVE_ROUTE, UPDATE_ROUTE_STATE, UPDATE_SELECTOR_MANAGER_STATE, INITIALIZE_INPUT_SCREEN_UI, HEADLINE, INITIALIZE_HTYPE, DELETE_HTYPE, EMPTY_SELECTED_COMPONENT_ID, UPDATE_SIMULATOR_SELECTION, SET_SELECTED_COMPONENT, UPDATE_COMPONENTS_ORDER, CLEAN_NONSAVED_HTYPES, STOP_AND_POI_MANAGER_CONTROLLER, SET_TITLE, LOAD_USER, CLEAN_USER, LOAD_HTYPE_DATA, INITIALIZE_INPUTSCREEN, INITIALIZE_INPUTSCREEN_DATA, LOAD_ROUTEMGMT_DATA, LOAD_INPUTSCREEN_DATA, UPDATE_STOP_AND_POI_DATA, UPDATE_ROUTEMGMT_STATE, LOAD_STOP_AND_POI_MANAGER_STATE, UPDATE_INPUT_SCREEN_STATE, UPDATE_SIMULATOR_SELECTION_STATE, DATA_UPDATE_COMPONENT, DATA_ADD_NEW_COMPONENT */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4063,7 +4306,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_ROUTE", function() { return REMOVE_ROUTE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE_ROUTE_STATE", function() { return UPDATE_ROUTE_STATE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE_SELECTOR_MANAGER_STATE", function() { return UPDATE_SELECTOR_MANAGER_STATE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE_INPUT_SCREEN_UI", function() { return UPDATE_INPUT_SCREEN_UI; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "INITIALIZE_INPUT_SCREEN_UI", function() { return INITIALIZE_INPUT_SCREEN_UI; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HEADLINE", function() { return HEADLINE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "INITIALIZE_HTYPE", function() { return INITIALIZE_HTYPE; });
@@ -4079,12 +4321,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CLEAN_USER", function() { return CLEAN_USER; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOAD_HTYPE_DATA", function() { return LOAD_HTYPE_DATA; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "INITIALIZE_INPUTSCREEN", function() { return INITIALIZE_INPUTSCREEN; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "INITIALIZE_INPUTSCREEN_DATA", function() { return INITIALIZE_INPUTSCREEN_DATA; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOAD_ROUTEMGMT_DATA", function() { return LOAD_ROUTEMGMT_DATA; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOAD_INPUTSCREEN_DATA", function() { return LOAD_INPUTSCREEN_DATA; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE_STOP_AND_POI_DATA", function() { return UPDATE_STOP_AND_POI_DATA; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE_ROUTEMGMT_STATE", function() { return UPDATE_ROUTEMGMT_STATE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOAD_STOP_AND_POI_MANAGER_STATE", function() { return LOAD_STOP_AND_POI_MANAGER_STATE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE_INPUT_SCREEN_STATE", function() { return UPDATE_INPUT_SCREEN_STATE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE_SIMULATOR_SELECTION_STATE", function() { return UPDATE_SIMULATOR_SELECTION_STATE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DATA_UPDATE_COMPONENT", function() { return DATA_UPDATE_COMPONENT; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DATA_ADD_NEW_COMPONENT", function() { return DATA_ADD_NEW_COMPONENT; });
 const REMOVE_ROUTE = "REMOVE_ROUTE";
 const UPDATE_ROUTE_STATE = "UPDATE_ROUTE_STATE";
 const UPDATE_SELECTOR_MANAGER_STATE = "UPDATE_SELECTOR_MANAGER_STATE";
-const UPDATE_INPUT_SCREEN_UI = "UPDATE_INPUT_SCREEN_UI";
 const INITIALIZE_INPUT_SCREEN_UI = "INITIALIZE_INPUT_SCREEN_UI";
-const HEADLINE = "ADD_HEADLINE";
+const HEADLINE = "HEADLINE";
 const INITIALIZE_HTYPE = "INITIALIZE_HTYPE";
 const DELETE_HTYPE = "DELETE_HTYPE";
 const EMPTY_SELECTED_COMPONENT_ID = "EMPTY_SELECTED_COMPONENT_ID";
@@ -4097,15 +4348,28 @@ const SET_TITLE = "SET_TITLE";
 const LOAD_USER = "LOAD_USER";
 const CLEAN_USER = "CLEAN_USER";
 const LOAD_HTYPE_DATA = "LOAD_HTYPE_DATA";
-const INITIALIZE_INPUTSCREEN = "INITIALIZE_INPUTSCREEN";
+const INITIALIZE_INPUTSCREEN = "INITIALIZE_INPUTSCREEN"; //.---------------------------
+//----Data------
+
+const INITIALIZE_INPUTSCREEN_DATA = "INITIALIZE_INPUTSCREEN_DATA";
+const LOAD_ROUTEMGMT_DATA = "LOAD_ROUTEMGMT_DATA";
+const LOAD_INPUTSCREEN_DATA = "LOAD_INPUTSCREEN_DATA";
+const UPDATE_STOP_AND_POI_DATA = "UPDATE_STOP_AND_POI_DATA"; //-----UI-------
+
+const UPDATE_ROUTEMGMT_STATE = "UPDATE_ROUTEMGMT_STATE";
+const LOAD_STOP_AND_POI_MANAGER_STATE = "LOAD_STOP_AND_POI_MANAGER_STATE";
+const UPDATE_INPUT_SCREEN_STATE = "UPDATE_INPUT_SCREEN_STATE";
+const UPDATE_SIMULATOR_SELECTION_STATE = "UPDATE_SIMULATOR_SELECTION_STATE";
+const DATA_UPDATE_COMPONENT = "DATA_UPDATE_COMPONENT";
+const DATA_ADD_NEW_COMPONENT = "DATA_ADD_NEW_COMPONENT";
 
 /***/ }),
 
-/***/ "./src/redux/actions/uiActions.ts":
-/*!****************************************!*\
-  !*** ./src/redux/actions/uiActions.ts ***!
-  \****************************************/
-/*! exports provided: removeRoute, updateOrder, updateSelectorManagerState, updateInputScreenUi, initializeInputScreenUi, updateSimulatorSelection, stopAndPoiManagerController, setTitle */
+/***/ "./src/lib/redux/actions/uiActions.ts":
+/*!********************************************!*\
+  !*** ./src/lib/redux/actions/uiActions.ts ***!
+  \********************************************/
+/*! exports provided: removeRoute, updateOrder, updateSelectorManagerState, initializeInputScreenUi, stopAndPoiManagerController, setTitle, updateRoutemgmtState, loadStopAndPoiManagerState, updateInputScreenState, updateSimulatorSelectionState */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4113,22 +4377,27 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "removeRoute", function() { return removeRoute; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateOrder", function() { return updateOrder; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateSelectorManagerState", function() { return updateSelectorManagerState; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateInputScreenUi", function() { return updateInputScreenUi; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "initializeInputScreenUi", function() { return initializeInputScreenUi; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateSimulatorSelection", function() { return updateSimulatorSelection; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "stopAndPoiManagerController", function() { return stopAndPoiManagerController; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setTitle", function() { return setTitle; });
-/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./types */ "./src/redux/actions/types.ts");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateRoutemgmtState", function() { return updateRoutemgmtState; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "loadStopAndPoiManagerState", function() { return loadStopAndPoiManagerState; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateInputScreenState", function() { return updateInputScreenState; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateSimulatorSelectionState", function() { return updateSimulatorSelectionState; });
+/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./types */ "./src/lib/redux/actions/types.ts");
  //includes route management actions
 
 let routeId = 0;
 let updateId = 0;
 let updateManagerStateId = 0;
-let updateInputScreenUiId = 0;
+let updateInputScreenStateId = 0;
 let initializeInputScreenUiId = 0;
 let updateSimulatorSelectionId = 0;
 let stopAndPoiManagerControllerId = 0;
 let setTitleId = 0;
+let updateRoutemgmtStateId = 0;
+let loadStopAndPoiManagerStateId = 0;
+let updateSimulatorSelectionStateId = 0;
 const removeRoute = content => ({
   type: _types__WEBPACK_IMPORTED_MODULE_0__["REMOVE_ROUTE"],
   payload: {
@@ -4150,24 +4419,10 @@ const updateSelectorManagerState = content => ({
     content
   }
 });
-const updateInputScreenUi = content => ({
-  type: _types__WEBPACK_IMPORTED_MODULE_0__["UPDATE_INPUT_SCREEN_UI"],
-  payload: {
-    id: ++updateInputScreenUiId,
-    content
-  }
-});
 const initializeInputScreenUi = content => ({
   type: _types__WEBPACK_IMPORTED_MODULE_0__["INITIALIZE_INPUT_SCREEN_UI"],
   payload: {
     id: ++initializeInputScreenUiId,
-    content
-  }
-});
-const updateSimulatorSelection = content => ({
-  type: _types__WEBPACK_IMPORTED_MODULE_0__["UPDATE_SIMULATOR_SELECTION"],
-  payload: {
-    id: ++updateSimulatorSelectionId,
     content
   }
 });
@@ -4184,301 +4439,370 @@ const setTitle = content => ({
     id: ++setTitleId,
     content
   }
+}); ///-.--------------
+
+const updateRoutemgmtState = content => ({
+  type: _types__WEBPACK_IMPORTED_MODULE_0__["UPDATE_ROUTEMGMT_STATE"],
+  payload: {
+    id: ++updateRoutemgmtStateId,
+    content
+  }
+});
+const loadStopAndPoiManagerState = content => ({
+  type: _types__WEBPACK_IMPORTED_MODULE_0__["LOAD_STOP_AND_POI_MANAGER_STATE"],
+  payload: {
+    id: ++loadStopAndPoiManagerStateId,
+    content
+  }
+});
+const updateInputScreenState = content => ({
+  type: _types__WEBPACK_IMPORTED_MODULE_0__["UPDATE_INPUT_SCREEN_STATE"],
+  payload: {
+    id: ++updateInputScreenStateId,
+    content
+  }
+});
+const updateSimulatorSelectionState = content => ({
+  type: _types__WEBPACK_IMPORTED_MODULE_0__["UPDATE_SIMULATOR_SELECTION_STATE"],
+  payload: {
+    id: ++updateSimulatorSelectionStateId,
+    content
+  }
 });
 
 /***/ }),
 
-/***/ "./src/redux/reducers/dataReducer.ts":
-/*!*******************************************!*\
-  !*** ./src/redux/reducers/dataReducer.ts ***!
-  \*******************************************/
+/***/ "./src/lib/redux/reducers/dataReducer.ts":
+/*!***********************************************!*\
+  !*** ./src/lib/redux/reducers/dataReducer.ts ***!
+  \***********************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_corejs2_core_js_object_entries__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/object/entries */ "./node_modules/@babel/runtime-corejs2/core-js/object/entries.js");
-/* harmony import */ var _babel_runtime_corejs2_core_js_object_entries__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_object_entries__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/objectSpread */ "./node_modules/@babel/runtime-corejs2/helpers/esm/objectSpread.js");
-/* harmony import */ var _babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/object/keys */ "./node_modules/@babel/runtime-corejs2/core-js/object/keys.js");
-/* harmony import */ var _babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _actions_types__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../actions/types */ "./src/redux/actions/types.ts");
-/* harmony import */ var nanoid__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! nanoid */ "nanoid");
-/* harmony import */ var nanoid__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(nanoid__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_define_property__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/object/define-property */ "./node_modules/@babel/runtime-corejs2/core-js/object/define-property.js");
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_define_property__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_object_define_property__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_define_properties__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/object/define-properties */ "./node_modules/@babel/runtime-corejs2/core-js/object/define-properties.js");
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_define_properties__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_object_define_properties__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/object/get-own-property-descriptors */ "./node_modules/@babel/runtime-corejs2/core-js/object/get-own-property-descriptors.js");
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/object/get-own-property-descriptor */ "./node_modules/@babel/runtime-corejs2/core-js/object/get-own-property-descriptor.js");
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/object/get-own-property-symbols */ "./node_modules/@babel/runtime-corejs2/core-js/object/get-own-property-symbols.js");
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/defineProperty */ "./node_modules/@babel/runtime-corejs2/helpers/esm/defineProperty.js");
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/object/keys */ "./node_modules/@babel/runtime-corejs2/core-js/object/keys.js");
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _actions_types__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../actions/types */ "./src/lib/redux/actions/types.ts");
+/* harmony import */ var uuid_v4__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! uuid/v4 */ "uuid/v4");
+/* harmony import */ var uuid_v4__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(uuid_v4__WEBPACK_IMPORTED_MODULE_8__);
 
 
 
 
- //HTYPE is the hierarchy type, aka route, stop, etc
+
+
+
+
+function ownKeys(object, enumerableOnly) { var keys = _babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_6___default()(object); if (_babel_runtime_corejs2_core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_4___default.a) { var symbols = _babel_runtime_corejs2_core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_4___default()(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return _babel_runtime_corejs2_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_3___default()(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_5__["default"])(target, key, source[key]); }); } else if (_babel_runtime_corejs2_core_js_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_2___default.a) { _babel_runtime_corejs2_core_js_object_define_properties__WEBPACK_IMPORTED_MODULE_1___default()(target, _babel_runtime_corejs2_core_js_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_2___default()(source)); } else { ownKeys(Object(source)).forEach(function (key) { _babel_runtime_corejs2_core_js_object_define_property__WEBPACK_IMPORTED_MODULE_0___default()(target, key, _babel_runtime_corejs2_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_3___default()(source, key)); }); } } return target; }
+
+
+
+//HTYPE is the hierarchy type, aka route, stop, etc
 //DATA REDUCER + UI REDUCER + ROUTE MANAGEMENT SCREEN REDUCER
-
-const initialState = {
-  user: {
-    name: "",
-    routes: [],
-    stops: [],
-    pois: [],
-    email: ""
-  },
-  //the id of the hcomponent being worked on
-  selectedHtypeId: "",
-  selectedComponentId: "empty",
-  routes: {},
-  stops: {},
-  pois: {},
-  components: {}
-}; //make a reducer that cleans up the routes stops etc when you go to the route management screen.
-
+//make a reducer that cleans up the routes stops etc when you go to the route management screen.
 /* harmony default export */ __webpack_exports__["default"] = (function (state = initialState, action) {
   switch (action.type) {
-    case _actions_types__WEBPACK_IMPORTED_MODULE_3__["LOAD_HTYPE_DATA"]:
+    case _actions_types__WEBPACK_IMPORTED_MODULE_7__["LOAD_ROUTEMGMT_DATA"]:
       {
+        const {
+          htypes
+        } = action.payload.content;
+        const {
+          user
+        } = action.payload.content;
         const content = {};
-        console.log(action.payload.content);
 
-        for (let item of _babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_2___default()(action.payload.content.data)) {
-          //to not create a component object in the user state
+        for (let item of _babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_6___default()(htypes)) {
           let key = item.substring(3).toLowerCase();
-          console.log(key);
-          content[key] = action.payload.content.data[item].reduce((result, attri, index) => {
+          content[key] = htypes[item].reduce((result, attri) => {
             if (attri) {
               result[attri.id] = attri;
-            } //a, b, c
-
+            }
 
             return result;
           }, {});
         }
 
-        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state, {
-          /*   user:{
-                 ...state.user,
-                 routes:action.payload.content.data.getRoutes[0] === null ? []:action.payload.content.data.getRoutes ,
-                 stops:action.payload.content.data.getStops[0] === null ? []:action.payload.content.data.getStops ,
-                 pois:action.payload.content.data.getPois[0] === null ? []:action.payload.content.data.getPois 
-             },*/
-          routes: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, content["routes"]),
-          stops: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, content["stops"]),
-          pois: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, content["pois"])
+        return _objectSpread({}, state, {
+          routeMgmt: {
+            user: _objectSpread({}, user, {
+              routes: htypes.getRoutes[0] === null ? [] : htypes.getRoutes,
+              stops: htypes.getStops[0] === null ? [] : htypes.getStops,
+              pois: htypes.getPois[0] === null ? [] : htypes.getPois
+            }),
+            routes: _objectSpread({}, content["routes"]),
+            stops: _objectSpread({}, content["stops"]),
+            pois: _objectSpread({}, content["pois"])
+          }
         });
       }
 
-    case _actions_types__WEBPACK_IMPORTED_MODULE_3__["LOAD_USER"]:
+    case _actions_types__WEBPACK_IMPORTED_MODULE_7__["INITIALIZE_INPUTSCREEN_DATA"]:
       {
         const {
-          name,
-          email,
-          routes,
-          stops,
-          pois
+          htype
         } = action.payload.content;
-        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state, {
-          user: {
-            name: name,
-            routes: routes ? routes : [],
-            stops: stops ? stops : [],
-            pois: pois ? pois : [],
-            email: email
-          }
-        });
-      }
-
-    case _actions_types__WEBPACK_IMPORTED_MODULE_3__["CLEAN_USER"]:
-      {
-        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state, {
-          user: {
-            name: '',
-            routes: [],
-            stops: [],
-            pois: [],
-            email: ''
-          },
-          //the id of the hcomponent being worked on
-          selectedHtypeId: '',
-          selectedComponentId: "empty",
-          routes: {},
-          stops: {},
-          pois: {}
-        });
-      }
-
-    case _actions_types__WEBPACK_IMPORTED_MODULE_3__["INITIALIZE_HTYPE"]:
-      {
-        //     const selectedDispatch = action.payload.content.dispatch;
-        const htype = action.payload.content.htype;
-        const htypeid = htype.substring(0, 2) + "_" + nanoid__WEBPACK_IMPORTED_MODULE_4___default()(8);
-        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state, {
-          user: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state.user, {
-            [htype]: [...state.user[htype], htypeid]
-          }),
-          selectedHtypeId: htypeid,
-          [htype]: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state[htype], {
-            //taking the first two letters of the hierarchy type and combining it with a unique id of length 8
-            [htypeid]: {
-              //take the name of the account owner
-              saved: false,
-              owner: state.user.name,
-              //name to be filled out when the route is finished
-              name: "",
-              order: [],
-              components: {}
-            }
-          })
-        });
-      }
-
-    case _actions_types__WEBPACK_IMPORTED_MODULE_3__["EMPTY_SELECTED_COMPONENT_ID"]:
-      {
-        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state, {
-          selectedComponentId: "empty"
-        });
-      }
-
-    case _actions_types__WEBPACK_IMPORTED_MODULE_3__["DELETE_HTYPE"]:
-      {
-        const htype = action.payload.content.htype;
-        const htypeid = action.payload.content.htypeid;
-        delete state[htype][htypeid];
-        const index = state.user[htype].indexOf(htypeid);
-        delete state.user[htype][index];
-        return state;
-      }
-
-    /*   case FINISH_HTYPE: {
-           const selectedDispatch = action.payload.content.dispatch;
-           const id = action.payload.content.id
-           const htype = action.payload.content.dispatch;
-           return {
-               ...state,
-                       [htype.toLowerCase()]:{
-                       ...state.data[htype.toLowerCase()],
-                       //taking the first two letters of the hierarchy type and combining it with a unique id of length 8
-                       [htype.toLowerCase().substring(0, 2) + "_" + nanoid(8)]:{
-                           //take the name of the account owner
-                           owner:state.data.user.name,
-                           //name to be filled out when the route is finished
-                           name:""
-                           //location of stops?
-                           //pois that belong?
-                           
-                   }
-               }
-           };
-       },
-    */
-
-    case _actions_types__WEBPACK_IMPORTED_MODULE_3__["CLEAN_NONSAVED_HTYPES"]:
-      {
-        const htypes = ["ROUTES", "STOPS", "POIS"]; // const htype= action.payload.content.headline
-
-        for (var j in htypes) {
-          for (let [key] of _babel_runtime_corejs2_core_js_object_entries__WEBPACK_IMPORTED_MODULE_0___default()(state[htypes[j]])) {
-            if (state[htypes[j]][key].saved != true) {
-              delete state[htypes[j]][key];
-            }
-          }
-        }
-
-        return state;
-      }
-
-    case _actions_types__WEBPACK_IMPORTED_MODULE_3__["HEADLINE"]:
-      {
-        const headline = action.payload.content.headline;
-        const htype = action.payload.content.type;
-        const htypeid = action.payload.content.selectedHtypeId;
-        const dispatch = action.payload.content.dispatch;
-        console.log(headline);
-
-        switch (dispatch) {
-          case "ADD_HEADLINE":
-            {
-              //create the id because it has not been changed before
-              const headlineId = "HL_" + nanoid__WEBPACK_IMPORTED_MODULE_4___default()(8); //rebuilding the state object to add new data
-
-              console.log(state);
-              return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state, {
-                selectedComponentId: headlineId,
-                [htype]: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state[htype], {
-                  [htypeid]: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state[htype][htypeid], {
-                    order: [...state[htype][htypeid].order, headlineId],
-                    components: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state[htype][htypeid].components, {
-                      [headlineId]: {
-                        id: headlineId,
-                        type: "HEADLINE",
-                        headline: headline
-                      }
-                    })
-                  })
-                })
-              });
-            }
-          //case where you want to change the headline but it already exists
-
-          case "UPDATE_HEADLINE":
-            {
-              const headlineId = action.payload.content.selectedComponentId;
-              return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state, {
-                [htype]: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state[htype], {
-                  [htypeid]: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state[htype][htypeid], {
-                    components: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state[htype][htypeid].components, {
-                      [headlineId]: {
-                        id: headlineId,
-                        type: "HEADLINE",
-                        headline: headline
-                      }
-                    })
-                  })
-                })
-              });
-            }
-        }
-      }
-
-    case _actions_types__WEBPACK_IMPORTED_MODULE_3__["UPDATE_COMPONENTS_ORDER"]:
-      {
-        const newOrder = action.payload.content.newOrder;
-        const htype = action.payload.content.htype;
-        const htypeId = action.payload.content.htypeId;
-        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state, {
-          [htype]: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state[htype], {
-            [htypeId]: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state[htype][htypeId], {
-              order: newOrder
+        const {
+          user
+        } = action.payload.content;
+        const htypeid = htype.substring(0, 2) + "_" + uuid_v4__WEBPACK_IMPORTED_MODULE_8___default()();
+        return _objectSpread({}, state, {
+          inputScreen: _objectSpread({}, state.inputScreen, {
+            user: _objectSpread({}, state.inputScreen.user, {
+              [htype]: [...state.inputScreen.user[htype], htypeid]
+            }),
+            selectedHtypeId: htypeid,
+            selectedHtype: htype + "s",
+            [htype]: _objectSpread({}, state[htype], {
+              //taking the first two letters of the hierarchy type and combining it with a unique id of length 8
+              [htypeid]: {
+                //take the name of the account owner
+                //saved:false,
+                id: htypeid,
+                owner: user.name,
+                //name to be filled out when the route is finished
+                name: "",
+                components: []
+              }
             })
           })
         });
       }
       ;
 
-    case _actions_types__WEBPACK_IMPORTED_MODULE_3__["SET_SELECTED_COMPONENT"]:
+    case _actions_types__WEBPACK_IMPORTED_MODULE_7__["LOAD_INPUTSCREEN_DATA"]:
       {
-        const selectedId = action.payload.content.selectedComponentId;
-        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state, {
-          selectedComponentId: selectedId
-        });
-      }
-
-    case _actions_types__WEBPACK_IMPORTED_MODULE_3__["INITIALIZE_INPUTSCREEN"]:
-      {
-        console.log(action.payload.content);
         const {
-          id
-        } = action.payload.content.htype;
-        const {
-          components
+          htype
         } = action.payload.content;
-        let content = {};
-        content = components.reduce((result, attri, index) => {
-          if (attri != "") {
+        const {
+          htypeData
+        } = action.payload.content;
+        const {
+          user
+        } = action.payload.content;
+        const {
+          componentsArray
+        } = action.payload.content;
+        console.log(componentsArray);
+        const htypeid = htypeData[htype].id;
+        let components = componentsArray.reduce((result, attri) => {
+          if (attri) {
             result[attri.id] = attri;
-          } //a, b, c
-
+          }
 
           return result;
         }, {});
-        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state, {
-          selectedHtypeId: id,
-          components: content
+        let componentIdsArray = componentsArray.reduce((result, attri) => {
+          if (attri) {
+            result.push(attri.id);
+          }
+
+          return result;
+        }, []);
+        return _objectSpread({}, state, {
+          inputScreen: _objectSpread({}, state.inputScreen, {
+            user: _objectSpread({}, user),
+            selectedHtypeId: htypeid,
+            selectedHtype: htype + "s",
+            [htype + "s"]: _objectSpread({}, state[htype + "s"], {
+              //taking the first two letters of the hierarchy type and combining it with a unique id of length 8
+              [htypeid]: {
+                //take the name of the account owner
+                //saved:false,
+                id: htypeid,
+                owner: user.name,
+                //name to be filled out when the route is finished
+                name: "",
+                components: componentIdsArray
+              }
+            }),
+            components: _objectSpread({}, components)
+          })
+        });
+      }
+
+    case _actions_types__WEBPACK_IMPORTED_MODULE_7__["UPDATE_STOP_AND_POI_DATA"]:
+      {
+        const {
+          htype
+        } = action.payload.content;
+        const {
+          dispatch
+        } = action.payload.dispatch;
+        const {
+          htypeParent
+        } = action.payload.content;
+        const {
+          htypeid
+        } = action.payload.content;
+        const {
+          routeid
+        } = action.payload.content;
+        const index = state.routeMgmt.user[htype].indexOf(htypeid);
+        let routes;
+        let stops; //const newOrder = Array.from(state.inputScreen.user[htypeParent]);
+
+        if (htype == "poi") {
+          let {
+            stopid
+          } = action.payload.content.stopid;
+          let route = state.routeMgmt.routes[routeid].pois;
+          let stop = state.routeMgmt.routes[stopid].pois;
+
+          if (dispatch == "ADD") {
+            route = route.push(htypeid);
+            stop = stop.push(htypeid);
+          } else if (dispatch == "REMOVE") {
+            const stopIndex = state.routeMgmt.stops[stopid].pois.indexOf(htypeid);
+            const routeIndex = state.routeMgmt.routes[routeid].pois.indexOf(htypeid);
+            route = route.splice(routeIndex, 1);
+            stop = stop.splice(stopIndex, 1);
+          }
+
+          return _objectSpread({}, state, {
+            routeMgmt: _objectSpread({}, state.routeMgmt, {
+              routes: _objectSpread({}, state.routeMgmt.routes, {
+                [routeid]: _objectSpread({}, state.routeMgmt.routes[routeid], {
+                  pois: route
+                })
+              }),
+              stops: _objectSpread({}, state.routeMgmt.stops, {
+                [stopid]: _objectSpread({}, state.routeMgmt.stops[stopid], {
+                  pois: stop
+                })
+              })
+            })
+          });
+        } else {
+          let route = state.routeMgmt.routes[routeid].stops;
+
+          if (dispatch == "ADD") {
+            route = route.push(htypeid);
+          } else if (dispatch == "REMOVE") {
+            const routeIndex = state.routeMgmt.routes[routeid].pois.indexOf(htypeid);
+            route = route.splice(routeIndex, 1);
+          }
+
+          return _objectSpread({}, state, {
+            routeMgmt: _objectSpread({}, state.routeMgmt, {
+              routes: _objectSpread({}, state.routeMgmt, {
+                [routeid]: _objectSpread({}, state.routeMgmt[routeid], {
+                  stops: route
+                })
+              })
+            })
+          });
+        }
+
+        ;
+      }
+
+    case _actions_types__WEBPACK_IMPORTED_MODULE_7__["DATA_ADD_NEW_COMPONENT"]:
+      {
+        const {
+          htype
+        } = action.payload.content;
+        const {
+          selectedHtypeId
+        } = action.payload.content;
+        const {
+          type
+        } = action.payload.content;
+        const {
+          user
+        } = action.payload.content;
+        const idSuffix = type.substring(0, 2).toLowerCase() + "_";
+        const selectedComponentId = idSuffix + uuid_v4__WEBPACK_IMPORTED_MODULE_8___default()(); //console.log(action.payload.content)
+        //console.log(state.inputScreen[htype])
+
+        const newComponentsArray = [...state.inputScreen[htype][selectedHtypeId].components, selectedComponentId];
+        return _objectSpread({}, state, {
+          inputScreen: _objectSpread({}, state.inputScreen, {
+            selectedComponentId: selectedComponentId,
+            [htype]: _objectSpread({}, state.inputScreen[htype], {
+              [selectedHtypeId]: _objectSpread({}, state.inputScreen[htype][selectedHtypeId], {
+                components: newComponentsArray
+              })
+            }),
+            components: _objectSpread({}, state.inputScreen.components, {
+              [selectedComponentId]: {
+                id: selectedComponentId,
+                onwnerId: user.id,
+                ownerName: user.name,
+                parentId: selectedHtypeId,
+                type: type,
+                content: "{}"
+              }
+            })
+          })
+        });
+      }
+
+    case _actions_types__WEBPACK_IMPORTED_MODULE_7__["DATA_UPDATE_COMPONENT"]:
+      {
+        const {
+          content
+        } = action.payload.content;
+        const {
+          selectedComponentId
+        } = action.payload.content;
+        return _objectSpread({}, state, {
+          inputScreen: _objectSpread({}, state.inputScreen, {
+            components: _objectSpread({}, state.inputScreen.components, {
+              [selectedComponentId]: _objectSpread({}, state.inputScreen.components[selectedComponentId], {
+                content: content
+              })
+            })
+          })
+        });
+      }
+
+    case _actions_types__WEBPACK_IMPORTED_MODULE_7__["UPDATE_COMPONENTS_ORDER"]:
+      {
+        const newOrder = action.payload.content.newOrder;
+        const htype = action.payload.content.htype;
+        const selectedHtypeId = action.payload.content.selectedHtypeId;
+        return _objectSpread({}, state, {
+          inputScreen: _objectSpread({}, state.inputScreen, {
+            [htype]: _objectSpread({}, state.inputScreen[htype], {
+              [selectedHtypeId]: _objectSpread({}, state.inputScreen[htype][selectedHtypeId], {
+                components: newOrder
+              })
+            })
+          })
+        });
+      }
+      ;
+
+    case _actions_types__WEBPACK_IMPORTED_MODULE_7__["EMPTY_SELECTED_COMPONENT_ID"]:
+      {
+        return _objectSpread({}, state, {
+          selectedComponentId: "empty"
+        });
+      }
+
+    case _actions_types__WEBPACK_IMPORTED_MODULE_7__["SET_SELECTED_COMPONENT"]:
+      {
+        const selectedComponentId = action.payload.content.selectedComponentId;
+        return _objectSpread({}, state, {
+          inputScreen: _objectSpread({}, state.inputScreen, {
+            selectedComponentId: selectedComponentId
+          })
         });
       }
 
@@ -4486,6 +4810,241 @@ const initialState = {
       return state;
   }
 });
+const initialState = {
+  routeMgmt: {
+    user: {
+      name: "",
+      routes: [],
+      stops: [],
+      pois: [],
+      email: ""
+    },
+    routes: {},
+    stops: {},
+    pois: {}
+  },
+  inputScreen: {
+    user: {},
+    selectedHtypeId: "",
+    selectedComponentId: "empty",
+    selectedHtype: "",
+    routes: {},
+    pois: {},
+    stops: {},
+    components: {}
+  }
+};
+/*
+
+
+
+
+        case LOAD_HTYPE_DATA: {
+            const content = {}
+            for (let item of Object.keys(action.payload.content.data)) {
+                //to not create a component object in the user state
+                let key = item.substring(3).toLowerCase()
+                console.log(key)
+                content[key] = action.payload.content.data[item].reduce((result, attri, index) => {
+                    if (attri) {
+                        result[attri.id] = attri;
+                    } //a, b, c
+                    return result;
+                }, {})
+            }
+
+            return {
+                ...state,
+                user:{
+                    ...state.user,
+                    routes:action.payload.content.data.getRoutes[0] === null ? []:action.payload.content.data.getRoutes ,
+                    stops:action.payload.content.data.getStops[0] === null ? []:action.payload.content.data.getStops ,
+                    pois:action.payload.content.data.getPois[0] === null ? []:action.payload.content.data.getPois 
+                }
+                routes: {
+                    ...content["routes"]
+                },
+                stops: {
+                    ...content["stops"]
+                },
+                pois: {
+                    ...content["pois"]
+                }
+            }
+        }
+
+        case LOAD_USER: {
+            const { name, email, routes, stops, pois } = action.payload.content;
+            return {
+                ...state,
+                user: {
+                    name: name,
+                    routes: routes ? routes : [],
+                    stops: stops ? stops : [],
+                    pois: pois ? pois : [],
+                    email: email,
+                }
+            }
+        }
+        case CLEAN_USER: {
+            return {
+                ...state,
+                user: {
+                    name: '',
+                    routes: [],
+                    stops: [],
+                    pois: [],
+                    email: '',
+                },
+                //the id of the hcomponent being worked on
+                selectedHtypeId: '',
+                selectedComponentId: "empty",
+                routes: {},
+                stops: {},
+                pois: {},
+            }
+        }
+        case INITIALIZE_HTYPE: {
+            //const selectedDispatch = action.payload.content.dispatch;
+            const htype = action.payload.content.htype;
+            const htypeid = htype.substring(0, 2) + "_" + uuid
+            return {
+                ...state,
+                user: {
+                    ...state.data.inputScreen.user,
+                    [htype]: [...state.data.inputScreen.user[htype], htypeid]
+                },
+                selectedHtypeId: htypeid,
+                [htype]: {
+                    ...state[htype],
+                    //taking the first two letters of the hierarchy type and combining it with a unique id of length 8
+                    [htypeid]: {
+                        //take the name of the account owner
+                        saved: false,
+                        owner: state.data.inputScreen.user.name,
+                        //name to be filled out when the route is finished
+                        name: "",
+                        order: [],
+                        components: {},
+
+                    }
+                }
+            };
+        }
+        case EMPTY_SELECTED_COMPONENT_ID: {
+            return {
+                ...state,
+                selectedComponentId: "empty",
+            }
+        }
+        case DELETE_HTYPE: {
+            const htype = action.payload.content.htype;
+            const htypeid = action.payload.content.htypeid;
+            delete state[htype][htypeid]
+            const index = state.data.inputScreen.user[htype].indexOf(htypeid);
+            delete state.data.inputScreen.user[htype][index]
+            return state
+        }
+        case HEADLINE: {
+            const headline = action.payload.content.headline
+            const htype = action.payload.content.type
+            const htypeid = action.payload.content.selectedHtypeId
+            const dispatch = action.payload.content.dispatch
+            console.log(headline)
+            switch (dispatch) {
+                case ("ADD_HEADLINE"): {
+                    //create the id because it has not been changed before
+                    const headlineId = "HL_" + uuid
+                    //rebuilding the state object to add new data
+                    console.log(state)
+                    return {
+                        ...state,
+                        selectedComponentId: headlineId,
+                        [htype]: {
+                            ...state[htype],
+                            [htypeid]: {
+                                ...state[htype][htypeid],
+                                order: [...state[htype][htypeid].order, headlineId],
+                                components: {
+                                    ...state[htype][htypeid].components,
+                                    [headlineId]: {
+                                        id: headlineId,
+                                        type: "HEADLINE",
+                                        headline: headline
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                //case where you want to change the headline but it already exists
+                case ("UPDATE_HEADLINE"): {
+                    const headlineId = action.payload.content.selectedComponentId
+                    return {
+                        ...state,
+                        [htype]: {
+                            ...state[htype],
+                            [htypeid]: {
+                                ...state[htype][htypeid],
+                                components: {
+                                    ...state[htype][htypeid].components,
+                                    [headlineId]: {
+                                        id: headlineId,
+                                        type: "HEADLINE",
+                                        headline: headline
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        case (UPDATE_COMPONENTS_ORDER): {
+            const newOrder = action.payload.content.newOrder
+            const htype = action.payload.content.htype
+            const htypeId = action.payload.content.htypeId
+            return {
+                ...state,
+                [htype]: {
+                    ...state[htype],
+                    [htypeId]: {
+                        ...state[htype][htypeId],
+                        order: newOrder,
+                    }
+                }
+            }
+        };
+
+    }
+}
+
+
+
+
+    /*    case (INITIALIZE_INPUTSCREEN): {
+            console.log(action.payload.content)
+            const { id } = action.payload.content.htype
+            const { components } = action.payload.content
+            let content = {}
+            content = components.reduce((result, attri, index) => {
+                if (attri != "") {
+                    result[attri.id] = attri;
+                } //a, b, c
+                return result;
+            }, {})
+            return {
+                ...state,
+                selectedHtypeId: id,
+                components: content
+            }
+        }
+        default:
+            return state;
+    }
+
+
+
 /*
         case HEADLINE: {
             const headline = action.payload.content.headline
@@ -4545,14 +5104,26 @@ const initialState = {
 
 
 
-        */
+        case CLEAN_NONSAVED_HTYPES:{
+                    const htypes = ["ROUTES","STOPS","POIS"]
+                   // const htype= action.payload.content.headline
+                    for(var j in htypes){
+                    
+                            for(let [key] of Object.entries(state[htypes[j]])){
+                            if(state[htypes[j]][key].saved !=true){
+                                delete state[htypes[j]][key];
+                            }
+                            }
+                        }
+                    return state;
+                } */
 
 /***/ }),
 
-/***/ "./src/redux/reducers/index.ts":
-/*!*************************************!*\
-  !*** ./src/redux/reducers/index.ts ***!
-  \*************************************/
+/***/ "./src/lib/redux/reducers/index.ts":
+/*!*****************************************!*\
+  !*** ./src/lib/redux/reducers/index.ts ***!
+  \*****************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -4560,321 +5131,178 @@ const initialState = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "redux");
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(redux__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _uiReducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./uiReducer */ "./src/redux/reducers/uiReducer.ts");
-/* harmony import */ var _dataReducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./dataReducer */ "./src/redux/reducers/dataReducer.ts");
+/* harmony import */ var _uiReducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./uiReducer */ "./src/lib/redux/reducers/uiReducer.ts");
+/* harmony import */ var _dataReducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./dataReducer */ "./src/lib/redux/reducers/dataReducer.ts");
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
-  ui: _uiReducer__WEBPACK_IMPORTED_MODULE_1__["default"],
-  data: _dataReducer__WEBPACK_IMPORTED_MODULE_2__["default"]
+  data: _dataReducer__WEBPACK_IMPORTED_MODULE_2__["default"],
+  ui: _uiReducer__WEBPACK_IMPORTED_MODULE_1__["default"]
 }));
 
 /***/ }),
 
-/***/ "./src/redux/reducers/uiReducer.ts":
-/*!*****************************************!*\
-  !*** ./src/redux/reducers/uiReducer.ts ***!
-  \*****************************************/
+/***/ "./src/lib/redux/reducers/uiReducer.ts":
+/*!*********************************************!*\
+  !*** ./src/lib/redux/reducers/uiReducer.ts ***!
+  \*********************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/objectSpread */ "./node_modules/@babel/runtime-corejs2/helpers/esm/objectSpread.js");
-/* harmony import */ var _actions_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/types */ "./src/redux/actions/types.ts");
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_define_property__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/object/define-property */ "./node_modules/@babel/runtime-corejs2/core-js/object/define-property.js");
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_define_property__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_object_define_property__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_define_properties__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/object/define-properties */ "./node_modules/@babel/runtime-corejs2/core-js/object/define-properties.js");
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_define_properties__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_object_define_properties__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/object/get-own-property-descriptors */ "./node_modules/@babel/runtime-corejs2/core-js/object/get-own-property-descriptors.js");
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/object/get-own-property-descriptor */ "./node_modules/@babel/runtime-corejs2/core-js/object/get-own-property-descriptor.js");
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/object/get-own-property-symbols */ "./node_modules/@babel/runtime-corejs2/core-js/object/get-own-property-symbols.js");
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/object/keys */ "./node_modules/@babel/runtime-corejs2/core-js/object/keys.js");
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/defineProperty */ "./node_modules/@babel/runtime-corejs2/helpers/esm/defineProperty.js");
+/* harmony import */ var _actions_types__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../actions/types */ "./src/lib/redux/actions/types.ts");
 
 
-const initialState = {
-  routes: {
-    "h12345": {
-      id: "h12345",
-      headline: "Christian's Norway Route",
-      subheadline: "Fjords you just have to explore",
-      stops: ["Bergen", "Stavanger", "Molde", "Ålesund"],
-      attractions: ["Hiking", "Swimming", "Nature"]
-    },
-    "h54321": {
-      id: "h54321",
-      headline: "Paul's South Tyrol Route",
-      subheadline: "Explore the Dolomites",
-      stops: ["Bolzano", "Trento"],
-      attractions: ["Hiking", "Swimming", "Nature", "Food"]
-    },
-    "h12354": {
-      id: "h12354",
-      headline: "Simon's Allgäu Route",
-      subheadline: "Experience Neuschweinstein and so much more!",
-      stops: ["Mammendorf", "Füssen"],
-      attractions: ["Hiking", "Swimming", "Nature", "Sking"]
-    }
-  },
-  stops: {
-    "s213141": {
-      id: "s213141",
-      headline: "Bergen",
-      subheadline: "Byen ombringet av fjell",
-      pois: ["restaurant", "accommodation", "activities"],
-      location: {
-        lat: 1.2222,
-        lng: 1445666
-      }
-    },
-    "s54321": {
-      id: "s54321",
-      headline: "Stavanger",
-      subheadline: "Oljehovedstaden",
-      pois: ["restaurant", "accommodation", "activities"],
-      location: {
-        lat: 1.5555,
-        lng: 1.214134
-      }
-    }
-  },
-  pois: {
-    "p1314134": {
-      id: "p1314134",
-      headline: "Bergen Fjordrestaurant",
-      subheadline: "Fantastisk fisk og sjømat!",
-      location: {
-        lat: 1.2222,
-        lng: 1445666
-      },
-      address: "Bryggen 15a",
-      website: "www.bergen-fjordrestaurant.no"
-    }
-  },
-  columns: {
-    "column-1": {
-      id: "column-1",
-      title: "Routes",
-      ids: ["h12345", "h54321", "h12354"]
-    },
-    "column-2": {
-      id: "column-2",
-      title: "Stops",
-      ids: ["s213141", "s54321"]
-    },
-    "column-3": {
-      id: "column-3",
-      title: "Pois",
-      ids: ["p1314134"]
-    }
-  },
-  columnOrder: ["column-1", "column-2", "column-3"],
-  title: "",
-  inputMenu: {
-    htype: "routes",
-    //which component is shown in the menu
-    show: "MENU",
-    routes: [{
-      name: "Headline",
-      id: "headlineInput",
-      dispatch: "HEADLINE_INPUT"
-    }, {
-      name: "Subheadline",
-      id: "subheadlineInput",
-      dispatch: "SUBHEADLINE_INPUT"
-    }, {
-      name: "Image Gallery",
-      id: "imageGalleryInput",
-      dispatch: "IMAGE_GALLERY_INPUT"
-    }],
-    stops: [{
-      name: "Headline",
-      id: "headlineInput",
-      dispatch: "HEADLINE_INPUT"
-    }, {
-      name: "Subheadline",
-      id: "subheadlineInput",
-      dispatch: "SUBHEADLINE_INPUT"
-    }, {
-      name: "Image Gallery",
-      id: "imageGalleryInput",
-      dispatch: "IMAGE_GALLERY_INPUT"
-    }],
-    pois: [{
-      name: "Headline",
-      id: "headlineInput",
-      dispatch: "HEADLINE_INPUT"
-    }, {
-      name: "Subheadline",
-      id: "subheadlineInput",
-      dispatch: "SUBHEADLINE_INPUT"
-    }, {
-      name: "Image Gallery",
-      id: "imageGalleryInput",
-      dispatch: "IMAGE_GALLERY_INPUT"
-    }]
-  },
-  simulator: {
-    show: "routes",
-    selected: "empty"
-  },
-  selector: {
-    lastManagerUiCode: "",
-    selectedROUTES: "",
-    selectedSTOPS: "",
-    selectedPOIS: "",
-    managerUiCode: "RO",
-    htype: ""
-  }
-};
+
+
+
+
+
+
+function ownKeys(object, enumerableOnly) { var keys = _babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_5___default()(object); if (_babel_runtime_corejs2_core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_4___default.a) { var symbols = _babel_runtime_corejs2_core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_4___default()(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return _babel_runtime_corejs2_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_3___default()(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_6__["default"])(target, key, source[key]); }); } else if (_babel_runtime_corejs2_core_js_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_2___default.a) { _babel_runtime_corejs2_core_js_object_define_properties__WEBPACK_IMPORTED_MODULE_1___default()(target, _babel_runtime_corejs2_core_js_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_2___default()(source)); } else { ownKeys(Object(source)).forEach(function (key) { _babel_runtime_corejs2_core_js_object_define_property__WEBPACK_IMPORTED_MODULE_0___default()(target, key, _babel_runtime_corejs2_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_3___default()(source, key)); }); } } return target; }
+
+
 /*simulator states
 */
 
 /* harmony default export */ __webpack_exports__["default"] = (function (state = initialState, action) {
   switch (action.type) {
-    case _actions_types__WEBPACK_IMPORTED_MODULE_1__["UPDATE_SELECTOR_MANAGER_STATE"]:
+    case _actions_types__WEBPACK_IMPORTED_MODULE_7__["UPDATE_ROUTEMGMT_STATE"]:
       {
         const selectedId = action.payload.content.selectedId;
         const htype = action.payload.content.htype;
         let managerUiCode = "RO";
-        let selectedROUTES = "";
-        let selectedSTOPS = "";
-        let selectedPOIS = "";
+        let selectedroutes = "";
+        let selectedstops = "";
+        let selectedpois = "";
 
-        if (htype == "routes" && state.selector.selectedROUTES != selectedId) {
+        if (htype == "routes" && state.routeMgmt.selector.selectedroutes != selectedId) {
           managerUiCode = "ROST";
-          selectedROUTES = selectedId;
-          selectedSTOPS = "";
-          selectedPOIS = "";
-        } else if (htype == "routes" && state.selector.selectedROUTES == selectedId) {
+          selectedroutes = selectedId;
+          selectedstops = "";
+          selectedpois = "";
+        } else if (htype == "routes" && state.routeMgmt.selector.selectedroutes == selectedId) {
           managerUiCode = "RO";
-          selectedROUTES = "";
-          selectedSTOPS = "";
-          selectedPOIS = "";
-        } else if (htype == "stops" && state.selector.selectedSTOPS != selectedId) {
+          selectedroutes = "";
+          selectedstops = "";
+          selectedpois = "";
+        } else if (htype == "stops" && state.routeMgmt.selector.selectedstops != selectedId) {
           managerUiCode = "ROSTPO";
-          selectedROUTES = state.selector.selectedROUTES;
-          selectedSTOPS = selectedId;
-          selectedPOIS = "";
-        } else if (htype == "stops" && state.selector.selectedSTOPS == selectedId) {
+          selectedroutes = state.routeMgmt.selector.selectedroutes;
+          selectedstops = selectedId;
+          selectedpois = "";
+        } else if (htype == "stops" && state.routeMgmt.selector.selectedstops == selectedId) {
           managerUiCode = "ROST";
-          selectedROUTES = state.selector.selectedROUTES;
-          selectedSTOPS = "";
-          selectedPOIS = "";
-        } else if (htype == "pois" && state.selector.selectedPOIS != selectedId) {
+          selectedroutes = state.routeMgmt.selector.selectedroutes;
+          selectedstops = "";
+          selectedpois = "";
+        } else if (htype == "pois" && state.routeMgmt.selector.selectedpois != selectedId) {
           managerUiCode = "ROSTPO";
-          selectedROUTES = state.selector.selectedROUTES;
-          selectedSTOPS = state.selector.selectedSTOPS;
-          selectedPOIS = selectedId;
-        } else if (htype == "pois" && state.selector.selectedPOIS == selectedId) {
+          selectedroutes = state.routeMgmt.selector.selectedroutes;
+          selectedstops = state.routeMgmt.selector.selectedstops;
+          selectedpois = selectedId;
+        } else if (htype == "pois" && state.routeMgmt.selector.selectedpois == selectedId) {
           managerUiCode = "ROSTPO";
-          selectedROUTES = state.selector.selectedROUTES;
-          selectedSTOPS = state.selector.selectedSTOPS;
-          selectedPOIS = "";
+          selectedroutes = state.routeMgmt.selector.selectedroutes;
+          selectedstops = state.routeMgmt.selector.selectedstops;
+          selectedpois = "";
         }
 
-        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
-          selector: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state.selector, {
-            selectedROUTES: selectedROUTES,
-            selectedSTOPS: selectedSTOPS,
-            selectedPOIS: selectedPOIS,
-            managerUiCode: managerUiCode
+        return _objectSpread({}, state, {
+          routeMgmt: _objectSpread({}, state.routeMgmt, {
+            selector: _objectSpread({}, state.routeMgmt.selector, {
+              selectedroutes: selectedroutes,
+              selectedstops: selectedstops,
+              selectedpois: selectedpois,
+              managerUiCode: managerUiCode
+            })
           })
         });
       }
 
-    case _actions_types__WEBPACK_IMPORTED_MODULE_1__["STOP_AND_POI_MANAGER_CONTROLLER"]:
+    case _actions_types__WEBPACK_IMPORTED_MODULE_7__["LOAD_STOP_AND_POI_MANAGER_STATE"]:
       {
-        if (state.selector.managerUiCode != "MA") {
+        if (state.routeMgmt.selector.managerUiCode != "MA") {
           const htype = action.payload.content.htype;
-          return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
-            selector: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state.selector, {
-              lastManagerUiCode: state.selector.managerUiCode,
-              htype: htype,
-              managerUiCode: "MA"
+          return _objectSpread({}, state, {
+            routeMgmt: _objectSpread({}, state.routeMgmt, {
+              selector: _objectSpread({}, state.routeMgmt.selector, {
+                lastManagerUiCode: state.routeMgmt.selector.managerUiCode,
+                htype: htype,
+                managerUiCode: "MA"
+              })
             })
           });
         } else {
-          return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
-            selector: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state.selector, {
-              managerUiCode: state.selector.lastManagerUiCode
+          return _objectSpread({}, state, {
+            routeMgmt: _objectSpread({}, state.routeMgmt, {
+              selector: _objectSpread({}, state.routeMgmt.selector, {
+                managerUiCode: state.routeMgmt.selector.lastManagerUiCode
+              })
             })
           });
         }
       }
+    //--------------------------------------------------- update --------------------------------------------------
 
-    case _actions_types__WEBPACK_IMPORTED_MODULE_1__["SET_TITLE"]:
-      {
-        const title = action.payload.content.title;
-        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
-          title: title
-        });
-      }
-
-    case _actions_types__WEBPACK_IMPORTED_MODULE_1__["INITIALIZE_INPUT_SCREEN_UI"]:
-      {
-        const selectedDispatch = action.payload.content.dispatch;
-        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
-          menu: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state.inputMenu, {
-            //menu for what kind of hierarchy type
-            htype: selectedDispatch,
-            //which component is shown in the menu //menu, headline input, image gallery etc.
-            show: "MENU"
-          })
-        });
-      }
-
-    case _actions_types__WEBPACK_IMPORTED_MODULE_1__["UPDATE_INPUT_SCREEN_UI"]:
+    case _actions_types__WEBPACK_IMPORTED_MODULE_7__["UPDATE_INPUT_SCREEN_STATE"]:
       {
         const selectedDispatch = action.payload.content;
-        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
-          inputMenu: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state.inputMenu, {
-            //which component is shown in the menu //menu, headline input, image gallery etc.
-            show: selectedDispatch
-          })
-        });
-      }
-
-    case _actions_types__WEBPACK_IMPORTED_MODULE_1__["REMOVE_ROUTE"]:
-      {
-        const index = action.payload.content.removeIndex;
-        const columnId = action.payload.content.removeColumn;
-        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
-          ids: state.columns[columnId].ids.splice(index, 1)
-        });
-      }
-      ;
-
-    case _actions_types__WEBPACK_IMPORTED_MODULE_1__["UPDATE_ROUTE_STATE"]:
-      {
-        const newOrder = action.payload.content.newOrder;
-        const columnId = action.payload.content.columnId;
-        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
-          //   routeIds: newOrder,
-          columns: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state.columns, {
-            [columnId]: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state.columns[columnId], {
-              ids: newOrder
+        return _objectSpread({}, state, {
+          inputScreen: _objectSpread({}, state.inputScreen, {
+            inputMenu: _objectSpread({}, state.inputScreen.inputMenu, {
+              //which component is shown in the menu //menu, headline input, image gallery etc.
+              show: selectedDispatch
             })
           })
         });
       }
-      ;
 
-    case _actions_types__WEBPACK_IMPORTED_MODULE_1__["UPDATE_SIMULATOR_SELECTION"]:
+    case _actions_types__WEBPACK_IMPORTED_MODULE_7__["UPDATE_SIMULATOR_SELECTION_STATE"]:
       {
         const selectedComponentId = action.payload.content.selectedComponentId;
         const input = action.payload.content.input;
 
         if (input == "YES") {
-          return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
-            simulator: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state.simulator, {
-              selected: selectedComponentId
+          return _objectSpread({}, state, {
+            inputScreen: _objectSpread({}, state.inputScreen, {
+              simulator: _objectSpread({}, state.inputScreen.simulator, {
+                selectedComponentId: selectedComponentId
+              })
             })
           });
         } else {
-          if (state.simulator.selected == selectedComponentId) {
-            return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
-              simulator: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state.simulator, {
-                selected: "empty"
+          if (state.inputScreen.simulator.selected == selectedComponentId) {
+            return _objectSpread({}, state, {
+              inputScreen: _objectSpread({}, state.inputScreen, {
+                simulator: _objectSpread({}, state.inputScreen.simulator, {
+                  selectedComponentId: "empty"
+                })
               })
             });
           } else {
-            return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
-              simulator: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state.simulator, {
-                selected: selectedComponentId
+            return _objectSpread({}, state, {
+              inputScreen: _objectSpread({}, state.inputScreen, {
+                simulator: _objectSpread({}, state.inputScreen.simulator, {
+                  selectedComponentId: selectedComponentId
+                })
               })
             });
           }
@@ -4885,34 +5313,255 @@ const initialState = {
       return state;
   }
 });
+const initialState = {
+  routeMgmt: {
+    selector: {
+      lastManagerUiCode: "",
+      selectedroutes: "",
+      selectedstops: "",
+      selectedpois: "",
+      managerUiCode: "RO",
+      htype: ""
+    },
+    columnOrder: ["column-1", "column-2", "column-3"],
+    title: ""
+  },
+  inputScreen: {
+    inputMenu: {
+      htype: "routes",
+      //which component is shown in the menu
+      show: "MENU",
+      routes: [{
+        name: "Headline",
+        id: "headlineInput",
+        dispatch: "HEADLINE_INPUT",
+        type: "HEADLINE"
+      }, {
+        name: "Subheadline",
+        id: "subheadlineInput",
+        dispatch: "SUBHEADLINE_INPUT",
+        type: "SUBHEADLINE"
+      }, {
+        name: "Image Gallery",
+        id: "imageGalleryInput",
+        dispatch: "IMAGE_GALLERY_INPUT",
+        type: "IMAGE_GALLERY"
+      }],
+      stops: [{
+        name: "Headline",
+        id: "headlineInput",
+        dispatch: "HEADLINE_INPUT",
+        type: "HEADLINE"
+      }, {
+        name: "Subheadline",
+        id: "subheadlineInput",
+        dispatch: "SUBHEADLINE_INPUT",
+        type: "SUBHEADLINE"
+      }, {
+        name: "Image Gallery",
+        id: "imageGalleryInput",
+        dispatch: "IMAGE_GALLERY_INPUT",
+        type: "IMAGE_GALLERY"
+      }],
+      pois: [{
+        name: "Headline",
+        id: "headlineInput",
+        dispatch: "HEADLINE_INPUT",
+        type: "HEADLINE"
+      }, {
+        name: "Subheadline",
+        id: "subheadlineInput",
+        dispatch: "SUBHEADLINE_INPUT",
+        type: "SUBHEADLINE"
+      }, {
+        name: "Image Gallery",
+        id: "imageGalleryInput",
+        dispatch: "IMAGE_GALLERY_INPUT",
+        type: "IMAGE_GALLERY"
+      }]
+    },
+    simulator: {
+      show: "routes",
+      selected: "empty"
+    }
+  }
+}; //----------------------------------------------
+
+/*
+
+        case STOP_AND_POI_MANAGER_CONTROLLER: {
+            if (state.routeMgmt.selector.managerUiCode != "MA") {
+                const htype = action.payload.content.htype
+                return {
+                    ...state,
+                    selector: {
+                        ...state.selector,
+                        lastManagerUiCode: state.selector.managerUiCode,
+                        htype: htype,
+                        managerUiCode: "MA",
+                    }
+                }
+            } else {
+                return {
+                    ...state,
+                    selector: {
+                        ...state.selector,
+                        managerUiCode: state.selector.lastManagerUiCode,
+                    }
+                }
+            }
+        }
+
+        case SET_TITLE: {
+            const title = action.payload.content.title
+            return {
+                ...state,
+                title: title
+            }
+        }
+
+
+        case INITIALIZE_INPUT_SCREEN_UI: {
+            const selectedDispatch = action.payload.content.dispatch
+            return {
+                ...state,
+                menu: {
+                    ...state.inputMenu,
+                    //menu for what kind of hierarchy type
+                    htype: selectedDispatch,
+                    //which component is shown in the menu //menu, headline input, image gallery etc.
+                    show: "MENU",
+                }
+
+            };
+        }
+        case UPDATE_INPUT_SCREEN_UI: {
+            const selectedDispatch = action.payload.content
+            return {
+                ...state,
+                inputMenu: {
+                    ...state.inputMenu,
+                    //which component is shown in the menu //menu, headline input, image gallery etc.
+
+                    show: selectedDispatch
+
+                }
+            }
+        }
+        case REMOVE_ROUTE: {
+            const index = action.payload.content.removeIndex
+            const columnId = action.payload.content.removeColumn;
+
+            return {
+                ...state,
+                ids: state.columns[columnId].ids.splice(index, 1),
+            }
+        };
+        case UPDATE_ROUTE_STATE: {
+            const newOrder = action.payload.content.newOrder
+            const columnId = action.payload.content.columnId
+            return {
+                ...state,
+                //   routeIds: newOrder,
+                columns: {
+                    ...state.columns,
+                    [columnId]: {
+                        ...state.columns[columnId],
+                        ids: newOrder
+                    },
+                }
+            }
+        };
+        case UPDATE_SIMULATOR_SELECTION: {
+            const selectedComponentId = action.payload.content.selectedComponentId
+            const input = action.payload.content.input
+            if (input == "YES") {
+                return {
+                    ...state,
+                    simulator: {
+                        ...state.simulator,
+                        selected: selectedComponentId,
+                    }
+                }
+            } else {
+                if (state.simulator.selected == selectedComponentId) {
+                    return {
+                        ...state,
+                        simulator: {
+                            ...state.simulator,
+                            selected: "empty",
+                        }
+                    }
+                }
+                else {
+                    return {
+                        ...state,
+                        simulator: {
+                            ...state.simulator,
+                            selected: selectedComponentId,
+
+                        }
+                    }
+                }
+            }
+        }
+
+        default:
+            return state;
+    }
+}
+*/
 
 /***/ }),
 
-/***/ "./src/redux/redux.jsx":
-/*!*****************************!*\
-  !*** ./src/redux/redux.jsx ***!
-  \*****************************/
+/***/ "./src/lib/redux/redux.jsx":
+/*!*********************************!*\
+  !*** ./src/lib/redux/redux.jsx ***!
+  \*********************************/
 /*! exports provided: withRedux */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "withRedux", function() { return withRedux; });
-/* harmony import */ var _babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/objectSpread */ "./node_modules/@babel/runtime-corejs2/helpers/esm/objectSpread.js");
-/* harmony import */ var _babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/extends */ "./node_modules/@babel/runtime-corejs2/helpers/esm/extends.js");
-/* harmony import */ var _babel_runtime_corejs2_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/objectWithoutProperties */ "./node_modules/@babel/runtime-corejs2/helpers/esm/objectWithoutProperties.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-redux */ "react-redux");
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./store */ "./src/redux/store.js");
-/* harmony import */ var next_app__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! next/app */ "./node_modules/next/app.js");
-/* harmony import */ var next_app__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(next_app__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_define_property__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/object/define-property */ "./node_modules/@babel/runtime-corejs2/core-js/object/define-property.js");
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_define_property__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_object_define_property__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_define_properties__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/object/define-properties */ "./node_modules/@babel/runtime-corejs2/core-js/object/define-properties.js");
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_define_properties__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_object_define_properties__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/object/get-own-property-descriptors */ "./node_modules/@babel/runtime-corejs2/core-js/object/get-own-property-descriptors.js");
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/object/get-own-property-descriptor */ "./node_modules/@babel/runtime-corejs2/core-js/object/get-own-property-descriptor.js");
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/object/get-own-property-symbols */ "./node_modules/@babel/runtime-corejs2/core-js/object/get-own-property-symbols.js");
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/object/keys */ "./node_modules/@babel/runtime-corejs2/core-js/object/keys.js");
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/defineProperty */ "./node_modules/@babel/runtime-corejs2/helpers/esm/defineProperty.js");
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/extends */ "./node_modules/@babel/runtime-corejs2/helpers/esm/extends.js");
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/objectWithoutProperties */ "./node_modules/@babel/runtime-corejs2/helpers/esm/objectWithoutProperties.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react-redux */ "react-redux");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./store */ "./src/lib/redux/store.js");
+/* harmony import */ var next_app__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! next/app */ "./node_modules/next/app.js");
+/* harmony import */ var next_app__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(next_app__WEBPACK_IMPORTED_MODULE_12__);
 
 
 
-var _jsxFileName = "/home/christian/Development/fible-frontend-nextjs/src/redux/redux.jsx";
-var __jsx = react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement;
+
+
+
+
+
+
+var _jsxFileName = "/home/christian/Development/fible-frontend/src/lib/redux/redux.jsx";
+var __jsx = react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement;
+
+function ownKeys(object, enumerableOnly) { var keys = _babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_5___default()(object); if (_babel_runtime_corejs2_core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_4___default.a) { var symbols = _babel_runtime_corejs2_core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_4___default()(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return _babel_runtime_corejs2_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_3___default()(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_6__["default"])(target, key, source[key]); }); } else if (_babel_runtime_corejs2_core_js_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_2___default.a) { _babel_runtime_corejs2_core_js_object_define_properties__WEBPACK_IMPORTED_MODULE_1___default()(target, _babel_runtime_corejs2_core_js_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_2___default()(source)); } else { ownKeys(Object(source)).forEach(function (key) { _babel_runtime_corejs2_core_js_object_define_property__WEBPACK_IMPORTED_MODULE_0___default()(target, key, _babel_runtime_corejs2_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_3___default()(source, key)); }); } } return target; }
+
 
 
 
@@ -4924,17 +5573,17 @@ const withRedux = (PageComponent, {
     let {
       initialReduxState
     } = _ref,
-        props = Object(_babel_runtime_corejs2_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_2__["default"])(_ref, ["initialReduxState"]);
+        props = Object(_babel_runtime_corejs2_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_8__["default"])(_ref, ["initialReduxState"]);
 
     const store = getOrInitializeStore(initialReduxState);
-    return __jsx(react_redux__WEBPACK_IMPORTED_MODULE_4__["Provider"], {
+    return __jsx(react_redux__WEBPACK_IMPORTED_MODULE_10__["Provider"], {
       store: store,
       __source: {
         fileName: _jsxFileName,
         lineNumber: 13
       },
       __self: undefined
-    }, __jsx(PageComponent, Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_1__["default"])({}, props, {
+    }, __jsx(PageComponent, Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_7__["default"])({}, props, {
       __source: {
         fileName: _jsxFileName,
         lineNumber: 14
@@ -4945,7 +5594,7 @@ const withRedux = (PageComponent, {
 
 
   if (true) {
-    const isAppHoc = PageComponent === next_app__WEBPACK_IMPORTED_MODULE_6___default.a || PageComponent.prototype instanceof next_app__WEBPACK_IMPORTED_MODULE_6___default.a;
+    const isAppHoc = PageComponent === next_app__WEBPACK_IMPORTED_MODULE_12___default.a || PageComponent.prototype instanceof next_app__WEBPACK_IMPORTED_MODULE_12___default.a;
 
     if (isAppHoc) {
       throw new Error('The withRedux HOC only works with PageComponents');
@@ -4968,7 +5617,7 @@ const withRedux = (PageComponent, {
 
       const pageProps = typeof PageComponent.getInitialProps === 'function' ? await PageComponent.getInitialProps(context) : {}; // Pass props to PageComponent
 
-      return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, pageProps, {
+      return _objectSpread({}, pageProps, {
         initialReduxState: reduxStore.getState()
       });
     };
@@ -4981,12 +5630,12 @@ let reduxStore;
 const getOrInitializeStore = initialState => {
   // Always make a new store if server, otherwise state is shared between requests
   if (true) {
-    return Object(_store__WEBPACK_IMPORTED_MODULE_5__["initializeStore"])(initialState);
+    return Object(_store__WEBPACK_IMPORTED_MODULE_11__["initializeStore"])(initialState);
   } // Create store if unavailable on the client and set it on the window object
 
 
   if (!reduxStore) {
-    reduxStore = Object(_store__WEBPACK_IMPORTED_MODULE_5__["initializeStore"])(initialState);
+    reduxStore = Object(_store__WEBPACK_IMPORTED_MODULE_11__["initializeStore"])(initialState);
   }
 
   return reduxStore;
@@ -4994,10 +5643,10 @@ const getOrInitializeStore = initialState => {
 
 /***/ }),
 
-/***/ "./src/redux/store.js":
-/*!****************************!*\
-  !*** ./src/redux/store.js ***!
-  \****************************/
+/***/ "./src/lib/redux/store.js":
+/*!********************************!*\
+  !*** ./src/lib/redux/store.js ***!
+  \********************************/
 /*! exports provided: initializeStore */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -5008,7 +5657,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(redux__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var redux_thunk__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! redux-thunk */ "redux-thunk");
 /* harmony import */ var redux_thunk__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(redux_thunk__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _reducers_index__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./reducers/index */ "./src/redux/reducers/index.ts");
+/* harmony import */ var _reducers_index__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./reducers/index */ "./src/lib/redux/reducers/index.ts");
 /* harmony import */ var redux_devtools_extension__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! redux-devtools-extension */ "redux-devtools-extension");
 /* harmony import */ var redux_devtools_extension__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(redux_devtools_extension__WEBPACK_IMPORTED_MODULE_3__);
 
@@ -5020,96 +5669,102 @@ __webpack_require__.r(__webpack_exports__);
 
 const initialState = {
   data: {
-    user: {
-      name: "Christian",
-      routes: [],
-      stops: [],
-      pois: [],
-      email: ""
+    routeMgmt: {
+      user: {
+        name: "",
+        routes: [],
+        stops: [],
+        pois: [],
+        email: ""
+      },
+      routes: {},
+      stops: {},
+      pois: {}
     },
-    //the id of the hcomponent being worked on
-    selectedHtypeId: "",
-    selectedComponentId: "empty",
-    routes: {},
-    stops: {},
-    pois: {}
+    inputScreen: {
+      user: {
+        name: "",
+        routes: [],
+        stops: [],
+        pois: []
+      },
+      selectedHtypeId: "",
+      selectedComponentId: "empty",
+      // htype: {},
+      components: {}
+    }
   },
   ui: {
-    columns: {
-      "routes": {
-        id: "routes",
-        title: "Routes",
-        ids: ["h12345", "h54321", "h12354"]
+    routeMgmt: {
+      selector: {
+        lastManagerUiCode: "",
+        selectedroutes: "",
+        selectedstops: "",
+        selectedpois: "",
+        managerUiCode: "RO",
+        htype: ""
       },
-      "stops": {
-        id: "stops",
-        title: "Stops",
-        ids: ["s213141", "s54321"]
+      columnOrder: ["column-1", "column-2", "column-3"],
+      title: ""
+    },
+    inputScreen: {
+      inputMenu: {
+        htype: "routes",
+        //which component is shown in the menu
+        show: "MENU",
+        routes: [{
+          name: "Headline",
+          id: "headlineInput",
+          dispatch: "HEADLINE_INPUT",
+          type: "HEADLINE"
+        }, {
+          name: "Subheadline",
+          id: "subheadlineInput",
+          dispatch: "SUBHEADLINE_INPUT",
+          type: "SUBHEADLINE"
+        }, {
+          name: "Image Gallery",
+          id: "imageGalleryInput",
+          dispatch: "IMAGE_GALLERY_INPUT",
+          type: "IMAGE_GALLERY"
+        }],
+        stops: [{
+          name: "Headline",
+          id: "headlineInput",
+          dispatch: "HEADLINE_INPUT",
+          type: "HEADLINE"
+        }, {
+          name: "Subheadline",
+          id: "subheadlineInput",
+          dispatch: "SUBHEADLINE_INPUT",
+          type: "SUBHEADLINE"
+        }, {
+          name: "Image Gallery",
+          id: "imageGalleryInput",
+          dispatch: "IMAGE_GALLERY_INPUT",
+          type: "IMAGE_GALLERY"
+        }],
+        pois: [{
+          name: "Headline",
+          id: "headlineInput",
+          dispatch: "HEADLINE_INPUT",
+          type: "HEADLINE"
+        }, {
+          name: "Subheadline",
+          id: "subheadlineInput",
+          dispatch: "SUBHEADLINE_INPUT",
+          type: "SUBHEADLINE"
+        }, {
+          name: "Image Gallery",
+          id: "imageGalleryInput",
+          dispatch: "IMAGE_GALLERY_INPUT",
+          type: "IMAGE_GALLERY"
+        }]
       },
-      "pois": {
-        id: "pois",
-        title: "Pois",
-        ids: ["p1314134"]
+      simulator: {
+        show: "routes",
+        selected: "empty"
       }
-    },
-    columnOrder: ["routes", "stops", "pois"],
-    title: "test",
-    inputMenu: {
-      htype: "routes",
-      //which component is shown in the menu
-      show: "MENU",
-      routes: [{
-        name: "Headline",
-        id: "headlineInput",
-        dispatch: "HEADLINE_INPUT"
-      }, {
-        name: "Subheadline",
-        id: "subheadlineInput",
-        dispatch: "SUBHEADLINE_INPUT"
-      }, {
-        name: "Image Gallery",
-        id: "imageGalleryInput",
-        dispatch: "IMAGE_GALLERY_INPUT"
-      }],
-      stops: [{
-        name: "Headline",
-        id: "headlineInput",
-        dispatch: "HEADLINE_INPUT"
-      }, {
-        name: "Subheadline",
-        id: "subheadlineInput",
-        dispatch: "SUBHEADLINE_INPUT"
-      }, {
-        name: "Image Gallery",
-        id: "imageGalleryInput",
-        dispatch: "IMAGE_GALLERY_INPUT"
-      }],
-      pois: [{
-        name: "Headline",
-        id: "headlineInput",
-        dispatch: "HEADLINE_INPUT"
-      }, {
-        name: "Subheadline",
-        id: "subheadlineInput",
-        dispatch: "SUBHEADLINE_INPUT"
-      }, {
-        name: "Image Gallery",
-        id: "imageGalleryInput",
-        dispatch: "IMAGE_GALLERY_INPUT"
-      }]
-    },
-    simulator: {
-      show: "routes",
-      selected: "empty"
-    },
-    selector: {
-      //to keep ui state on refresh
-      lastManagerUiCode: "",
-      selectedROUTES: "",
-      selectedSTOPS: "",
-      selectedPOIS: "",
-      managerUiCode: "RO",
-      htype: ""
     }
   }
 }; //const persistedReducer = persistReducer(persistConfig, rootReducer)
@@ -5134,20 +5789,183 @@ export default () => {
   let initializeStore = createStore(persistedReducer, composeWithDevTools(applyMiddleware(thunk)));
   let persistor = persistStore(store)
   return { initializeStore, persistor }
-} 
+}
 
 */
 
 /***/ }),
 
-/***/ 4:
+/***/ "./src/pages/routemanagement.tsx":
+/*!***************************************!*\
+  !*** ./src/pages/routemanagement.tsx ***!
+  \***************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! next/link */ "./node_modules/next/link.js");
+/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! styled-components */ "styled-components");
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(styled_components__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _components_route_management_title__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/route-management/title */ "./src/components/route-management/title.tsx");
+/* harmony import */ var _components_route_management_stateManager__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/route-management/stateManager */ "./src/components/route-management/stateManager.tsx");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-redux */ "react-redux");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _components_shared_components_logoutButton__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./../components/shared-components/logoutButton */ "./src/components/shared-components/logoutButton.tsx");
+/* harmony import */ var _lib_apollo__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../lib/apollo */ "./src/lib/apollo.jsx");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _lib_redux_redux__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../lib/redux/redux */ "./src/lib/redux/redux.jsx");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! redux */ "redux");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(redux__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _lib_auth__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../lib/auth */ "./src/lib/auth.tsx");
+/* harmony import */ var graphql_tag__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! graphql-tag */ "graphql-tag");
+/* harmony import */ var graphql_tag__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(graphql_tag__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var _lib_redux_actions_dataActions__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../lib/redux/actions/dataActions */ "./src/lib/redux/actions/dataActions.ts");
+var _jsxFileName = "/home/christian/Development/fible-frontend/src/pages/routemanagement.tsx";
+var __jsx = react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const RouteManagement = props => {
+  //console.log(props.dataState)
+  return __jsx(Container, {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 23
+    },
+    __self: undefined
+  }, __jsx(Images, {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 24
+    },
+    __self: undefined
+  }, __jsx(HeaderImage, {
+    src: "/logo_fible.png",
+    alt: "my image",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 25
+    },
+    __self: undefined
+  }), __jsx(next_link__WEBPACK_IMPORTED_MODULE_0___default.a, {
+    href: "/",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 26
+    },
+    __self: undefined
+  }, __jsx(BackImage, {
+    src: "/back.svg",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 27
+    },
+    __self: undefined
+  }))), __jsx(_components_route_management_title__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    name: props.dataState.routeMgmt.user.name,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 30
+    },
+    __self: undefined
+  }), __jsx(_components_shared_components_logoutButton__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 31
+    },
+    __self: undefined
+  }), __jsx(_components_route_management_stateManager__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 32
+    },
+    __self: undefined
+  }));
+}; //            
+
+
+RouteManagement.getInitialProps = async ({
+  apolloClient,
+  me,
+  reduxStore
+}) => {
+  const routesQuery = graphql_tag__WEBPACK_IMPORTED_MODULE_11___default.a`query getHtypes 
+    {   getRoutes{id ownerid name components}
+        getPois{id ownerid name components}
+        getStops{id ownerid name components}
+    }`;
+  const htypes = await apolloClient.query({
+    query: routesQuery
+  }); // reduxStore.dispatch(loadUser(me))
+  //console.log(htypes)
+
+  reduxStore.dispatch(Object(_lib_redux_actions_dataActions__WEBPACK_IMPORTED_MODULE_12__["loadRouteMgmtData"])({
+    "htypes": htypes.data,
+    "user": me
+  }));
+};
+
+const mapStateToProps = state => {
+  return {
+    selectorState: state.selector,
+    uiState: state.ui,
+    dataState: state.data
+  };
+};
+
+const enhance = Object(redux__WEBPACK_IMPORTED_MODULE_9__["compose"])(_lib_apollo__WEBPACK_IMPORTED_MODULE_6__["withApollo"], _lib_auth__WEBPACK_IMPORTED_MODULE_10__["withAuth"], _lib_redux_redux__WEBPACK_IMPORTED_MODULE_8__["withRedux"], Object(react_redux__WEBPACK_IMPORTED_MODULE_4__["connect"])(mapStateToProps, {
+  loadUser: _lib_redux_actions_dataActions__WEBPACK_IMPORTED_MODULE_12__["loadUser"],
+  loadRouteMgmtData: _lib_redux_actions_dataActions__WEBPACK_IMPORTED_MODULE_12__["loadRouteMgmtData"]
+}));
+/* harmony default export */ __webpack_exports__["default"] = (enhance(RouteManagement));
+/*
+const DynamicRouteSelector = dynamic(
+    () => import('../components/route-management/selectorManager'),
+    { ssr: false }
+)
+*/
+
+const Images = styled_components__WEBPACK_IMPORTED_MODULE_1___default.a.div.withConfig({
+  displayName: "routemanagement__Images",
+  componentId: "geraa8-0"
+})(["height:8em;margin:0;padding-left:1em;position:absolute;top:1%;left:0%;"]);
+const HeaderImage = styled_components__WEBPACK_IMPORTED_MODULE_1___default.a.img.withConfig({
+  displayName: "routemanagement__HeaderImage",
+  componentId: "geraa8-1"
+})(["height:4em;width:7em;padding-left:2em;padding-top:1em;padding-bottom:2em;position:absolute;margin:0;z-index:1;"]);
+const BackImage = styled_components__WEBPACK_IMPORTED_MODULE_1___default.a.img.withConfig({
+  displayName: "routemanagement__BackImage",
+  componentId: "geraa8-2"
+})(["padding-top:0.5em;height:2em;width:2em;z-index:1;position:absolute;"]);
+const Container = styled_components__WEBPACK_IMPORTED_MODULE_1___default.a.div.withConfig({
+  displayName: "routemanagement__Container",
+  componentId: "geraa8-3"
+})(["width:100vw;height:100vh;margin:0;padding:0;background:white;display:flex;display:-webkit-box;display:-moz-box;display:-ms-flexbox;display:-webkit-flex;align-content:center;justify-content:center;"]);
+
+/***/ }),
+
+/***/ 3:
 /*!*********************************************!*\
   !*** multi ./src/pages/routemanagement.tsx ***!
   \*********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/christian/Development/fible-frontend-nextjs/src/pages/routemanagement.tsx */"./src/pages/routemanagement.tsx");
+module.exports = __webpack_require__(/*! /home/christian/Development/fible-frontend/src/pages/routemanagement.tsx */"./src/pages/routemanagement.tsx");
 
 
 /***/ }),
@@ -5295,6 +6113,17 @@ module.exports = require("core-js/library/fn/object/create");
 
 /***/ }),
 
+/***/ "core-js/library/fn/object/define-properties":
+/*!**************************************************************!*\
+  !*** external "core-js/library/fn/object/define-properties" ***!
+  \**************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("core-js/library/fn/object/define-properties");
+
+/***/ }),
+
 /***/ "core-js/library/fn/object/define-property":
 /*!************************************************************!*\
   !*** external "core-js/library/fn/object/define-property" ***!
@@ -5306,17 +6135,6 @@ module.exports = require("core-js/library/fn/object/define-property");
 
 /***/ }),
 
-/***/ "core-js/library/fn/object/entries":
-/*!****************************************************!*\
-  !*** external "core-js/library/fn/object/entries" ***!
-  \****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("core-js/library/fn/object/entries");
-
-/***/ }),
-
 /***/ "core-js/library/fn/object/get-own-property-descriptor":
 /*!************************************************************************!*\
   !*** external "core-js/library/fn/object/get-own-property-descriptor" ***!
@@ -5325,6 +6143,17 @@ module.exports = require("core-js/library/fn/object/entries");
 /***/ (function(module, exports) {
 
 module.exports = require("core-js/library/fn/object/get-own-property-descriptor");
+
+/***/ }),
+
+/***/ "core-js/library/fn/object/get-own-property-descriptors":
+/*!*************************************************************************!*\
+  !*** external "core-js/library/fn/object/get-own-property-descriptors" ***!
+  \*************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("core-js/library/fn/object/get-own-property-descriptors");
 
 /***/ }),
 
@@ -5358,6 +6187,17 @@ module.exports = require("core-js/library/fn/object/keys");
 /***/ (function(module, exports) {
 
 module.exports = require("core-js/library/fn/promise");
+
+/***/ }),
+
+/***/ "core-js/library/fn/weak-map":
+/*!**********************************************!*\
+  !*** external "core-js/library/fn/weak-map" ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("core-js/library/fn/weak-map");
 
 /***/ }),
 
@@ -5402,17 +6242,6 @@ module.exports = require("isomorphic-unfetch");
 /***/ (function(module, exports) {
 
 module.exports = require("js-cookie");
-
-/***/ }),
-
-/***/ "nanoid":
-/*!*************************!*\
-  !*** external "nanoid" ***!
-  \*************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("nanoid");
 
 /***/ }),
 
@@ -5493,17 +6322,6 @@ module.exports = require("react-draggable");
 
 /***/ }),
 
-/***/ "react-is":
-/*!***************************!*\
-  !*** external "react-is" ***!
-  \***************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("react-is");
-
-/***/ }),
-
 /***/ "react-redux":
 /*!******************************!*\
   !*** external "react-redux" ***!
@@ -5567,6 +6385,17 @@ module.exports = require("styled-components");
 /***/ (function(module, exports) {
 
 module.exports = require("url");
+
+/***/ }),
+
+/***/ "uuid/v4":
+/*!**************************!*\
+  !*** external "uuid/v4" ***!
+  \**************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("uuid/v4");
 
 /***/ })
 

@@ -5,33 +5,31 @@ import Menu from './menu'
 import HeadlineInput from './headlinInput';
 import SubheadlineInput from './subheadlineInput';
 
-class MenuManager extends React.Component<{state:any}> {
-    
-    menuChoice = () => {
-        console.log(this.props.state.inputMenu.show)
-           switch(this.props.state.inputMenu.show){
-               case("MENU"): {
-                   return<Menu/>
-               }
-               case("HEADLINE_INPUT"):{
-                   return<HeadlineInput/>
-               }
-               case("SUBHEADLINE_INPUT"):{
-                   return<SubheadlineInput/>
-               }
+const MenuManager = props => {
+    const menuChoice = (props) => {
+        console.log(props.uiState)
+            switch(props.uiState.inputScreen.inputMenu.show){
+                case("MENU"): {
+                    return<Menu/>
+                }
+                case("HEADLINE_INPUT"):{
+                    return<HeadlineInput/>
+                }
+                case("SUBHEADLINE_INPUT"):{
+                    return<SubheadlineInput/>
+                }
         }
     }
 
-    render(){
-        return<Container>
-            {this.menuChoice()}
-        </Container>
-    }
+        return(<Container>
+            {menuChoice(props)}
+        </Container>)
+    
 }
 
 const mapStateToProps = state => {
-    return {state:state.ui};
-  };
+    return {uiState:state.ui};
+};
 
 export default connect(mapStateToProps)(MenuManager);
 

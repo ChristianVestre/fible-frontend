@@ -11,14 +11,14 @@ import { withRedux } from '../lib/redux/redux';
 import { compose } from 'redux';
 import  {withAuth} from '../lib/auth';
 import gql from 'graphql-tag';
-import { loadUser, loadHtypeData } from '../lib/redux/actions/dataActions';
+import { loadUser, loadRouteMgmtData} from '../lib/redux/actions/dataActions';
 
 
 
 
 
 const RouteManagement = (props) => {
-    
+    //console.log(props.dataState)
     return(
         <Container>
             <Images>
@@ -27,7 +27,7 @@ const RouteManagement = (props) => {
                     <BackImage src="/back.svg"></BackImage>
                 </Link>
             </Images>
-            <Title name={props.dataState.user.name}/>
+            <Title name={props.dataState.routeMgmt.user.name}/>
             <LogoutButton/>
             <RouteManagementStateManager/>
         </Container>
@@ -41,12 +41,12 @@ RouteManagement.getInitialProps = async ({apolloClient, me, reduxStore}) => {
         getPois{id ownerid name components}
         getStops{id ownerid name components}
     }`
-    let htypes = await apolloClient.query({query:routesQuery})
-    reduxStore.dispatch(loadUser(me))
-    reduxStore.dispatch(loadHtypeData(htypes))
-    
-  }
-  
+    const htypes = await apolloClient.query({query:routesQuery})
+   // reduxStore.dispatch(loadUser(me))
+    //console.log(htypes)
+    reduxStore.dispatch(loadRouteMgmtData({"htypes":htypes.data, "user":me}))
+
+}
 
 
 const mapStateToProps = state => {
@@ -57,8 +57,8 @@ const enhance = compose(
     withApollo,
     withAuth,
     withRedux,
-    connect(mapStateToProps,{loadUser, loadHtypeData})
-  )
+    connect(mapStateToProps,{loadUser, loadRouteMgmtData})
+)
 export default enhance(RouteManagement);
 
 /*

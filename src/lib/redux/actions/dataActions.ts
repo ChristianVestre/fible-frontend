@@ -8,12 +8,19 @@ import { HEADLINE,
   LOAD_USER,
   CLEAN_USER,
   LOAD_HTYPE_DATA,
-  INITIALIZE_INPUTSCREEN
+  INITIALIZE_INPUTSCREEN,
+
+  INITIALIZE_INPUTSCREEN_DATA,
+  LOAD_ROUTEMGMT_DATA,
+  LOAD_INPUTSCREEN_DATA,
+  UPDATE_STOP_AND_POI_DATA,
+  DATA_ADD_NEW_COMPONENT,
+  DATA_UPDATE_COMPONENT,
 
 } from "./types";
 
 
-let addHeadlineId = 0;
+let headlineId = 0;
 let initializeHtypeId = 0;
 let deleteHtypeId = 0;
 let emptySelectedComponentId = 0;
@@ -24,17 +31,18 @@ let loadUserId = 0;
 let cleanUserId = 0;
 let loadHtypeDataId = 0;
 let initializeInputscreenId = 0;
+//----
+let initializeInputScreenDataId = 0;
+let loadRouteMgmtDataId = 0;
+let loadInputScreenDataId = 0;
+let updateStopAndPoiDataId = 0;
+let dataUpdateComponentId =0;
+let dataAddNewComponentId = 0;
 
 
 
 
-export const addOrUpdateHeadline = content => ({
-  type: HEADLINE,
-  payload: {
-    id:++addHeadlineId,
-    content,
-  }
-})
+
 
 export const initializeHtype = content => ({
   type: INITIALIZE_HTYPE,
@@ -116,3 +124,67 @@ export const initializeInputScreen = content => ({
     content
   }
 })
+
+//.....
+
+
+
+
+
+
+
+export const initializeInputScreenData = content => ({
+  type: INITIALIZE_INPUTSCREEN_DATA,
+  payload:{
+    id:++initializeInputScreenDataId,
+    content
+  }
+})
+
+export const loadRouteMgmtData = content => ({
+  type: LOAD_ROUTEMGMT_DATA,
+  payload:{
+    id:++loadRouteMgmtDataId,
+    content
+  }
+})
+
+export const loadInputScreenData = content => ({
+  type: LOAD_INPUTSCREEN_DATA,
+  payload:{
+    id:++loadInputScreenDataId,
+    content
+  }
+})
+
+export const updateStopAndPoiData = content => ({
+  type: UPDATE_STOP_AND_POI_DATA,
+  payload:{
+    id:++updateStopAndPoiDataId,
+    content
+  }
+})
+export const addOrUpdateHeadline = content => ({
+  type: HEADLINE,
+  payload: {
+    id:++headlineId,
+    content,
+  }
+})
+
+export const dataUpdateComponent = content => ({
+  type: DATA_UPDATE_COMPONENT,
+  payload: {
+    id:++dataUpdateComponentId,
+    content,
+  }
+})
+
+export const dataAddNewComponent = content => ({
+  type: DATA_ADD_NEW_COMPONENT,
+  payload: {
+    id:++dataAddNewComponentId,
+    content,
+  }
+})
+

@@ -21,10 +21,11 @@ const Home = (props) => {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [errorMessage,setError] = useState('')
   const SIGN_IN = gql`
   mutation Signin($email: String!, $password: String!) {
     login(email: $email, password: $password ) {
-      user{id name routes pois stops email}
+      user{id name routes stops pois email}
     }
   }`
   const onCompleted = data => {
@@ -42,7 +43,9 @@ const Home = (props) => {
 
   const onError = error => {
     // If you want to send error to external service?
-    console.error(error)
+    console.log(error)
+
+    setError(error.message)
   }
   const [signinUser, { error }] = useMutation(SIGN_IN, {
     onCompleted,
@@ -67,6 +70,7 @@ const Home = (props) => {
       },
     }) //setEmail(''), setPassword('')
     }}>Log in</StyledButton>
+    {errorMessage != '' ? <StyledError>Wrong password!</StyledError>:null}
   </Wrapper>
 
   )
@@ -122,6 +126,16 @@ const StyledText = styled.h3`
   padding:0;
 
 `
+
+const StyledError = styled.h3`
+width:60%;
+padding:2vh;
+align-self:center;
+text-align:center;
+font-weight:bold;
+font-size:2.5vh;
+color:salmon;
+`
 const StyledInput = styled.input`
   display:flex;
   width:60%;
@@ -137,6 +151,7 @@ const StyledInput = styled.input`
         outline:none;
         caret-color:salmon;
     }
+
 
 `
 const StyledButton = styled.button`

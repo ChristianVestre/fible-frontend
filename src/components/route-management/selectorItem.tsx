@@ -1,67 +1,82 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { Draggable } from 'react-beautiful-dnd'
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes, faEdit } from '@fortawesome/free-solid-svg-icons'
 import { connect } from "react-redux";
-import {removeRoute, updateSelectorManagerState } from '../../lib/redux/actions/uiActions';
+import { removeRoute, updateRoutemgmtState } from '../../lib/redux/actions/uiActions';
 import Router from 'next/router'
 import Cookie from 'js-cookie';
+import { useLazyQuery } from '@apollo/react-hooks';
+import gql from 'graphql-tag';
 
 
-const SelectorItem = props =>{
-        console.log(props)
+const SelectorItem = props => {
+    const [getHtypeWithComponents, { loading, data }] = useLazyQuery( gql`query getHtypeWithComponents 
+    {   getHtypeWithComponents{
+            htype{
+                route{id name ownerid components}
+                stop{id name ownerid components}
+                poi{id name ownerid components}
+            } 
+            components{id content type}}
+    }`);
 
-      const handleEditRoutes = (e) => {
+    const handleEditRoutes = async (e) => {
 
         e.stopPropagation()
         e.nativeEvent.stopImmediatePropagation();
         Cookie.set("hid", props.itemData.id)
-       // Cookie.
-        const selectedId = props.itemData.id
-        const htype = props.type
-        props.updateSelectorManagerState({selectedId,htype})
-            Router.push({
-                pathname: '/inputscreen',
-            })
-      };
+        // Cookie.
+      //  const resp = await getHtypeWithComponents()
 
-      const handleSelectorManagerStateUpdate = (e) => {
         const selectedId = props.itemData.id
         const htype = props.type
-        props.updateSelectorManagerState({selectedId,htype})
-        
-          
-        
-      }
-        return(
+        //props.updateSelectorManagerState({selectedId,htype})
+        Router.push({
+            pathname: '/inputscreen',
+            query: { id:props.itemData.id },
+        },
+            //'inputscreen'
+        )
+      //  Router.replace('/routemanagement','/inputscreen')
+    };
+
+    const handleSelectorManagerStateUpdate = (e) => {
+        const selectedId = props.itemData.id
+        const htype = props.type
+        props.updateRoutemgmtState({ selectedId, htype })
+
+    }
+    return (
         <Draggable draggableId={props.itemData.id} index={props.index}>
-            {provided =>( 
-            <Container
-                {...provided.draggableProps}
-                {...provided.dragHandleProps}
-                ref={provided.innerRef}
-                onClick={(e) => handleSelectorManagerStateUpdate(e)}
-                color={props.itemData.id == props.uiState.selector["selected" + props.type] ? "salmon":"lightgray" }
+            {provided => (
+                <Container
+                    {...provided.draggableProps}
+                    {...provided.dragHandleProps}
+                    ref={provided.innerRef}
+                    onClick={(e) => handleSelectorManagerStateUpdate(e)}
+                    //todo fix state
+                    color={props.itemData.id == props.uiState.routeMgmt.selector["selected"+ props.type] ? "salmon" : "lightgray"}
                 >
-                <Headline>{props.itemData.name}</Headline>
-                <EditButton onClick={(e) => handleEditRoutes(e)} >
-                    <FontAwesomeIcon icon={faEdit}/>
-                </EditButton>
-            </Container>
+                    <Headline>{props.itemData.name}</Headline>
+                    <EditButton onClick={(e) => handleEditRoutes(e)} >
+                        <FontAwesomeIcon icon={faEdit} />
+                    </EditButton>
+                </Container>
             )
             }
         </Draggable>
-        )
+    )
 }
 
 const mapStateToProps = state => {
-    return {uiState:state.ui,updateSelectorManagerState:state.updateSelectorManagerState};
-  };
+    return { uiState: state.ui, updateRoutemgmtState: state.updateSelectorManagerState };
+};
 
 //export default SelectorItem
 
-export default connect(mapStateToProps,{ removeRoute, updateSelectorManagerState })(SelectorItem);
+export default connect(mapStateToProps, { removeRoute, updateRoutemgmtState })(SelectorItem);
 
 const Container = styled.div`
     border: 1px solid;

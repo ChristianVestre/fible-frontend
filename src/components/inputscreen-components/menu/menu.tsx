@@ -10,38 +10,36 @@ import GridElement from './gridElement'
 import {deleteHtype} from '../../../lib/redux/actions/dataActions'
 
 
-class Menu extends React.Component<{uiState:any,deleteHtype:Function,dataState:any}> {
+const Menu = props => {
 
-
-    backHandler = () => {
+    const backHandler = () => {
         Router.push({
             pathname: '/routemanagement',
-          })
-        const htypeid = this.props.dataState.selectedHtypeId
-        const htype = this.props.uiState.inputMenu.htype
-        this.props.deleteHtype({htypeid,htype})
+        })
+        const htypeid = props.dataState.inputScreen.selectedHtypeId
+        const htype = props.uiState.inputScreen.inputMenu.htype
+       // props.deleteHtype({htypeid,htype})
         
     }
 
-    render() {
-       return( 
+    return( 
         <Container>
                 <HeaderImage src="/logo_fible.png" alt="my image"></HeaderImage>
-                <BackImage src="/back.svg" onClick={this.backHandler}></BackImage>
-        <Headline>{this.props.uiState.inputMenu.htype}</Headline>
+                <BackImage src="/back.svg" onClick={() => backHandler()}></BackImage>
+        <Headline>{props.uiState.inputScreen.inputMenu.htype}</Headline>
         <MenuWrapper>
-       {this.props.uiState.inputMenu[this.props.uiState.inputMenu.htype].map((elem) => {return <GridElement key={elem.id} name={elem.name} dispatch={elem.dispatch}/>})}
+            {props.uiState.inputScreen.inputMenu[props.uiState.inputScreen.inputMenu.htype].map((elem) => {return <GridElement key={elem.id} name={elem.name} dispatch={elem.dispatch} type={elem.type}/>})}
 
         </MenuWrapper>
         </Container>
-       )}
+    )
 
 }
 
 const mapStateToProps = state => {
 
     return {uiState:state.ui,dataState:state.data,deleteHtype:state.deleteHtype};
-  };
+};
 
 
 

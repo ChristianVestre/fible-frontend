@@ -5,9 +5,13 @@ import { Droppable } from 'react-beautiful-dnd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes, faPlus } from '@fortawesome/free-solid-svg-icons'
 import Router from 'next/router'
-import { initializeInputScreenUi, stopAndPoiManagerController, setTitle } from '../../lib/redux/actions/uiActions';
-import { initializeHtype } from '../../lib/redux/actions/dataActions';
+import { initializeInputScreenUi, loadStopAndPoiManagerState, setTitle } from '../../lib/redux/actions/uiActions';
+import { initializeHtype, initializeInputScreenData } from '../../lib/redux/actions/dataActions';
 import { connect } from 'react-redux';
+import Cookie from 'js-cookie';
+import { ApolloClient } from 'apollo-client'
+import { useMutation } from '@apollo/react-hooks';
+import gql from 'graphql-tag';
 
 
 
@@ -30,16 +34,29 @@ const RouteList = styled.div`
 
 
 const Selector = props => {
+    const [addRoute, { data }] = useMutation(gql`
+    mutation setRoute{setRoute{
+        id
+    }
+    }
+    `
+    );
 
-    const handleInputScreenButton = () => {
+
+    const handleInputScreenButton = async (props) => {
+        console.log(props.type)
         if (props.type == "routes") {
+            props.initializeInputScreenData({htype:props.type,user:props.dataState.routeMgmt.user})
+            props.initializeInputScreenUi({ dispatch: props.type })
+            const route = await addRoute()
+            console.log(data)
+            console.log(route.data.setRoute.id)
+            Cookie.set("hid", route.data.setRoute.id)
             Router.push({
                 pathname: '/inputscreen',
             })
-            props.initializeHtype({ htype: props.type })
-            props.initializeInputScreenUi({ dispatch: props.type })
         } else {
-            props.stopAndPoiManagerController({ htype: props.type })
+            props.loadStopAndPoiManagerState({ htype: props.type })
             let firstLetter = props.type.substring(0, 1)
             let rest = props.type.substring(1)
             let title = firstLetter + rest.toLowerCase() + " manager"
@@ -57,13 +74,12 @@ const Selector = props => {
                         ref={provided.innerRef}
                         {...provided.droppableProps}
                     >
-                        {console.log(props.listItems)}
                         {props.listItems.map((itemData, index) => <FibleRoute key={itemData.id} type={props.type} itemData={itemData} index={index} />)}
                         {provided.placeholder}
                     </RouteList>
                 )}
             </Droppable>
-            <InputScreenButton onClick={() => handleInputScreenButton()} >
+            <InputScreenButton onClick={() => handleInputScreenButton(props)} >
                 <FontAwesomeIcon icon={faPlus} />
             </InputScreenButton>
         </Container>
@@ -71,12 +87,13 @@ const Selector = props => {
 }
 
 const mapStateToProps = state => {
-    return { dataState: state.data, initializeInputScreenState: state.initializeInputScreenState, stopAndPoiManagerController: state.stopAndPoiManagerController, setTitle: state.setTitle };
+  // console.log(state)
+    return { dataState: state.data, uiState:state.ui, loadStopAndPoiManagerState:state.loadStopAndPoiManagerState};
 };
 
 //export default Selector
 
-export default connect(mapStateToProps, { initializeInputScreenUi, initializeHtype, stopAndPoiManagerController, setTitle })(Selector);
+export default connect(mapStateToProps, { initializeInputScreenUi, initializeInputScreenData, loadStopAndPoiManagerState, setTitle })(Selector);
 
 
 

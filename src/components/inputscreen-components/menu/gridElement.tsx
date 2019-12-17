@@ -1,39 +1,44 @@
 import styled from 'styled-components'
 import React from 'react'
-import { updateInputScreenUi} from '../../../lib/redux/actions/uiActions'
+import { updateInputScreenState} from '../../../lib/redux/actions/uiActions'
 import {connect} from 'react-redux';
+import { dataAddNewComponent } from '../../../lib/redux/actions/dataActions';
 
 
 
 
-class GridElement extends React.Component<{name:string, dispatch:string, updateInputScreenUi:Function}> {
-
+const GridElement = props => {
       
     
-    handleInputMenuUpdate = () => {
-        const dispatch = this.props.dispatch
+    const handleInputMenuUpdate = (props) => {
+        const dispatch = props.dispatch
       //  console.log(dispatch)
-        this.props.updateInputScreenUi(dispatch);
+        console.log(props)
+        props.updateInputScreenState(dispatch);
+        props.dataAddNewComponent({
+          type:props.type,
+          htype:props.dataState.inputScreen.selectedHtype,
+          selectedHtypeId:props.dataState.inputScreen.selectedHtypeId,
+          user:props.dataState.inputScreen.user })
     };
     
   
-  render(){
 
       return(
-        <Wrapper onClick={this.handleInputMenuUpdate}>
-        <StyledText>{this.props.name}</StyledText>
+        <Wrapper onClick={() => handleInputMenuUpdate(props)}>
+        <StyledText>{props.name}</StyledText>
         </Wrapper>
       )
-  }
+  
 }
 
 const mapStateToProps = state => {
-  return {selectorState:state.data ,updateInputScreenUi:state.updateInputScreenUi};
+  return {dataState:state.data};
 };
 
 
 
-export default connect(mapStateToProps,{ updateInputScreenUi })(GridElement);
+export default connect(mapStateToProps,{ updateInputScreenState, dataAddNewComponent })(GridElement);
 
 
 /*

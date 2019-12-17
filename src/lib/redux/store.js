@@ -10,96 +10,93 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 //import rootReducer from './reducers'
 
 const initialState = {
-data:{
-  user: {
-      name: "Christian",
-      routes: [],
-      stops: [],
-      pois: [],
-      email: "",
+  data: {
+    routeMgmt: {
+      user: {
+        name: "",
+        routes: [],
+        stops: [],
+        pois: [],
+        email: "",
+      },
+      routes: {},
+      stops: {},
+      pois: {},
+    },
+    inputScreen: {
+      user: {
+        name: "",
+        routes: [],
+        stops: [],
+        pois: [],
+      },
+      selectedHtypeId: "",
+      selectedComponentId: "empty",
+      // htype: {},
+      components: {},
+    },
   },
-  //the id of the hcomponent being worked on
-  selectedHtypeId: "",
-  selectedComponentId: "empty",
-  routes: {},
-  stops: {},
-  pois: {},
-},
-ui:{
-
-columns: {
-    "routes": {
-        id: "routes",
-        title: "Routes",
-        ids: ["h12345", "h54321", "h12354"],
+  ui: {
+    routeMgmt: {
+      selector: {
+        lastManagerUiCode: "",
+        selectedroutes: "",
+        selectedstops: "",
+        selectedpois: "",
+        managerUiCode: "RO",
+        htype: "",
+      },
+      columnOrder: ["column-1", "column-2", "column-3"],
+      title: "",
     },
-    "stops": {
-        id: "stops",
-        title: "Stops",
-        ids: ["s213141", "s54321"],
-    },
-    "pois": {
-        id: "pois",
-        title: "Pois",
-        ids: ["p1314134"]
+    inputScreen: {
+      inputMenu: {
+        htype: "routes",
+        //which component is shown in the menu
+        show: "MENU",
+        routes: [{ name: "Headline", id: "headlineInput", dispatch: "HEADLINE_INPUT", type:"HEADLINE" },
+        { name: "Subheadline", id: "subheadlineInput", dispatch: "SUBHEADLINE_INPUT", type:"SUBHEADLINE" },
+        { name: "Image Gallery", id: "imageGalleryInput", dispatch: "IMAGE_GALLERY_INPUT", type:"IMAGE_GALLERY" },
+        ],
+        stops: [{ name: "Headline", id: "headlineInput", dispatch: "HEADLINE_INPUT", type:"HEADLINE" },
+        { name: "Subheadline", id: "subheadlineInput", dispatch: "SUBHEADLINE_INPUT",type:"SUBHEADLINE" },
+        { name: "Image Gallery", id: "imageGalleryInput", dispatch: "IMAGE_GALLERY_INPUT",type:"IMAGE_GALLERY"  },
+        ],
+        pois: [{ name: "Headline", id: "headlineInput", dispatch: "HEADLINE_INPUT", type:"HEADLINE" },
+        { name: "Subheadline", id: "subheadlineInput", dispatch: "SUBHEADLINE_INPUT", type:"SUBHEADLINE" },
+        { name: "Image Gallery", id: "imageGalleryInput", dispatch: "IMAGE_GALLERY_INPUT",type:"IMAGE_GALLERY"},
+        ]
+      },
+      simulator: {
+        show: "routes",
+        selected: "empty"
+      },
     }
-},
-columnOrder: ["routes", "stops", "pois"],
-title:"test",
-inputMenu: {
-    htype: "routes",
-    //which component is shown in the menu
-    show: "MENU",
-    routes: [{ name: "Headline", id: "headlineInput", dispatch: "HEADLINE_INPUT" },
-    { name: "Subheadline", id: "subheadlineInput", dispatch: "SUBHEADLINE_INPUT" },
-    { name: "Image Gallery", id: "imageGalleryInput", dispatch: "IMAGE_GALLERY_INPUT" },
-    ],
-    stops: [{ name: "Headline", id: "headlineInput", dispatch: "HEADLINE_INPUT" },
-    { name: "Subheadline", id: "subheadlineInput", dispatch: "SUBHEADLINE_INPUT" },
-    { name: "Image Gallery", id: "imageGalleryInput", dispatch: "IMAGE_GALLERY_INPUT" },
-    ],
-    pois: [{ name: "Headline", id: "headlineInput", dispatch: "HEADLINE_INPUT" },
-    { name: "Subheadline", id: "subheadlineInput", dispatch: "SUBHEADLINE_INPUT" },
-    { name: "Image Gallery", id: "imageGalleryInput", dispatch: "IMAGE_GALLERY_INPUT" },
-    ]
-},
-simulator: {
-    show: "routes",
-    selected: "empty"
-},
-selector:{
-    //to keep ui state on refresh
-    lastManagerUiCode:"",
-    selectedROUTES:"",
-    selectedSTOPS:"",
-    selectedPOIS:"",
-    managerUiCode:"RO",
-    htype:"",
-}
-}
+
+  }
 }
 
 
 //const persistedReducer = persistReducer(persistConfig, rootReducer)
 export const initializeStore = (preloadedState = initialState) => {
-let store;
-const isClient = typeof window !== 'undefined';
-if (isClient) {
-  store = createStore(
-    rootReducer,
-    preloadedState,
-    composeWithDevTools(applyMiddleware(thunk))
-  );
-   //store.__PERSISTOR = persistStore(store);
-} else {
+  let store;
+  const isClient = typeof window !== 'undefined';
+  if (isClient) {
     store = createStore(
-        rootReducer,
-        preloadedState,
-        composeWithDevTools(applyMiddleware(thunk))
-      );
-    }
-//export const Store = createStore(persistedReducer, composeWithDevTools(applyMiddleware(thunk)));
-//export const persistor = persistStore(initialState);
+      rootReducer,
+      preloadedState,
+      composeWithDevTools(applyMiddleware(thunk))
+    );
+    //store.__PERSISTOR = persistStore(store);
+  } else {
+    store = createStore(
+      rootReducer,
+      preloadedState,
+      composeWithDevTools(applyMiddleware(thunk))
+    );
+  }
+  //export const Store = createStore(persistedReducer, composeWithDevTools(applyMiddleware(thunk)));
+  //export const persistor = persistStore(initialState);
 
   return store
 }
@@ -110,6 +107,6 @@ export default () => {
   let initializeStore = createStore(persistedReducer, composeWithDevTools(applyMiddleware(thunk)));
   let persistor = persistStore(store)
   return { initializeStore, persistor }
-} 
+}
 
 */

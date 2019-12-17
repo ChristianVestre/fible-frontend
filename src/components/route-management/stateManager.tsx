@@ -11,7 +11,7 @@ const RouteManagementStateManager = props => {
 
     const SelectorChoice = (props) => {
      //   console.log(props.state.htypes.getRoutes)
-            switch(props.uiState.selector.managerUiCode){
+            switch(props.uiState.routeMgmt.selector.managerUiCode){
                 case("RO"):{
                     return <OneSelectorWrapper>
                     <Selector type="routes"/>

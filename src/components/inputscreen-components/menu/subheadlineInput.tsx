@@ -1,24 +1,22 @@
 import React from 'react';
 import styled from 'styled-components';
-import { updateInputScreenUi} from '../../../lib/redux/actions/uiActions'
+import { updateInputScreenState} from '../../../lib/redux/actions/uiActions'
 import {connect} from 'react-redux';
 
 
 
-class SubheadlineInput extends React.Component<{updateInputScreenUi:Function}> {
-
-    handleInputMenuUpdate = () => {
+const SubheadlineInput = props => {
+    const handleInputMenuUpdate = () => {
         const dispatch = "MENU"
       //  console.log(dispatch)
-        this.props.updateInputScreenUi(dispatch);
+        props.updateInputScreenState(dispatch);
     };
 
 
-    render() {
-       return( 
+        return( 
         <Container>
             <HeaderImage src="/logo_fible.png" alt="my image"></HeaderImage>
-            <BackImage src="/back.svg" onClick={this.handleInputMenuUpdate}></BackImage>
+            <BackImage src="/back.svg" onClick={handleInputMenuUpdate}></BackImage>
             <Headline>Subheadline Input</Headline>
             <InputWrapper>
                 <StyledTextArea/>
@@ -31,17 +29,17 @@ class SubheadlineInput extends React.Component<{updateInputScreenUi:Function}> {
             </FontSizeDiv>
         </Container>
         
-       )}
+        )
 
 }
 
 const mapStateToProps = state => {
-    return {selectorState:state.data ,updateInputScreenUi:state.updateInputScreenUi};
-  };
+    return {selectorState:state.data ,updateInputScreenState:state.updateInputScreenState};
+};
   
   
   
-export default connect(mapStateToProps,{ updateInputScreenUi })(SubheadlineInput);
+export default connect(mapStateToProps,{ updateInputScreenState })(SubheadlineInput);
   
 
 const Container = styled.div`

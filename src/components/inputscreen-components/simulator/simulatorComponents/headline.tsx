@@ -2,67 +2,79 @@ import styled from 'styled-components';
 import React from 'react';
 import { connect } from 'react-redux';
 import { Draggable } from 'react-beautiful-dnd'
-import { updateSimulatorSelection, updateInputScreenUi} from '../../../../lib/redux/actions/uiActions'
+import { updateSimulatorSelectionState, updateInputScreenState } from '../../../../lib/redux/actions/uiActions';
 import { setSelectedComponent } from '../../../../lib/redux/actions/dataActions'
 import { addOrUpdateHeadline, emptySelectedComponent } from '../../../../lib/redux/actions/dataActions'
 import TextareaAutosize from 'react-autosize-textarea';
+import { useMutation } from '@apollo/react-hooks';
+import { syncInputScreenDataMutation } from '../../../../lib/sync';
 
 
 
-class Headline extends React.Component<{component:any, index:any,uiState:any,dataState:any, addOrUpdateHeadline:Function, updateSimulatorSelection:Function, setSelectedComponent:Function, updateInputScreenUi:Function}> {
-    handleSelection = () => {
-        let selectedComponentId = this.props.component.id
-        if(this.props.component.id != this.props.uiState.simulator.selected){
-        this.props.updateSimulatorSelection({selectedComponentId})
-        this.props.setSelectedComponent({selectedComponentId})
-        this.props.updateInputScreenUi("HEADLINE_INPUT")
+const Headline = props => {
+    const [syncInputScreen,resp] = useMutation(syncInputScreenDataMutation)
+
+    const handleSelection = (props) => {
+        let selectedComponentId = props.component.id
+        if(props.component.id != props.uiState.inputScreen.simulator.selectedComponentId){
+            syncInputScreen({variables:{
+                components:
+                JSON.stringify(props.dataState.inputScreen.components),
+                htype:JSON.stringify(props.dataState.inputScreen[props.dataState.inputScreen.selectedHtype])
+            }})
+        props.updateSimulatorSelectionState({selectedComponentId})
+        props.setSelectedComponent({selectedComponentId})
+        props.updateInputScreenState("HEADLINE_INPUT")
         } else {
         selectedComponentId = "empty"
-        this.props.updateSimulatorSelection({selectedComponentId})
-        this.props.setSelectedComponent({selectedComponentId})
-        this.props.updateInputScreenUi("MENU")
+        props.updateSimulatorSelectionState({selectedComponentId})
+        props.setSelectedComponent({selectedComponentId})
+        props.updateInputScreenState("MENU")
         }
     }
-    handleKeyDown(e) {
+    /*
+    const handleKeyDown = (e) => {
         e.target.style.height = 'inherit';
         e.target.style.height = `${e.target.scrollHeight}px`; 
         // In case you have a limitation
         // e.target.style.height = `${Math.min(e.target.scrollHeight, limit)}px`;
-      }
+    }
     
 
-    handleHeadline = (e) => {
-        const type = this.props.uiState.menu.htype
+    const handleHeadline = (e) => {
+        const type = props.uiState.menu.htype
         const headline = e.target.value
-        const selectedHtypeId = this.props.dataState.selectedHtypeId
-        const selectedComponentId = this.props.dataState.selectedComponentId
+        const selectedHtypeId = props.dataState.selectedHtypeId
+        const selectedComponentId = props.dataState.selectedComponentId
         const dispatch = "UPDATE_HEADLINE"
-        this.props.addOrUpdateHeadline({ type, headline, selectedHtypeId, dispatch, selectedComponentId })
+        props.addOrUpdateHeadline({ type, headline, selectedHtypeId, dispatch, selectedComponentId })
     }
-
-    render() {
-        return (<Draggable draggableId={this.props.component.id} index={this.props.index}>
+    */
+    
+        return (<Draggable draggableId={props.component.id} index={props.index}>
         {provided =>( 
         <Container
-            key = {this.props.component.id}
+            key = {props.component.id}
             {...provided.draggableProps}
             {...provided.dragHandleProps}
             ref={provided.innerRef}
-            onClick={this.handleSelection}
-            datatype={this.props.component.id == this.props.uiState.simulator.selected ? "-0.2vh":"0" }
-            property={this.props.component.id == this.props.uiState.simulator.selected ? "dashed":"none" }
+            onClick={() => handleSelection(props)}
+            datatype={props.component.id == props.uiState.inputScreen.simulator.selectedComponentId ? "-0.2vh":"0" }
+            property={props.component.id == props.uiState.inputScreen.simulator.selectedComponentId ? "dashed":"none" }
             >
-            <HeadlineText>{JSON.parse(this.props.component.content).headline}</HeadlineText>
+                <HeadlineText>{JSON.parse(props.component.content).headline}</HeadlineText>
         </Container>
         )
         }
     </Draggable>)
-    }
+    
 }
+//            <HeadlineText>{JSON.parse(props.component.content).headline}</HeadlineText>
 
 const mapStateToProps = state => {
-    return { uiState: state.ui, dataState: state.data };
+    return { uiState: state.ui, dataState: state.data, updateInputScreenState: state.updateInputScreenState, updateSimulatorSelectionState:state.updateSimulatorSelectionState};
 };
+export default connect(mapStateToProps,{updateSimulatorSelectionState, setSelectedComponent, updateInputScreenState,addOrUpdateHeadline})(Headline);
 
 
 const Container = styled.div`
@@ -112,5 +124,4 @@ const HeadlineText2 = styled.textarea`
     }
 `
 
-export default connect(mapStateToProps,{updateSimulatorSelection, setSelectedComponent, updateInputScreenUi,addOrUpdateHeadline})(Headline);
 

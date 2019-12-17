@@ -1,59 +1,62 @@
 import React from 'react';
 import styled from 'styled-components';
-import { addOrUpdateHeadline, emptySelectedComponent } from '../../../lib/redux/actions/dataActions'
-import { updateInputScreenUi, updateSimulatorSelection } from '../../../lib/redux/actions/uiActions'
+import { addOrUpdateHeadline, emptySelectedComponent, dataUpdateComponent } from '../../../lib/redux/actions/dataActions';
+import { updateInputScreenState, updateSimulatorSelectionState } from '../../../lib/redux/actions/uiActions';
 import { connect } from 'react-redux';
 import TextareaAutosize from 'react-autosize-textarea';
+import { prepInputScreenDataForSync, syncInputScreenDataMutation } from '../../../lib/sync';
+import { useMutation } from '@apollo/react-hooks';
 
 
-class HeadlineInput extends React.Component<{ updateInputScreenUi: Function, dataState: any, uiState: any, addOrUpdateHeadline: Function, emptySelectedComponent: Function, updateSimulatorSelection:Function }> {
-
-    handleInputMenuUpdate = () => {
+const HeadlineInput = props => {
+    const [syncInputScreen,resp] = useMutation(syncInputScreenDataMutation)
+    const handleInputMenuUpdate = async () => {
         const dispatch = "MENU"
         //  console.log(dispatch)
-        this.props.updateInputScreenUi(dispatch);
-        this.props.emptySelectedComponent();
+    
+        syncInputScreen({variables:{
+            components:
+            JSON.stringify(props.dataState.inputScreen.components),
+            htype:JSON.stringify(props.dataState.inputScreen[props.dataState.inputScreen.selectedHtype])
+        }})
+
+        props.updateInputScreenState(dispatch);
+        props.emptySelectedComponent();
         const selectedComponentId = "empty"
-        this.props.updateSimulatorSelection({selectedComponentId})
+        props.updateSimulatorSelectionState({selectedComponentId})
     };
 
-    handleHeadline = (e) => {
-        const type = this.props.uiState.inputMenu.htype
+    const handleHeadline = (e) => {
+        const type = props.uiState.inputScreen.inputMenu.htype
         const headline = e.target.value
-        const selectedHtypeId = this.props.dataState.selectedHtypeId
-        let dispatch = ""
-        const selectedComponentId = this.props.dataState.selectedComponentId
-        if(selectedComponentId == "empty") {
-            dispatch = "ADD_HEADLINE" 
-        }else {
-            dispatch = "UPDATE_HEADLINE"
-        }
-        this.props.addOrUpdateHeadline({ type, headline, selectedHtypeId, dispatch, selectedComponentId })
-        if(selectedComponentId != this.props.uiState.simulator.selectedComponentId) {
+        const selectedHtypeId = props.dataState.inputScreen.selectedHtypeId
+        let dispatch = "UPDATE_HEADLINE"
+        const content = '{"headline":"'+headline+'"}'
+        const selectedComponentId = props.dataState.inputScreen.selectedComponentId
+        props.dataUpdateComponent({ htype:type, content:content, selectedHtypeId:selectedHtypeId, dispatch:dispatch, selectedComponentId:selectedComponentId})
+        if(selectedComponentId != props.uiState.inputScreen.simulator.selectedComponentId) {
             const input = "YES"
-            this.props.updateSimulatorSelection({selectedComponentId, input})
+            props.updateSimulatorSelectionState({selectedComponentId, input})
         }
 
     }
-    showText = () => {
+    const showText = () => {
         let showText;
-        return this.props.dataState[this.props.uiState.inputMenu.htype][this.props.dataState.selectedHtypeId] != undefined &&
-            this.props.dataState[this.props.uiState.inputMenu.htype][this.props.dataState.selectedHtypeId].components[this.props.dataState.selectedComponentId] != undefined ?
-            showText = this.props.dataState[this.props.uiState.inputMenu.htype][this.props.dataState.selectedHtypeId].components[this.props.dataState.selectedComponentId].headline :
+        return props.dataState[props.uiState.inputMenu.htype][props.dataState.selectedHtypeId] != undefined &&
+            props.dataState[props.uiState.inputMenu.htype][props.dataState.selectedHtypeId].components[props.dataState.selectedComponentId] != undefined ?
+            showText = props.dataState[props.uiState.inputMenu.htype][props.dataState.selectedHtypeId].components[props.dataState.selectedComponentId].headline :
             showText = ""
 
     }
-    render() {
-
         return (
             <Container>
                 <HeaderImage src="/logo_fible.png" alt="my image"></HeaderImage>
-                <BackImage src="/back.svg" onClick={this.handleInputMenuUpdate}></BackImage>
+                <BackImage src="/back.svg" onClick={() => handleInputMenuUpdate()}></BackImage>
                 <Headline>Headline Input</Headline>
                 <InputWrapper>
-                    <StyledTextArea maxRows={10} onChange={(e) => this.handleHeadline(e)} value={this.props.dataState[this.props.uiState.inputMenu.htype][this.props.dataState.selectedHtypeId] != undefined &&
-                        this.props.dataState[this.props.uiState.inputMenu.htype][this.props.dataState.selectedHtypeId].components[this.props.dataState.selectedComponentId] != undefined ?
-                        this.props.dataState[this.props.uiState.inputMenu.htype][this.props.dataState.selectedHtypeId].components[this.props.dataState.selectedComponentId].headline :
+                    <StyledTextArea maxRows={10} onChange={(e) => handleHeadline(e)} value={props.dataState.inputScreen.components[props.dataState.inputScreen.selectedComponentId] != undefined &&
+                        props.dataState.inputScreen.components[props.dataState.inputScreen.selectedComponentId].content != undefined ?
+                        JSON.parse(props.dataState.inputScreen.components[props.dataState.inputScreen.selectedComponentId].content).headline :
                         ""} />
                 </InputWrapper>
                 <FontSizeDiv>
@@ -65,17 +68,17 @@ class HeadlineInput extends React.Component<{ updateInputScreenUi: Function, dat
             </Container>
 
         )
-    }
+    
 
 }
 
 const mapStateToProps = state => {
-    return { dataState: state.data, uiState: state.ui, updateInputScreenUi: state.updateInputScreenUi };
+    return { dataState: state.data, uiState: state.ui, addOrUpdateHeadline: state.addOrUpdateHeadline, updateInputScreenState: state.updateInputScreenState, updateSimulatorSelectionState:state.updateSimulatorSelectionState };
 };
 
 
 
-export default connect(mapStateToProps, { updateInputScreenUi, addOrUpdateHeadline, emptySelectedComponent, updateSimulatorSelection })(HeadlineInput);
+export default connect(mapStateToProps, { dataUpdateComponent,updateInputScreenState, addOrUpdateHeadline, emptySelectedComponent, updateSimulatorSelectionState })(HeadlineInput);
 
 
 const Container = styled.div`
