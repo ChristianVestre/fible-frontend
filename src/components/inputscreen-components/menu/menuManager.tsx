@@ -7,7 +7,6 @@ import SubheadlineInput from './subheadlineInput';
 
 const MenuManager = props => {
     const menuChoice = (props) => {
-        console.log(props.uiState)
             switch(props.uiState.inputScreen.inputMenu.show){
                 case("MENU"): {
                     return<Menu/>

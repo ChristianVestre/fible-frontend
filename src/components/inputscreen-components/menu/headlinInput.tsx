@@ -14,11 +14,11 @@ const HeadlineInput = props => {
         const dispatch = "MENU"
         //  console.log(dispatch)
     
-        syncInputScreen({variables:{
+     /*   syncInputScreen({variables:{
             components:
             JSON.stringify(props.dataState.inputScreen.components),
             htype:JSON.stringify(props.dataState.inputScreen[props.dataState.inputScreen.selectedHtype])
-        }})
+        }})*/   
 
         props.updateInputScreenState(dispatch);
         props.emptySelectedComponent();

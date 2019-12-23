@@ -8,6 +8,8 @@ import {updateComponentsOrder} from '../../../lib/redux/actions/dataActions'
 
 
 const Simulator = props => {
+    console.log(props)
+    
     const componentCreator = props => {
         return props.dataState.inputScreen[props.uiState.inputScreen.simulator.show][props.dataState.inputScreen.selectedHtypeId].components.length > 0 ?
         props.dataState.inputScreen[props.uiState.inputScreen.simulator.show][props.dataState.inputScreen.selectedHtypeId].components.map((id,index) =>{

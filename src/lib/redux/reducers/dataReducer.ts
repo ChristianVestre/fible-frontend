@@ -6,7 +6,8 @@ import {
     INITIALIZE_INPUTSCREEN_DATA, LOAD_ROUTEMGMT_DATA, LOAD_INPUTSCREEN_DATA,
     UPDATE_STOP_AND_POI_DATA,
     DATA_ADD_NEW_COMPONENT,
-    DATA_UPDATE_COMPONENT
+    DATA_UPDATE_COMPONENT,
+    DATA_HANDLE_HTYPE_NAME_CHANGE
 } from "../actions/types";
 import uuid from "uuid/v4";
 import Cookie from 'js-cookie';
@@ -93,6 +94,8 @@ export default function (state = initialState, action) {
                 const {componentsArray} = action.payload.content;
                 console.log(componentsArray)
                 const htypeid = htypeData[htype].id;
+                console.log(action.payload.content)
+
                 let components = componentsArray.reduce((result, attri) => { 
                         if(attri){
                         result[attri.id] = attri;
@@ -118,13 +121,7 @@ export default function (state = initialState, action) {
                         ...state[htype+"s"],
                         //taking the first two letters of the hierarchy type and combining it with a unique id of length 8
                         [htypeid]: {
-                            //take the name of the account owner
-                            //saved:false,
-                            id:htypeid,
-                            owner: user.name,
-                            //name to be filled out when the route is finished
-                            name: "",
-                            components: componentIdsArray,
+                            ...htypeData[htype]
                         }
                     },
                     components:{
@@ -204,18 +201,13 @@ export default function (state = initialState, action) {
             case DATA_ADD_NEW_COMPONENT:{
                 const {htype} = action.payload.content
                 const {selectedHtypeId} = action.payload.content
-                const {type} = action.payload.content
-                const {user} = action.payload.content
-                const idSuffix = type.substring(0,2).toLowerCase() + "_"
-                const selectedComponentId = idSuffix + uuid()
-                //console.log(action.payload.content)
-                //console.log(state.inputScreen[htype])
-                const newComponentsArray =  [...state.inputScreen[htype][selectedHtypeId].components,selectedComponentId]
+                const {component} = action.payload.content;
+                const newComponentsArray =  [...state.inputScreen[htype][selectedHtypeId].components,component.id]
                 return {
                     ...state,
                     inputScreen:{
                         ...state.inputScreen,
-                        selectedComponentId: selectedComponentId,
+                        selectedComponentId:component.id,
                         [htype]: {
                             ...state.inputScreen[htype],
                             [selectedHtypeId]: {
@@ -225,13 +217,8 @@ export default function (state = initialState, action) {
                         },
                         components: {
                             ...state.inputScreen.components,
-                            [selectedComponentId]: {
-                                id: selectedComponentId,
-                                onwnerId:user.id,
-                                ownerName:user.name,
-                                parentId:selectedHtypeId,
-                                type: type,
-                                content: "{}"
+                            [component.id]:{
+                                ...component
                             }
                         },
                     }
@@ -288,16 +275,36 @@ export default function (state = initialState, action) {
                         }
                     }
                 }
+                case DATA_HANDLE_HTYPE_NAME_CHANGE:{
+                    const {newName} = action.payload.content
+                    const {htypeId} = action.payload.content
+                    const {htype} = action.payload.content
+                    return {
+                        ...state,
+                        inputScreen:{
+                            ...state.inputScreen,
+                            [htype]:{
+                                ...state.inputScreen[htype],
+                                [htypeId]:{
+                                    ...state.inputScreen[htype][htypeId],
+                                    name:newName
+                                }
+                            }
+                        }
+                        
+                    }
+                }
+
             default:
                     return state
         }
+        
 
     }
 
 
 
     const initialState = {
-
         routeMgmt: {
             user: {
                 name: "",
@@ -312,7 +319,6 @@ export default function (state = initialState, action) {
         },
         inputScreen: {
             user: {
-
             },
             selectedHtypeId: "",
             selectedComponentId: "empty",

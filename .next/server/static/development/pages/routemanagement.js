@@ -101,7 +101,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 6);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -114,6 +114,17 @@ module.exports =
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(/*! core-js/library/fn/array/from */ "core-js/library/fn/array/from");
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime-corejs2/core-js/json/stringify.js":
+/*!***********************************************************************!*\
+  !*** ./node_modules/@babel/runtime-corejs2/core-js/json/stringify.js ***!
+  \***********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(/*! core-js/library/fn/json/stringify */ "core-js/library/fn/json/stringify");
 
 /***/ }),
 
@@ -2487,32 +2498,34 @@ if (false) {} else {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/extends */ "./node_modules/@babel/runtime-corejs2/helpers/esm/extends.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! styled-components */ "styled-components");
-/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(styled_components__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _selectorItem__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./selectorItem */ "./src/components/route-management/selectorItem.tsx");
-/* harmony import */ var react_beautiful_dnd__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-beautiful-dnd */ "react-beautiful-dnd");
-/* harmony import */ var react_beautiful_dnd__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_beautiful_dnd__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @fortawesome/react-fontawesome */ "@fortawesome/react-fontawesome");
-/* harmony import */ var _fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "@fortawesome/free-solid-svg-icons");
-/* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! next/router */ "next/router");
-/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _lib_redux_actions_uiActions__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../lib/redux/actions/uiActions */ "./src/lib/redux/actions/uiActions.ts");
-/* harmony import */ var _lib_redux_actions_dataActions__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../lib/redux/actions/dataActions */ "./src/lib/redux/actions/dataActions.ts");
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react-redux */ "react-redux");
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! js-cookie */ "js-cookie");
-/* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(js_cookie__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/json/stringify */ "./node_modules/@babel/runtime-corejs2/core-js/json/stringify.js");
+/* harmony import */ var _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! styled-components */ "styled-components");
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(styled_components__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _selectorItem__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./selectorItem */ "./src/components/route-management/selectorItem.tsx");
+/* harmony import */ var react_beautiful_dnd__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-beautiful-dnd */ "react-beautiful-dnd");
+/* harmony import */ var react_beautiful_dnd__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_beautiful_dnd__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @fortawesome/react-fontawesome */ "@fortawesome/react-fontawesome");
+/* harmony import */ var _fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "@fortawesome/free-solid-svg-icons");
+/* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! next/router */ "next/router");
+/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _lib_redux_actions_uiActions__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../lib/redux/actions/uiActions */ "./src/lib/redux/actions/uiActions.ts");
+/* harmony import */ var _lib_redux_actions_dataActions__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../lib/redux/actions/dataActions */ "./src/lib/redux/actions/dataActions.ts");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! react-redux */ "react-redux");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_11__);
 /* harmony import */ var _apollo_react_hooks__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @apollo/react-hooks */ "@apollo/react-hooks");
 /* harmony import */ var _apollo_react_hooks__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(_apollo_react_hooks__WEBPACK_IMPORTED_MODULE_12__);
 /* harmony import */ var graphql_tag__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! graphql-tag */ "graphql-tag");
 /* harmony import */ var graphql_tag__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(graphql_tag__WEBPACK_IMPORTED_MODULE_13__);
+/* harmony import */ var _lib_createFunctions__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../lib/createFunctions */ "./src/lib/createFunctions.ts");
+
 
 var _jsxFileName = "/home/christian/Development/fible-frontend/src/components/route-management/selector.tsx";
-var __jsx = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement;
+var __jsx = react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement;
 
 
 
@@ -2526,24 +2539,24 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement;
 
 
 
-const Container = styled_components__WEBPACK_IMPORTED_MODULE_2___default.a.div.withConfig({
+const Container = styled_components__WEBPACK_IMPORTED_MODULE_3___default.a.div.withConfig({
   displayName: "selector__Container",
   componentId: "sc-1ihwjbd-0"
 })(["margin:1em;border:1px solid lightgray;border-radius:2em;width:100%;height:100%;position:relative;"]);
-const Title = styled_components__WEBPACK_IMPORTED_MODULE_2___default.a.h1.withConfig({
+const Title = styled_components__WEBPACK_IMPORTED_MODULE_3___default.a.h1.withConfig({
   displayName: "selector__Title",
   componentId: "sc-1ihwjbd-1"
 })(["padding:8px;"]);
-const RouteList = styled_components__WEBPACK_IMPORTED_MODULE_2___default.a.div.withConfig({
+const RouteList = styled_components__WEBPACK_IMPORTED_MODULE_3___default.a.div.withConfig({
   displayName: "selector__RouteList",
   componentId: "sc-1ihwjbd-2"
 })(["padding:8px;"]);
 
 const Selector = props => {
-  const [addRoute, {
+  const [setRoute, {
     data
   }] = Object(_apollo_react_hooks__WEBPACK_IMPORTED_MODULE_12__["useMutation"])(graphql_tag__WEBPACK_IMPORTED_MODULE_13___default.a`
-    mutation setRoute{setRoute{
+    mutation setRoute($route:String!){setRoute(route:$route){
         id
     }
     }
@@ -2560,11 +2573,17 @@ const Selector = props => {
       props.initializeInputScreenUi({
         dispatch: props.type
       });
-      const route = await addRoute();
-      console.log(data);
-      console.log(route.data.setRoute.id);
-      js_cookie__WEBPACK_IMPORTED_MODULE_11___default.a.set("hid", route.data.setRoute.id);
-      next_router__WEBPACK_IMPORTED_MODULE_7___default.a.push({
+      const route = Object(_lib_createFunctions__WEBPACK_IMPORTED_MODULE_14__["createRoute"])({
+        user: props.dataState.routeMgmt.user,
+        type: "routes"
+      });
+      await setRoute({
+        variables: {
+          route: _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_1___default()(route)
+        }
+      });
+      sessionStorage.setItem("hid", route.id);
+      next_router__WEBPACK_IMPORTED_MODULE_8___default.a.push({
         pathname: '/inputscreen'
       });
     } else {
@@ -2592,7 +2611,7 @@ const Selector = props => {
       lineNumber: 70
     },
     __self: undefined
-  }, props.type.substring(0, 1).toUpperCase() + props.type.substring(1)), __jsx(react_beautiful_dnd__WEBPACK_IMPORTED_MODULE_4__["Droppable"], {
+  }, props.type.substring(0, 1).toUpperCase() + props.type.substring(1)), __jsx(react_beautiful_dnd__WEBPACK_IMPORTED_MODULE_5__["Droppable"], {
     droppableId: props.type,
     __source: {
       fileName: _jsxFileName,
@@ -2607,7 +2626,7 @@ const Selector = props => {
       lineNumber: 73
     },
     __self: undefined
-  }), props.listItems.map((itemData, index) => __jsx(_selectorItem__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  }), props.listItems.map((itemData, index) => __jsx(_selectorItem__WEBPACK_IMPORTED_MODULE_4__["default"], {
     key: itemData.id,
     type: props.type,
     itemData: itemData,
@@ -2624,8 +2643,8 @@ const Selector = props => {
       lineNumber: 82
     },
     __self: undefined
-  }, __jsx(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_5__["FontAwesomeIcon"], {
-    icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faPlus"],
+  }, __jsx(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_6__["FontAwesomeIcon"], {
+    icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_7__["faPlus"],
     __source: {
       fileName: _jsxFileName,
       lineNumber: 83
@@ -2644,13 +2663,13 @@ const mapStateToProps = state => {
 }; //export default Selector
 
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_10__["connect"])(mapStateToProps, {
-  initializeInputScreenUi: _lib_redux_actions_uiActions__WEBPACK_IMPORTED_MODULE_8__["initializeInputScreenUi"],
-  initializeInputScreenData: _lib_redux_actions_dataActions__WEBPACK_IMPORTED_MODULE_9__["initializeInputScreenData"],
-  loadStopAndPoiManagerState: _lib_redux_actions_uiActions__WEBPACK_IMPORTED_MODULE_8__["loadStopAndPoiManagerState"],
-  setTitle: _lib_redux_actions_uiActions__WEBPACK_IMPORTED_MODULE_8__["setTitle"]
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_11__["connect"])(mapStateToProps, {
+  initializeInputScreenUi: _lib_redux_actions_uiActions__WEBPACK_IMPORTED_MODULE_9__["initializeInputScreenUi"],
+  initializeInputScreenData: _lib_redux_actions_dataActions__WEBPACK_IMPORTED_MODULE_10__["initializeInputScreenData"],
+  loadStopAndPoiManagerState: _lib_redux_actions_uiActions__WEBPACK_IMPORTED_MODULE_9__["loadStopAndPoiManagerState"],
+  setTitle: _lib_redux_actions_uiActions__WEBPACK_IMPORTED_MODULE_9__["setTitle"]
 })(Selector));
-const InputScreenButton = styled_components__WEBPACK_IMPORTED_MODULE_2___default.a.button.withConfig({
+const InputScreenButton = styled_components__WEBPACK_IMPORTED_MODULE_3___default.a.button.withConfig({
   displayName: "selector__InputScreenButton",
   componentId: "sc-1ihwjbd-3"
 })(["position:absolute;bottom:0;right:0;font-size:6vh;border:0;color:none;background-color:transparent;:focus{outline:none;}"]);
@@ -2720,7 +2739,8 @@ const SelectorItem = props => {
   const handleEditRoutes = async e => {
     e.stopPropagation();
     e.nativeEvent.stopImmediatePropagation();
-    js_cookie__WEBPACK_IMPORTED_MODULE_9___default.a.set("hid", props.itemData.id); // Cookie.
+    js_cookie__WEBPACK_IMPORTED_MODULE_9___default.a.set("hid", props.itemData.id);
+    sessionStorage.setItem("hid", props.itemData.id); // Cookie.
     //  const resp = await getHtypeWithComponents()
 
     const selectedId = props.itemData.id;
@@ -2749,7 +2769,7 @@ const SelectorItem = props => {
     index: props.index,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 52
+      lineNumber: 53
     },
     __self: undefined
   }, provided => __jsx(Container, Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, provided.draggableProps, provided.dragHandleProps, {
@@ -2759,27 +2779,27 @@ const SelectorItem = props => {
     color: props.itemData.id == props.uiState.routeMgmt.selector["selected" + props.type] ? "salmon" : "lightgray",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 54
+      lineNumber: 55
     },
     __self: undefined
   }), __jsx(Headline, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 62
+      lineNumber: 63
     },
     __self: undefined
   }, props.itemData.name), __jsx(EditButton, {
     onClick: e => handleEditRoutes(e),
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 63
+      lineNumber: 64
     },
     __self: undefined
   }, __jsx(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_4__["FontAwesomeIcon"], {
     icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__["faEdit"],
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 64
+      lineNumber: 65
     },
     __self: undefined
   }))));
@@ -4098,6 +4118,66 @@ const withAuth = C => {
 
 /***/ }),
 
+/***/ "./src/lib/createFunctions.ts":
+/*!************************************!*\
+  !*** ./src/lib/createFunctions.ts ***!
+  \************************************/
+/*! exports provided: createComponent, createRoute */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createComponent", function() { return createComponent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createRoute", function() { return createRoute; });
+/* harmony import */ var uuid_v4__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! uuid/v4 */ "uuid/v4");
+/* harmony import */ var uuid_v4__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(uuid_v4__WEBPACK_IMPORTED_MODULE_0__);
+
+const createComponent = ({
+  user,
+  type,
+  selectedHtypeId
+}) => {
+  const idSuffix = type.substring(0, 2).toLowerCase() + "_";
+  const selectedComponentId = idSuffix + uuid_v4__WEBPACK_IMPORTED_MODULE_0___default()();
+  let componentTemplate;
+
+  switch (type) {
+    case "HEADLINE":
+      {
+        componentTemplate = '{"headline":"New Headline"}';
+      }
+  }
+
+  return {
+    id: selectedComponentId,
+    onwnerId: user.id,
+    ownerName: user.name,
+    parentId: selectedHtypeId,
+    type: type,
+    content: componentTemplate
+  };
+};
+const createRoute = ({
+  user,
+  type
+}) => {
+  const idSuffix = type.substring(0, 2).toLowerCase() + "_";
+  const routeId = idSuffix + uuid_v4__WEBPACK_IMPORTED_MODULE_0___default()();
+  return {
+    id: routeId,
+    onwnerId: user.id,
+    ownerName: user.name,
+    name: "New Route",
+    image: "",
+    stops: [],
+    pois: [],
+    components: [],
+    locations: []
+  };
+};
+
+/***/ }),
+
 /***/ "./src/lib/redirect.ts":
 /*!*****************************!*\
   !*** ./src/lib/redirect.ts ***!
@@ -4130,7 +4210,7 @@ __webpack_require__.r(__webpack_exports__);
 /*!**********************************************!*\
   !*** ./src/lib/redux/actions/dataActions.ts ***!
   \**********************************************/
-/*! exports provided: initializeHtype, deleteHtype, emptySelectedComponent, setSelectedComponent, updateComponentsOrder, cleanNonsavedHtypes, loadUser, loadHtypeData, loadComponents, cleanUser, initializeInputScreen, initializeInputScreenData, loadRouteMgmtData, loadInputScreenData, updateStopAndPoiData, addOrUpdateHeadline, dataUpdateComponent, dataAddNewComponent */
+/*! exports provided: initializeHtype, deleteHtype, emptySelectedComponent, setSelectedComponent, updateComponentsOrder, cleanNonsavedHtypes, loadUser, loadHtypeData, loadComponents, cleanUser, initializeInputScreen, initializeInputScreenData, loadRouteMgmtData, loadInputScreenData, updateStopAndPoiData, addOrUpdateHeadline, dataUpdateComponent, dataAddNewComponent, dataHandleHtypeNameChange */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4153,6 +4233,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addOrUpdateHeadline", function() { return addOrUpdateHeadline; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "dataUpdateComponent", function() { return dataUpdateComponent; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "dataAddNewComponent", function() { return dataAddNewComponent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "dataHandleHtypeNameChange", function() { return dataHandleHtypeNameChange; });
 /* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./types */ "./src/lib/redux/actions/types.ts");
 
 let headlineId = 0;
@@ -4173,6 +4254,7 @@ let loadInputScreenDataId = 0;
 let updateStopAndPoiDataId = 0;
 let dataUpdateComponentId = 0;
 let dataAddNewComponentId = 0;
+let dataHandleHtypeNameChangeId = 0;
 const initializeHtype = content => ({
   type: _types__WEBPACK_IMPORTED_MODULE_0__["INITIALIZE_HTYPE"],
   payload: {
@@ -4291,6 +4373,13 @@ const dataAddNewComponent = content => ({
     content
   }
 });
+const dataHandleHtypeNameChange = content => ({
+  type: _types__WEBPACK_IMPORTED_MODULE_0__["DATA_HANDLE_HTYPE_NAME_CHANGE"],
+  payload: {
+    id: ++dataHandleHtypeNameChangeId,
+    content
+  }
+});
 
 /***/ }),
 
@@ -4298,7 +4387,7 @@ const dataAddNewComponent = content => ({
 /*!****************************************!*\
   !*** ./src/lib/redux/actions/types.ts ***!
   \****************************************/
-/*! exports provided: REMOVE_ROUTE, UPDATE_ROUTE_STATE, UPDATE_SELECTOR_MANAGER_STATE, INITIALIZE_INPUT_SCREEN_UI, HEADLINE, INITIALIZE_HTYPE, DELETE_HTYPE, EMPTY_SELECTED_COMPONENT_ID, UPDATE_SIMULATOR_SELECTION, SET_SELECTED_COMPONENT, UPDATE_COMPONENTS_ORDER, CLEAN_NONSAVED_HTYPES, STOP_AND_POI_MANAGER_CONTROLLER, SET_TITLE, LOAD_USER, CLEAN_USER, LOAD_HTYPE_DATA, INITIALIZE_INPUTSCREEN, INITIALIZE_INPUTSCREEN_DATA, LOAD_ROUTEMGMT_DATA, LOAD_INPUTSCREEN_DATA, UPDATE_STOP_AND_POI_DATA, UPDATE_ROUTEMGMT_STATE, LOAD_STOP_AND_POI_MANAGER_STATE, UPDATE_INPUT_SCREEN_STATE, UPDATE_SIMULATOR_SELECTION_STATE, DATA_UPDATE_COMPONENT, DATA_ADD_NEW_COMPONENT */
+/*! exports provided: REMOVE_ROUTE, UPDATE_ROUTE_STATE, UPDATE_SELECTOR_MANAGER_STATE, INITIALIZE_INPUT_SCREEN_UI, HEADLINE, INITIALIZE_HTYPE, DELETE_HTYPE, EMPTY_SELECTED_COMPONENT_ID, UPDATE_SIMULATOR_SELECTION, SET_SELECTED_COMPONENT, UPDATE_COMPONENTS_ORDER, CLEAN_NONSAVED_HTYPES, STOP_AND_POI_MANAGER_CONTROLLER, SET_TITLE, LOAD_USER, CLEAN_USER, LOAD_HTYPE_DATA, INITIALIZE_INPUTSCREEN, INITIALIZE_INPUTSCREEN_DATA, LOAD_ROUTEMGMT_DATA, LOAD_INPUTSCREEN_DATA, UPDATE_STOP_AND_POI_DATA, DATA_HANDLE_HTYPE_NAME_CHANGE, DATA_UPDATE_COMPONENT, DATA_ADD_NEW_COMPONENT, UPDATE_ROUTEMGMT_STATE, LOAD_STOP_AND_POI_MANAGER_STATE, UPDATE_INPUT_SCREEN_STATE, UPDATE_SIMULATOR_SELECTION_STATE */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4325,12 +4414,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOAD_ROUTEMGMT_DATA", function() { return LOAD_ROUTEMGMT_DATA; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOAD_INPUTSCREEN_DATA", function() { return LOAD_INPUTSCREEN_DATA; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE_STOP_AND_POI_DATA", function() { return UPDATE_STOP_AND_POI_DATA; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DATA_HANDLE_HTYPE_NAME_CHANGE", function() { return DATA_HANDLE_HTYPE_NAME_CHANGE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DATA_UPDATE_COMPONENT", function() { return DATA_UPDATE_COMPONENT; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DATA_ADD_NEW_COMPONENT", function() { return DATA_ADD_NEW_COMPONENT; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE_ROUTEMGMT_STATE", function() { return UPDATE_ROUTEMGMT_STATE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOAD_STOP_AND_POI_MANAGER_STATE", function() { return LOAD_STOP_AND_POI_MANAGER_STATE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE_INPUT_SCREEN_STATE", function() { return UPDATE_INPUT_SCREEN_STATE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE_SIMULATOR_SELECTION_STATE", function() { return UPDATE_SIMULATOR_SELECTION_STATE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DATA_UPDATE_COMPONENT", function() { return DATA_UPDATE_COMPONENT; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DATA_ADD_NEW_COMPONENT", function() { return DATA_ADD_NEW_COMPONENT; });
 const REMOVE_ROUTE = "REMOVE_ROUTE";
 const UPDATE_ROUTE_STATE = "UPDATE_ROUTE_STATE";
 const UPDATE_SELECTOR_MANAGER_STATE = "UPDATE_SELECTOR_MANAGER_STATE";
@@ -4354,14 +4444,15 @@ const INITIALIZE_INPUTSCREEN = "INITIALIZE_INPUTSCREEN"; //.--------------------
 const INITIALIZE_INPUTSCREEN_DATA = "INITIALIZE_INPUTSCREEN_DATA";
 const LOAD_ROUTEMGMT_DATA = "LOAD_ROUTEMGMT_DATA";
 const LOAD_INPUTSCREEN_DATA = "LOAD_INPUTSCREEN_DATA";
-const UPDATE_STOP_AND_POI_DATA = "UPDATE_STOP_AND_POI_DATA"; //-----UI-------
+const UPDATE_STOP_AND_POI_DATA = "UPDATE_STOP_AND_POI_DATA";
+const DATA_HANDLE_HTYPE_NAME_CHANGE = "DATA_HANDLE_HTYPE_NAME_CHANGE";
+const DATA_UPDATE_COMPONENT = "DATA_UPDATE_COMPONENT";
+const DATA_ADD_NEW_COMPONENT = "DATA_ADD_NEW_COMPONENT"; //-----UI-------
 
 const UPDATE_ROUTEMGMT_STATE = "UPDATE_ROUTEMGMT_STATE";
 const LOAD_STOP_AND_POI_MANAGER_STATE = "LOAD_STOP_AND_POI_MANAGER_STATE";
 const UPDATE_INPUT_SCREEN_STATE = "UPDATE_INPUT_SCREEN_STATE";
 const UPDATE_SIMULATOR_SELECTION_STATE = "UPDATE_SIMULATOR_SELECTION_STATE";
-const DATA_UPDATE_COMPONENT = "DATA_UPDATE_COMPONENT";
-const DATA_ADD_NEW_COMPONENT = "DATA_ADD_NEW_COMPONENT";
 
 /***/ }),
 
@@ -4600,6 +4691,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
         } = action.payload.content;
         console.log(componentsArray);
         const htypeid = htypeData[htype].id;
+        console.log(action.payload.content);
         let components = componentsArray.reduce((result, attri) => {
           if (attri) {
             result[attri.id] = attri;
@@ -4621,15 +4713,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
             selectedHtype: htype + "s",
             [htype + "s"]: _objectSpread({}, state[htype + "s"], {
               //taking the first two letters of the hierarchy type and combining it with a unique id of length 8
-              [htypeid]: {
-                //take the name of the account owner
-                //saved:false,
-                id: htypeid,
-                owner: user.name,
-                //name to be filled out when the route is finished
-                name: "",
-                components: componentIdsArray
-              }
+              [htypeid]: _objectSpread({}, htypeData[htype])
             }),
             components: _objectSpread({}, components)
           })
@@ -4721,33 +4805,19 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
           selectedHtypeId
         } = action.payload.content;
         const {
-          type
+          component
         } = action.payload.content;
-        const {
-          user
-        } = action.payload.content;
-        const idSuffix = type.substring(0, 2).toLowerCase() + "_";
-        const selectedComponentId = idSuffix + uuid_v4__WEBPACK_IMPORTED_MODULE_8___default()(); //console.log(action.payload.content)
-        //console.log(state.inputScreen[htype])
-
-        const newComponentsArray = [...state.inputScreen[htype][selectedHtypeId].components, selectedComponentId];
+        const newComponentsArray = [...state.inputScreen[htype][selectedHtypeId].components, component.id];
         return _objectSpread({}, state, {
           inputScreen: _objectSpread({}, state.inputScreen, {
-            selectedComponentId: selectedComponentId,
+            selectedComponentId: component.id,
             [htype]: _objectSpread({}, state.inputScreen[htype], {
               [selectedHtypeId]: _objectSpread({}, state.inputScreen[htype][selectedHtypeId], {
                 components: newComponentsArray
               })
             }),
             components: _objectSpread({}, state.inputScreen.components, {
-              [selectedComponentId]: {
-                id: selectedComponentId,
-                onwnerId: user.id,
-                ownerName: user.name,
-                parentId: selectedHtypeId,
-                type: type,
-                content: "{}"
-              }
+              [component.id]: _objectSpread({}, component)
             })
           })
         });
@@ -4802,6 +4872,28 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
         return _objectSpread({}, state, {
           inputScreen: _objectSpread({}, state.inputScreen, {
             selectedComponentId: selectedComponentId
+          })
+        });
+      }
+
+    case _actions_types__WEBPACK_IMPORTED_MODULE_7__["DATA_HANDLE_HTYPE_NAME_CHANGE"]:
+      {
+        const {
+          newName
+        } = action.payload.content;
+        const {
+          htypeId
+        } = action.payload.content;
+        const {
+          htype
+        } = action.payload.content;
+        return _objectSpread({}, state, {
+          inputScreen: _objectSpread({}, state.inputScreen, {
+            [htype]: _objectSpread({}, state.inputScreen[htype], {
+              [htypeId]: _objectSpread({}, state.inputScreen[htype][htypeId], {
+                name: newName
+              })
+            })
           })
         });
       }
@@ -5904,7 +5996,8 @@ RouteManagement.getInitialProps = async ({
   reduxStore
 }) => {
   const routesQuery = graphql_tag__WEBPACK_IMPORTED_MODULE_11___default.a`query getHtypes 
-    {   getRoutes{id ownerid name components}
+    {   
+        getRoutes{id ownerid name components}
         getPois{id ownerid name components}
         getStops{id ownerid name components}
     }`;
@@ -5958,7 +6051,7 @@ const Container = styled_components__WEBPACK_IMPORTED_MODULE_1___default.a.div.w
 
 /***/ }),
 
-/***/ 3:
+/***/ 6:
 /*!*********************************************!*\
   !*** multi ./src/pages/routemanagement.tsx ***!
   \*********************************************/
@@ -6077,6 +6170,17 @@ module.exports = require("cookie");
 /***/ (function(module, exports) {
 
 module.exports = require("core-js/library/fn/array/from");
+
+/***/ }),
+
+/***/ "core-js/library/fn/json/stringify":
+/*!****************************************************!*\
+  !*** external "core-js/library/fn/json/stringify" ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("core-js/library/fn/json/stringify");
 
 /***/ }),
 

@@ -27,6 +27,7 @@ const SelectorItem = props => {
         e.stopPropagation()
         e.nativeEvent.stopImmediatePropagation();
         Cookie.set("hid", props.itemData.id)
+        sessionStorage.setItem("hid",props.itemData.id)
         // Cookie.
       //  const resp = await getHtypeWithComponents()
 

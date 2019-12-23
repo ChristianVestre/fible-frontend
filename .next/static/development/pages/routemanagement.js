@@ -960,6 +960,17 @@ module.exports = __webpack_require__(/*! core-js/library/fn/is-iterable */ "./no
 
 /***/ }),
 
+/***/ "./node_modules/@babel/runtime-corejs2/core-js/json/stringify.js":
+/*!***********************************************************************!*\
+  !*** ./node_modules/@babel/runtime-corejs2/core-js/json/stringify.js ***!
+  \***********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(/*! core-js/library/fn/json/stringify */ "./node_modules/core-js/library/fn/json/stringify.js");
+
+/***/ }),
+
 /***/ "./node_modules/@babel/runtime-corejs2/core-js/map.js":
 /*!************************************************************!*\
   !*** ./node_modules/@babel/runtime-corejs2/core-js/map.js ***!
@@ -17669,6 +17680,22 @@ module.exports = __webpack_require__(/*! ../modules/core.get-iterator */ "./node
 __webpack_require__(/*! ../modules/web.dom.iterable */ "./node_modules/core-js/library/modules/web.dom.iterable.js");
 __webpack_require__(/*! ../modules/es6.string.iterator */ "./node_modules/core-js/library/modules/es6.string.iterator.js");
 module.exports = __webpack_require__(/*! ../modules/core.is-iterable */ "./node_modules/core-js/library/modules/core.is-iterable.js");
+
+
+/***/ }),
+
+/***/ "./node_modules/core-js/library/fn/json/stringify.js":
+/*!***********************************************************!*\
+  !*** ./node_modules/core-js/library/fn/json/stringify.js ***!
+  \***********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var core = __webpack_require__(/*! ../../modules/_core */ "./node_modules/core-js/library/modules/_core.js");
+var $JSON = core.JSON || (core.JSON = { stringify: JSON.stringify });
+module.exports = function stringify(it) { // eslint-disable-line no-unused-vars
+  return $JSON.stringify.apply($JSON, arguments);
+};
 
 
 /***/ }),
@@ -48879,36 +48906,38 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/extends */ "./node_modules/@babel/runtime-corejs2/helpers/esm/extends.js");
 /* harmony import */ var _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime-corejs2/regenerator */ "./node_modules/@babel/runtime-corejs2/regenerator/index.js");
 /* harmony import */ var _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/asyncToGenerator */ "./node_modules/@babel/runtime-corejs2/helpers/esm/asyncToGenerator.js");
-/* harmony import */ var _babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/taggedTemplateLiteral */ "./node_modules/@babel/runtime-corejs2/helpers/esm/taggedTemplateLiteral.js");
-/* harmony import */ var _babel_runtime_corejs2_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/slicedToArray */ "./node_modules/@babel/runtime-corejs2/helpers/esm/slicedToArray.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
-/* harmony import */ var _selectorItem__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./selectorItem */ "./src/components/route-management/selectorItem.tsx");
-/* harmony import */ var react_beautiful_dnd__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-beautiful-dnd */ "./node_modules/react-beautiful-dnd/dist/react-beautiful-dnd.esm.js");
-/* harmony import */ var _fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
-/* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
-/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! next/router */ "./node_modules/next/dist/client/router.js");
-/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_11__);
-/* harmony import */ var _lib_redux_actions_uiActions__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../lib/redux/actions/uiActions */ "./src/lib/redux/actions/uiActions.ts");
-/* harmony import */ var _lib_redux_actions_dataActions__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../lib/redux/actions/dataActions */ "./src/lib/redux/actions/dataActions.ts");
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! js-cookie */ "./node_modules/js-cookie/src/js.cookie.js");
-/* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(js_cookie__WEBPACK_IMPORTED_MODULE_15__);
+/* harmony import */ var _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/json/stringify */ "./node_modules/@babel/runtime-corejs2/core-js/json/stringify.js");
+/* harmony import */ var _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/asyncToGenerator */ "./node_modules/@babel/runtime-corejs2/helpers/esm/asyncToGenerator.js");
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/taggedTemplateLiteral */ "./node_modules/@babel/runtime-corejs2/helpers/esm/taggedTemplateLiteral.js");
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/slicedToArray */ "./node_modules/@babel/runtime-corejs2/helpers/esm/slicedToArray.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
+/* harmony import */ var _selectorItem__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./selectorItem */ "./src/components/route-management/selectorItem.tsx");
+/* harmony import */ var react_beautiful_dnd__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react-beautiful-dnd */ "./node_modules/react-beautiful-dnd/dist/react-beautiful-dnd.esm.js");
+/* harmony import */ var _fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
+/* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
+/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! next/router */ "./node_modules/next/dist/client/router.js");
+/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_12__);
+/* harmony import */ var _lib_redux_actions_uiActions__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../lib/redux/actions/uiActions */ "./src/lib/redux/actions/uiActions.ts");
+/* harmony import */ var _lib_redux_actions_dataActions__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../lib/redux/actions/dataActions */ "./src/lib/redux/actions/dataActions.ts");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _apollo_react_hooks__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @apollo/react-hooks */ "./node_modules/@apollo/react-hooks/lib/react-hooks.esm.js");
 /* harmony import */ var graphql_tag__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! graphql-tag */ "./node_modules/graphql-tag/src/index.js");
 /* harmony import */ var graphql_tag__WEBPACK_IMPORTED_MODULE_17___default = /*#__PURE__*/__webpack_require__.n(graphql_tag__WEBPACK_IMPORTED_MODULE_17__);
+/* harmony import */ var _lib_createFunctions__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../../lib/createFunctions */ "./src/lib/createFunctions.ts");
+
 
 
 
 
 
 var _jsxFileName = "/home/christian/Development/fible-frontend/src/components/route-management/selector.tsx";
-var __jsx = react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement;
+var __jsx = react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement;
 
 function _templateObject() {
-  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_3__["default"])(["\n    mutation setRoute{setRoute{\n        id\n    }\n    }\n    "]);
+  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_4__["default"])(["\n    mutation setRoute($route:String!){setRoute(route:$route){\n        id\n    }\n    }\n    "]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -48930,29 +48959,29 @@ function _templateObject() {
 
 
 
-var Container = styled_components__WEBPACK_IMPORTED_MODULE_6__["default"].div.withConfig({
+var Container = styled_components__WEBPACK_IMPORTED_MODULE_7__["default"].div.withConfig({
   displayName: "selector__Container",
   componentId: "sc-1ihwjbd-0"
 })(["margin:1em;border:1px solid lightgray;border-radius:2em;width:100%;height:100%;position:relative;"]);
-var Title = styled_components__WEBPACK_IMPORTED_MODULE_6__["default"].h1.withConfig({
+var Title = styled_components__WEBPACK_IMPORTED_MODULE_7__["default"].h1.withConfig({
   displayName: "selector__Title",
   componentId: "sc-1ihwjbd-1"
 })(["padding:8px;"]);
-var RouteList = styled_components__WEBPACK_IMPORTED_MODULE_6__["default"].div.withConfig({
+var RouteList = styled_components__WEBPACK_IMPORTED_MODULE_7__["default"].div.withConfig({
   displayName: "selector__RouteList",
   componentId: "sc-1ihwjbd-2"
 })(["padding:8px;"]);
 
 var Selector = function Selector(props) {
   var _useMutation = Object(_apollo_react_hooks__WEBPACK_IMPORTED_MODULE_16__["useMutation"])(graphql_tag__WEBPACK_IMPORTED_MODULE_17___default()(_templateObject())),
-      _useMutation2 = Object(_babel_runtime_corejs2_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_4__["default"])(_useMutation, 2),
-      addRoute = _useMutation2[0],
+      _useMutation2 = Object(_babel_runtime_corejs2_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_5__["default"])(_useMutation, 2),
+      setRoute = _useMutation2[0],
       data = _useMutation2[1].data;
 
   var handleInputScreenButton =
   /*#__PURE__*/
   function () {
-    var _ref = Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2__["default"])(
+    var _ref = Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_3__["default"])(
     /*#__PURE__*/
     _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.mark(function _callee(props) {
       var route, firstLetter, rest, title;
@@ -48963,7 +48992,7 @@ var Selector = function Selector(props) {
               console.log(props.type);
 
               if (!(props.type == "routes")) {
-                _context.next = 13;
+                _context.next = 11;
                 break;
               }
 
@@ -48974,21 +49003,26 @@ var Selector = function Selector(props) {
               props.initializeInputScreenUi({
                 dispatch: props.type
               });
-              _context.next = 6;
-              return addRoute();
+              route = Object(_lib_createFunctions__WEBPACK_IMPORTED_MODULE_18__["createRoute"])({
+                user: props.dataState.routeMgmt.user,
+                type: "routes"
+              });
+              _context.next = 7;
+              return setRoute({
+                variables: {
+                  route: _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_2___default()(route)
+                }
+              });
 
-            case 6:
-              route = _context.sent;
-              console.log(data);
-              console.log(route.data.setRoute.id);
-              js_cookie__WEBPACK_IMPORTED_MODULE_15___default.a.set("hid", route.data.setRoute.id);
-              next_router__WEBPACK_IMPORTED_MODULE_11___default.a.push({
+            case 7:
+              sessionStorage.setItem("hid", route.id);
+              next_router__WEBPACK_IMPORTED_MODULE_12___default.a.push({
                 pathname: '/inputscreen'
               });
-              _context.next = 18;
+              _context.next = 16;
               break;
 
-            case 13:
+            case 11:
               props.loadStopAndPoiManagerState({
                 htype: props.type
               });
@@ -48999,7 +49033,7 @@ var Selector = function Selector(props) {
                 title: title
               });
 
-            case 18:
+            case 16:
             case "end":
               return _context.stop();
           }
@@ -49024,7 +49058,7 @@ var Selector = function Selector(props) {
       lineNumber: 70
     },
     __self: this
-  }, props.type.substring(0, 1).toUpperCase() + props.type.substring(1)), __jsx(react_beautiful_dnd__WEBPACK_IMPORTED_MODULE_8__["Droppable"], {
+  }, props.type.substring(0, 1).toUpperCase() + props.type.substring(1)), __jsx(react_beautiful_dnd__WEBPACK_IMPORTED_MODULE_9__["Droppable"], {
     droppableId: props.type,
     __source: {
       fileName: _jsxFileName,
@@ -49041,7 +49075,7 @@ var Selector = function Selector(props) {
       },
       __self: this
     }), props.listItems.map(function (itemData, index) {
-      return __jsx(_selectorItem__WEBPACK_IMPORTED_MODULE_7__["default"], {
+      return __jsx(_selectorItem__WEBPACK_IMPORTED_MODULE_8__["default"], {
         key: itemData.id,
         type: props.type,
         itemData: itemData,
@@ -49062,8 +49096,8 @@ var Selector = function Selector(props) {
       lineNumber: 82
     },
     __self: this
-  }, __jsx(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_9__["FontAwesomeIcon"], {
-    icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_10__["faPlus"],
+  }, __jsx(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_10__["FontAwesomeIcon"], {
+    icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_11__["faPlus"],
     __source: {
       fileName: _jsxFileName,
       lineNumber: 83
@@ -49082,13 +49116,13 @@ var mapStateToProps = function mapStateToProps(state) {
 }; //export default Selector
 
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_14__["connect"])(mapStateToProps, {
-  initializeInputScreenUi: _lib_redux_actions_uiActions__WEBPACK_IMPORTED_MODULE_12__["initializeInputScreenUi"],
-  initializeInputScreenData: _lib_redux_actions_dataActions__WEBPACK_IMPORTED_MODULE_13__["initializeInputScreenData"],
-  loadStopAndPoiManagerState: _lib_redux_actions_uiActions__WEBPACK_IMPORTED_MODULE_12__["loadStopAndPoiManagerState"],
-  setTitle: _lib_redux_actions_uiActions__WEBPACK_IMPORTED_MODULE_12__["setTitle"]
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_15__["connect"])(mapStateToProps, {
+  initializeInputScreenUi: _lib_redux_actions_uiActions__WEBPACK_IMPORTED_MODULE_13__["initializeInputScreenUi"],
+  initializeInputScreenData: _lib_redux_actions_dataActions__WEBPACK_IMPORTED_MODULE_14__["initializeInputScreenData"],
+  loadStopAndPoiManagerState: _lib_redux_actions_uiActions__WEBPACK_IMPORTED_MODULE_13__["loadStopAndPoiManagerState"],
+  setTitle: _lib_redux_actions_uiActions__WEBPACK_IMPORTED_MODULE_13__["setTitle"]
 })(Selector));
-var InputScreenButton = styled_components__WEBPACK_IMPORTED_MODULE_6__["default"].button.withConfig({
+var InputScreenButton = styled_components__WEBPACK_IMPORTED_MODULE_7__["default"].button.withConfig({
   displayName: "selector__InputScreenButton",
   componentId: "sc-1ihwjbd-3"
 })(["position:absolute;bottom:0;right:0;font-size:6vh;border:0;color:none;background-color:transparent;:focus{outline:none;}"]);
@@ -49176,7 +49210,8 @@ var SelectorItem = function SelectorItem(props) {
             case 0:
               e.stopPropagation();
               e.nativeEvent.stopImmediatePropagation();
-              js_cookie__WEBPACK_IMPORTED_MODULE_13___default.a.set("hid", props.itemData.id); // Cookie.
+              js_cookie__WEBPACK_IMPORTED_MODULE_13___default.a.set("hid", props.itemData.id);
+              sessionStorage.setItem("hid", props.itemData.id); // Cookie.
               //  const resp = await getHtypeWithComponents()
 
               selectedId = props.itemData.id;
@@ -49190,7 +49225,7 @@ var SelectorItem = function SelectorItem(props) {
               } //'inputscreen'
               ); //  Router.replace('/routemanagement','/inputscreen')
 
-            case 6:
+            case 7:
             case "end":
               return _context.stop();
           }
@@ -49217,7 +49252,7 @@ var SelectorItem = function SelectorItem(props) {
     index: props.index,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 52
+      lineNumber: 53
     },
     __self: this
   }, function (provided) {
@@ -49230,13 +49265,13 @@ var SelectorItem = function SelectorItem(props) {
       color: props.itemData.id == props.uiState.routeMgmt.selector["selected" + props.type] ? "salmon" : "lightgray",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 54
+        lineNumber: 55
       },
       __self: this
     }), __jsx(Headline, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 62
+        lineNumber: 63
       },
       __self: this
     }, props.itemData.name), __jsx(EditButton, {
@@ -49245,14 +49280,14 @@ var SelectorItem = function SelectorItem(props) {
       },
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 63
+        lineNumber: 64
       },
       __self: this
     }, __jsx(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_8__["FontAwesomeIcon"], {
       icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_9__["faEdit"],
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 64
+        lineNumber: 65
       },
       __self: this
     })));
@@ -50762,6 +50797,64 @@ var withAuth = function withAuth(C) {
 
 /***/ }),
 
+/***/ "./src/lib/createFunctions.ts":
+/*!************************************!*\
+  !*** ./src/lib/createFunctions.ts ***!
+  \************************************/
+/*! exports provided: createComponent, createRoute */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createComponent", function() { return createComponent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createRoute", function() { return createRoute; });
+/* harmony import */ var uuid_v4__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! uuid/v4 */ "./node_modules/uuid/v4.js");
+/* harmony import */ var uuid_v4__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(uuid_v4__WEBPACK_IMPORTED_MODULE_0__);
+
+var createComponent = function createComponent(_ref) {
+  var user = _ref.user,
+      type = _ref.type,
+      selectedHtypeId = _ref.selectedHtypeId;
+  var idSuffix = type.substring(0, 2).toLowerCase() + "_";
+  var selectedComponentId = idSuffix + uuid_v4__WEBPACK_IMPORTED_MODULE_0___default()();
+  var componentTemplate;
+
+  switch (type) {
+    case "HEADLINE":
+      {
+        componentTemplate = '{"headline":"New Headline"}';
+      }
+  }
+
+  return {
+    id: selectedComponentId,
+    onwnerId: user.id,
+    ownerName: user.name,
+    parentId: selectedHtypeId,
+    type: type,
+    content: componentTemplate
+  };
+};
+var createRoute = function createRoute(_ref2) {
+  var user = _ref2.user,
+      type = _ref2.type;
+  var idSuffix = type.substring(0, 2).toLowerCase() + "_";
+  var routeId = idSuffix + uuid_v4__WEBPACK_IMPORTED_MODULE_0___default()();
+  return {
+    id: routeId,
+    onwnerId: user.id,
+    ownerName: user.name,
+    name: "New Route",
+    image: "",
+    stops: [],
+    pois: [],
+    components: [],
+    locations: []
+  };
+};
+
+/***/ }),
+
 /***/ "./src/lib/redirect.ts":
 /*!*****************************!*\
   !*** ./src/lib/redirect.ts ***!
@@ -50794,7 +50887,7 @@ __webpack_require__.r(__webpack_exports__);
 /*!**********************************************!*\
   !*** ./src/lib/redux/actions/dataActions.ts ***!
   \**********************************************/
-/*! exports provided: initializeHtype, deleteHtype, emptySelectedComponent, setSelectedComponent, updateComponentsOrder, cleanNonsavedHtypes, loadUser, loadHtypeData, loadComponents, cleanUser, initializeInputScreen, initializeInputScreenData, loadRouteMgmtData, loadInputScreenData, updateStopAndPoiData, addOrUpdateHeadline, dataUpdateComponent, dataAddNewComponent */
+/*! exports provided: initializeHtype, deleteHtype, emptySelectedComponent, setSelectedComponent, updateComponentsOrder, cleanNonsavedHtypes, loadUser, loadHtypeData, loadComponents, cleanUser, initializeInputScreen, initializeInputScreenData, loadRouteMgmtData, loadInputScreenData, updateStopAndPoiData, addOrUpdateHeadline, dataUpdateComponent, dataAddNewComponent, dataHandleHtypeNameChange */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -50817,6 +50910,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addOrUpdateHeadline", function() { return addOrUpdateHeadline; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "dataUpdateComponent", function() { return dataUpdateComponent; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "dataAddNewComponent", function() { return dataAddNewComponent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "dataHandleHtypeNameChange", function() { return dataHandleHtypeNameChange; });
 /* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./types */ "./src/lib/redux/actions/types.ts");
 
 var headlineId = 0;
@@ -50837,6 +50931,7 @@ var loadInputScreenDataId = 0;
 var updateStopAndPoiDataId = 0;
 var dataUpdateComponentId = 0;
 var dataAddNewComponentId = 0;
+var dataHandleHtypeNameChangeId = 0;
 var initializeHtype = function initializeHtype(content) {
   return {
     type: _types__WEBPACK_IMPORTED_MODULE_0__["INITIALIZE_HTYPE"],
@@ -50991,6 +51086,15 @@ var dataAddNewComponent = function dataAddNewComponent(content) {
     }
   };
 };
+var dataHandleHtypeNameChange = function dataHandleHtypeNameChange(content) {
+  return {
+    type: _types__WEBPACK_IMPORTED_MODULE_0__["DATA_HANDLE_HTYPE_NAME_CHANGE"],
+    payload: {
+      id: ++dataHandleHtypeNameChangeId,
+      content: content
+    }
+  };
+};
 
 /***/ }),
 
@@ -50998,7 +51102,7 @@ var dataAddNewComponent = function dataAddNewComponent(content) {
 /*!****************************************!*\
   !*** ./src/lib/redux/actions/types.ts ***!
   \****************************************/
-/*! exports provided: REMOVE_ROUTE, UPDATE_ROUTE_STATE, UPDATE_SELECTOR_MANAGER_STATE, INITIALIZE_INPUT_SCREEN_UI, HEADLINE, INITIALIZE_HTYPE, DELETE_HTYPE, EMPTY_SELECTED_COMPONENT_ID, UPDATE_SIMULATOR_SELECTION, SET_SELECTED_COMPONENT, UPDATE_COMPONENTS_ORDER, CLEAN_NONSAVED_HTYPES, STOP_AND_POI_MANAGER_CONTROLLER, SET_TITLE, LOAD_USER, CLEAN_USER, LOAD_HTYPE_DATA, INITIALIZE_INPUTSCREEN, INITIALIZE_INPUTSCREEN_DATA, LOAD_ROUTEMGMT_DATA, LOAD_INPUTSCREEN_DATA, UPDATE_STOP_AND_POI_DATA, UPDATE_ROUTEMGMT_STATE, LOAD_STOP_AND_POI_MANAGER_STATE, UPDATE_INPUT_SCREEN_STATE, UPDATE_SIMULATOR_SELECTION_STATE, DATA_UPDATE_COMPONENT, DATA_ADD_NEW_COMPONENT */
+/*! exports provided: REMOVE_ROUTE, UPDATE_ROUTE_STATE, UPDATE_SELECTOR_MANAGER_STATE, INITIALIZE_INPUT_SCREEN_UI, HEADLINE, INITIALIZE_HTYPE, DELETE_HTYPE, EMPTY_SELECTED_COMPONENT_ID, UPDATE_SIMULATOR_SELECTION, SET_SELECTED_COMPONENT, UPDATE_COMPONENTS_ORDER, CLEAN_NONSAVED_HTYPES, STOP_AND_POI_MANAGER_CONTROLLER, SET_TITLE, LOAD_USER, CLEAN_USER, LOAD_HTYPE_DATA, INITIALIZE_INPUTSCREEN, INITIALIZE_INPUTSCREEN_DATA, LOAD_ROUTEMGMT_DATA, LOAD_INPUTSCREEN_DATA, UPDATE_STOP_AND_POI_DATA, DATA_HANDLE_HTYPE_NAME_CHANGE, DATA_UPDATE_COMPONENT, DATA_ADD_NEW_COMPONENT, UPDATE_ROUTEMGMT_STATE, LOAD_STOP_AND_POI_MANAGER_STATE, UPDATE_INPUT_SCREEN_STATE, UPDATE_SIMULATOR_SELECTION_STATE */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -51025,12 +51129,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOAD_ROUTEMGMT_DATA", function() { return LOAD_ROUTEMGMT_DATA; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOAD_INPUTSCREEN_DATA", function() { return LOAD_INPUTSCREEN_DATA; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE_STOP_AND_POI_DATA", function() { return UPDATE_STOP_AND_POI_DATA; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DATA_HANDLE_HTYPE_NAME_CHANGE", function() { return DATA_HANDLE_HTYPE_NAME_CHANGE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DATA_UPDATE_COMPONENT", function() { return DATA_UPDATE_COMPONENT; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DATA_ADD_NEW_COMPONENT", function() { return DATA_ADD_NEW_COMPONENT; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE_ROUTEMGMT_STATE", function() { return UPDATE_ROUTEMGMT_STATE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOAD_STOP_AND_POI_MANAGER_STATE", function() { return LOAD_STOP_AND_POI_MANAGER_STATE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE_INPUT_SCREEN_STATE", function() { return UPDATE_INPUT_SCREEN_STATE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE_SIMULATOR_SELECTION_STATE", function() { return UPDATE_SIMULATOR_SELECTION_STATE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DATA_UPDATE_COMPONENT", function() { return DATA_UPDATE_COMPONENT; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DATA_ADD_NEW_COMPONENT", function() { return DATA_ADD_NEW_COMPONENT; });
 var REMOVE_ROUTE = "REMOVE_ROUTE";
 var UPDATE_ROUTE_STATE = "UPDATE_ROUTE_STATE";
 var UPDATE_SELECTOR_MANAGER_STATE = "UPDATE_SELECTOR_MANAGER_STATE";
@@ -51054,14 +51159,15 @@ var INITIALIZE_INPUTSCREEN = "INITIALIZE_INPUTSCREEN"; //.----------------------
 var INITIALIZE_INPUTSCREEN_DATA = "INITIALIZE_INPUTSCREEN_DATA";
 var LOAD_ROUTEMGMT_DATA = "LOAD_ROUTEMGMT_DATA";
 var LOAD_INPUTSCREEN_DATA = "LOAD_INPUTSCREEN_DATA";
-var UPDATE_STOP_AND_POI_DATA = "UPDATE_STOP_AND_POI_DATA"; //-----UI-------
+var UPDATE_STOP_AND_POI_DATA = "UPDATE_STOP_AND_POI_DATA";
+var DATA_HANDLE_HTYPE_NAME_CHANGE = "DATA_HANDLE_HTYPE_NAME_CHANGE";
+var DATA_UPDATE_COMPONENT = "DATA_UPDATE_COMPONENT";
+var DATA_ADD_NEW_COMPONENT = "DATA_ADD_NEW_COMPONENT"; //-----UI-------
 
 var UPDATE_ROUTEMGMT_STATE = "UPDATE_ROUTEMGMT_STATE";
 var LOAD_STOP_AND_POI_MANAGER_STATE = "LOAD_STOP_AND_POI_MANAGER_STATE";
 var UPDATE_INPUT_SCREEN_STATE = "UPDATE_INPUT_SCREEN_STATE";
 var UPDATE_SIMULATOR_SELECTION_STATE = "UPDATE_SIMULATOR_SELECTION_STATE";
-var DATA_UPDATE_COMPONENT = "DATA_UPDATE_COMPONENT";
-var DATA_ADD_NEW_COMPONENT = "DATA_ADD_NEW_COMPONENT";
 
 /***/ }),
 
@@ -51306,6 +51412,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
         var componentsArray = action.payload.content.componentsArray;
         console.log(componentsArray);
         var _htypeid = htypeData[_htype].id;
+        console.log(action.payload.content);
         var components = componentsArray.reduce(function (result, attri) {
           if (attri) {
             result[attri.id] = attri;
@@ -51325,15 +51432,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
             user: _objectSpread({}, _user2),
             selectedHtypeId: _htypeid,
             selectedHtype: _htype + "s"
-          }, Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_7__["default"])(_objectSpread6, _htype + "s", _objectSpread({}, state[_htype + "s"], Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_7__["default"])({}, _htypeid, {
-            //take the name of the account owner
-            //saved:false,
-            id: _htypeid,
-            owner: _user2.name,
-            //name to be filled out when the route is finished
-            name: "",
-            components: componentIdsArray
-          }))), Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_7__["default"])(_objectSpread6, "components", _objectSpread({}, components)), _objectSpread6))
+          }, Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_7__["default"])(_objectSpread6, _htype + "s", _objectSpread({}, state[_htype + "s"], Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_7__["default"])({}, _htypeid, _objectSpread({}, htypeData[_htype])))), Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_7__["default"])(_objectSpread6, "components", _objectSpread({}, components)), _objectSpread6))
         });
       }
 
@@ -51404,36 +51503,24 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
         var _htype3 = action.payload.content.htype;
         var selectedHtypeId = action.payload.content.selectedHtypeId;
-        var type = action.payload.content.type;
-        var _user3 = action.payload.content.user;
-        var idSuffix = type.substring(0, 2).toLowerCase() + "_";
-        var selectedComponentId = idSuffix + uuid_v4__WEBPACK_IMPORTED_MODULE_9___default()(); //console.log(action.payload.content)
-        //console.log(state.inputScreen[htype])
-
-        var newComponentsArray = [].concat(Object(_babel_runtime_corejs2_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_5__["default"])(state.inputScreen[_htype3][selectedHtypeId].components), [selectedComponentId]);
+        var component = action.payload.content.component;
+        var newComponentsArray = [].concat(Object(_babel_runtime_corejs2_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_5__["default"])(state.inputScreen[_htype3][selectedHtypeId].components), [component.id]);
         return _objectSpread({}, state, {
           inputScreen: _objectSpread({}, state.inputScreen, (_objectSpread12 = {
-            selectedComponentId: selectedComponentId
+            selectedComponentId: component.id
           }, Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_7__["default"])(_objectSpread12, _htype3, _objectSpread({}, state.inputScreen[_htype3], Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_7__["default"])({}, selectedHtypeId, _objectSpread({}, state.inputScreen[_htype3][selectedHtypeId], {
             components: newComponentsArray
-          })))), Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_7__["default"])(_objectSpread12, "components", _objectSpread({}, state.inputScreen.components, Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_7__["default"])({}, selectedComponentId, {
-            id: selectedComponentId,
-            onwnerId: _user3.id,
-            ownerName: _user3.name,
-            parentId: selectedHtypeId,
-            type: type,
-            content: "{}"
-          }))), _objectSpread12))
+          })))), Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_7__["default"])(_objectSpread12, "components", _objectSpread({}, state.inputScreen.components, Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_7__["default"])({}, component.id, _objectSpread({}, component)))), _objectSpread12))
         });
       }
 
     case _actions_types__WEBPACK_IMPORTED_MODULE_8__["DATA_UPDATE_COMPONENT"]:
       {
         var _content = action.payload.content.content;
-        var _selectedComponentId = action.payload.content.selectedComponentId;
+        var selectedComponentId = action.payload.content.selectedComponentId;
         return _objectSpread({}, state, {
           inputScreen: _objectSpread({}, state.inputScreen, {
-            components: _objectSpread({}, state.inputScreen.components, Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_7__["default"])({}, _selectedComponentId, _objectSpread({}, state.inputScreen.components[_selectedComponentId], {
+            components: _objectSpread({}, state.inputScreen.components, Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_7__["default"])({}, selectedComponentId, _objectSpread({}, state.inputScreen.components[selectedComponentId], {
               content: _content
             })))
           })
@@ -51462,11 +51549,23 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
     case _actions_types__WEBPACK_IMPORTED_MODULE_8__["SET_SELECTED_COMPONENT"]:
       {
-        var _selectedComponentId2 = action.payload.content.selectedComponentId;
+        var _selectedComponentId = action.payload.content.selectedComponentId;
         return _objectSpread({}, state, {
           inputScreen: _objectSpread({}, state.inputScreen, {
-            selectedComponentId: _selectedComponentId2
+            selectedComponentId: _selectedComponentId
           })
+        });
+      }
+
+    case _actions_types__WEBPACK_IMPORTED_MODULE_8__["DATA_HANDLE_HTYPE_NAME_CHANGE"]:
+      {
+        var newName = action.payload.content.newName;
+        var htypeId = action.payload.content.htypeId;
+        var _htype5 = action.payload.content.htype;
+        return _objectSpread({}, state, {
+          inputScreen: _objectSpread({}, state.inputScreen, Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_7__["default"])({}, _htype5, _objectSpread({}, state.inputScreen[_htype5], Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_7__["default"])({}, htypeId, _objectSpread({}, state.inputScreen[_htype5][htypeId], {
+            name: newName
+          })))))
         });
       }
 
@@ -52536,7 +52635,7 @@ var _jsxFileName = "/home/christian/Development/fible-frontend/src/pages/routema
 var __jsx = react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement;
 
 function _templateObject() {
-  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_1__["default"])(["query getHtypes \n    {   getRoutes{id ownerid name components}\n        getPois{id ownerid name components}\n        getStops{id ownerid name components}\n    }"]);
+  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_1__["default"])(["query getHtypes \n    {   \n        getRoutes{id ownerid name components}\n        getPois{id ownerid name components}\n        getStops{id ownerid name components}\n    }"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -52697,7 +52796,7 @@ var Container = styled_components__WEBPACK_IMPORTED_MODULE_4__["default"].div.wi
 
 /***/ }),
 
-/***/ 0:
+/***/ 3:
 /*!**********************************************************************************************************************************************************************!*\
   !*** multi next-client-pages-loader?page=%2Froutemanagement&absolutePagePath=%2Fhome%2Fchristian%2FDevelopment%2Ffible-frontend%2Fsrc%2Fpages%2Froutemanagement.tsx ***!
   \**********************************************************************************************************************************************************************/
@@ -52720,5 +52819,5 @@ module.exports = dll_ef0ff7c60362f24a921f;
 
 /***/ })
 
-},[[0,"static/runtime/webpack.js"]]]);
+},[[3,"static/runtime/webpack.js"]]]);
 //# sourceMappingURL=routemanagement.js.map

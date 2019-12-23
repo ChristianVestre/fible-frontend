@@ -7,7 +7,7 @@ import Router from 'next/router'
 import {connect} from 'react-redux';
 import Link from 'next';
 import GridElement from './gridElement'
-import {deleteHtype} from '../../../lib/redux/actions/dataActions'
+import { deleteHtype, dataHandleHtypeNameChange } from '../../../lib/redux/actions/dataActions';
 
 
 const Menu = props => {
@@ -21,12 +21,25 @@ const Menu = props => {
        // props.deleteHtype({htypeid,htype})
         
     }
+    const handleRouteNameChange = (e) => {
+        props.dataHandleHtypeNameChange({newName:e.value, htype:props.uiState.inputScreen.inputMenu.htype,htypeId:props.dataState.inputScreen.selectedHtypeId })
+    }
+    const test = (e) => {
+        console.log('test')
+        console.log(e)
+    }
 
     return( 
         <Container>
                 <HeaderImage src="/logo_fible.png" alt="my image"></HeaderImage>
                 <BackImage src="/back.svg" onClick={() => backHandler()}></BackImage>
-        <Headline>{props.uiState.inputScreen.inputMenu.htype}</Headline>
+        <Headline value=
+        {props.dataState.inputScreen[props.uiState.inputScreen.inputMenu.htype][props.dataState.inputScreen.selectedHtypeId].name}
+        onChange={(e) => {handleRouteNameChange(e)}
+        }
+        onBlur={(e) => {test(e)}}
+        />
+
         <MenuWrapper>
             {props.uiState.inputScreen.inputMenu[props.uiState.inputScreen.inputMenu.htype].map((elem) => {return <GridElement key={elem.id} name={elem.name} dispatch={elem.dispatch} type={elem.type}/>})}
 
@@ -43,7 +56,7 @@ const mapStateToProps = state => {
 
 
 
-export default connect(mapStateToProps,{deleteHtype})(Menu);
+export default connect(mapStateToProps,{deleteHtype, dataHandleHtypeNameChange})(Menu);
 
 
 const Container = styled.div`
@@ -68,6 +81,7 @@ const MenuWrapper = styled.div`
     bottom: 0;
 
 `
+
 /*
 const GridElement = styled.div`
     min-width: ${100 / 2}%;
@@ -79,15 +93,21 @@ const GridElement = styled.div`
 
 `
 */
-const Headline = styled.h1`
-    position: absolute;;
+const Headline = styled.input`
+    position: absolute;
+    text-align:center;
     top:10%;
     left:25%;
     transform: translate(-50%, 0); 
     margin:0;
     padding:0;
+    border: none;
+    font-size:3vh;
     font-weight:lighter;
-
+    :focus {
+        outline:none;
+        caret-color:salmon;
+    }
 `
 
 

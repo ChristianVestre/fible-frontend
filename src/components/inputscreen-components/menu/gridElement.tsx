@@ -3,23 +3,36 @@ import React from 'react'
 import { updateInputScreenState} from '../../../lib/redux/actions/uiActions'
 import {connect} from 'react-redux';
 import { dataAddNewComponent } from '../../../lib/redux/actions/dataActions';
+import { useMutation } from '@apollo/react-hooks';
+import gql from 'graphql-tag';
+import { createComponent } from '../../../lib/createFunctions';
 
 
 
 
 const GridElement = props => {
-      
+    const [setComponent,resp] = useMutation(
+      gql`mutation setComponent($component: String, $parentHtype: String!) {
+        setComponent(component: $component, parentHtype: $parentHtype ) 
+    }`
+    )
+
     
-    const handleInputMenuUpdate = (props) => {
+    const handleInputMenuUpdate =  (props) => {
         const dispatch = props.dispatch
-      //  console.log(dispatch)
-        console.log(props)
-        props.updateInputScreenState(dispatch);
-        props.dataAddNewComponent({
+        const newComponent = createComponent({
           type:props.type,
-          htype:props.dataState.inputScreen.selectedHtype,
           selectedHtypeId:props.dataState.inputScreen.selectedHtypeId,
           user:props.dataState.inputScreen.user })
+        props.dataAddNewComponent({
+          htype:props.dataState.inputScreen.selectedHtype,
+          selectedHtypeId:props.dataState.inputScreen.selectedHtypeId,
+          component: newComponent})
+        props.updateInputScreenState(dispatch);
+        setComponent({variables:
+          {parentHtype:JSON.stringify(props.dataState.inputScreen[props.dataState.inputScreen.selectedHtype][props.dataState.inputScreen.selectedHtypeId]),
+            component:JSON.stringify(newComponent)
+          }})
     };
     
   

@@ -16,6 +16,7 @@ import { HEADLINE,
   UPDATE_STOP_AND_POI_DATA,
   DATA_ADD_NEW_COMPONENT,
   DATA_UPDATE_COMPONENT,
+  DATA_HANDLE_HTYPE_NAME_CHANGE
 
 } from "./types";
 
@@ -38,6 +39,7 @@ let loadInputScreenDataId = 0;
 let updateStopAndPoiDataId = 0;
 let dataUpdateComponentId =0;
 let dataAddNewComponentId = 0;
+let dataHandleHtypeNameChangeId = 0;
 
 
 
@@ -188,3 +190,11 @@ export const dataAddNewComponent = content => ({
   }
 })
 
+
+export const dataHandleHtypeNameChange = content => ({
+  type: DATA_HANDLE_HTYPE_NAME_CHANGE,
+  payload: {
+    id:++dataHandleHtypeNameChangeId,
+    content,
+  }
+})

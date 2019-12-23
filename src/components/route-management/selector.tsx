@@ -12,6 +12,7 @@ import Cookie from 'js-cookie';
 import { ApolloClient } from 'apollo-client'
 import { useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
+import { createRoute } from '../../lib/createFunctions';
 
 
 
@@ -34,8 +35,8 @@ const RouteList = styled.div`
 
 
 const Selector = props => {
-    const [addRoute, { data }] = useMutation(gql`
-    mutation setRoute{setRoute{
+    const [setRoute, { data }] = useMutation(gql`
+    mutation setRoute($route:String!){setRoute(route:$route){
         id
     }
     }
@@ -48,10 +49,9 @@ const Selector = props => {
         if (props.type == "routes") {
             props.initializeInputScreenData({htype:props.type,user:props.dataState.routeMgmt.user})
             props.initializeInputScreenUi({ dispatch: props.type })
-            const route = await addRoute()
-            console.log(data)
-            console.log(route.data.setRoute.id)
-            Cookie.set("hid", route.data.setRoute.id)
+            const route = createRoute({user:props.dataState.routeMgmt.user, type:"routes"})
+            await setRoute({variables:{route:JSON.stringify(route)}})
+            sessionStorage.setItem("hid",route.id)
             Router.push({
                 pathname: '/inputscreen',
             })
