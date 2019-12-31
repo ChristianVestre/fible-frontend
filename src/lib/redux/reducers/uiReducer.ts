@@ -1,15 +1,18 @@
 import {
-    REMOVE_ROUTE, UPDATE_ROUTE_STATE,
-    INITIALIZE_INPUT_SCREEN_UI,
+    UI_UPDATE_ROUTE_STATE,
+    UI_INITIALIZE_INPUT_SCREEN_UI,
 
-    UPDATE_SIMULATOR_SELECTION,
-    STOP_AND_POI_MANAGER_CONTROLLER,
-    SET_TITLE,
+    UI_UPDATE_SIMULATOR_SELECTION,
+    UI_STOP_AND_POI_MANAGER_CONTROLLER,
+    UI_SET_TITLE,
 
-    UPDATE_ROUTEMGMT_STATE,
-    LOAD_STOP_AND_POI_MANAGER_STATE,
-    UPDATE_INPUT_SCREEN_STATE,
-    UPDATE_SIMULATOR_SELECTION_STATE,
+    UI_UPDATE_ROUTEMGMT_STATE,
+    UI_LOAD_STOP_AND_POI_MANAGER_STATE,
+    UI_UPDATE_INPUT_SCREEN_STATE,
+    UI_UPDATE_SIMULATOR_SELECTION_STATE,
+
+    UI_INITIALIZE_SIMULATOR_STATE,
+    UI_UPDATE_INPUT_SCREEN_FLAG
 
 
 
@@ -22,7 +25,64 @@ import {
 
 export default function (state = initialState, action) {
     switch (action.type) {
-        case UPDATE_ROUTEMGMT_STATE: {
+        case UI_LOAD_STOP_AND_POI_MANAGER_STATE: {
+            if (state.routeMgmt.selector.managerUiCode != "MAPO" && state.routeMgmt.selector.managerUiCode != "MAST") {
+                console.log(action.payload.content)
+                const htype = action.payload.content.htype
+                if (htype == "pois") {
+                    return {
+                        ...state,
+                        routeMgmt: {
+                            ...state.routeMgmt,
+                            selector: {
+                                ...state.routeMgmt.selector,
+                                lastManagerUiCode: state.routeMgmt.selector.managerUiCode,
+                                htype: htype,
+                                managerUiCode: "MAPO",
+                            }
+                        }
+                    }
+                } else {
+                    return {
+                        ...state,
+                        routeMgmt: {
+                            ...state.routeMgmt,
+                            selector: {
+                                ...state.routeMgmt.selector,
+                                lastManagerUiCode: state.routeMgmt.selector.managerUiCode,
+                                htype: htype,
+                                managerUiCode: "MAST",
+                            }
+                        }
+                    }
+                }
+            } else {
+                return {
+                    ...state,
+                    routeMgmt: {
+                        ...state.routeMgmt,
+                        selector: {
+                            ...state.routeMgmt.selector,
+                            managerUiCode: state.routeMgmt.selector.lastManagerUiCode,
+                        }
+                    }
+                }
+            }
+        }
+        case UI_INITIALIZE_SIMULATOR_STATE: {
+            const show = action.payload.content
+            return {
+                ...state,
+                inputScreen: {
+                    ...state.inputScreen,
+                    simulator:{
+                        show:show
+                    }
+                }
+            }
+        }
+        //--------------------------------------------------- update --------------------------------------------------
+        case UI_UPDATE_ROUTEMGMT_STATE: {
             const selectedId = action.payload.content.selectedId
             const htype = action.payload.content.htype
             let managerUiCode = "RO"
@@ -76,39 +136,7 @@ export default function (state = initialState, action) {
                 }
             }
         }
-
-        case LOAD_STOP_AND_POI_MANAGER_STATE: {
-            if (state.routeMgmt.selector.managerUiCode != "MA") {
-                const htype = action.payload.content.htype
-                return {
-
-                    ...state,
-                    routeMgmt: {
-                        ...state.routeMgmt,
-                        selector: {
-                            ...state.routeMgmt.selector,
-                            lastManagerUiCode: state.routeMgmt.selector.managerUiCode,
-                            htype: htype,
-                            managerUiCode: "MA",
-                        }
-
-                    }
-                }
-            } else {
-                return {
-                    ...state,
-                    routeMgmt: {
-                        ...state.routeMgmt,
-                        selector: {
-                            ...state.routeMgmt.selector,
-                            managerUiCode: state.routeMgmt.selector.lastManagerUiCode,
-                        }
-                    }
-                }
-            }
-        }
-        //--------------------------------------------------- update --------------------------------------------------
-        case UPDATE_INPUT_SCREEN_STATE: {
+        case UI_UPDATE_INPUT_SCREEN_STATE: {
             const selectedDispatch = action.payload.content
             return {
                 ...state,
@@ -123,7 +151,7 @@ export default function (state = initialState, action) {
                 }
             }
         }
-        case UPDATE_SIMULATOR_SELECTION_STATE: {
+        case UI_UPDATE_SIMULATOR_SELECTION_STATE: {
             const selectedComponentId = action.payload.content.selectedComponentId
             const input = action.payload.content.input
             if (input == "YES") {
@@ -164,10 +192,19 @@ export default function (state = initialState, action) {
                 }
             }
         }
+        case UI_UPDATE_INPUT_SCREEN_FLAG:{
+            return {
+                ...state,
+                inputScreen: {
+                    ...state.inputScreen,
+                    inputMenu: {
+                        ...state.inputScreen.inputMenu,
+                        reload: state.inputScreen.inputMenu.reload == false ? true : false,
+                    }
+                }
+            }
 
-
-
-
+        }
 
 
         default:
@@ -190,7 +227,7 @@ const initialState = {
             managerUiCode: "RO",
             htype: "",
         },
-        columnOrder: ["column-1", "column-2", "column-3"],
+        columnOrder: ["routes", "stops", "pois"],
         title: "",
     },
     inputScreen: {
@@ -198,17 +235,18 @@ const initialState = {
             htype: "routes",
             //which component is shown in the menu
             show: "MENU",
-            routes: [{ name: "Headline", id: "headlineInput", dispatch: "HEADLINE_INPUT", type:"HEADLINE" },
-            { name: "Subheadline", id: "subheadlineInput", dispatch: "SUBHEADLINE_INPUT", type:"SUBHEADLINE" },
-            { name: "Image Gallery", id: "imageGalleryInput", dispatch: "IMAGE_GALLERY_INPUT", type:"IMAGE_GALLERY" },
+            reload: true,
+            routes: [{ name: "Headline", id: "headlineInput", dispatch: "HEADLINE_INPUT", type: "HEADLINE" },
+            { name: "Subheadline", id: "subheadlineInput", dispatch: "SUBHEADLINE_INPUT", type: "SUBHEADLINE" },
+            { name: "Image Gallery", id: "imageGalleryInput", dispatch: "IMAGE_GALLERY_INPUT", type: "IMAGE_GALLERY" },
             ],
-            stops: [{ name: "Headline", id: "headlineInput", dispatch: "HEADLINE_INPUT", type:"HEADLINE" },
-            { name: "Subheadline", id: "subheadlineInput", dispatch: "SUBHEADLINE_INPUT",type:"SUBHEADLINE" },
-            { name: "Image Gallery", id: "imageGalleryInput", dispatch: "IMAGE_GALLERY_INPUT",type:"IMAGE_GALLERY"  },
+            stops: [{ name: "Headline", id: "headlineInput", dispatch: "HEADLINE_INPUT", type: "HEADLINE" },
+            { name: "Subheadline", id: "subheadlineInput", dispatch: "SUBHEADLINE_INPUT", type: "SUBHEADLINE" },
+            { name: "Image Gallery", id: "imageGalleryInput", dispatch: "IMAGE_GALLERY_INPUT", type: "IMAGE_GALLERY" },
             ],
-            pois: [{ name: "Headline", id: "headlineInput", dispatch: "HEADLINE_INPUT", type:"HEADLINE" },
-            { name: "Subheadline", id: "subheadlineInput", dispatch: "SUBHEADLINE_INPUT", type:"SUBHEADLINE" },
-            { name: "Image Gallery", id: "imageGalleryInput", dispatch: "IMAGE_GALLERY_INPUT",type:"IMAGE_GALLERY"},
+            pois: [{ name: "Headline", id: "headlineInput", dispatch: "HEADLINE_INPUT", type: "HEADLINE" },
+            { name: "Subheadline", id: "subheadlineInput", dispatch: "SUBHEADLINE_INPUT", type: "SUBHEADLINE" },
+            { name: "Image Gallery", id: "imageGalleryInput", dispatch: "IMAGE_GALLERY_INPUT", type: "IMAGE_GALLERY" },
             ]
         },
         simulator: {

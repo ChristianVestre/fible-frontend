@@ -1,175 +1,83 @@
-import { HEADLINE,
-  INITIALIZE_HTYPE,
-  DELETE_HTYPE,
-  EMPTY_SELECTED_COMPONENT_ID,
-  SET_SELECTED_COMPONENT,
-  UPDATE_COMPONENTS_ORDER,
-  CLEAN_NONSAVED_HTYPES,
-  LOAD_USER,
-  CLEAN_USER,
-  LOAD_HTYPE_DATA,
-  INITIALIZE_INPUTSCREEN,
-
-  INITIALIZE_INPUTSCREEN_DATA,
-  LOAD_ROUTEMGMT_DATA,
-  LOAD_INPUTSCREEN_DATA,
-  UPDATE_STOP_AND_POI_DATA,
-  DATA_ADD_NEW_COMPONENT,
+import { 
+  DATA_LOAD_USER,
+  DATA_LOAD_ROUTE_MGMT_DATA,
+  DATA_LOAD_INPUT_SCREEN,
+  DATA_UPDATE_COMPONENTS_ORDER,
+  DATA_UPDATE_HTYPE_ORDER,
+  DATA_UPDATE_CHILD_HTYPE_ORDER,
   DATA_UPDATE_COMPONENT,
-  DATA_HANDLE_HTYPE_NAME_CHANGE
-
+  DATA_ADD_NEW_COMPONENT,
+  DATA_EMPTY_SELECTED_COMPONENT_ID,
+  DATA_HANDLE_HTYPE_CHANGE,
+  DATA_SET_SELECTED_COMPONENT,
+  DATA_LOAD_COMPONENTS,
+  DATA_SET_SELECTED_HTYPE,
+  DATA_DELETE_SELECTED_COMPONENT
 } from "./types";
 
 
-let headlineId = 0;
-let initializeHtypeId = 0;
-let deleteHtypeId = 0;
-let emptySelectedComponentId = 0;
-let setSelectedComponentId = 0;
-let updateComponentsOrderId = 0;
-let cleanNonsavedHtypesId = 0;
-let loadUserId = 0;
-let cleanUserId = 0;
-let loadHtypeDataId = 0;
-let initializeInputscreenId = 0;
-//----
-let initializeInputScreenDataId = 0;
-let loadRouteMgmtDataId = 0;
-let loadInputScreenDataId = 0;
-let updateStopAndPoiDataId = 0;
-let dataUpdateComponentId =0;
+
+let dataLoadUserId = 0;
+let dataLoadRouteMgmtDataId = 0;
+let dataLoadInputScreenId = 0;
+let dataLoadComponentsId = 0;
+let dataUpdateComponentsOrderId = 0;
+let dataUpdateHtypeOrderId = 0;
+let dataUpdateChildHtypeOrderId = 0;
+let dataUpdateComponentId = 0;
 let dataAddNewComponentId = 0;
+let dataEmptySelectedComponentId = 0;
 let dataHandleHtypeNameChangeId = 0;
+let dataSetSelectedComponentId = 0;
+let dataSetSelectedHtypeId = 0;
+let dataDeleteSelectedComponentId = 0;
 
 
-
-
-
-
-export const initializeHtype = content => ({
-  type: INITIALIZE_HTYPE,
+export const dataLoadUser = content => ({
+  type: DATA_LOAD_USER,
   payload: {
-    id:++initializeHtypeId,
+    id: ++dataLoadUserId,
     content,
   }
-})
+});
 
-export const deleteHtype = content => ({
-  type: DELETE_HTYPE,
+
+export const dataLoadRouteMgmtData = content => ({
+  type: DATA_LOAD_ROUTE_MGMT_DATA,
   payload: {
-    id:++deleteHtypeId,
+    id: ++dataLoadRouteMgmtDataId,
+    content,
+  }
+});
+
+export const dataLoadInputScreen = content => ({
+  type: DATA_LOAD_INPUT_SCREEN,
+  payload:{
+    id: ++dataLoadInputScreenId,
     content,
   }
 })
 
-export const emptySelectedComponent = content => ({
-  type: EMPTY_SELECTED_COMPONENT_ID,
+export const dataUpdateComponentsOrder = content => ({
+  type: DATA_UPDATE_COMPONENTS_ORDER,
   payload:{
-    id:++emptySelectedComponentId,
-  }
-})
-
-export const setSelectedComponent = content => ({
-  type: SET_SELECTED_COMPONENT,
-  payload:{
-    id:++setSelectedComponentId,
-    content
-  }
-})
-
-export const updateComponentsOrder = content => ({
-  type: UPDATE_COMPONENTS_ORDER,
-  payload:{
-    id:++updateComponentsOrderId,
-    content
-  }
-})
-
-export const cleanNonsavedHtypes = () => ({
-  type: CLEAN_NONSAVED_HTYPES,
-  payload:{
-    id:++cleanNonsavedHtypesId,
-  }
-})
-
-export const loadUser = content => ({
-  type: LOAD_USER,
-  payload:{
-    id:++loadUserId,
+    id: ++dataUpdateComponentsOrderId,
     content,
   }
 })
 
-export const loadHtypeData = content => ({
-  type: LOAD_HTYPE_DATA,
+export const dataUpdateHtypeOrder = content => ({
+  type: DATA_UPDATE_HTYPE_ORDER,
   payload:{
-    id:++loadHtypeDataId,
+    id: ++dataUpdateHtypeOrderId,
     content,
   }
 })
 
-export const loadComponents = content => ({
-
-})
-
-export const cleanUser = () => ({
-  type: CLEAN_USER,
+export const dataUpdateChildHtypeOrder = content => ({
+  type:DATA_UPDATE_CHILD_HTYPE_ORDER,
   payload:{
-    id:++cleanUserId
-  }
-})
-
-export const initializeInputScreen = content => ({
-  type: INITIALIZE_INPUTSCREEN,
-  payload:{
-    id:++initializeInputscreenId,
-    content
-  }
-})
-
-//.....
-
-
-
-
-
-
-
-export const initializeInputScreenData = content => ({
-  type: INITIALIZE_INPUTSCREEN_DATA,
-  payload:{
-    id:++initializeInputScreenDataId,
-    content
-  }
-})
-
-export const loadRouteMgmtData = content => ({
-  type: LOAD_ROUTEMGMT_DATA,
-  payload:{
-    id:++loadRouteMgmtDataId,
-    content
-  }
-})
-
-export const loadInputScreenData = content => ({
-  type: LOAD_INPUTSCREEN_DATA,
-  payload:{
-    id:++loadInputScreenDataId,
-    content
-  }
-})
-
-export const updateStopAndPoiData = content => ({
-  type: UPDATE_STOP_AND_POI_DATA,
-  payload:{
-    id:++updateStopAndPoiDataId,
-    content
-  }
-})
-export const addOrUpdateHeadline = content => ({
-  type: HEADLINE,
-  payload: {
-    id:++headlineId,
+    id: ++dataUpdateChildHtypeOrderId,
     content,
   }
 })
@@ -189,12 +97,48 @@ export const dataAddNewComponent = content => ({
     content,
   }
 })
+export const dataEmptySelectedComponent = () => ({
+  type: DATA_EMPTY_SELECTED_COMPONENT_ID,
+  payload:{
+    id:++dataEmptySelectedComponentId,
+  }
+})
 
-
-export const dataHandleHtypeNameChange = content => ({
-  type: DATA_HANDLE_HTYPE_NAME_CHANGE,
+export const dataHandleHtypeChange = content => ({
+  type: DATA_HANDLE_HTYPE_CHANGE,
   payload: {
     id:++dataHandleHtypeNameChangeId,
     content,
+  }
+})
+
+export const dataSetSelectedComponent = content => ({
+  type: DATA_SET_SELECTED_COMPONENT,
+  payload:{
+    id:++dataSetSelectedComponentId,
+    content,
+  }
+})
+
+export const dataSetSelectedHtype = content => ({
+  type: DATA_SET_SELECTED_HTYPE,
+  payload:{
+    id:++dataSetSelectedHtypeId,
+    content,
+  }
+})
+
+export const dataLoadComponents = content => ({
+  type: DATA_LOAD_COMPONENTS,
+  payload:{
+    id:++dataLoadComponentsId,
+    content,
+  }
+})
+
+export const dataDeleteSelectedComponent = () => ({
+  type: DATA_DELETE_SELECTED_COMPONENT,
+  payload:{
+    id:++dataDeleteSelectedComponentId,
   }
 })

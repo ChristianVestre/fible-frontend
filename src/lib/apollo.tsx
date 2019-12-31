@@ -123,11 +123,13 @@ function initApolloClient (...args) {
   // Make sure to create a new client for every server-side request so that data
   // isn't shared between connections (which would be bad)
   if (typeof window === 'undefined') {
+    // @ts-ignore
     return createApolloClient(...args)
   }
 
   // Reuse client on the client-side
   if (!apolloClient) {
+    // @ts-ignore
     apolloClient = createApolloClient(...args)
   }
 

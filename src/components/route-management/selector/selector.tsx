@@ -3,77 +3,58 @@ import styled from 'styled-components';
 import FibleRoute from './selectorItem';
 import { Droppable } from 'react-beautiful-dnd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimes, faPlus } from '@fortawesome/free-solid-svg-icons'
+import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import Router from 'next/router'
-import { initializeInputScreenUi, loadStopAndPoiManagerState, setTitle } from '../../lib/redux/actions/uiActions';
-import { initializeHtype, initializeInputScreenData } from '../../lib/redux/actions/dataActions';
-import { connect } from 'react-redux';
-import Cookie from 'js-cookie';
-import { ApolloClient } from 'apollo-client'
+import { uiInitializeInputScreenUi, uiSetTitle, uiLoadStopAndPoiManagerState } from '../../../lib/redux/actions/uiActions';
+import { dataLoadInputScreen } from '../../../lib/redux/actions/dataActions';
+import { connect, useSelector, useDispatch } from 'react-redux';
 import { useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
-import { createRoute } from '../../lib/createFunctions';
+import { createRoute } from '../../../lib/createFunctions';
+import { DataState } from '../../../types/reduxTypes';
 
-
-
-
-const Container = styled.div`
-    margin:1em;
-    border: 1px solid lightgray;
-    border-radius:2em;
-    width:100%;
-    height:100%;
-    position: relative;
-
-`
-const Title = styled.h1`
-    padding:8px;
-`
-const RouteList = styled.div`
-    padding:8px;
-`
 
 
 const Selector = props => {
     const [setRoute, { data }] = useMutation(gql`
-    mutation setRoute($route:String!){setRoute(route:$route){
-        id
-    }
-    }
-    `
-    );
-
+    mutation setRoute($route:String!){
+        setRoute(route:$route){
+            id
+        }
+    }`);
+    const dataState = useSelector((state:DataState) => state.data)
+    const dispatch = useDispatch()
 
     const handleInputScreenButton = async (props) => {
         console.log(props.type)
         if (props.type == "routes") {
-            props.initializeInputScreenData({htype:props.type,user:props.dataState.routeMgmt.user})
-            props.initializeInputScreenUi({ dispatch: props.type })
-            const route = createRoute({user:props.dataState.routeMgmt.user, type:"routes"})
-            await setRoute({variables:{route:JSON.stringify(route)}})
-            sessionStorage.setItem("hid",route.id)
+            const route = createRoute({ user: dataState.user, type: "routes" })
+            dispatch(uiInitializeInputScreenUi({ dispatch: props.type }))
+            dispatch(dataLoadInputScreen({ htype: props.type, user: dataState.user, htypeData: { routes:route}, componentsArray: route.components }))
+            await setRoute({ variables: { route: JSON.stringify(route) } })
+            sessionStorage.setItem("hid", route.id)
             Router.push({
                 pathname: '/inputscreen',
             })
         } else {
-            props.loadStopAndPoiManagerState({ htype: props.type })
             let firstLetter = props.type.substring(0, 1)
             let rest = props.type.substring(1)
             let title = firstLetter + rest.toLowerCase() + " manager"
-            props.setTitle({ title: title })
-
+            dispatch(uiLoadStopAndPoiManagerState({ htype: props.type }))
+            dispatch(uiSetTitle({ title: title }))
         }
     }
 
     return (
         <Container>
-            <Title>{props.type.substring(0,1).toUpperCase() + props.type.substring(1,)}</Title>
+            <Title>{props.type.substring(0, 1).toUpperCase() + props.type.substring(1)}</Title>
             <Droppable droppableId={props.type}>
                 {provided => (
                     <RouteList
                         ref={provided.innerRef}
                         {...provided.droppableProps}
                     >
+                        {console.log(props.listItems)}
                         {props.listItems.map((itemData, index) => <FibleRoute key={itemData.id} type={props.type} itemData={itemData} index={index} />)}
                         {provided.placeholder}
                     </RouteList>
@@ -86,14 +67,27 @@ const Selector = props => {
     )
 }
 
-const mapStateToProps = state => {
-  // console.log(state)
-    return { dataState: state.data, uiState:state.ui, loadStopAndPoiManagerState:state.loadStopAndPoiManagerState};
-};
+export default Selector
 
-//export default Selector
 
-export default connect(mapStateToProps, { initializeInputScreenUi, initializeInputScreenData, loadStopAndPoiManagerState, setTitle })(Selector);
+const Container = styled.div`
+    margin-left:0.5vw;
+    margin-right:0.5vw;
+    border: 1px solid lightgray;
+    border-radius:2em;
+    min-width:20vw;
+    width:100%;
+    height:100%;
+    position: relative;
+
+`
+const Title = styled.h1`
+    padding:8px;
+`
+const RouteList = styled.div`
+
+    padding:8px;
+`
 
 
 

@@ -1,21 +1,14 @@
-import {connect} from 'react-redux';
-import {setTitle} from '../../lib/redux/actions/uiActions';
 import styled from 'styled-components';
 
 
 
 const Title = props => (
         <TitleStyle>Welcome {props.name}, here are your routes!</TitleStyle>
-      )
-
-//const mapStateToProps = state => {
- // return {ui:state.ui};
-//};
+    )
 export default Title
 
 
 //export default connect(mapStateToProps)(Title);
-
 const TitleStyle = styled.h2`
     position:absolute;
     top:3%;
@@ -29,4 +22,9 @@ const TitleStyle = styled.h2`
     text-align:center;
     margin:0;
     padding:0;
+    @media screen and (max-width: 1024px) {
+    {
+        display:none !important;
+    }
+}
 `

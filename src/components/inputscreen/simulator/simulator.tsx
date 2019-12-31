@@ -1,26 +1,33 @@
 import styled from 'styled-components';
 import React from 'react';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
-import HeadlineText from './simulatorComponents/headline'
-import {updateComponentsOrder} from '../../../lib/redux/actions/dataActions'
+import Headline from './simulatorComponents/headline'
+import {dataUpdateComponentsOrder} from '../../../lib/redux/actions/dataActions'
+import { UiState, DataState } from '../../../types/reduxTypes';
+import SimulatorTemplate from './simulatorTemplate';
 
 
 
 const Simulator = props => {
     console.log(props)
-    
+    const dispatch = useDispatch()
+    const uiState = useSelector((state:UiState) => state.ui)
+    const dataState = useSelector((state:DataState) => state.data)
     const componentCreator = props => {
-        return props.dataState.inputScreen[props.uiState.inputScreen.simulator.show][props.dataState.inputScreen.selectedHtypeId].components.length > 0 ?
-        props.dataState.inputScreen[props.uiState.inputScreen.simulator.show][props.dataState.inputScreen.selectedHtypeId].components.map((id,index) =>{
-
+        console.log(dataState[dataState.selectedHtype])
+        console.log(dataState[dataState.selectedHtype][dataState.selectedHtypeId])
+        return dataState[dataState.selectedHtype][dataState.selectedHtypeId].components.length > 0 ?
+        dataState[dataState.selectedHtype][dataState.selectedHtypeId].components.map((id,index) =>{
+            
             if(id != ""){ 
-             //console.log(id)
-             //console.log(props.dataState.components)
-            let component =  props.dataState.inputScreen.components[id];
+            let component =  dataState.components[id];
             switch (component.type) {
                 case ("HEADLINE"): {
-                    return <HeadlineText key={component.id} component={component} index={index}></HeadlineText>
+                    //return <HeadlineText key={component.id} component={component} index={index}></HeadlineText>
+                    return <SimulatorTemplate key={component.id} component={component} index={index} 
+                    underComponent={<Headline key={component.id} component={component}/>}>
+                    </SimulatorTemplate>
                 }
                 default:
                     return<div></div>
@@ -41,17 +48,16 @@ const Simulator = props => {
             destination.index == source.index) {
             return;
         }
-        const newOrder = Array.from(props.dataState.inputScreen[props.uiState.inputScreen.simulator.show][props.dataState.inputScreen.selectedHtypeId].components)
-        const htype = props.uiState.inputScreen.simulator.show
-        const selectedHtypeId = props.dataState.inputScreen.selectedHtypeId
+        const newOrder = Array.from(dataState[dataState.selectedHtype][dataState.selectedHtypeId].components)
+        const htype = dataState.selectedHtype
+        const selectedHtypeId = dataState.selectedHtypeId
        // const columnId = source.droppableId;
         //const column = props.uiState.columns[source.droppableId]
         //const newOrder = Array.from(column.ids);
 
         newOrder.splice(source.index, 1);
         newOrder.splice(destination.index, 0, draggableId);
-        console.log(newOrder)
-        props.updateComponentsOrder({ newOrder,htype,selectedHtypeId  })
+        dispatch(dataUpdateComponentsOrder({ newOrder,htype,selectedHtypeId  }))
     }
 
     
@@ -64,21 +70,13 @@ const Simulator = props => {
                         {...provided.droppableProps}
                 >{componentCreator(props)}
                     {provided.placeholder}
-                </FilledSimulator>
-
-                )}
+                </FilledSimulator>)}
                 </Droppable>
                 </DragDropContext>
-            
-        </BackgroundWrapper>
-        )
+                </BackgroundWrapper>
+                )
 }
-
-const mapStateToProps = state => {
-    return { uiState: state.ui, dataState: state.data };
-};
-
-export default connect(mapStateToProps,{updateComponentsOrder})(Simulator);
+export default Simulator
 
 
 /*

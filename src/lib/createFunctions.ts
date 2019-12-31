@@ -37,3 +37,36 @@ export const createRoute =  ({user, type}) => {
     }
 
 }
+
+export const createStop =  ({user, type}) => {
+    const idSuffix = type.substring(0,2).toLowerCase() + "_"
+    const stopId = idSuffix + uuid()
+
+    return{
+        id:stopId,
+        onwnerId:user.id,
+        ownerName:user.name,
+        name:"New Stop",
+        image:"",
+        pois:[],
+        components:[],
+        locations:"",
+    }
+
+}
+
+export const createPoi =  ({user, type}) => {
+    const idSuffix = type.substring(0,2).toLowerCase() + "_"
+    const poiId = idSuffix + uuid()
+
+    return{
+        id:poiId,
+        onwnerId:user.id,
+        ownerName:user.name,
+        name:"New Poi",
+        image:"",
+        components:[],
+        location:"",
+    }
+
+}

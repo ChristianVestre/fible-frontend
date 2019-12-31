@@ -1405,10 +1405,10 @@ module.exports = __webpack_require__(/*! ./dist/pages/_document */ "./node_modul
 
 /***/ }),
 
-/***/ "./src/pages/_document.js":
-/*!********************************!*\
-  !*** ./src/pages/_document.js ***!
-  \********************************/
+/***/ "./src/pages/_document.tsx":
+/*!*********************************!*\
+  !*** ./src/pages/_document.tsx ***!
+  \*********************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1445,7 +1445,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _jsxFileName = "/home/christian/Development/fible-frontend/src/pages/_document.js";
+var _jsxFileName = "/home/christian/Development/fible-frontend/src/pages/_document.tsx";
 
 var __jsx = react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement;
 
@@ -1487,13 +1487,13 @@ class MyDocument extends next_document__WEBPACK_IMPORTED_MODULE_9___default.a {
 /***/ }),
 
 /***/ 1:
-/*!*********************************************!*\
-  !*** multi private-next-pages/_document.js ***!
-  \*********************************************/
+/*!**********************************************!*\
+  !*** multi private-next-pages/_document.tsx ***!
+  \**********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! private-next-pages/_document.js */"./src/pages/_document.js");
+module.exports = __webpack_require__(/*! private-next-pages/_document.tsx */"./src/pages/_document.tsx");
 
 
 /***/ }),

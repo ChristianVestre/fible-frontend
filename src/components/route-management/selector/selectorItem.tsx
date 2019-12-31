@@ -2,41 +2,37 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { Draggable } from 'react-beautiful-dnd'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimes, faEdit } from '@fortawesome/free-solid-svg-icons'
-import { connect } from "react-redux";
-import { removeRoute, updateRoutemgmtState } from '../../lib/redux/actions/uiActions';
+import { faEdit } from '@fortawesome/free-solid-svg-icons'
+import { useSelector, useDispatch } from 'react-redux';
+import { uiUpdateRoutemgmtState, uiInitializeSimulatorState } from '../../../lib/redux/actions/uiActions';
 import Router from 'next/router'
-import Cookie from 'js-cookie';
-import { useLazyQuery } from '@apollo/react-hooks';
-import gql from 'graphql-tag';
+import { UiState } from '../../../types/reduxTypes';
+import { dataSetSelectedHtype } from '../../../lib/redux/actions/dataActions';
 
 
 const SelectorItem = props => {
-    const [getHtypeWithComponents, { loading, data }] = useLazyQuery( gql`query getHtypeWithComponents 
-    {   getHtypeWithComponents{
-            htype{
-                route{id name ownerid components}
-                stop{id name ownerid components}
-                poi{id name ownerid components}
-            } 
-            components{id content type}}
-    }`);
+    const uiState = useSelector((state: UiState) => state.ui);
+    const dispatch = useDispatch()
+   /* const [getCompontents, { loading, data }] = useLazyQuery( gql`
+    query getComponents($ids:String)
+    {   getComponents(ids:$ids){
+        id content type
+        }    }
+    `);*/
 
     const handleEditRoutes = async (e) => {
 
         e.stopPropagation()
         e.nativeEvent.stopImmediatePropagation();
-        Cookie.set("hid", props.itemData.id)
         sessionStorage.setItem("hid",props.itemData.id)
-        // Cookie.
-      //  const resp = await getHtypeWithComponents()
-
         const selectedId = props.itemData.id
         const htype = props.type
+        dispatch(uiInitializeSimulatorState({show:htype}))
+        dispatch(dataSetSelectedHtype({selectedHtype:htype,selectedHtypeId:props.itemData.id}))
+        //const resp = await getCompontents()
         //props.updateSelectorManagerState({selectedId,htype})
         Router.push({
             pathname: '/inputscreen',
-            query: { id:props.itemData.id },
         },
             //'inputscreen'
         )
@@ -46,7 +42,7 @@ const SelectorItem = props => {
     const handleSelectorManagerStateUpdate = (e) => {
         const selectedId = props.itemData.id
         const htype = props.type
-        props.updateRoutemgmtState({ selectedId, htype })
+        dispatch(uiUpdateRoutemgmtState({ selectedId, htype }))
 
     }
     return (
@@ -58,7 +54,7 @@ const SelectorItem = props => {
                     ref={provided.innerRef}
                     onClick={(e) => handleSelectorManagerStateUpdate(e)}
                     //todo fix state
-                    color={props.itemData.id == props.uiState.routeMgmt.selector["selected"+ props.type] ? "salmon" : "lightgray"}
+                    color={props.itemData.id == uiState.routeMgmt.selector["selected"+ props.type] ? "salmon" : "lightgray"}
                 >
                     <Headline>{props.itemData.name}</Headline>
                     <EditButton onClick={(e) => handleEditRoutes(e)} >
@@ -71,21 +67,16 @@ const SelectorItem = props => {
     )
 }
 
-const mapStateToProps = state => {
-    return { uiState: state.ui, updateRoutemgmtState: state.updateSelectorManagerState };
-};
-
-//export default SelectorItem
-
-export default connect(mapStateToProps, { removeRoute, updateRoutemgmtState })(SelectorItem);
+export default SelectorItem;
 
 const Container = styled.div`
+    position:relative;
     border: 1px solid;
     border-color: ${props => props.color};
     border-radius:2em;
-    height:8vh;
-    padding: 8px;
-    margin-bottom:1em;
+    padding-top:4vh;
+    padding: 1vw;
+    margin-bottom:2vh;
     background-color:white;
     :hover {
         border-color:rgba(250,128,114 ,0.3 );
@@ -97,10 +88,10 @@ const Container = styled.div`
 const Headline = styled.h3`
     font-size: 2vh;
     font-weight:lighter;
-    position:relative;
     user-select:none;
     top:10%;
-    left:20%;
+    left:5vw;
+    position:relative;
     margin:0;
     color:black;
     border:none;
@@ -110,13 +101,14 @@ const Headline = styled.h3`
 
 const EditButton = styled.button`
     position:relative;
-    bottom:2vh;
-    left:95%;
-    margin-right:3vw;
+    bottom:3vh;
+    left:98%;
     font-size:2vh;
     border:0;
     color:none;
     background-color:transparent;
+    transform: translate(-50%, 0); 
+
     cursor: pointer;
     :focus {
         outline:none;

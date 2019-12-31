@@ -4,29 +4,41 @@ import styled from 'styled-components';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import { faTimes, faPlus } from '@fortawesome/free-solid-svg-icons'
 import Router from 'next/router'
-import {connect} from 'react-redux';
-import Link from 'next';
+import {useDispatch, useSelector} from 'react-redux';
 import GridElement from './gridElement'
-import { deleteHtype, dataHandleHtypeNameChange } from '../../../lib/redux/actions/dataActions';
+import { dataHandleHtypeChange } from '../../../lib/redux/actions/dataActions';
+import { DataState, UiState } from '../../../types/reduxTypes';
+import { uiUpdateInputScreenFlag } from '../../../lib/redux/actions/uiActions';
+import { useMutation } from '@apollo/react-hooks';
+import gql from 'graphql-tag';
 
 
 const Menu = props => {
-
+    const dispatch = useDispatch()
+    const dataState = useSelector((state:DataState) => state.data)
+    const uiState = useSelector((state:UiState) => state.ui)
+    const [updateHtype, { data }] = useMutation(gql`
+    mutation updateHtype($htype:String!){
+        updateHtype(htype:$htype)
+    }`);
     const backHandler = () => {
+        dispatch(uiUpdateInputScreenFlag())
         Router.push({
             pathname: '/routemanagement',
         })
-        const htypeid = props.dataState.inputScreen.selectedHtypeId
-        const htype = props.uiState.inputScreen.inputMenu.htype
-       // props.deleteHtype({htypeid,htype})
-        
     }
     const handleRouteNameChange = (e) => {
-        props.dataHandleHtypeNameChange({newName:e.value, htype:props.uiState.inputScreen.inputMenu.htype,htypeId:props.dataState.inputScreen.selectedHtypeId })
+        console.log(e.target.value)
+        dispatch(dataHandleHtypeChange({
+            changedHtype:{...dataState[dataState.selectedHtype][dataState.selectedHtypeId],name:e.target.value},
+            htype:dataState.selectedHtype,
+            htypeId:dataState.selectedHtypeId
+        }))
     }
-    const test = (e) => {
-        console.log('test')
-        console.log(e)
+    const handleHtypeUpdate = (e) => {
+        console.log(dataState[dataState.selectedHtype][dataState.selectedHtypeId])
+        updateHtype({variables:{htype:JSON.stringify(dataState[dataState.selectedHtype][dataState.selectedHtypeId])}})
+        //setRoute
     }
 
     return( 
@@ -34,14 +46,14 @@ const Menu = props => {
                 <HeaderImage src="/logo_fible.png" alt="my image"></HeaderImage>
                 <BackImage src="/back.svg" onClick={() => backHandler()}></BackImage>
         <Headline value=
-        {props.dataState.inputScreen[props.uiState.inputScreen.inputMenu.htype][props.dataState.inputScreen.selectedHtypeId].name}
+        {dataState[dataState.selectedHtype][dataState.selectedHtypeId].name}
         onChange={(e) => {handleRouteNameChange(e)}
         }
-        onBlur={(e) => {test(e)}}
+        onBlur={(e) => {handleHtypeUpdate(e)}}
         />
 
         <MenuWrapper>
-            {props.uiState.inputScreen.inputMenu[props.uiState.inputScreen.inputMenu.htype].map((elem) => {return <GridElement key={elem.id} name={elem.name} dispatch={elem.dispatch} type={elem.type}/>})}
+            {uiState.inputScreen.inputMenu[dataState.selectedHtype].map((elem) => {return <GridElement key={elem.id} name={elem.name} dispatch={elem.dispatch} type={elem.type}/>})}
 
         </MenuWrapper>
         </Container>
@@ -49,14 +61,8 @@ const Menu = props => {
 
 }
 
-const mapStateToProps = state => {
 
-    return {uiState:state.ui,dataState:state.data,deleteHtype:state.deleteHtype};
-};
-
-
-
-export default connect(mapStateToProps,{deleteHtype, dataHandleHtypeNameChange})(Menu);
+export default Menu;
 
 
 const Container = styled.div`

@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import MenuItem from '../components/homepage-components/list-menu';
+import MenuItem from '../components/login-screen/listMenuItem';
 import { withApollo } from '../lib/apollo';
 import gql from 'graphql-tag'
 
@@ -7,17 +7,15 @@ import React from 'react';
 import { useState } from 'react';
 import Router from 'next/router'
 import {useMutation } from '@apollo/react-hooks';
-import redirect from '../lib/redirect';
-import checkLoggedIn from './../lib/check-login'
-import { loadUser } from '../lib/redux/actions/dataActions';
-import { connect } from 'react-redux';
-import { withRedux } from '../lib/redux/redux';
-import { compose } from 'redux';
+import { dataLoadUser } from '../lib/redux/actions/dataActions';
+import { connect, useDispatch } from 'react-redux';
+
 
 
 
 const Home = (props) => {
-  //const client = useApolloClient()
+  //const client = useA    
+  const dispatch = useDispatch();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -33,8 +31,8 @@ const Home = (props) => {
   //    redirect({}, '/')
   //  })
     //console.log(data)
-
-    props.loadUser(data)
+    dispatch(dataLoadUser(data))
+    //props.dataLoadUser(data)
     Router.push({
       pathname: '/routemanagement',
     })
@@ -72,22 +70,14 @@ const Home = (props) => {
     }}>Log in</StyledButton>
     {errorMessage != '' ? <StyledError>Wrong password!</StyledError>:null}
   </Wrapper>
-
   )
 }
 //        <MenuItem page="/routemanagement" name="Routes" />
 
 
 
-const mapStateToProps = state => {
-  return { loadUser: state.loadUser };
-};
-const enhance = compose(
-  withRedux,
-  withApollo,
-  connect(mapStateToProps, {loadUser}),
-)
-export default enhance(Home)
+
+export default withApollo(Home)
 
 
 const Wrapper = styled.div`
@@ -115,10 +105,10 @@ const HeaderImage = styled.img`
 
 const StyledInputRow = styled.div`
   display:flex;
-  width:60%;
+  padding-top:20%;
   padding:2vh;
   flex-direction:row;
-  align-self:center;
+  align-content:center;
 `
 const StyledText = styled.h3`
   align-self:flex-start;
@@ -137,16 +127,14 @@ font-size:2.5vh;
 color:salmon;
 `
 const StyledInput = styled.input`
-  display:flex;
-  width:60%;
+  width:55%;
   padding:0.5vh;
   font-size:1.5vh;
   border: 1px solid;
   border-color: lightgray;
   border-radius:1vh;
   position:absolute;
-  width:16vw;
-  right:10vw;
+  left:10vw;
   :focus {
         outline:none;
         caret-color:salmon;
@@ -159,6 +147,7 @@ const StyledButton = styled.button`
     color:white;
     border:0;
     width:8vw;
+    padding-top:20%;
     background:salmon;
     font-size:2vh;
     font-weight:bold;

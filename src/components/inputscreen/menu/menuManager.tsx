@@ -1,13 +1,15 @@
 import styled from 'styled-components';
 import React from 'react';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import Menu from './menu'
-import HeadlineInput from './headlinInput';
+import HeadlineInput from './headlineInput';
 import SubheadlineInput from './subheadlineInput';
+import { UiState } from '../../../types/reduxTypes';
 
 const MenuManager = props => {
+    const uiState = useSelector((state:UiState) => state.ui)
     const menuChoice = (props) => {
-            switch(props.uiState.inputScreen.inputMenu.show){
+            switch(uiState.inputScreen.inputMenu.show){
                 case("MENU"): {
                     return<Menu/>
                 }
@@ -26,11 +28,7 @@ const MenuManager = props => {
     
 }
 
-const mapStateToProps = state => {
-    return {uiState:state.ui};
-};
-
-export default connect(mapStateToProps)(MenuManager);
+export default MenuManager;
 
 const Container = styled.div`
     margin:0;

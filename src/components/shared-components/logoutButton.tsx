@@ -7,11 +7,9 @@ import Router from 'next/router'
 import { useMutation, useApolloClient } from '@apollo/react-hooks';
 
 
-import { cleanUser } from '../../lib/redux/actions/dataActions';
 import { connect } from 'react-redux';
 import { faDoorOpen } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import redirect from '../../lib/redirect';
 import Cookies from 'js-cookie'
 
 
@@ -19,29 +17,25 @@ import Cookies from 'js-cookie'
 const LogoutButton = (props) => {
   const client = useApolloClient()
 
-  const LOGOUT = gql`
-  mutation Logout {
-    logout
-  }`
+
   const onCompleted = () => {
-    client.cache.reset().then(() => {
-     redirect({}, '/')
-    })
-
-    props.cleanUser()
-    document.cookie = "qid= ; expires = Thu, 01 Jan 1970 00:00:00 GMT"
-    Cookies.remove('qid')
-
+    Router.replace("/")
+    sessionStorage.clear()
+    logout()
   }
 
   const onError = error => {
     // If you want to send error to external service?
     console.error(error)
   }
-  const [logout, { error }] = useMutation(LOGOUT, {
+  const [logout, { error }] = useMutation(gql`
+  mutation Logout {
+    logout
+  }`, {
     onCompleted,
     onError,
   })
+  
   return (
     <StyledWrapper onClick={() => {logout()}}>
     <StyledText>Logout</StyledText>
@@ -59,6 +53,7 @@ export default LogoutButton
   
   const StyledFontAwesomeIcon = styled(FontAwesomeIcon)`
   font-size:3vh;
+  transform: translate(-50%, 0); 
   `
 
   const StyledWrapper = styled.div`

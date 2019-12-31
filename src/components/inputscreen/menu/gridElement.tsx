@@ -1,11 +1,12 @@
 import styled from 'styled-components'
 import React from 'react'
-import { updateInputScreenState} from '../../../lib/redux/actions/uiActions'
-import {connect} from 'react-redux';
+import { uiUpdateInputScreenState, uiUpdateSimulatorSelectionState} from '../../../lib/redux/actions/uiActions'
+import { useDispatch, useSelector } from 'react-redux';
 import { dataAddNewComponent } from '../../../lib/redux/actions/dataActions';
 import { useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import { createComponent } from '../../../lib/createFunctions';
+import { DataState } from '../../../types/reduxTypes';
 
 
 
@@ -16,21 +17,25 @@ const GridElement = props => {
         setComponent(component: $component, parentHtype: $parentHtype ) 
     }`
     )
+    const dispatch = useDispatch()
+    const dataState = useSelector((state:DataState) => state.data)
 
     
-    const handleInputMenuUpdate =  (props) => {
-        const dispatch = props.dispatch
-        const newComponent = createComponent({
+    const handleInputMenuUpdate = async  (props) => {
+        const menuUpdate = props.dispatch
+        const newComponent = await createComponent({
           type:props.type,
-          selectedHtypeId:props.dataState.inputScreen.selectedHtypeId,
-          user:props.dataState.inputScreen.user })
-        props.dataAddNewComponent({
-          htype:props.dataState.inputScreen.selectedHtype,
-          selectedHtypeId:props.dataState.inputScreen.selectedHtypeId,
-          component: newComponent})
-        props.updateInputScreenState(dispatch);
-        setComponent({variables:
-          {parentHtype:JSON.stringify(props.dataState.inputScreen[props.dataState.inputScreen.selectedHtype][props.dataState.inputScreen.selectedHtypeId]),
+          selectedHtypeId:dataState.selectedHtypeId,
+          user:dataState.user })
+        await dispatch(dataAddNewComponent({
+          htype:dataState.selectedHtype,
+          selectedHtypeId:dataState.selectedHtypeId,
+          component: newComponent}))
+        dispatch(uiUpdateInputScreenState(menuUpdate));
+        dispatch(uiUpdateSimulatorSelectionState({ selectedComponentId:newComponent.id }))
+        console.log(newComponent)
+        await setComponent({variables:
+          {parentHtype:JSON.stringify(dataState[dataState.selectedHtype][dataState.selectedHtypeId]),
             component:JSON.stringify(newComponent)
           }})
     };
@@ -45,13 +50,7 @@ const GridElement = props => {
   
 }
 
-const mapStateToProps = state => {
-  return {dataState:state.data};
-};
-
-
-
-export default connect(mapStateToProps,{ updateInputScreenState, dataAddNewComponent })(GridElement);
+export default GridElement;
 
 
 /*

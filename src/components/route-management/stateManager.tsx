@@ -1,72 +1,70 @@
 import styled from 'styled-components';
 import React from 'react';
-import { connect } from 'react-redux';
-import Selector from './selectorManager';
-import StopsAndPois from './stopsandpoi-components/sandpManager'
+import { connect, useSelector } from 'react-redux';
+import Selector from './selector/selectorManager';
+import StopsAndPois from './stopsandpoi-management/spManager'
+import { UiState } from '../../types/reduxTypes';
 
 
 
 
 const RouteManagementStateManager = props => {
+    const uiState = useSelector((state: UiState) => state.ui);
 
     const SelectorChoice = (props) => {
-     //   console.log(props.state.htypes.getRoutes)
-            switch(props.uiState.routeMgmt.selector.managerUiCode){
-                case("RO"):{
-                    return <OneSelectorWrapper>
-                    <Selector type="routes"/>
-                    </OneSelectorWrapper>
-                }
-                case("ROST"):{
-                    return<TwoSelectorsWrapper>
+        //   console.log(props.state.htypes.getRoutes)
+        switch (uiState.routeMgmt.selector.managerUiCode) {
+            case ("RO"): {
+                return <OneSelectorWrapper>
                     <Selector type="routes" />
-                    <Selector type="stops" />
-                    </TwoSelectorsWrapper>
-                }
-                case("ROSTPO"):{
-                    return<ThreeSelectorsWrapper>
-                    <Selector type="routes" />
-                    <Selector type="stops" />
-                    <Selector type="pois" /> 
-                    </ThreeSelectorsWrapper>   
-                }
-                case("MAST"):{
-                    return <ManagerWrapper>
-                    <StopsAndPois type="stops" />
-                    </ManagerWrapper>
-                }
-                case("MAPO"):{
-                    return <ManagerWrapper>
-                    <StopsAndPois type="pois" />
-                    </ManagerWrapper>
-                }
-                default:{
-                    return <OneSelectorWrapper>
-                    <Selector type="routes"/>
-                    </OneSelectorWrapper>
-                }
+                </OneSelectorWrapper>
             }
+            case ("ROST"): {
+                return <TwoSelectorsWrapper>
+                    <Selector type="routes" />
+                    <Selector type="stops" />
+                </TwoSelectorsWrapper>
+            }
+            case ("ROSTPO"): {
+                return <ThreeSelectorsWrapper>
+                    <Selector type="routes" />
+                    <Selector type="stops" />
+                    <Selector type="pois" />
+                </ThreeSelectorsWrapper>
+            }
+            case ("MAST"): {
+                return <ManagerWrapper>
+                    <StopsAndPois type="stops" />
+                </ManagerWrapper>
+            }
+            case ("MAPO"): {
+                return <ManagerWrapper>
+                    <StopsAndPois type="pois" />
+                </ManagerWrapper>
+            }
+            default: {
+                return <OneSelectorWrapper>
+                    <Selector type="routes" />
+                </OneSelectorWrapper>
+            }
+        }
     }
 
-    return(
+    return (
         <Container>
             {SelectorChoice(props)}
         </Container>
     )
-    }
+}
 
-const mapStateToProps = state => {
-    return {uiState:state.ui, dataState:state.data};
-  };
 
 //export default RouteManagementStateManager
-export default connect(mapStateToProps)(RouteManagementStateManager);
-
+export default RouteManagementStateManager;
 const Container = styled.div`
     width:100vw;
     height:80vh;
     position:absolute;
-    bottom:3vh;
+    bottom:5vh;
 `
 const OneSelectorWrapper = styled.div`
     position:relative;
@@ -78,7 +76,6 @@ const OneSelectorWrapper = styled.div`
     align-content:center;
     display:flex;
     flex-direction:row;
-    bottom:5%;
 `
 
 const TwoSelectorsWrapper = styled.div`
@@ -89,9 +86,9 @@ const TwoSelectorsWrapper = styled.div`
     margin:0;
     padding:0;
     align-content:center;
+    justify-content:center;
     display:flex;
     flex-direction:row;
-    bottom:5%;
 `
 const ThreeSelectorsWrapper = styled.div`
     position:relative;
@@ -103,23 +100,22 @@ const ThreeSelectorsWrapper = styled.div`
     align-content:center;
     display:flex;
     flex-direction:row;
-    bottom:5%;
 `
 const ManagerWrapper = styled.div`
     position:relative;
     margin:0;
     padding:0;
-    width:80vw;
-    height:96%;
-    left:10vw;
+    width:90vw;
+    height:100%;
+    left:5vw;
     align-content:center;
     justify-content:center;
     display:flex;
     flex-direction:row;
-    bottom:5%;
     border: 1px solid lightgray;
     border-radius:0.5vh;
     top:0;
+
 
 
 `

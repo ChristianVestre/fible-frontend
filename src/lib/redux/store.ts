@@ -2,6 +2,8 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import rootReducer from './reducers/index';
 import { composeWithDevTools } from 'redux-devtools-extension';
+import storageSession from 'redux-persist/lib/storage/session';
+import {persistReducer, persistStore} from 'redux-persist';
 
 //export default createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
 //export default createStore(rootReducer, applyMiddleware(thunk));
@@ -11,30 +13,20 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 
 const initialState = {
   data: {
-    routeMgmt: {
-      user: {
-        name: "",
-        routes: [],
-        stops: [],
-        pois: [],
-        email: "",
-      },
-      routes: {},
-      stops: {},
-      pois: {},
-    },
-    inputScreen: {
-      user: {
-        name: "",
-        routes: [],
-        stops: [],
-        pois: [],
-      },
-      selectedHtypeId: "",
-      selectedComponentId: "empty",
-      // htype: {},
-      components: {},
-    },
+    user:{
+      name: "",
+      routes: [],
+      stops: [],
+      pois: [],
+      email: "",
+  },
+  selectedHtypeId: "",
+  selectedComponentId: "empty",
+  selectedHtype:"",
+  routes:{},
+  pois:{},
+  stops:{},
+  components: {},
   },
   ui: {
     routeMgmt: {
@@ -77,7 +69,8 @@ const initialState = {
 }
 
 
-//const persistedReducer = persistReducer(persistConfig, rootReducer)
+const persistedReducer = persistReducer({key:"root", storage:storageSession}, rootReducer)
+/*
 export const initializeStore = (preloadedState = initialState) => {
   let store;
   const isClient = typeof window !== 'undefined';
@@ -94,19 +87,18 @@ export const initializeStore = (preloadedState = initialState) => {
       preloadedState,
       composeWithDevTools(applyMiddleware(thunk))
     );
-  }
-  //export const Store = createStore(persistedReducer, composeWithDevTools(applyMiddleware(thunk)));
+  }*/
+ // export const Store = createStore(persistedReducer, composeWithDevTools(applyMiddleware(thunk)));
   //export const persistor = persistStore(initialState);
 
-  return store
-}
-
+//  return store
+//}
+ export const Store = createStore(persistedReducer, composeWithDevTools(applyMiddleware(thunk)));
+export const persistor = persistStore(Store);
 /*
-
 export default () => {
   let initializeStore = createStore(persistedReducer, composeWithDevTools(applyMiddleware(thunk)));
   let persistor = persistStore(store)
   return { initializeStore, persistor }
-}
-
+} 
 */

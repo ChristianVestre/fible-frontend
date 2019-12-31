@@ -1,61 +1,58 @@
-import { REMOVE_ROUTE, UPDATE_ROUTE_STATE, UPDATE_SELECTOR_MANAGER_STATE, 
-    INITIALIZE_INPUT_SCREEN_UI, 
-    UPDATE_SIMULATOR_SELECTION,
-    STOP_AND_POI_MANAGER_CONTROLLER,
-    SET_TITLE,
+import { 
+    UI_UPDATE_ROUTE_STATE,
+    UI_UPDATE_SELECTOR_MANAGER_STATE, 
+    UI_INITIALIZE_INPUT_SCREEN_UI, 
+    UI_STOP_AND_POI_MANAGER_CONTROLLER,
+    UI_SET_TITLE,
+    UI_INITIALIZE_SIMULATOR_STATE,
     //---------------
-    UPDATE_ROUTEMGMT_STATE,
-    LOAD_STOP_AND_POI_MANAGER_STATE,
-    UPDATE_INPUT_SCREEN_STATE,
-    UPDATE_SIMULATOR_SELECTION_STATE,
+    UI_UPDATE_ROUTEMGMT_STATE,
+    UI_LOAD_STOP_AND_POI_MANAGER_STATE,
+    UI_UPDATE_INPUT_SCREEN_STATE,
+    UI_UPDATE_SIMULATOR_SELECTION_STATE,
+    UI_UPDATE_INPUT_SCREEN_FLAG
+    
 
   } from "./types";
   //includes route management actions
 
 
-  let routeId = 0;
-  let updateId = 0;
-  let updateManagerStateId = 0;
-  let updateInputScreenStateId = 0;
-  let initializeInputScreenUiId = 0;
-  let updateSimulatorSelectionId = 0;
-  let stopAndPoiManagerControllerId = 0;
-  let setTitleId = 0;
-  let updateRoutemgmtStateId = 0;
-  let loadStopAndPoiManagerStateId = 0;
-  let updateSimulatorSelectionStateId = 0;
+  let uiUpdateId = 0;
+  let uiUpdateManagerStateId = 0;
+  let uiUpdateInputScreenStateId = 0;
+  let uiInitializeInputScreenUiId = 0;
+  let uiUpdateSimulatorSelectionId = 0;
+  let uiStopAndPoiManagerControllerId = 0;
+  let uiSetTitleId = 0;
+  let uiUpdateRoutemgmtStateId = 0;
+  let uiLoadStopAndPoiManagerStateId = 0;
+  let uiUpdateSimulatorSelectionStateId = 0;
+  let uiInitializeSimulatorStateId = 0;
+  let uiUpdateInputScreenFlagId = 0;
 
 
-  export const removeRoute = content => ({
-    type: REMOVE_ROUTE,
-    payload: {
-      id: ++routeId,
-      content,
-    }
-  });
-  
-  export const updateOrder = content => ({
-      type: UPDATE_ROUTE_STATE,
+  export const uiUpdateOrder = content => ({
+      type: UI_UPDATE_ROUTE_STATE,
       payload: {
-        id: ++updateId,
+        id: ++uiUpdateId,
         content,
       }
     });
   
-  export const updateSelectorManagerState = content => ({
-      type: UPDATE_SELECTOR_MANAGER_STATE,
+  export const uiUpdateSelectorManagerState = content => ({
+      type: UI_UPDATE_SELECTOR_MANAGER_STATE,
       payload: {
-        id:++updateManagerStateId,
+        id:++uiUpdateManagerStateId,
         content,
       }
-   })
+  })
   
- 
   
-  export const initializeInputScreenUi = content => ({
-    type: INITIALIZE_INPUT_SCREEN_UI,
+  
+  export const uiInitializeInputScreenUi = content => ({
+    type: UI_INITIALIZE_INPUT_SCREEN_UI,
     payload: {
-      id:++initializeInputScreenUiId,
+      id:++uiInitializeInputScreenUiId,
       content,
     }
     
@@ -63,53 +60,67 @@ import { REMOVE_ROUTE, UPDATE_ROUTE_STATE, UPDATE_SELECTOR_MANAGER_STATE,
 
 
 
-  export const stopAndPoiManagerController = content => ({
-    type: STOP_AND_POI_MANAGER_CONTROLLER,
+  export const uiStopAndPoiManagerController = content => ({
+    type: UI_STOP_AND_POI_MANAGER_CONTROLLER,
     payload: {
-      id:++stopAndPoiManagerControllerId,
+      id:++uiStopAndPoiManagerControllerId,
       content,
     }
   })
 
-  export const setTitle = content => ({
-    type: SET_TITLE,
+  export const uiSetTitle = content => ({
+    type: UI_SET_TITLE,
     payload: {
-      id:++setTitleId,
+      id:++uiSetTitleId,
       content,
     }
   })
 
   ///-.--------------
-  export const updateRoutemgmtState = content => ({
-    type: UPDATE_ROUTEMGMT_STATE,
+  export const uiUpdateRoutemgmtState = content => ({
+    type: UI_UPDATE_ROUTEMGMT_STATE,
     payload: {
-      id:++updateRoutemgmtStateId,
+      id:++uiUpdateRoutemgmtStateId,
       content,
     }
   })
 
-  export const loadStopAndPoiManagerState = content => ({
-    type: LOAD_STOP_AND_POI_MANAGER_STATE,
+  export const uiLoadStopAndPoiManagerState = content => ({
+    type: UI_LOAD_STOP_AND_POI_MANAGER_STATE,
     payload: {
-      id:++loadStopAndPoiManagerStateId,
+      id:++uiLoadStopAndPoiManagerStateId,
       content,
     }
   })
 
-  export const updateInputScreenState = content => ({
-    type: UPDATE_INPUT_SCREEN_STATE,
+  export const uiUpdateInputScreenState = content => ({
+    type: UI_UPDATE_INPUT_SCREEN_STATE,
     payload: {
-      id:++updateInputScreenStateId,
+      id:++uiUpdateInputScreenStateId,
       content,
     }
   })
 
 
-  export const updateSimulatorSelectionState = content => ({
-    type: UPDATE_SIMULATOR_SELECTION_STATE,
+  export const uiUpdateSimulatorSelectionState = content => ({
+    type: UI_UPDATE_SIMULATOR_SELECTION_STATE,
     payload: {
-      id:++updateSimulatorSelectionStateId,
+      id:++uiUpdateSimulatorSelectionStateId,
       content,
     }
   })
 
+  export const uiInitializeSimulatorState = content => ({
+    type:UI_INITIALIZE_SIMULATOR_STATE,
+    payload:{
+      id:++uiInitializeSimulatorStateId,
+      content,
+    }
+  })
+
+  export const uiUpdateInputScreenFlag = () => ({
+    type:UI_UPDATE_INPUT_SCREEN_FLAG,
+    payload:{
+      id:++uiUpdateInputScreenFlagId
+    }
+  })

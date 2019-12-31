@@ -1,15 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
-import { updateInputScreenState} from '../../../lib/redux/actions/uiActions'
-import {connect} from 'react-redux';
+import { uiUpdateInputScreenState} from '../../../lib/redux/actions/uiActions'
+import { useDispatch } from 'react-redux';
 
 
 
 const SubheadlineInput = props => {
+    const dispatch = useDispatch()
     const handleInputMenuUpdate = () => {
-        const dispatch = "MENU"
+        const menuUpdate = "MENU"
       //  console.log(dispatch)
-        props.updateInputScreenState(dispatch);
+        dispatch(uiUpdateInputScreenState(menuUpdate));
     };
 
 
@@ -33,14 +34,9 @@ const SubheadlineInput = props => {
 
 }
 
-const mapStateToProps = state => {
-    return {selectorState:state.data ,updateInputScreenState:state.updateInputScreenState};
-};
-  
-  
-  
-export default connect(mapStateToProps,{ updateInputScreenState })(SubheadlineInput);
-  
+
+export default SubheadlineInput
+
 
 const Container = styled.div`
     margin:0;

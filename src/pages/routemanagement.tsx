@@ -3,71 +3,70 @@ import styled from 'styled-components';
 import dynamic from 'next/dynamic';
 import Title from '../components/route-management/title'
 import RouteManagementStateManager from '../components/route-management/stateManager';
-import { connect } from 'react-redux';
-import LogoutButton from './../components/shared-components/logoutButton'
+import { useDispatch, useSelector } from 'react-redux';
 import { withApollo } from '../lib/apollo';
-import React, { useState } from 'react';
-import { withRedux } from '../lib/redux/redux';
-import { compose } from 'redux';
-import  {withAuth} from '../lib/auth';
+import React, { useState, useEffect } from 'react';
 import gql from 'graphql-tag';
-import { loadUser, loadRouteMgmtData} from '../lib/redux/actions/dataActions';
-
-
-
+import { useQuery } from '@apollo/react-hooks';
+import { dataLoadUser, dataLoadRouteMgmtData } from '../lib/redux/actions/dataActions';
+import { UiState, DataState } from '../types/reduxTypes';
+import Router from 'next/router';
+import { GrayRotatingSpinner } from '../components/loading-component/rotatingSpinner';
+import LogoutButton from '../components/shared-components/logoutButton';
 
 
 const RouteManagement = (props) => {
-    //console.log(props.dataState)
-    return(
+    const dispatch = useDispatch();
+    const dataState = useSelector((state: DataState) => state.data);
+    const [dispatchSent, setDispatchSent,] = useState(false)
+    const { loading, error, data } = useQuery(
+        gql`query getHtypes 
+    {   
+        getRoutes{id ownerid name components stops pois}
+        getPois{id ownerid name components}
+        getStops{id ownerid name components pois}
+        me{id name email routes pois stops}
+    }`)
+
+    useEffect(() => {
+        // console.log(data)
+        //   console.log(error)
+        if (!loading) {
+            let htype;
+            if (!data || !data.me.id) {
+                Router.replace("/")
+                return
+            }
+            const htypes = {
+                routes:data.getRoutes,
+                stops:data.getStops,
+                pois:data.getPois
+            }
+            dispatch(dataLoadRouteMgmtData({htypes:htypes, user:data.me}))
+            setDispatchSent(true)
+        }
+    }, [loading])
+
+
+    return (
+        !dispatchSent?
+        <GrayRotatingSpinner/>:
         <Container>
             <Images>
                 <HeaderImage src="/logo_fible.png" alt="my image"></HeaderImage>
-                <Link href="/">
-                    <BackImage src="/back.svg"></BackImage>
-                </Link>
             </Images>
-            <Title name={props.dataState.routeMgmt.user.name}/>
+            <Title name={dataState.user.name}/>
             <LogoutButton/>
-            <RouteManagementStateManager/>
+            <RouteManagementStateManager/>      
         </Container>
     )
 };
-//            
-RouteManagement.getInitialProps = async ({apolloClient, me, reduxStore}) => {
-
-    const routesQuery = gql`query getHtypes 
-    {   
-        getRoutes{id ownerid name components}
-        getPois{id ownerid name components}
-        getStops{id ownerid name components}
-    }`
-    const htypes = await apolloClient.query({query:routesQuery})
-   // reduxStore.dispatch(loadUser(me))
-    //console.log(htypes)
-    reduxStore.dispatch(loadRouteMgmtData({"htypes":htypes.data, "user":me}))
-
-}
-
-
-const mapStateToProps = state => {
-    return { selectorState: state.selector, uiState:state.ui,dataState:state.data };
-};
-
-const enhance = compose(
-    withApollo,
-    withAuth,
-    withRedux,
-    connect(mapStateToProps,{loadUser, loadRouteMgmtData})
-)
-export default enhance(RouteManagement);
-
-/*
-const DynamicRouteSelector = dynamic(
-    () => import('../components/route-management/selectorManager'),
-    { ssr: false }
-)
-*/
+//                <Link href="/">
+//<BackImage src="/back.svg"></BackImage>
+//</Link>
+export default dynamic(() => Promise.resolve(withApollo(RouteManagement)), {
+    ssr: false
+})
 
 
 const Images = styled.div`
